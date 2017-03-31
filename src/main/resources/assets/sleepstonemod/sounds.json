@@ -1,0 +1,10 @@
+{
+	"Teleport": {
+		"category": "player",
+		"sounds": [{"name": "bhab", "stream": false}]
+	},
+	"Swoosh": {
+		"category": "player",
+		"sounds": [{"name": "swoosh", "stream": false}]
+	}
+}

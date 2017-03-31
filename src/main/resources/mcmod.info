@@ -1,0 +1,16 @@
+[
+{
+  "modid": "sleepstonemod",
+  "name": "Sleepstone",
+  "description": "Power of the sleepstone.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Echo343"],
+  "credits": "The Forge and FML guys, for making this example",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
