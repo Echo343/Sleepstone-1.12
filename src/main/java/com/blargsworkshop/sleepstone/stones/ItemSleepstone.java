@@ -19,7 +19,7 @@ import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-public class Sleepstone extends Item implements IMessageHandler<BasicMessage, IMessage> {
+public class ItemSleepstone extends Item implements IMessageHandler<BasicMessage, IMessage> {
 	
 	private static final String TEXT_SLEEPSTONE_SUFFERING_EFFECTS_OF_WARPING = "text.sleepstone.suffering_effects_of_warping";
 	private static final String TEXT_SLEEPSTONE_BED_DESTROYED = "text.sleepstone.bed_destroyed";
@@ -32,7 +32,7 @@ public class Sleepstone extends Item implements IMessageHandler<BasicMessage, IM
 	
 	private static final String TEXTURE_SLEEPSTONE = "sleepstonemod:sleepy";
 	
-	public Sleepstone() {
+	public ItemSleepstone() {
 		this.setMaxStackSize(1);
 		this.setUnlocalizedName(BASIC_SLEEPSTONE_NAME);
 		this.setTextureName(TEXTURE_SLEEPSTONE);

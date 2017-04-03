@@ -1,16 +1,19 @@
 [
-{
-  "modid": "sleepstonemod",
-  "name": "Sleepstone",
-  "description": "Power of the sleepstone.",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
-  "url": "",
-  "updateUrl": "",
-  "authorList": ["Echo343"],
-  "credits": "The Forge and FML guys, for making this example",
-  "logoFile": "",
-  "screenshots": [],
-  "dependencies": []
-}
+  {
+    "modid": "sleepstonemod",
+    "name": "Sleepstone",
+    "description": "A magical stone Blarg forged that teleports the bearer back to the comfort of their home.",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "https://github.com/Echo343/Sleepstone",
+    "updateUrl": "",
+    "authorList": [
+      "Echo343"
+    ],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "useDependencyInformation": false,
+    "dependencies": []
+  }
 ]

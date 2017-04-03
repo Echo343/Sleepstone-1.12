@@ -11,7 +11,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.blargsworkshop.sleepstone.SleepstoneMod;
 import com.blargsworkshop.sleepstone.network.BasicMessage;
-import com.blargsworkshop.sleepstone.stones.Sleepstone;
+import com.blargsworkshop.sleepstone.stones.ItemSleepstone;
 
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -62,7 +62,7 @@ public class GuiStone extends GuiScreen implements IMessage{
 		switch (button.id) {
 		case 1:
 			Item heldItem = player.getHeldItem().getItem();
-			if (heldItem != null && heldItem instanceof Sleepstone) {
+			if (heldItem != null && heldItem instanceof ItemSleepstone) {
 				
 				SleepstoneMod.networkWrapper.sendToServer(new BasicMessage("GuiStone"));
 				

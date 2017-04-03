@@ -13,7 +13,8 @@ import net.minecraft.potion.Potion;
 import net.minecraft.util.ChatComponentText;
 
 import com.blargsworkshop.sleepstone.network.BasicMessage;
-import com.blargsworkshop.sleepstone.stones.Sleepstone;
+import com.blargsworkshop.sleepstone.stones.ItemSleepstone;
+import com.blargsworkshop.sleepstone.interfaces.IProxy;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -32,7 +33,7 @@ public class SleepstoneMod
 {
     public static final String MODID = "sleepstonemod";
     public static final String NAME = "Sleepstone";
-    public static final String VERSION = "1.1";
+    public static final String VERSION = "1.2";
     public static SimpleNetworkWrapper networkWrapper = null;
     
     protected static final int DEBUG_LVL = 1;
@@ -42,7 +43,7 @@ public class SleepstoneMod
     public static SleepstoneMod instance = new SleepstoneMod();
     
     @SidedProxy(clientSide = "com.blargsworkshop.sleepstone.ClientProxy", serverSide = "com.blargsworkshop.sleepstone.ServerProxy")
-    public static CommonProxy proxy;
+    public static IProxy proxy;
     
     //Creative Mode Tabs
     public static CreativeTabs tabSleepstone;
@@ -129,11 +130,11 @@ public class SleepstoneMod
 	
 	private static void initRegisters() {
 		SleepstoneMod.networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(SleepstoneMod.MODID);
-		SleepstoneMod.networkWrapper.registerMessage(Sleepstone.class, BasicMessage.class, 0, Side.SERVER); //TODO ? id should be dynamically generated?
+		SleepstoneMod.networkWrapper.registerMessage(ItemSleepstone.class, BasicMessage.class, 0, Side.SERVER); //TODO ? id should be dynamically generated?
 	}
     
     private static void initItems() {
-    	sleepstoneItem = new Sleepstone();
+    	sleepstoneItem = new ItemSleepstone();
 		GameRegistry.registerItem(sleepstoneItem, "modItemSleepstoneItem"); //TODO something to generate random name.
     }
     
