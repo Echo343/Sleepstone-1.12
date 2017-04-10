@@ -90,10 +90,19 @@ public class SleepstoneMod
     	}
     	SleepstoneMod.debug("Potions End - length: " + Potion.potionTypes.length, 2, null);
     	
-    	NovelPotion.warpSickness = new NovelPotion(33, false, 0);
+		int warpSicknessId = -1;
+		for (int i = 0; i < Potion.potionTypes.length; i++) {
+			if (Potion.potionTypes[i] == null) {
+				warpSicknessId = i;
+				break;
+			}
+		}
+		if (warpSicknessId == -1) {
+			throw new IndexOutOfBoundsException();
+		}
+    	NovelPotion.warpSickness = new NovelPotion(warpSicknessId, false, 0);
     	NovelPotion.warpSickness.setPotionName("potion.warpingsickness");
     	NovelPotion.warpSickness.setIconIndex(5, 1);
-    	
 	}
     
     /**
@@ -154,9 +163,7 @@ public class SleepstoneMod
     		if (SleepstoneMod.DEBUG_CHAT && player != null) {
     			player.addChatMessage(new ChatComponentText(str));
     		}
-    		else {
-    			System.out.println(str);
-    		}
+			System.out.println(str);
     	}
 	}
 	
