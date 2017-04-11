@@ -1,28 +1,23 @@
 package com.blargsworkshop.sleepstone.Gui.Guis;
 
-import io.netty.buffer.ByteBuf;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
 import com.blargsworkshop.sleepstone.SleepstoneMod;
 import com.blargsworkshop.sleepstone.network.BasicMessage;
-import com.blargsworkshop.sleepstone.stones.ItemSleepstone;
-
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 
-public class GuiStone extends GuiScreen implements IMessage{
+public class GuiStone extends GuiScreen {
 	
 	private static final String GUI_TEXTURE = "textures/gui/GuiStone.png";
 	private static final String TEXT_BUTTON_WARP = "text.guistone.warp";
 	
-	private EntityPlayer player;
+	// private EntityPlayer player;
 	private int xSize, ySize;
 	
 	private ResourceLocation backgroundImage;
@@ -30,7 +25,7 @@ public class GuiStone extends GuiScreen implements IMessage{
 	public GuiStone() {}
 	
 	public GuiStone(EntityPlayer player) {
-		this.player = player;
+		// this.player = player;
 		xSize = 247;
 		ySize = 165;
 		backgroundImage = new ResourceLocation(SleepstoneMod.MODID, GUI_TEXTURE);
@@ -61,14 +56,9 @@ public class GuiStone extends GuiScreen implements IMessage{
 	protected void actionPerformed(GuiButton button) {
 		switch (button.id) {
 		case 1:
-			Item heldItem = player.getHeldItem().getItem();
-			if (heldItem != null && heldItem instanceof ItemSleepstone) {
-				
-				SleepstoneMod.networkWrapper.sendToServer(new BasicMessage("GuiStone"));
-				
-				this.mc.displayGuiScreen((GuiScreen)null);
-	            this.mc.setIngameFocus();
-			}
+			SleepstoneMod.networkWrapper.sendToServer(new BasicMessage("Warp"));
+			this.mc.displayGuiScreen((GuiScreen)null);
+			this.mc.setIngameFocus();
 			break;
 		}
 	}
@@ -85,15 +75,4 @@ public class GuiStone extends GuiScreen implements IMessage{
         }
 		super.keyTyped(c, i);
 	}
-
-	@Override
-	public void fromBytes(ByteBuf buf) {
-//		String text = ByteBufUtils.readUTF8String(buf);
-	}
-
-	@Override
-	public void toBytes(ByteBuf buf) {
-//		ByteBufUtils.writeUTF8String(buf, "hi");
-	}
-
 }

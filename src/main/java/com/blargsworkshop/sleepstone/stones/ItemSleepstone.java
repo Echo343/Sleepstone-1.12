@@ -12,6 +12,7 @@ import net.minecraft.world.World;
 import com.blargsworkshop.sleepstone.NovelPotion;
 import com.blargsworkshop.sleepstone.SleepstoneMod;
 import com.blargsworkshop.sleepstone.Gui.GuiEnum;
+import com.blargsworkshop.sleepstone.SleepstoneMod.DEBUG;
 import com.blargsworkshop.sleepstone.network.BasicMessage;
 
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
@@ -24,13 +25,13 @@ public class ItemSleepstone extends Item implements IMessageHandler<BasicMessage
 	private static final String TEXT_SLEEPSTONE_SUFFERING_EFFECTS_OF_WARPING = "text.sleepstone.suffering_effects_of_warping";
 	private static final String TEXT_SLEEPSTONE_BED_DESTROYED = "text.sleepstone.bed_destroyed";
 	private static final int WARP_SICKNESS_DURATION = 20*60*10;
-	
 	private static final String SOUND_TELEPORT = SleepstoneMod.MODID + ":" + "Teleport";
 	private static final String SOUND_SWOOSH = SleepstoneMod.MODID + ":" + "Swoosh";
-	
 	private static final String BASIC_SLEEPSTONE_NAME = "basicsleepstone";
-	
 	private static final String TEXTURE_SLEEPSTONE = "sleepstonemod:sleepy";
+
+	private static int nameTestId = 0;
+	private String nameTestString = null;
 	
 	public ItemSleepstone() {
 		this.setMaxStackSize(1);
@@ -43,6 +44,16 @@ public class ItemSleepstone extends Item implements IMessageHandler<BasicMessage
 	public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer player) {
 		if (player.isSneaking()) {
 			player.openGui(SleepstoneMod.instance, GuiEnum.STONE.ordinal(), world, (int)player.posX, (int)player.posY, (int)player.posZ);
+		}
+		else {
+			//This is a test to see if new items are created or if the same one is used over and over.
+			if (nameTestString == null) {
+				nameTestString = player.getDisplayName() + "_test" + String.valueOf(nameTestId++);
+				player.addChatMessage(new ChatComponentText("Setting name to: " + nameTestString));
+			}
+			else {
+				player.addChatMessage(new ChatComponentText("Name: " + nameTestString));
+			}
 		}
 //		player.setItemInUse(item, getMaxItemUseDuration(item));
 		return item;
@@ -74,7 +85,7 @@ public class ItemSleepstone extends Item implements IMessageHandler<BasicMessage
 				player.setPositionAndUpdate(coord.posX + 0.5, coord.posY + 0.1, coord.posZ + 0.5);
 				player.addPotionEffect(new PotionEffect(NovelPotion.warpSickness.id, WARP_SICKNESS_DURATION));
 				world.playSoundAtEntity(player, SOUND_TELEPORT, 1f, 1f);
-				SleepstoneMod.debug("Warping to: " + (coord.posX + 0.5) + ", " + (coord.posY + 0.1) + ", " + (coord.posZ + 0.5), 2, player);
+				SleepstoneMod.debug("Warping to: " + (coord.posX + 0.5) + ", " + (coord.posY + 0.1) + ", " + (coord.posZ + 0.5), DEBUG.CASUAL, player);
 			}
 			else {
 				player.addChatMessage(new ChatComponentText(LanguageRegistry.instance().getStringLocalization(TEXT_SLEEPSTONE_BED_DESTROYED)));
@@ -91,12 +102,13 @@ public class ItemSleepstone extends Item implements IMessageHandler<BasicMessage
 
 	@Override
 	public IMessage onMessage(BasicMessage message, MessageContext ctx) {
+		//I believe this is the player/client the message came from.
 		EntityPlayerMP player = ctx.getServerHandler().playerEntity;
 		if (player.isPotionActive(NovelPotion.warpSickness.id)) {
 			player.addChatMessage(new ChatComponentText(LanguageRegistry.instance().getStringLocalization(TEXT_SLEEPSTONE_SUFFERING_EFFECTS_OF_WARPING)));
 		}
 		else {
-			this.warpPlayerToBed(ctx.getServerHandler().playerEntity, ctx.getServerHandler().playerEntity.worldObj);
+			this.warpPlayerToBed(player, player.worldObj);
 		}
 		return null;
 	}
