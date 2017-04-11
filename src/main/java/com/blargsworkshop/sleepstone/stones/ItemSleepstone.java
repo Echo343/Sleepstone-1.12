@@ -38,6 +38,7 @@ public class ItemSleepstone extends Item implements IMessageHandler<BasicMessage
 		this.setUnlocalizedName(BASIC_SLEEPSTONE_NAME);
 		this.setTextureName(TEXTURE_SLEEPSTONE);
 		this.setCreativeTab(SleepstoneMod.tabSleepstone);
+		SleepstoneMod.debug("***ItemSleepstone Constructor***", DEBUG.DETAIL);
 	}
 	
 	@Override

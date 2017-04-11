@@ -39,8 +39,8 @@ public class SleepstoneMod {
 		NONE, CASUAL, DETAIL
 	};
 
-	protected static DEBUG DEBUG_LVL = DEBUG.CASUAL;
-	protected static boolean DEBUG_CHAT = false;
+	protected static DEBUG DEBUG_LVL = DEBUG.DETAIL;
+	protected static boolean DEBUG_CHAT = true;
 
 	@Instance
 	public static SleepstoneMod instance = new SleepstoneMod();
@@ -153,6 +153,10 @@ public class SleepstoneMod {
 		NovelPotion.warpSickness = new NovelPotion(warpSicknessId, false, 0);
 		NovelPotion.warpSickness.setPotionName("potion.warpingsickness");
 		NovelPotion.warpSickness.setIconIndex(5, 1);
+	}
+
+	public static void debug(String str, DEBUG option) {
+		debug(str, option, null);
 	}
 
 	public static void debug(String str, DEBUG option, EntityPlayer player) {
