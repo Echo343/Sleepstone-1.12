@@ -30,31 +30,17 @@ public class ItemSleepstone extends Item implements IMessageHandler<BasicMessage
 	private static final String BASIC_SLEEPSTONE_NAME = "basicsleepstone";
 	private static final String TEXTURE_SLEEPSTONE = "sleepstonemod:sleepy";
 
-	private static int nameTestId = 0;
-	private String nameTestString = null;
-	
 	public ItemSleepstone() {
 		this.setMaxStackSize(1);
 		this.setUnlocalizedName(BASIC_SLEEPSTONE_NAME);
 		this.setTextureName(TEXTURE_SLEEPSTONE);
 		this.setCreativeTab(SleepstoneMod.tabSleepstone);
-		SleepstoneMod.debug("***ItemSleepstone Constructor***", DEBUG.DETAIL);
 	}
 	
 	@Override
 	public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer player) {
 		if (player.isSneaking()) {
 			player.openGui(SleepstoneMod.instance, GuiEnum.STONE.ordinal(), world, (int)player.posX, (int)player.posY, (int)player.posZ);
-		}
-		else {
-			//This is a test to see if new items are created or if the same one is used over and over.
-			if (nameTestString == null) {
-				nameTestString = player.getDisplayName() + "_test" + String.valueOf(nameTestId++);
-				player.addChatMessage(new ChatComponentText("Setting name to: " + nameTestString));
-			}
-			else {
-				player.addChatMessage(new ChatComponentText("Name: " + nameTestString));
-			}
 		}
 //		player.setItemInUse(item, getMaxItemUseDuration(item));
 		return item;
