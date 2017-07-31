@@ -1,4 +1,6 @@
 *.class
+*.classpath
+*.project
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
@@ -44,6 +46,13 @@ Temporary Items
 .vscode
 build
 bin
+
+# Keep gradle jar
+!gradle-wrapper.jar
+
+# Eclipse stuff
+!eclipse/**
+eclipse\.metadata\.plugins\org.eclipse.core.resources\.projects\Minecraft\*.location
 
 # Windows
 # =========================
