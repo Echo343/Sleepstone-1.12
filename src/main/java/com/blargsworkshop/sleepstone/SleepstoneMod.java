@@ -45,7 +45,7 @@ public class SleepstoneMod {
 	@Instance
 	public static SleepstoneMod instance = new SleepstoneMod();
 
-	@SidedProxy(clientSide = "com.blargsworkshop.sleepstone.ClientProxy", serverSide = "com.blargsworkshop.sleepstone.ServerProxy")
+	@SidedProxy(clientSide = "com.blargsworkshop.sleepstone.ClientProxy", serverSide = "com.blargsworkshop.sleepstone.CommonProxy")
 	public static IProxy proxy;
 
 	//Creative Mode Tabs
@@ -61,11 +61,11 @@ public class SleepstoneMod {
 	 */
 	@EventHandler
 	public static void preInit(FMLPreInitializationEvent e) {
-		SleepstoneMod.debug("Forge PreInit Start", DEBUG.DETAIL, null);
+		SleepstoneMod.debug("PreInit Start", DEBUG.DETAIL);
 		proxy.preInit(e);
 		initCreativeTabs();
 		initItems();
-		SleepstoneMod.debug("Forge PreInit End", DEBUG.DETAIL, null);
+		SleepstoneMod.debug("PreInit End", DEBUG.DETAIL);
 	}
 
 	/**
@@ -74,11 +74,13 @@ public class SleepstoneMod {
 	 */
 	@EventHandler
 	public static void init(FMLInitializationEvent e) {
-		SleepstoneMod.debug("Hi! Hello There! ZZZZZZZZZZZZZZZZZ Sleepstone mod!", DEBUG.CASUAL, null);
+		SleepstoneMod.debug("Hi! Hello There! ZZZZZZZZZZZZZZZZZ Sleepstone mod!", DEBUG.CASUAL);
+		SleepstoneMod.debug("Init Start", DEBUG.DETAIL);
 		preInitPotions();
 		proxy.init(e);
 		initRegisters();
 		initRecipes();
+		SleepstoneMod.debug("Init End", DEBUG.DETAIL);
 	}
 
 	/**
@@ -87,7 +89,9 @@ public class SleepstoneMod {
 	 */
 	@EventHandler
 	public static void postInit(FMLPostInitializationEvent e) {
+		SleepstoneMod.debug("PostInit Start", DEBUG.DETAIL);
 		proxy.postInit(e);
+		SleepstoneMod.debug("PostInit End", DEBUG.DETAIL);
 	}
 
 	private static void initCreativeTabs() {
@@ -117,7 +121,7 @@ public class SleepstoneMod {
 	}
 
 	private static void preInitPotions() {
-		SleepstoneMod.debug("Potions Start - length: " + Potion.potionTypes.length, DEBUG.DETAIL, null);
+		SleepstoneMod.debug("Potions Start - length: " + Potion.potionTypes.length, DEBUG.DETAIL);
 		Potion[] potionTypes = null;
 		for (Field field : Potion.class.getDeclaredFields()) {
 			field.setAccessible(true);
@@ -138,7 +142,7 @@ public class SleepstoneMod {
 				System.out.println("Error with PotionTypes - " + exc);
 			}
 		}
-		SleepstoneMod.debug("Potions End - length: " + Potion.potionTypes.length, DEBUG.DETAIL, null);
+		SleepstoneMod.debug("Potions End - length: " + Potion.potionTypes.length, DEBUG.DETAIL);
 
 		int warpSicknessId = -1;
 		for (int i = 0; i < Potion.potionTypes.length; i++) {

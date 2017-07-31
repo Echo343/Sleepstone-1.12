@@ -31,6 +31,7 @@ public class ItemSleepstone extends Item implements IMessageHandler<BasicMessage
 	private static final String TEXTURE_SLEEPSTONE = "sleepstonemod:sleepy";
 
 	public ItemSleepstone() {
+		// ItemStacks that store an NBT Tag Compound are limited to stack size of 1
 		this.setMaxStackSize(1);
 		this.setUnlocalizedName(BASIC_SLEEPSTONE_NAME);
 		this.setTextureName(TEXTURE_SLEEPSTONE);
@@ -39,10 +40,12 @@ public class ItemSleepstone extends Item implements IMessageHandler<BasicMessage
 	
 	@Override
 	public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer player) {
-		if (player.isSneaking()) {
+		if (!player.isSneaking()) {
 			player.openGui(SleepstoneMod.instance, GuiEnum.STONE.ordinal(), world, (int)player.posX, (int)player.posY, (int)player.posZ);
 		}
-//		player.setItemInUse(item, getMaxItemUseDuration(item));
+		else {
+			player.openGui(SleepstoneMod.instance, GuiEnum.STONE_INVENTORY.ordinal(), world, 0, 0, 0);
+		}
 		return item;
 	}
 		
@@ -82,9 +85,11 @@ public class ItemSleepstone extends Item implements IMessageHandler<BasicMessage
 		}
 	}
 	
+	// Without this method, your inventory will NOT work!!!
 	@Override
-	public int getMaxItemUseDuration(ItemStack p_77626_1_) {
-		return 100;
+	public int getMaxItemUseDuration(ItemStack stack) {
+		// return any value greater than zero
+		return 1;
 	}
 
 	@Override

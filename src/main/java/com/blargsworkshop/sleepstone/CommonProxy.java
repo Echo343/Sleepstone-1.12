@@ -5,8 +5,10 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 import com.blargsworkshop.sleepstone.interfaces.IProxy;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import com.blargsworkshop.sleepstone.Gui.GuiHandler;
 
-public class ServerProxy implements IProxy {
+public class CommonProxy implements IProxy {
 
 	@Override
     public void preInit(FMLPreInitializationEvent e) {
@@ -15,7 +17,7 @@ public class ServerProxy implements IProxy {
 
     @Override
     public void init(FMLInitializationEvent e) {
-
+    	NetworkRegistry.INSTANCE.registerGuiHandler(SleepstoneMod.instance, new GuiHandler());
     }
 
     @Override

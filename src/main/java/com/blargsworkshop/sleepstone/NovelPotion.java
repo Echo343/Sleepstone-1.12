@@ -11,18 +11,16 @@ public class NovelPotion extends Potion {
 
 	protected NovelPotion(int potionId, boolean isBadEffect, int liquidColor) {
 		super(potionId, isBadEffect, liquidColor);
-		SleepstoneMod.debug("Registering NovelPotion: " + potionId, DEBUG.DETAIL, null);
+		SleepstoneMod.debug("Registering NovelPotion: " + potionId, DEBUG.DETAIL);
 	}
 	
 	@Override
 	public void performEffect(EntityLivingBase entity, int p_76394_2_) {
-		if (this.id <= 31) {
-			super.performEffect(entity, p_76394_2_);
+		if (this.id == warpSickness.id) {
+			//Warp Sickness effect here
 		}
 		else {
-			if (this.id == warpSickness.id) {
-				
-			}
+			super.performEffect(entity, p_76394_2_);
 		}
 	}
 	
