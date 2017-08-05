@@ -1,4 +1,4 @@
-package com.blargsworkshop.sleepstone.stones;
+package com.blargsworkshop.sleepstone.items.stone;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;

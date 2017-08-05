@@ -3,18 +3,9 @@ package com.blargsworkshop.sleepstone;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
-import net.minecraft.util.ChatComponentText;
-
+import com.blargsworkshop.sleepstone.items.stone.ItemSleepstone;
 import com.blargsworkshop.sleepstone.network.BasicMessage;
-import com.blargsworkshop.sleepstone.stones.ItemSleepstone;
-import com.blargsworkshop.sleepstone.interfaces.IProxy;
+import com.blargsworkshop.sleepstone.proxy.IProxy;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -27,6 +18,14 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.util.ChatComponentText;
 
 @Mod(modid = SleepstoneMod.MODID, name = SleepstoneMod.NAME, version = SleepstoneMod.VERSION)
 public class SleepstoneMod {
@@ -45,7 +44,7 @@ public class SleepstoneMod {
 	@Instance
 	public static SleepstoneMod instance = new SleepstoneMod();
 
-	@SidedProxy(clientSide = "com.blargsworkshop.sleepstone.ClientProxy", serverSide = "com.blargsworkshop.sleepstone.CommonProxy")
+	@SidedProxy(clientSide = "com.blargsworkshop.sleepstone.proxy..ClientProxy", serverSide = "com.blargsworkshop.sleepstone.proxy..CommonProxy")
 	public static IProxy proxy;
 
 	//Creative Mode Tabs
@@ -54,6 +53,7 @@ public class SleepstoneMod {
 
 	//Items
 	public static Item sleepstoneItem;
+//	public static Item
 
 	/**
 	 * Read Config, create blocks, items, etc & register them.

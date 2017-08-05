@@ -1,5 +1,15 @@
-package com.blargsworkshop.sleepstone.stones;
+package com.blargsworkshop.sleepstone.items.stone;
 
+import com.blargsworkshop.sleepstone.NovelPotion;
+import com.blargsworkshop.sleepstone.SleepstoneMod;
+import com.blargsworkshop.sleepstone.SleepstoneMod.DEBUG;
+import com.blargsworkshop.sleepstone.gui.GuiEnum;
+import com.blargsworkshop.sleepstone.network.BasicMessage;
+
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
+import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
@@ -8,17 +18,6 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
-
-import com.blargsworkshop.sleepstone.NovelPotion;
-import com.blargsworkshop.sleepstone.SleepstoneMod;
-import com.blargsworkshop.sleepstone.Gui.GuiEnum;
-import com.blargsworkshop.sleepstone.SleepstoneMod.DEBUG;
-import com.blargsworkshop.sleepstone.network.BasicMessage;
-
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class ItemSleepstone extends Item implements IMessageHandler<BasicMessage, IMessage> {
 	

@@ -1,12 +1,13 @@
-package com.blargsworkshop.sleepstone.Gui;
+package com.blargsworkshop.sleepstone.gui;
 
-import com.blargsworkshop.sleepstone.Gui.Guis.GuiStone;
-import com.blargsworkshop.sleepstone.stones.StoneContainerItem;
-import com.blargsworkshop.sleepstone.stones.StoneInventoryItem;
+import com.blargsworkshop.sleepstone.items.stone.StoneContainerItem;
+import com.blargsworkshop.sleepstone.items.stone.StoneInventoryItem;
+import com.blargsworkshop.sleepstone.items.stone.Guis.GuiStone;
+import com.blargsworkshop.sleepstone.items.stone.Guis.GuiStoneInventory;
+
+import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.network.IGuiHandler;
-import com.blargsworkshop.sleepstone.stones.Guis.GuiStoneInventory;
 
 public class GuiHandler implements IGuiHandler {
 

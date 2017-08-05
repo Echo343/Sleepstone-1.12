@@ -1,15 +1,18 @@
-package com.blargsworkshop.sleepstone.stones.Guis;
+package com.blargsworkshop.sleepstone.items.stone.Guis;
 
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.util.ResourceLocation;
-import com.blargsworkshop.sleepstone.stones.*;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.OpenGlHelper;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
-import net.minecraft.entity.EntityLivingBase;
+
 import com.blargsworkshop.sleepstone.SleepstoneMod;
+import com.blargsworkshop.sleepstone.items.stone.StoneContainerItem;
+import com.blargsworkshop.sleepstone.items.stone.StoneInventoryItem;
+
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.ResourceLocation;
 
 public class GuiStoneInventory extends GuiContainer
 {

@@ -1,4 +1,4 @@
-package com.blargsworkshop.sleepstone.interfaces;
+package com.blargsworkshop.sleepstone.proxy;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;

@@ -1,4 +1,4 @@
-package com.blargsworkshop.sleepstone.Gui;
+package com.blargsworkshop.sleepstone.gui;
 
 public enum GuiEnum {
 	STONE,
