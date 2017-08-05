@@ -4,6 +4,7 @@ import com.blargsworkshop.sleepstone.NovelPotion;
 import com.blargsworkshop.sleepstone.SleepstoneMod;
 import com.blargsworkshop.sleepstone.SleepstoneMod.DEBUG;
 import com.blargsworkshop.sleepstone.gui.GuiEnum;
+import com.blargsworkshop.sleepstone.items.BaseItem;
 import com.blargsworkshop.sleepstone.network.BasicMessage;
 
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
@@ -12,14 +13,13 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 
-public class ItemSleepstone extends Item implements IMessageHandler<BasicMessage, IMessage> {
+public class ItemSleepstone extends BaseItem implements IMessageHandler<BasicMessage, IMessage> {
 	
 	private static final String TEXT_SLEEPSTONE_SUFFERING_EFFECTS_OF_WARPING = "text.sleepstone.suffering_effects_of_warping";
 	private static final String TEXT_SLEEPSTONE_BED_DESTROYED = "text.sleepstone.bed_destroyed";
@@ -30,11 +30,9 @@ public class ItemSleepstone extends Item implements IMessageHandler<BasicMessage
 	private static final String TEXTURE_SLEEPSTONE = "sleepstonemod:sleepy";
 
 	public ItemSleepstone() {
+		super(BASIC_SLEEPSTONE_NAME, TEXTURE_SLEEPSTONE);
 		// ItemStacks that store an NBT Tag Compound are limited to stack size of 1
 		this.setMaxStackSize(1);
-		this.setUnlocalizedName(BASIC_SLEEPSTONE_NAME);
-		this.setTextureName(TEXTURE_SLEEPSTONE);
-		this.setCreativeTab(SleepstoneMod.tabSleepstone);
 	}
 	
 	@Override

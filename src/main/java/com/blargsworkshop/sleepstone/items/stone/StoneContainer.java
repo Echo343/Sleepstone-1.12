@@ -6,15 +6,15 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class StoneContainerItem extends Container {
-    private final StoneInventoryItem inventory;
+public class StoneContainer extends Container {
+    private final StoneInventory inventory;
 
     /** Using these will make transferStackInSlot easier to understand and implement
 	 * INV_START is the index of the first slot in the Player's Inventory, so our
 	 * InventoryItem's number of slots (e.g. 5 slots is array indices 0-4, so start at 5)
 	 * Notice how we don't have to remember how many slots we made? We can just use
 	 * InventoryItem.INV_SIZE and if we ever change it, the Container updates automatically. */
-    private static final int INV_START = StoneInventoryItem.INV_SIZE;
+    private static final int INV_START = StoneInventory.INV_SIZE;
     private static final int INV_END = INV_START + 26;
     private static final int HOTBAR_START = INV_END + 1;
     private static final int HOTBAR_END = HOTBAR_START + 8;
@@ -23,15 +23,15 @@ public class StoneContainerItem extends Container {
 	// ARMOR_START = InventoryItem.INV_SIZE, ARMOR_END = ARMOR_START+3,
 	// INV_START = ARMOR_END+1, and then carry on like above.
 	
-	public StoneInventoryItem getInventoryItem() {
+	public StoneInventory getInventoryItem() {
 		return this.inventory;
 	}
     
-    public StoneContainerItem(EntityPlayer par1Player, InventoryPlayer inventoryPlayer, StoneInventoryItem stoneInventoryItem) {
-        this.inventory = stoneInventoryItem;
+    public StoneContainer(EntityPlayer par1Player, InventoryPlayer inventoryPlayer, StoneInventory stoneInventory) {
+        this.inventory = stoneInventory;
 
         /** Stone Inventory */
-        for (int i = 0; i < StoneInventoryItem.INV_SIZE; i++) {
+        for (int i = 0; i < StoneInventory.INV_SIZE; i++) {
             // You can make a custom Slot if you need different behavior,
             // such as only certain item types can be put into this slot.
             // We made a custom slot to prevent our inventory-storing item

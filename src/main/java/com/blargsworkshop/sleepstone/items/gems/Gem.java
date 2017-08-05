@@ -1,16 +1,12 @@
 package com.blargsworkshop.sleepstone.items.gems;
 
-import com.blargsworkshop.sleepstone.SleepstoneMod;
+import com.blargsworkshop.sleepstone.items.BaseItem;
 
-import net.minecraft.item.Item;
-
-public abstract class Gem extends Item {
+public abstract class Gem extends BaseItem {
 
 	public Gem(String unlocalizedName, String texture) {
+		super(unlocalizedName, texture);
 		// ItemStacks that store an NBT Tag Compound are limited to stack size of 1
 		this.setMaxStackSize(16);
-		this.setUnlocalizedName(unlocalizedName);
-		this.setTextureName(texture);
-		this.setCreativeTab(SleepstoneMod.tabSleepstone);
 	}
 }

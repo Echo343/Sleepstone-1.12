@@ -3,6 +3,7 @@ package com.blargsworkshop.sleepstone;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
+import com.blargsworkshop.sleepstone.items.gems.ItemDensityGem;
 import com.blargsworkshop.sleepstone.items.stone.ItemSleepstone;
 import com.blargsworkshop.sleepstone.network.BasicMessage;
 import com.blargsworkshop.sleepstone.proxy.IProxy;
@@ -52,8 +53,8 @@ public class SleepstoneMod {
 	private static final String CREATIVE_TAB_SLEEPSTONE = "sleepstoneCreativeTab";
 
 	//Items
-	public static Item sleepstoneItem;
-//	public static Item
+	public static Item itemSleepstone;
+	public static Item itemDensityGem;
 
 	/**
 	 * Read Config, create blocks, items, etc & register them.
@@ -99,7 +100,7 @@ public class SleepstoneMod {
 
 			@Override
 			public Item getTabIconItem() {
-				return sleepstoneItem;
+				return itemSleepstone;
 			}
 		};
 	}
@@ -110,12 +111,14 @@ public class SleepstoneMod {
 	}
 
 	private static void initItems() {
-		sleepstoneItem = new ItemSleepstone();
-		GameRegistry.registerItem(sleepstoneItem, "modItemSleepstoneItem"); //TODO something to generate random name.
+		itemSleepstone = new ItemSleepstone();
+		itemDensityGem = new ItemDensityGem();
+		GameRegistry.registerItem(itemSleepstone, "modItemSleepstone"); //TODO something to generate random name.
+		GameRegistry.registerItem(itemDensityGem, "modItemDensityGem");
 	}
 
 	private static void initRecipes() {
-		GameRegistry.addShapedRecipe(new ItemStack(sleepstoneItem), "srs", "gbg", "srs", 's',
+		GameRegistry.addShapedRecipe(new ItemStack(itemSleepstone), "srs", "gbg", "srs", 's',
 				new ItemStack(Blocks.stone), 'r', new ItemStack(Blocks.redstone_block), 'g',
 				new ItemStack(Items.gold_ingot), 'b', new ItemStack(Items.bed));
 	}

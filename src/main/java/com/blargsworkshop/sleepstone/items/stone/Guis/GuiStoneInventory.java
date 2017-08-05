@@ -4,8 +4,8 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import com.blargsworkshop.sleepstone.SleepstoneMod;
-import com.blargsworkshop.sleepstone.items.stone.StoneContainerItem;
-import com.blargsworkshop.sleepstone.items.stone.StoneInventoryItem;
+import com.blargsworkshop.sleepstone.items.stone.StoneContainer;
+import com.blargsworkshop.sleepstone.items.stone.StoneInventory;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -32,9 +32,9 @@ public class GuiStoneInventory extends GuiContainer
 	private static final ResourceLocation iconLocation = new ResourceLocation(SleepstoneMod.MODID, GUI_TEXTURE);
 
 	/** The inventory to render on screen */
-	private final StoneInventoryItem inventory;
+	private final StoneInventory inventory;
 
-	public GuiStoneInventory(StoneContainerItem containerItem)
+	public GuiStoneInventory(StoneContainer containerItem)
 	{
 		super(containerItem);
 		this.inventory = containerItem.getInventoryItem();

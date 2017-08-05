@@ -7,7 +7,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.util.Constants;
 
-public class StoneInventoryItem implements IInventory {
+public class StoneInventory implements IInventory {
 	private boolean isNameLocalized = false;
     private String name = "Inventory Item";
 
@@ -23,7 +23,7 @@ public class StoneInventoryItem implements IInventory {
     /**
      * @param itemstack - the ItemStack to which this inventory belongs
      */
-	public StoneInventoryItem(ItemStack stack) {
+	public StoneInventory(ItemStack stack) {
         invItem = stack;
 
         // Create a new NBT Tag Compound if one doesn't already exist, or you will crash
