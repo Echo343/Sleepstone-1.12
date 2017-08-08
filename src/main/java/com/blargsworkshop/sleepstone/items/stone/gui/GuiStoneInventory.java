@@ -1,4 +1,4 @@
-package com.blargsworkshop.sleepstone.items.stone.Guis;
+package com.blargsworkshop.sleepstone.items.stone.gui;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;

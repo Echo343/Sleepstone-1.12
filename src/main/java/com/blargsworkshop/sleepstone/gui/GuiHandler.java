@@ -2,8 +2,8 @@ package com.blargsworkshop.sleepstone.gui;
 
 import com.blargsworkshop.sleepstone.items.stone.StoneContainer;
 import com.blargsworkshop.sleepstone.items.stone.StoneInventory;
-import com.blargsworkshop.sleepstone.items.stone.Guis.GuiStone;
-import com.blargsworkshop.sleepstone.items.stone.Guis.GuiStoneInventory;
+import com.blargsworkshop.sleepstone.items.stone.gui.GuiStone;
+import com.blargsworkshop.sleepstone.items.stone.gui.GuiStoneInventory;
 
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;

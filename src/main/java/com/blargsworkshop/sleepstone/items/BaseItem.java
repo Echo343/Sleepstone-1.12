@@ -11,4 +11,9 @@ public class BaseItem extends Item {
 		this.setTextureName(texture);
 		this.setCreativeTab(SleepstoneMod.tabSleepstone);
 	}
+
+	public BaseItem(String unlocalizedName) {
+		this.setUnlocalizedName(unlocalizedName);
+		this.setCreativeTab(SleepstoneMod.tabSleepstone);
+	}
 }

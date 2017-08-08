@@ -1,4 +1,4 @@
-package com.blargsworkshop.sleepstone.items.stone.Guis;
+package com.blargsworkshop.sleepstone.items.stone.gui;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;

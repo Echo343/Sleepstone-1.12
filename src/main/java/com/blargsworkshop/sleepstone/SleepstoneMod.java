@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
 import com.blargsworkshop.sleepstone.items.gems.ItemDensityGem;
+import com.blargsworkshop.sleepstone.items.gems.support.density.DensityCraftable;
 import com.blargsworkshop.sleepstone.items.stone.ItemSleepstone;
 import com.blargsworkshop.sleepstone.network.BasicMessage;
 import com.blargsworkshop.sleepstone.proxy.IProxy;
@@ -55,6 +56,7 @@ public class SleepstoneMod {
 	//Items
 	public static Item itemSleepstone;
 	public static Item itemDensityGem;
+	public static Item itemDensityCraftable;
 
 	/**
 	 * Read Config, create blocks, items, etc & register them.
@@ -111,10 +113,12 @@ public class SleepstoneMod {
 	}
 
 	private static void initItems() {
-		itemSleepstone = new ItemSleepstone();
-		itemDensityGem = new ItemDensityGem();
-		GameRegistry.registerItem(itemSleepstone, "modItemSleepstone"); //TODO something to generate random name.
-		GameRegistry.registerItem(itemDensityGem, "modItemDensityGem");
+//		itemSleepstone = new ItemSleepstone();
+//		itemDensityGem = new ItemDensityGem();
+//		itemDensityCraftable = new DensityCraftable();
+		GameRegistry.registerItem(itemSleepstone = new ItemSleepstone(), "modItemSleepstone"); //TODO something to generate random name.
+		GameRegistry.registerItem(itemDensityGem = new ItemDensityGem(), "modItemDensityGem");
+		GameRegistry.registerItem(itemDensityCraftable = new DensityCraftable(), "modItemDensityCraftable");
 	}
 
 	private static void initRecipes() {
