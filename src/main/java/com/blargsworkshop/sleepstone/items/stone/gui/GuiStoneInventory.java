@@ -3,7 +3,7 @@ package com.blargsworkshop.sleepstone.items.stone.gui;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import com.blargsworkshop.sleepstone.SleepstoneMod;
+import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.items.stone.StoneContainer;
 import com.blargsworkshop.sleepstone.items.stone.StoneInventory;
 
@@ -29,7 +29,7 @@ public class GuiStoneInventory extends GuiContainer
 	 * I have provided a sample texture file that works with this tutorial. Download it
 	 * from Forge_Tutorials/textures/gui/
 	 */
-	private static final ResourceLocation iconLocation = new ResourceLocation(SleepstoneMod.MODID, GUI_TEXTURE);
+	private static final ResourceLocation iconLocation = new ResourceLocation(ModInfo.ID, GUI_TEXTURE);
 
 	/** The inventory to render on screen */
 	private final StoneInventory inventory;

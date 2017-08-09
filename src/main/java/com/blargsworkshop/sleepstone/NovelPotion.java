@@ -1,7 +1,5 @@
 package com.blargsworkshop.sleepstone;
 
-import com.blargsworkshop.sleepstone.SleepstoneMod.DEBUG;
-
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.Potion;
 
@@ -11,7 +9,7 @@ public class NovelPotion extends Potion {
 
 	protected NovelPotion(int potionId, boolean isBadEffect, int liquidColor) {
 		super(potionId, isBadEffect, liquidColor);
-		SleepstoneMod.debug("Registering NovelPotion: " + potionId, DEBUG.DETAIL);
+		SleepstoneMod.debug("Registering NovelPotion: " + potionId, ModInfo.DEBUG.DETAIL);
 	}
 	
 	@Override

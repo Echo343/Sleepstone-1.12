@@ -1,8 +1,8 @@
 package com.blargsworkshop.sleepstone.items.stone;
 
+import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.NovelPotion;
 import com.blargsworkshop.sleepstone.SleepstoneMod;
-import com.blargsworkshop.sleepstone.SleepstoneMod.DEBUG;
 import com.blargsworkshop.sleepstone.gui.GuiEnum;
 import com.blargsworkshop.sleepstone.items.BaseItem;
 import com.blargsworkshop.sleepstone.network.BasicMessage;
@@ -24,8 +24,8 @@ public class ItemSleepstone extends BaseItem implements IMessageHandler<BasicMes
 	private static final String TEXT_SLEEPSTONE_SUFFERING_EFFECTS_OF_WARPING = "text.sleepstone.suffering_effects_of_warping";
 	private static final String TEXT_SLEEPSTONE_BED_DESTROYED = "text.sleepstone.bed_destroyed";
 	private static final int WARP_SICKNESS_DURATION = 20*60*10;
-	private static final String SOUND_TELEPORT = SleepstoneMod.MODID + ":" + "Teleport";
-	private static final String SOUND_SWOOSH = SleepstoneMod.MODID + ":" + "Swoosh";
+	private static final String SOUND_TELEPORT = ModInfo.ID + ":" + "Teleport";
+	private static final String SOUND_SWOOSH = ModInfo.ID + ":" + "Swoosh";
 	private static final String BASIC_SLEEPSTONE_NAME = "basicsleepstone";
 	private static final String TEXTURE_SLEEPSTONE = "sleepstonemod:sleepy";
 
@@ -72,7 +72,7 @@ public class ItemSleepstone extends BaseItem implements IMessageHandler<BasicMes
 				player.setPositionAndUpdate(coord.posX + 0.5, coord.posY + 0.1, coord.posZ + 0.5);
 				player.addPotionEffect(new PotionEffect(NovelPotion.warpSickness.id, WARP_SICKNESS_DURATION));
 				world.playSoundAtEntity(player, SOUND_TELEPORT, 1f, 1f);
-				SleepstoneMod.debug("Warping to: " + (coord.posX + 0.5) + ", " + (coord.posY + 0.1) + ", " + (coord.posZ + 0.5), DEBUG.CASUAL, player);
+				SleepstoneMod.debug("Warping to: " + (coord.posX + 0.5) + ", " + (coord.posY + 0.1) + ", " + (coord.posZ + 0.5), ModInfo.DEBUG.CASUAL, player);
 			}
 			else {
 				player.addChatMessage(new ChatComponentText(LanguageRegistry.instance().getStringLocalization(TEXT_SLEEPSTONE_BED_DESTROYED)));

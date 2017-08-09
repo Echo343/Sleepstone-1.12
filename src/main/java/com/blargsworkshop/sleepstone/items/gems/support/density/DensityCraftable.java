@@ -2,7 +2,7 @@ package com.blargsworkshop.sleepstone.items.gems.support.density;
 
 import java.util.List;
 
-import com.blargsworkshop.sleepstone.SleepstoneMod;
+import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.items.BaseItem;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -39,7 +39,7 @@ public class DensityCraftable extends BaseItem {
 	@Override
 	public void registerIcons(IIconRegister reg) {
 		for (int i = 0; i < NUMBER_OF_CRAFTABLES; i++) {
-			this.icons[i] = reg.registerIcon(SleepstoneMod.MODID + ":density-craftable_" + i);
+			this.icons[i] = reg.registerIcon(ModInfo.ID + ":density-craftable_" + i);
 		}
 	}
 	

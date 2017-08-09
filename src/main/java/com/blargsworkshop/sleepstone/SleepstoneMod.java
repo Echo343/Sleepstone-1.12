@@ -29,29 +29,18 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ChatComponentText;
 
-@Mod(modid = SleepstoneMod.MODID, name = SleepstoneMod.NAME, version = SleepstoneMod.VERSION)
+@Mod(modid = ModInfo.ID, name = ModInfo.NAME, version = ModInfo.VERSION)
 public class SleepstoneMod {
-	public static final String MODID = "sleepstonemod";
-	public static final String NAME = "Sleepstone";
-	public static final String VERSION = "1.2";
 	public static SimpleNetworkWrapper networkWrapper = null;
-
-	public static enum DEBUG {
-		NONE, CASUAL, DETAIL
-	};
-
-	protected static DEBUG DEBUG_LVL = DEBUG.DETAIL;
-	protected static boolean DEBUG_CHAT = true;
 
 	@Instance
 	public static SleepstoneMod instance = new SleepstoneMod();
 
-	@SidedProxy(clientSide = "com.blargsworkshop.sleepstone.proxy..ClientProxy", serverSide = "com.blargsworkshop.sleepstone.proxy..CommonProxy")
+	@SidedProxy(clientSide = ModInfo.CLIENT_PROXY, serverSide = ModInfo.COMMON_PROXY)
 	public static IProxy proxy;
 
 	//Creative Mode Tabs
 	public static CreativeTabs tabSleepstone;
-	private static final String CREATIVE_TAB_SLEEPSTONE = "sleepstoneCreativeTab";
 
 	//Items
 	public static Item itemSleepstone;
@@ -64,11 +53,11 @@ public class SleepstoneMod {
 	 */
 	@EventHandler
 	public static void preInit(FMLPreInitializationEvent e) {
-		SleepstoneMod.debug("PreInit Start", DEBUG.DETAIL);
+		SleepstoneMod.debug("PreInit Start", ModInfo.DEBUG.DETAIL);
 		proxy.preInit(e);
 		initCreativeTabs();
 		initItems();
-		SleepstoneMod.debug("PreInit End", DEBUG.DETAIL);
+		SleepstoneMod.debug("PreInit End", ModInfo.DEBUG.DETAIL);
 	}
 
 	/**
@@ -77,13 +66,13 @@ public class SleepstoneMod {
 	 */
 	@EventHandler
 	public static void init(FMLInitializationEvent e) {
-		SleepstoneMod.debug("Hi! Hello There! ZZZZZZZZZZZZZZZZZ Sleepstone mod!", DEBUG.CASUAL);
-		SleepstoneMod.debug("Init Start", DEBUG.DETAIL);
+		SleepstoneMod.debug("Hi! Hello There! ZZZZZZZZZZZZZZZZZ Sleepstone mod!", ModInfo.DEBUG.CASUAL);
+		SleepstoneMod.debug("Init Start", ModInfo.DEBUG.DETAIL);
 		preInitPotions();
 		proxy.init(e);
 		initRegisters();
 		initRecipes();
-		SleepstoneMod.debug("Init End", DEBUG.DETAIL);
+		SleepstoneMod.debug("Init End", ModInfo.DEBUG.DETAIL);
 	}
 
 	/**
@@ -92,13 +81,13 @@ public class SleepstoneMod {
 	 */
 	@EventHandler
 	public static void postInit(FMLPostInitializationEvent e) {
-		SleepstoneMod.debug("PostInit Start", DEBUG.DETAIL);
+		SleepstoneMod.debug("PostInit Start", ModInfo.DEBUG.DETAIL);
 		proxy.postInit(e);
-		SleepstoneMod.debug("PostInit End", DEBUG.DETAIL);
+		SleepstoneMod.debug("PostInit End", ModInfo.DEBUG.DETAIL);
 	}
 
 	private static void initCreativeTabs() {
-		tabSleepstone = new CreativeTabs(CREATIVE_TAB_SLEEPSTONE) {
+		tabSleepstone = new CreativeTabs(ModInfo.CREATIVE_TAB_SLEEPSTONE) {
 
 			@Override
 			public Item getTabIconItem() {
@@ -108,7 +97,7 @@ public class SleepstoneMod {
 	}
 
 	private static void initRegisters() {
-		SleepstoneMod.networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(SleepstoneMod.MODID);
+		SleepstoneMod.networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(ModInfo.ID);
 		SleepstoneMod.networkWrapper.registerMessage(ItemSleepstone.class, BasicMessage.class, 0, Side.SERVER); //TODO ? id should be dynamically generated?
 	}
 
@@ -128,7 +117,7 @@ public class SleepstoneMod {
 	}
 
 	private static void preInitPotions() {
-		SleepstoneMod.debug("Potions Start - length: " + Potion.potionTypes.length, DEBUG.DETAIL);
+		SleepstoneMod.debug("Potions Start - length: " + Potion.potionTypes.length, ModInfo.DEBUG.DETAIL);
 		Potion[] potionTypes = null;
 		for (Field field : Potion.class.getDeclaredFields()) {
 			field.setAccessible(true);
@@ -149,7 +138,7 @@ public class SleepstoneMod {
 				System.out.println("Error with PotionTypes - " + exc);
 			}
 		}
-		SleepstoneMod.debug("Potions End - length: " + Potion.potionTypes.length, DEBUG.DETAIL);
+		SleepstoneMod.debug("Potions End - length: " + Potion.potionTypes.length, ModInfo.DEBUG.DETAIL);
 
 		int warpSicknessId = -1;
 		for (int i = 0; i < Potion.potionTypes.length; i++) {
@@ -166,22 +155,22 @@ public class SleepstoneMod {
 		NovelPotion.warpSickness.setIconIndex(5, 1);
 	}
 
-	public static void debug(String str, DEBUG option) {
+	public static void debug(String str, ModInfo.DEBUG option) {
 		debug(str, option, null);
 	}
 
-	public static void debug(String str, DEBUG option, EntityPlayer player) {
-		switch (DEBUG_LVL) {
+	public static void debug(String str, ModInfo.DEBUG option, EntityPlayer player) {
+		switch (ModInfo.DEBUG_LVL) {
 		case CASUAL:
-			if (option == DEBUG.CASUAL) {
-				if (SleepstoneMod.DEBUG_CHAT && player != null) {
+			if (option == ModInfo.DEBUG.CASUAL) {
+				if (ModInfo.DEBUG_CHAT && player != null) {
 					player.addChatMessage(new ChatComponentText(str));
 				}
 				System.out.println(str);
 			}
 			break;
 		case DETAIL:
-			if (SleepstoneMod.DEBUG_CHAT && player != null) {
+			if (ModInfo.DEBUG_CHAT && player != null) {
 				player.addChatMessage(new ChatComponentText(str));
 			}
 			System.out.println(str);

@@ -1,15 +1,16 @@
 package com.blargsworkshop.sleepstone.items.stone.gui;
 
+import org.lwjgl.opengl.GL11;
+
+import com.blargsworkshop.sleepstone.ModInfo;
+import com.blargsworkshop.sleepstone.SleepstoneMod;
+import com.blargsworkshop.sleepstone.network.BasicMessage;
+
+import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
-
-import org.lwjgl.opengl.GL11;
-
-import com.blargsworkshop.sleepstone.SleepstoneMod;
-import com.blargsworkshop.sleepstone.network.BasicMessage;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 
 public class GuiStone extends GuiScreen {
@@ -28,7 +29,7 @@ public class GuiStone extends GuiScreen {
 		// this.player = player;
 		xSize = 247;
 		ySize = 165;
-		backgroundImage = new ResourceLocation(SleepstoneMod.MODID, GUI_TEXTURE);
+		backgroundImage = new ResourceLocation(ModInfo.ID, GUI_TEXTURE);
 	}
 	
 	@SuppressWarnings("unchecked")
