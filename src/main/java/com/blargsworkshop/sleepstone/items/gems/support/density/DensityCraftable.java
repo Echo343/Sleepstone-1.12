@@ -15,8 +15,8 @@ import net.minecraft.util.IIcon;
  * item.densitycraftable_0.name=Obsidian Clump
  * item.densitycraftable_1.name=Hardened Obsidian Clump
  * item.densitycraftable_2.name=Lattice Diamond Encased Clump
- * item.densitycraftable_3.name=Hardened Lattice Diamond Encased Structure
- * item.densitycraftable_4.name=Molded Ceramic Shield Clump
+ * item.densitycraftable_3.name=Hardened Crystallized Encased Structure
+ * item.densitycraftable_4.name=Molded Ceramic Shield Ball
  * item.densitycraftable_5.name=Blasted Ceramic Encased Orb
  * item.densitycraftable_6.name=Laced Redstone Encased Orb
  * item.densitycraftable_7.name=Infused Redstone Orb

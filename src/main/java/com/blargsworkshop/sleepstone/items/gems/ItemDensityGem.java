@@ -6,8 +6,8 @@ package com.blargsworkshop.sleepstone.items.gems;
  * 
  * Craftable from:
  *   Obsidian -craft-> Obsidian Clump -furnace-> Hardened Obsidian Clump
- *   Diamond Blocks -craft-> Lattice Diamond Encased Clump -furnace-> Hardened Lattice Diamond Encased Structure
- *   Sand, Clay -craft-> Molded Ceramic Shield Clump -furnace-> Blasted Ceramic Encased Orb
+ *   Diamond Blocks -craft-> Lattice Diamond Encased Clump -furnace-> Hardened Crystallized Encased Structure
+ *   Sand, Clay -craft-> Molded Ceramic Shield Ball -furnace-> Blasted Ceramic Encased Orb
  *   Redstone blocks -craft-> Laced Redstone Encased Orb -furnace-> Infused Redstone Orb
  *   Gold blocks -craft-> Densely Packed Orb -furnace-> Density Gem
  *   
