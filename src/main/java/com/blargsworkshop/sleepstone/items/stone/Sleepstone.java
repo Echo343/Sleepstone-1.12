@@ -19,7 +19,7 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 
-public class ItemSleepstone extends BaseItem implements IMessageHandler<BasicMessage, IMessage> {
+public class Sleepstone extends BaseItem implements IMessageHandler<BasicMessage, IMessage> {
 	
 	private static final String TEXT_SLEEPSTONE_SUFFERING_EFFECTS_OF_WARPING = "text.sleepstone.suffering_effects_of_warping";
 	private static final String TEXT_SLEEPSTONE_BED_DESTROYED = "text.sleepstone.bed_destroyed";
@@ -29,7 +29,7 @@ public class ItemSleepstone extends BaseItem implements IMessageHandler<BasicMes
 	private static final String BASIC_SLEEPSTONE_NAME = "basicsleepstone";
 	private static final String TEXTURE_SLEEPSTONE = "sleepstonemod:sleepy";
 
-	public ItemSleepstone() {
+	public Sleepstone() {
 		super(BASIC_SLEEPSTONE_NAME, TEXTURE_SLEEPSTONE);
 		// ItemStacks that store an NBT Tag Compound are limited to stack size of 1
 		this.setMaxStackSize(1);

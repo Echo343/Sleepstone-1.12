@@ -1,8 +1,8 @@
 package com.blargsworkshop.sleepstone;
 
-import com.blargsworkshop.sleepstone.items.gems.ItemDensityGem;
+import com.blargsworkshop.sleepstone.items.gems.DensityGem;
 import com.blargsworkshop.sleepstone.items.gems.support.density.DensityCraftable;
-import com.blargsworkshop.sleepstone.items.stone.ItemSleepstone;
+import com.blargsworkshop.sleepstone.items.stone.Sleepstone;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.creativetab.CreativeTabs;
@@ -19,8 +19,8 @@ public class ModItems {
 	public static Item itemDensityCraftable;
 	
 	public static void init() {
-		GameRegistry.registerItem(itemSleepstone = new ItemSleepstone(), "modItemSleepstone");
-		GameRegistry.registerItem(itemDensityGem = new ItemDensityGem(), "modItemDensityGem");
+		GameRegistry.registerItem(itemSleepstone = new Sleepstone(), "modItemSleepstone");
+		GameRegistry.registerItem(itemDensityGem = new DensityGem(), "modItemDensityGem");
 		GameRegistry.registerItem(itemDensityCraftable = new DensityCraftable(), "modItemDensityCraftable");
 	}
 	

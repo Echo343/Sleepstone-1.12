@@ -18,6 +18,6 @@ public class SlotItemInv extends Slot {
      */
     @Override
     public boolean isItemValid(ItemStack itemStack) {
-        return !(itemStack.getItem() instanceof ItemSleepstone);
+        return !(itemStack.getItem() instanceof Sleepstone);
     }
 }

@@ -13,12 +13,12 @@ package com.blargsworkshop.sleepstone.items.gems;
  *   
  *   Smelt with a stack of coal between each one.
  */
-public class ItemDensityGem extends Gem {
+public class DensityGem extends Gem {
 
 	private static final String UNLOCALIZEDNAME = "densitygem";
 	private static final String TEXTURE = "sleepstonemod:gem-density";
 	
-	public ItemDensityGem() {
+	public DensityGem() {
 		super(UNLOCALIZEDNAME, TEXTURE);
 	}
 
