@@ -12,24 +12,31 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
 /**
- * item.densitycraftable_0.name=Obsidian Clump
- * item.densitycraftable_1.name=Hardened Obsidian Clump
- * item.densitycraftable_2.name=Lattice Diamond Encased Clump
- * item.densitycraftable_3.name=Hardened Crystallized Encased Structure
- * item.densitycraftable_4.name=Molded Ceramic Shield Ball
- * item.densitycraftable_5.name=Blasted Ceramic Encased Orb
- * item.densitycraftable_6.name=Laced Redstone Encased Orb
- * item.densitycraftable_7.name=Infused Redstone Orb
- * item.densitycraftable_8.name=Densely Packed Orb
+ * item.densitycraftable_0.name=Hardened Clay Piece
+ * item.densitycraftable_1.name=Blasted Clay Piece
+ * item.densitycraftable_2.name=Ceramic Foundation
+ * item.densitycraftable_3.name=Blasted Ceramic Foundation
+ * item.densitycraftable_4.name=Condensed Redstone Block
+ * item.densitycraftable_5.name=Hyper Lattice Redstone Block
+ * item.densitycraftable_6.name=Hyper Lattice Redstone Mass
+ * item.densitycraftable_7.name=Hyper Infused Mass
+ * item.densitycraftable_8.name=Refined Obsidian
+ * item.densitycraftable_9.name=Refined Obsidian Clump
+ * item.densitycraftable_10.name=Hardened Obsidian Clump
+ * item.densitycraftable_11.name=Brittle Diamond Lattice
+ * item.densitycraftable_12.name=Strengthened Diamond Lattice
+ * item.densitycraftable_13.name=Crystalline Lattice Structure
+ * item.densitycraftable_14.name=Heated Crystalline Lattice Structure
+ * item.densitycraftable_15.name=Radial Empowered Orb
  * 
- * @author pswsadmin
+ * @author Echo343
  *
  */
 public class DensityCraftable extends BaseItem {
 	
 	private static final String UNLOCALIZED_NAME = "densitycraftable"; 
-	private static final int NUMBER_OF_CRAFTABLES = 9;
-	public IIcon[] icons = new IIcon[6];
+	private static final int NUMBER_OF_CRAFTABLES = 16;
+	public IIcon[] icons = new IIcon[NUMBER_OF_CRAFTABLES];
 
 	public DensityCraftable() {
 		super(UNLOCALIZED_NAME);
