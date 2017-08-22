@@ -1,4 +1,4 @@
-package com.blargsworkshop.sleepstone.items.gems.support.density;
+package com.blargsworkshop.sleepstone.items.gems.support;
 
 import java.util.List;
 
@@ -32,13 +32,13 @@ import net.minecraft.util.IIcon;
  * @author Echo343
  *
  */
-public class DensityCraftable extends BaseItem {
+public class StoneCraftable extends BaseItem {
 	
-	private static final String UNLOCALIZED_NAME = "densitycraftable"; 
+	private static final String UNLOCALIZED_NAME = "stonecraftable"; 
 	private static final int NUMBER_OF_CRAFTABLES = 16;
 	public IIcon[] icons = new IIcon[NUMBER_OF_CRAFTABLES];
 
-	public DensityCraftable() {
+	public StoneCraftable() {
 		super(UNLOCALIZED_NAME);
 		this.setHasSubtypes(true);
 	}
@@ -46,7 +46,7 @@ public class DensityCraftable extends BaseItem {
 	@Override
 	public void registerIcons(IIconRegister reg) {
 		for (int i = 0; i < NUMBER_OF_CRAFTABLES; i++) {
-			this.icons[i] = reg.registerIcon(ModInfo.ID + ":density-craftable_" + i);
+			this.icons[i] = reg.registerIcon(ModInfo.ID + ":stone-craftable_" + i);
 		}
 	}
 	

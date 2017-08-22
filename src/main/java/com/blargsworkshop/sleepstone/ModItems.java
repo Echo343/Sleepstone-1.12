@@ -1,7 +1,7 @@
 package com.blargsworkshop.sleepstone;
 
-import com.blargsworkshop.sleepstone.items.gems.DensityGem;
-import com.blargsworkshop.sleepstone.items.gems.support.density.DensityCraftable;
+import com.blargsworkshop.sleepstone.items.gems.StoneGem;
+import com.blargsworkshop.sleepstone.items.gems.support.StoneCraftable;
 import com.blargsworkshop.sleepstone.items.stone.Sleepstone;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -15,13 +15,13 @@ public class ModItems {
 	public static CreativeTabs tabSleepstone;
 	
 	public static Item itemSleepstone;
-	public static Item itemDensityGem;
-	public static Item itemDensityCraftable;
+	public static Item itemStoneGem;
+	public static Item itemStoneCraftable;
 	
 	public static void init() {
 		GameRegistry.registerItem(itemSleepstone = new Sleepstone(), "modItemSleepstone");
-		GameRegistry.registerItem(itemDensityGem = new DensityGem(), "modItemDensityGem");
-		GameRegistry.registerItem(itemDensityCraftable = new DensityCraftable(), "modItemDensityCraftable");
+		GameRegistry.registerItem(itemStoneGem = new StoneGem(), "modItemStoneGem");
+		GameRegistry.registerItem(itemStoneCraftable = new StoneCraftable(), "modItemStoneCraftable");
 	}
 	
 	public static void initRecipes() {
@@ -32,38 +32,38 @@ public class ModItems {
 				'b', new ItemStack(Items.bed));
 		
 		/**
-		 * item.densitycraftable_0.name=Obsidian Clump
-		 * item.densitycraftable_1.name=Hardened Obsidian Clump
-		 * item.densitycraftable_2.name=Lattice Diamond Encased Clump
-		 * item.densitycraftable_3.name=Hardened Crystallized Encased Structure
-		 * item.densitycraftable_4.name=Molded Ceramic Shield Ball
-		 * item.densitycraftable_5.name=Blasted Ceramic Encased Orb
-		 * item.densitycraftable_6.name=Laced Redstone Encased Orb
-		 * item.densitycraftable_7.name=Infused Redstone Orb
-		 * item.densitycraftable_8.name=Densely Packed Orb
+		 * item.stonecraftable_0.name=Obsidian Clump
+		 * item.stonecraftable_1.name=Hardened Obsidian Clump
+		 * item.stonecraftable_2.name=Lattice Diamond Encased Clump
+		 * item.stonecraftable_3.name=Hardened Crystallized Encased Structure
+		 * item.stonecraftable_4.name=Molded Ceramic Shield Ball
+		 * item.stonecraftable_5.name=Blasted Ceramic Encased Orb
+		 * item.stonecraftable_6.name=Laced Redstone Encased Orb
+		 * item.stonecraftable_7.name=Infused Redstone Orb
+		 * item.stonecraftable_8.name=Densely Packed Orb
 		 * 
 		 * Craftable from Obsidian, diamond blocks, sand, clay, redstone blocks & gold blocks.
 		 * */
-		GameRegistry.addShapedRecipe(new ItemStack(itemDensityCraftable, 1, 0), "xxx", "xxx", "xxx",
+		GameRegistry.addShapedRecipe(new ItemStack(itemStoneCraftable, 1, 0), "xxx", "xxx", "xxx",
 				'x', new ItemStack(Blocks.obsidian));
-		GameRegistry.addSmelting(new ItemStack(itemDensityCraftable, 1, 0), new ItemStack(itemDensityCraftable, 1, 1), 1f);
-		GameRegistry.addShapedRecipe(new ItemStack(itemDensityCraftable, 1, 2), "xxx", "xox", "xxx",
+		GameRegistry.addSmelting(new ItemStack(itemStoneCraftable, 1, 0), new ItemStack(itemStoneCraftable, 1, 1), 1f);
+		GameRegistry.addShapedRecipe(new ItemStack(itemStoneCraftable, 1, 2), "xxx", "xox", "xxx",
 				'x', Blocks.diamond_block,
-				'o', new ItemStack(itemDensityCraftable, 1, 1));
-		GameRegistry.addSmelting(new ItemStack(itemDensityCraftable, 1, 2), new ItemStack(itemDensityCraftable, 1, 3), 1f);
-		GameRegistry.addShapedRecipe(new ItemStack(itemDensityCraftable, 1, 4), "csc", "sos", "csc",
+				'o', new ItemStack(itemStoneCraftable, 1, 1));
+		GameRegistry.addSmelting(new ItemStack(itemStoneCraftable, 1, 2), new ItemStack(itemStoneCraftable, 1, 3), 1f);
+		GameRegistry.addShapedRecipe(new ItemStack(itemStoneCraftable, 1, 4), "csc", "sos", "csc",
 				'c', Blocks.clay,
 				's', Blocks.sand,
-				'o', new ItemStack(itemDensityCraftable, 1, 3));
-		GameRegistry.addSmelting(new ItemStack(itemDensityCraftable, 1, 4), new ItemStack(itemDensityCraftable, 1, 5), 1f);
-		GameRegistry.addShapedRecipe(new ItemStack(itemDensityCraftable, 1, 6), "xxx", "xox", "xxx",
+				'o', new ItemStack(itemStoneCraftable, 1, 3));
+		GameRegistry.addSmelting(new ItemStack(itemStoneCraftable, 1, 4), new ItemStack(itemStoneCraftable, 1, 5), 1f);
+		GameRegistry.addShapedRecipe(new ItemStack(itemStoneCraftable, 1, 6), "xxx", "xox", "xxx",
 				'x', Blocks.redstone_block,
-				'o', new ItemStack(itemDensityCraftable, 1, 5));
-		GameRegistry.addSmelting(new ItemStack(itemDensityCraftable, 1, 6), new ItemStack(itemDensityCraftable, 1, 7), 1f);
-		GameRegistry.addShapedRecipe(new ItemStack(itemDensityCraftable, 1, 8), "xxx", "xox", "xxx",
+				'o', new ItemStack(itemStoneCraftable, 1, 5));
+		GameRegistry.addSmelting(new ItemStack(itemStoneCraftable, 1, 6), new ItemStack(itemStoneCraftable, 1, 7), 1f);
+		GameRegistry.addShapedRecipe(new ItemStack(itemStoneCraftable, 1, 8), "xxx", "xox", "xxx",
 				'x', Blocks.gold_block,
-				'o', new ItemStack(itemDensityCraftable, 1, 7));
-		GameRegistry.addSmelting(new ItemStack(itemDensityCraftable, 1, 8), new ItemStack(itemDensityGem), 1f);
+				'o', new ItemStack(itemStoneCraftable, 1, 7));
+		GameRegistry.addSmelting(new ItemStack(itemStoneCraftable, 1, 8), new ItemStack(itemStoneGem), 1f);
 	}
 	
 	public static void initCreativeTabs() {
