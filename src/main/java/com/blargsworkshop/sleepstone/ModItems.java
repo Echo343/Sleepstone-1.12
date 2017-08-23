@@ -1,6 +1,8 @@
 package com.blargsworkshop.sleepstone;
 
+import com.blargsworkshop.sleepstone.items.gems.PathfinderGem;
 import com.blargsworkshop.sleepstone.items.gems.StoneGem;
+import com.blargsworkshop.sleepstone.items.gems.support.PathfinderCraftable;
 import com.blargsworkshop.sleepstone.items.gems.support.StoneCraftable;
 import com.blargsworkshop.sleepstone.items.stone.Sleepstone;
 
@@ -15,11 +17,15 @@ public class ModItems {
 	public static CreativeTabs tabSleepstone;
 	
 	public static Item itemSleepstone;
+	public static Item itemPathfinderGem;
+	public static Item itemPathfinderCraftable;
 	public static Item itemStoneGem;
 	public static Item itemStoneCraftable;
 	
 	public static void init() {
 		GameRegistry.registerItem(itemSleepstone = new Sleepstone(), "modItemSleepstone");
+		GameRegistry.registerItem(itemPathfinderGem = new PathfinderGem(), "modItemPathfinderGem");
+		GameRegistry.registerItem(itemPathfinderCraftable = new PathfinderCraftable(), "modItemPathfinderCraftable");
 		GameRegistry.registerItem(itemStoneGem = new StoneGem(), "modItemStoneGem");
 		GameRegistry.registerItem(itemStoneCraftable = new StoneCraftable(), "modItemStoneCraftable");
 	}
@@ -31,6 +37,34 @@ public class ModItems {
 				'r', new ItemStack(Blocks.redstone_block),
 				'g', new ItemStack(Items.gold_ingot),
 				'b', new ItemStack(Items.bed));
+		
+		/** Pathfinder Gem */
+		GameRegistry.addShapelessRecipe(new ItemStack(itemPathfinderCraftable),
+				Items.feather,
+				Blocks.wool,
+				Items.milk_bucket,
+				new ItemStack(Items.dye, 1, 0)); // Ink Sac
+		GameRegistry.addShapelessRecipe(new ItemStack(itemPathfinderGem),
+				Items.pumpkin_seeds,
+				new ItemStack(Items.dye, 1, 2), // Cactus Green
+				new ItemStack(Blocks.double_plant, 1, 4), //Rose Bush
+				new ItemStack(Items.dye, 1, 3), // Coco Beans
+				Items.saddle,
+				new ItemStack(itemPathfinderCraftable), // Mob Essence
+				Items.snowball,
+				Items.slime_ball,
+				Items.emerald);
+		// Copies the above recipe, but changes pumpkin and melon seeds
+		GameRegistry.addShapelessRecipe(new ItemStack(itemPathfinderGem),
+				Items.melon_seeds,
+				new ItemStack(Items.dye, 1, 2), // Cactus Green
+				new ItemStack(Blocks.double_plant, 1, 4), //Rose Bush
+				new ItemStack(Items.dye, 1, 3), // Coco Beans
+				Items.saddle,
+				new ItemStack(itemPathfinderCraftable), // Mob Essence
+				Items.snowball,
+				Items.slime_ball,
+				Items.emerald);
 		
 		/** Stone Gem
 		 * item.stonecraftable_0.name=Hardened Clay Piece
