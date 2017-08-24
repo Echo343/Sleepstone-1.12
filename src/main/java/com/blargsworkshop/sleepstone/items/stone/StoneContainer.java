@@ -1,5 +1,7 @@
 package com.blargsworkshop.sleepstone.items.stone;
 
+import com.blargsworkshop.sleepstone.items.gems.Gem;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -36,9 +38,9 @@ public class StoneContainer extends Container {
             // such as only certain item types can be put into this slot.
             // We made a custom slot to prevent our inventory-storing item
             // from being stored within itself, but if you want to allow that and 
-            // you follwed my advice at the end of the above step, then you
+            // you followed my advice at the end of the above step, then you
             // could get away with using the vanilla Slot class
-            this.addSlotToContainer(new SlotItemInv(this.inventory, i, 80 + (18 * (int)(i/4)), 8 + (18 * (i % 4))));
+            this.addSlotToContainer(new GemSlot(Gem.class, this.inventory, i, 80 + (18 * (int)(i/4)), 8 + (18 * (i % 4))));
         }
 
         // If you want, you can add ARMOR SLOTS here as well, but you need to

@@ -1,12 +1,17 @@
 package com.blargsworkshop.sleepstone.items.stone;
 
+import com.blargsworkshop.sleepstone.items.gems.Gem;
+
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class SlotItemInv extends Slot {
-    public SlotItemInv(IInventory inv, int index, int xPos, int yPos) {
+public class GemSlot extends Slot {
+	private Class<Gem> gemType;
+	
+    public GemSlot(Class<Gem> gemType, IInventory inv, int index, int xPos, int yPos) {
         super(inv, index, xPos, yPos);
+        this.gemType = gemType;
     }
 
     // This is the only method we need to override so that
@@ -18,6 +23,7 @@ public class SlotItemInv extends Slot {
      */
     @Override
     public boolean isItemValid(ItemStack itemStack) {
-        return !(itemStack.getItem() instanceof Sleepstone);
+//        return !(itemStack.getItem() instanceof Sleepstone); // Does not allow Sleepstone to store itself.
+        return gemType.isInstance(itemStack.getItem()); //Only allows the initialized Gem.
     }
 }
