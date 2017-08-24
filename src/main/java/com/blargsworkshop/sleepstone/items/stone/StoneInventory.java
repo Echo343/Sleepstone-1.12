@@ -15,7 +15,7 @@ public class StoneInventory implements IInventory {
     private final ItemStack invItem;
 
     /** Defining your inventory size this way is handy */
-    public static final int INV_SIZE = 8;
+    public static final int INV_SIZE = 12;
 
     /** Inventory's size must be the same as number of slots you add to the Container class */
     private ItemStack[] inventory = new ItemStack[INV_SIZE];

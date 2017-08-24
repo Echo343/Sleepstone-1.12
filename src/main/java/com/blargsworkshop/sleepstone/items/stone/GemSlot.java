@@ -7,11 +7,19 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 public class GemSlot extends Slot {
-	private Class<Gem> gemType;
+	private Class<? extends Gem> gemType;
+	private final int stackLimit;
 	
-    public GemSlot(Class<Gem> gemType, IInventory inv, int index, int xPos, int yPos) {
+    public GemSlot(Class<? extends Gem> gemType, IInventory inv, int index, int xPos, int yPos) {
         super(inv, index, xPos, yPos);
         this.gemType = gemType;
+        this.stackLimit = super.getSlotStackLimit();
+    }
+    
+    public GemSlot(Class<? extends Gem> gemType, IInventory inv, int stackLimit, int index, int xPos, int yPos) {
+    	super(inv, index, xPos, yPos);
+    	this.gemType = gemType;
+    	this.stackLimit = stackLimit;
     }
 
     // This is the only method we need to override so that
@@ -25,5 +33,10 @@ public class GemSlot extends Slot {
     public boolean isItemValid(ItemStack itemStack) {
 //        return !(itemStack.getItem() instanceof Sleepstone); // Does not allow Sleepstone to store itself.
         return gemType.isInstance(itemStack.getItem()); //Only allows the initialized Gem.
+    }
+    
+    @Override
+    public int getSlotStackLimit() {
+    	return stackLimit;
     }
 }

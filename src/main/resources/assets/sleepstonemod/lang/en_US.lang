@@ -1,6 +1,14 @@
 item.basicsleepstone.name=Sleepstone
+
+item.etherealgem.name=Ethereal Gem
+
+item.firegem.name=Fire Gem
+
+item.guardiangem.name=Guardian Gem
+
 item.pathfindergem.name=Pathfinder Gem
 item.pathfindercraftable_0.name=Mob Essence
+
 item.stonegem.name=Stone Gem
 item.stonecraftable_0.name=Hardened Clay Piece
 item.stonecraftable_1.name=Blasted Clay Piece
@@ -18,6 +26,8 @@ item.stonecraftable_12.name=Strengthened Diamond Lattice
 item.stonecraftable_13.name=Crystalline Lattice Structure
 item.stonecraftable_14.name=Heated Crystalline Lattice Structure
 item.stonecraftable_15.name=Radial Empowered Orb
+
+item.timespacegem.name=Time and Space Gem
 
 itemGroup.sleepstoneCreativeTab=Sleepstone
 

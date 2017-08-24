@@ -1,6 +1,12 @@
 package com.blargsworkshop.sleepstone.items.stone;
 
+import com.blargsworkshop.sleepstone.items.gems.EtherealGem;
+import com.blargsworkshop.sleepstone.items.gems.FireGem;
 import com.blargsworkshop.sleepstone.items.gems.Gem;
+import com.blargsworkshop.sleepstone.items.gems.GuardianGem;
+import com.blargsworkshop.sleepstone.items.gems.PathfinderGem;
+import com.blargsworkshop.sleepstone.items.gems.StoneGem;
+import com.blargsworkshop.sleepstone.items.gems.TimeSpaceGem;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -31,16 +37,30 @@ public class StoneContainer extends Container {
     
     public StoneContainer(EntityPlayer par1Player, InventoryPlayer inventoryPlayer, StoneInventory stoneInventory) {
         this.inventory = stoneInventory;
-
-        /** Stone Inventory */
-        for (int i = 0; i < StoneInventory.INV_SIZE; i++) {
-            // You can make a custom Slot if you need different behavior,
-            // such as only certain item types can be put into this slot.
-            // We made a custom slot to prevent our inventory-storing item
-            // from being stored within itself, but if you want to allow that and 
-            // you followed my advice at the end of the above step, then you
-            // could get away with using the vanilla Slot class
-            this.addSlotToContainer(new GemSlot(Gem.class, this.inventory, i, 80 + (18 * (int)(i/4)), 8 + (18 * (i % 4))));
+        int index = 0;
+        
+        /** Gem Slots */
+        //Group one
+        this.addSlotToContainer(new GemSlot(StoneGem.class, this.inventory, 1, index++, 29, 57));
+        this.addSlotToContainer(new GemSlot(EtherealGem.class, this.inventory, 1, index++, 11, 78));
+        this.addSlotToContainer(new GemSlot(GuardianGem.class, this.inventory, 1, index++, 29, 83));
+        this.addSlotToContainer(new GemSlot(FireGem.class, this.inventory, 1, index++, 47, 78));
+        
+        //Group two
+        this.addSlotToContainer(new GemSlot(TimeSpaceGem.class, this.inventory, 1, index++, 80, 16));
+        this.addSlotToContainer(new GemSlot(EtherealGem.class, this.inventory, 1, index++, 62, 37));
+        this.addSlotToContainer(new GemSlot(GuardianGem.class, this.inventory, 1, index++, 80, 44));
+        this.addSlotToContainer(new GemSlot(FireGem.class, this.inventory, 1, index++, 98, 37));
+        
+        //Group three
+        this.addSlotToContainer(new GemSlot(PathfinderGem.class, this.inventory, 1, index++, 130, 57));
+        this.addSlotToContainer(new GemSlot(EtherealGem.class, this.inventory, 1, index++, 112, 78));
+        this.addSlotToContainer(new GemSlot(GuardianGem.class, this.inventory, 1, index++, 130, 84));
+        this.addSlotToContainer(new GemSlot(FireGem.class, this.inventory, 1, index++, 148, 78));
+        
+        /** Spare Gem Inventory */
+        for (; index < StoneInventory.INV_SIZE; index++) {
+        	this.addSlotToContainer(new GemSlot(Gem.class, this.inventory, index, 8 + index * 18, 108));
         }
 
         // If you want, you can add ARMOR SLOTS here as well, but you need to
@@ -200,85 +220,85 @@ public class StoneContainer extends Container {
 		return super.slotClick(slot, button, flag, player);
     }
     
-//     /*
-// Special note: If your custom inventory's stack limit is 1 and you allow shift-clicking itemstacks into it,
-// you will need to override mergeStackInSlot to avoid losing all the items but one in a stack when you shift-click.
-// */
-// /**
-//  * Vanilla mergeItemStack method doesn't correctly handle inventories whose
-//  * max stack size is 1 when you shift-click into the inventory.
-//  * This is a modified method I wrote to handle such cases.
-//  * Note you only need it if your slot / inventory's max stack size is 1
-//  */
-// @Override
-// protected boolean mergeItemStack(ItemStack stack, int start, int end, boolean backwards) {
-//         boolean flag1 = false;
-//         int k = (backwards ? end - 1 : start);
-//         Slot slot;
-//         ItemStack itemstack1;
+	/*
+	 Special note: If your custom inventory's stack limit is 1 and you allow shift-clicking itemstacks into it,
+	 you will need to override mergeStackInSlot to avoid losing all the items but one in a stack when you shift-click.
+	 */
+	/**
+	 * Vanilla mergeItemStack method doesn't correctly handle inventories whose
+	 * max stack size is 1 when you shift-click into the inventory.
+	 * This is a modified method I wrote to handle such cases.
+	 * Note you only need it if your slot / inventory's max stack size is 1
+	 */
+	@Override
+	protected boolean mergeItemStack(ItemStack stack, int start, int end, boolean backwards) {
+		boolean flag1 = false;
+		int k = (backwards ? end - 1 : start);
+		Slot slot;
+		ItemStack itemstack1;
 
-//         if (stack.isStackable()) {
-//             while (stack.stackSize > 0 && (!backwards && k < end || backwards && k >= start)) {
-//                 slot = (Slot) inventorySlots.get(k);
-//                 itemstack1 = slot.getStack();
+		if (stack.isStackable()) {
+			while (stack.stackSize > 0 && (!backwards && k < end || backwards && k >= start)) {
+				slot = (Slot) inventorySlots.get(k);
+				itemstack1 = slot.getStack();
 
-//                 if (!slot.isItemValid(stack)) {
-//                     k += (backwards ? -1 : 1);
-//                     continue;
-//                 }
+				if (!slot.isItemValid(stack)) {
+					k += (backwards ? -1 : 1);
+					continue;
+				}
 
-//                 if (itemstack1 != null && itemstack1.getItem() == stack.getItem()
-//                         && (!stack.getHasSubtypes() || stack.getItemDamage() == itemstack1.getItemDamage())
-//                         && ItemStack.areItemStackTagsEqual(stack, itemstack1)) {
-//                     int l = itemstack1.stackSize + stack.stackSize;
+				if (itemstack1 != null && itemstack1.getItem() == stack.getItem()
+						&& (!stack.getHasSubtypes() || stack.getItemDamage() == itemstack1.getItemDamage())
+						&& ItemStack.areItemStackTagsEqual(stack, itemstack1)) {
+					int l = itemstack1.stackSize + stack.stackSize;
 
-//                     if (l <= stack.getMaxStackSize() && l <= slot.getSlotStackLimit()) {
-//                         stack.stackSize = 0;
-//                         itemstack1.stackSize = l;
-//                         inventory.markDirty();
-//                         flag1 = true;
-//                     } else if (itemstack1.stackSize < stack.getMaxStackSize() && l < slot.getSlotStackLimit()) {
-//                         stack.stackSize -= stack.getMaxStackSize() - itemstack1.stackSize;
-//                         itemstack1.stackSize = stack.getMaxStackSize();
-//                         inventory.markDirty();
-//                         flag1 = true;
-//                     }
-//                 }
+					if (l <= stack.getMaxStackSize() && l <= slot.getSlotStackLimit()) {
+						stack.stackSize = 0;
+						itemstack1.stackSize = l;
+						inventory.markDirty();
+						flag1 = true;
+					} else if (itemstack1.stackSize < stack.getMaxStackSize() && l < slot.getSlotStackLimit()) {
+						stack.stackSize -= stack.getMaxStackSize() - itemstack1.stackSize;
+						itemstack1.stackSize = stack.getMaxStackSize();
+						inventory.markDirty();
+						flag1 = true;
+					}
+				}
 
-//                 k += (backwards ? -1 : 1);
-//             }
-//         }
-//         if (stack.stackSize > 0) {
-//             k = (backwards ? end - 1 : start);
-//             while (!backwards && k < end || backwards && k >= start) {
-//                 slot = (Slot) inventorySlots.get(k);
-//                 itemstack1 = slot.getStack();
+				k += (backwards ? -1 : 1);
+			}
+		}
+		if (stack.stackSize > 0) {
+			k = (backwards ? end - 1 : start);
+			while (!backwards && k < end || backwards && k >= start) {
+				slot = (Slot) inventorySlots.get(k);
+				itemstack1 = slot.getStack();
 
-//                 if (!slot.isItemValid(stack)) {
-//                     k += (backwards ? -1 : 1);
-//                     continue;
-//                 }
+				if (!slot.isItemValid(stack)) {
+					k += (backwards ? -1 : 1);
+					continue;
+				}
 
-//                 if (itemstack1 == null) {
-//                     int l = stack.stackSize;
-//                     if (l <= slot.getSlotStackLimit()) {
-//                         slot.putStack(stack.copy());
-//                         stack.stackSize = 0;
-//                         inventory.markDirty();
-//                         flag1 = true;
-//                         break;
-//                     } else {
-//                         putStackInSlot(k,
-//                                 new ItemStack(stack.getItem(), slot.getSlotStackLimit(), stack.getItemDamage()));
-//                         stack.stackSize -= slot.getSlotStackLimit();
-//                         inventory.markDirty();
-//                         flag1 = true;
-//                     }
-//                 }
+				if (itemstack1 == null) {
+					int l = stack.stackSize;
+					if (l <= slot.getSlotStackLimit()) {
+						slot.putStack(stack.copy());
+						stack.stackSize = 0;
+						inventory.markDirty();
+						flag1 = true;
+						break;
+					} else {
+						putStackInSlot(k,
+								new ItemStack(stack.getItem(), slot.getSlotStackLimit(), stack.getItemDamage()));
+						stack.stackSize -= slot.getSlotStackLimit();
+						inventory.markDirty();
+						flag1 = true;
+					}
+				}
 
-//                 k += (backwards ? -1 : 1);
-//             }
-//         }
-//         return flag1;
-//     }
+				k += (backwards ? -1 : 1);
+			}
+		}
+		return flag1;
+	}
 }
