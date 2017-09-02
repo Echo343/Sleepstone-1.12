@@ -4,6 +4,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.SleepstoneMod;
+import com.blargsworkshop.sleepstone.gui.GuiEnum;
 import com.blargsworkshop.sleepstone.network.BasicMessage;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -11,6 +12,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 
 
 public class GuiStone extends GuiScreen {
@@ -18,15 +20,17 @@ public class GuiStone extends GuiScreen {
 	private static final String GUI_TEXTURE = "textures/gui/GuiStone.png";
 	private static final String TEXT_BUTTON_WARP = "text.guistone.warp";
 	
-	// private EntityPlayer player;
+	private EntityPlayer player;
+	private World world;
 	private int xSize, ySize;
 	
 	private ResourceLocation backgroundImage;
 	
 	public GuiStone() {}
 	
-	public GuiStone(EntityPlayer player) {
-		// this.player = player;
+	public GuiStone(EntityPlayer player, World world) {
+		this.player = player;
+		this.world = world;
 		xSize = 247;
 		ySize = 165;
 		backgroundImage = new ResourceLocation(ModInfo.ID, GUI_TEXTURE);
@@ -36,10 +40,13 @@ public class GuiStone extends GuiScreen {
 	@Override
 	public void initGui() {
 		super.initGui();
+		
 		int buttonWidth = 70;
 		int buttonHeight = 20;
 		GuiButton warpButton = new GuiButton(1, (this.width - buttonWidth) / 2, (this.height - buttonHeight) / 2, buttonWidth, buttonHeight, LanguageRegistry.instance().getStringLocalization(TEXT_BUTTON_WARP));
 		this.buttonList.add(warpButton);
+//		TODO Use an icon of some sort.
+		this.buttonList.add(new GuiButton(2, this.width - 18, 2, 16, 16, "i"));
 	}
 	
 	@Override
@@ -55,12 +62,16 @@ public class GuiStone extends GuiScreen {
 	
 	@Override
 	protected void actionPerformed(GuiButton button) {
+//		TODO turn into enum
 		switch (button.id) {
-		case 1:
+		case 1: //Warp
 			SleepstoneMod.networkWrapper.sendToServer(new BasicMessage("Warp"));
 			this.mc.displayGuiScreen((GuiScreen)null);
 			this.mc.setIngameFocus();
 			break;
+		case 2:
+			this.mc.displayGuiScreen(null);
+			player.openGui(SleepstoneMod.instance, GuiEnum.STONE_INVENTORY.ordinal(), world, 0, 0, 0);
 		}
 	}
 	
