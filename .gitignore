@@ -1,3 +1,11 @@
+# Minecraft Debug Stuff
+config/
+crash-reports/
+logs/
+options.txt
+saves/
+usernamecache.json
+
 *.class
 *.classpath
 *.project

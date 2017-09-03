@@ -39,11 +39,13 @@ public class ModItems {
 				'b', new ItemStack(Items.bed));
 		
 		/** Pathfinder Gem */
-		GameRegistry.addShapelessRecipe(new ItemStack(itemPathfinderCraftable),
-				Items.feather,
-				Blocks.wool,
-				Items.milk_bucket,
-				new ItemStack(Items.dye, 1, 0)); // Ink Sac
+		for (int i = 0; i < 16; i++) {
+			GameRegistry.addShapelessRecipe(new ItemStack(itemPathfinderCraftable),
+					Items.feather,
+					new ItemStack(Blocks.wool, 1, i),
+					Items.milk_bucket,
+					new ItemStack(Items.dye, 1, 0)); // Ink Sac
+		}
 		GameRegistry.addShapelessRecipe(new ItemStack(itemPathfinderGem),
 				Items.pumpkin_seeds,
 				new ItemStack(Items.dye, 1, 2), // Cactus Green

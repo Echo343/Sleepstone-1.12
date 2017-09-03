@@ -59,8 +59,8 @@ public class StoneContainer extends Container {
         this.addSlotToContainer(new GemSlot(FireGem.class, this.inventory, 1, index++, 148, 78));
         
         /** Spare Gem Inventory */
-        for (; index < StoneInventory.INV_SIZE; index++) {
-        	this.addSlotToContainer(new GemSlot(Gem.class, this.inventory, index, 8 + index * 18, 108));
+        for (int i = 0; index < StoneInventory.INV_SIZE; index++) {
+        	this.addSlotToContainer(new GemSlot(Gem.class, this.inventory, index, 8 + i++ * 18, 108));
         }
 
         // If you want, you can add ARMOR SLOTS here as well, but you need to
