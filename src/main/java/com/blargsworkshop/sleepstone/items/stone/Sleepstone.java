@@ -38,7 +38,8 @@ public class Sleepstone extends BaseItem implements IMessageHandler<BasicMessage
 	@Override
 	public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer player) {
 		if (player.isSneaking()) {
-			player.openGui(SleepstoneMod.instance, GuiEnum.STONE.ordinal(), world, (int)player.posX, (int)player.posY, (int)player.posZ);
+//			player.openGui(SleepstoneMod.instance, GuiEnum.STONE.ordinal(), world, (int)player.posX, (int)player.posY, (int)player.posZ);
+			player.openGui(SleepstoneMod.instance, GuiEnum.STONE_INVENTORY.ordinal(), world, 0, 0, 0);
 		}
 		else {
 //			TODO - Begin Warp
