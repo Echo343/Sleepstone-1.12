@@ -38,8 +38,7 @@ public class Sleepstone extends BaseItem implements IMessageHandler<BasicMessage
 	@Override
 	public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer player) {
 		if (player.isSneaking()) {
-//			player.openGui(SleepstoneMod.instance, GuiEnum.STONE.ordinal(), world, (int)player.posX, (int)player.posY, (int)player.posZ);
-			player.openGui(SleepstoneMod.instance, GuiEnum.STONE_INVENTORY.ordinal(), world, 0, 0, 0);
+			player.openGui(SleepstoneMod.instance, GuiEnum.STONE.ordinal(), world, (int)player.posX, (int)player.posY, (int)player.posZ);
 		}
 		else {
 //			TODO - Begin Warp
@@ -91,15 +90,24 @@ public class Sleepstone extends BaseItem implements IMessageHandler<BasicMessage
 		return 1;
 	}
 
+//	TODO - move this out to a handler
 	@Override
 	public IMessage onMessage(BasicMessage message, MessageContext ctx) {
-		//I believe this is the player/client the message came from.
-		EntityPlayerMP player = ctx.getServerHandler().playerEntity;
-		if (player.isPotionActive(NovelPotion.warpSickness.id)) {
-			player.addChatMessage(new ChatComponentText(LanguageRegistry.instance().getStringLocalization(TEXT_SLEEPSTONE_SUFFERING_EFFECTS_OF_WARPING)));
+		String msg = message.getMessage();
+		if ("Warp".equalsIgnoreCase(msg)) {
+			//I believe this is the player/client the message came from.
+			EntityPlayerMP player = ctx.getServerHandler().playerEntity;
+			if (player.isPotionActive(NovelPotion.warpSickness.id)) {
+				player.addChatMessage(new ChatComponentText(LanguageRegistry.instance().getStringLocalization(TEXT_SLEEPSTONE_SUFFERING_EFFECTS_OF_WARPING)));
+			}
+			else {
+				this.warpPlayerToBed(player, player.worldObj);
+			}
 		}
-		else {
-			this.warpPlayerToBed(player, player.worldObj);
+		else if ("OpenInvGui".equalsIgnoreCase(msg)) {
+			EntityPlayerMP player = ctx.getServerHandler().playerEntity;
+			World world = ctx.getServerHandler().playerEntity.getEntityWorld();
+			player.openGui(SleepstoneMod.instance, GuiEnum.STONE_INVENTORY.ordinal(), world, 0, 0, 0);
 		}
 		return null;
 	}

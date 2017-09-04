@@ -9,7 +9,7 @@ import net.minecraftforge.common.util.Constants;
 
 public class StoneInventory implements IInventory {
 	private boolean isNameLocalized = false;
-    private String name = "Inventory Item";
+    private String name = "Sleepstone";
 
     /** Provides NBT Tag Compound to reference */
     private final ItemStack invItem;
