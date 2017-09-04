@@ -18,18 +18,13 @@ public class GuiStoneInventory extends GuiContainer
 {
     private static final String GUI_TEXTURE = "textures/gui/GuiInventoryStone.png";
 
-	/** x and y size of the inventory window in pixels. Defined as float, passed as int
-	 * These are used for drawing the player model. */
-	private float xSize_lo;
-	private float ySize_lo;
-
 	/** ResourceLocation takes 2 parameters: ModId, path to texture at the location:
 	 * "src/minecraft/assets/modid/"
 	 * 
 	 * I have provided a sample texture file that works with this tutorial. Download it
 	 * from Forge_Tutorials/textures/gui/
 	 */
-	private static final ResourceLocation iconLocation = new ResourceLocation(ModInfo.ID, GUI_TEXTURE);
+	private static final ResourceLocation backgroundImage = new ResourceLocation(ModInfo.ID, GUI_TEXTURE);
 
 	/** The inventory to render on screen */
 	private final StoneInventory inventory;
@@ -38,21 +33,31 @@ public class GuiStoneInventory extends GuiContainer
 	{
 		super(containerItem);
 		this.inventory = containerItem.getInventoryItem();
+		this.xSize = 175;
+		this.ySize = 222;
+		this.guiLeft = (this.width - this.xSize) / 2;
+		this.guiTop = (this.height - this.ySize) / 2;
 	}
 
+	@Override
+	public void initGui() {
+		super.initGui();
+		//Add buttons here
+	}
+	
 	/**
-	 * Draws the screen and all the components in it.
+	 * Draw loop
 	 */
-	public void drawScreen(int par1, int par2, float par3)
+	@Override
+	public void drawScreen(int mouseX, int mouseY, float renderParitalTicks)
 	{
-		super.drawScreen(par1, par2, par3);
-		this.xSize_lo = (float)par1;
-		this.ySize_lo = (float)par2;
+		super.drawScreen(mouseX, mouseY, renderParitalTicks);
 	}
 
 	/**
 	 * Draw the foreground layer for the GuiContainer (everything in front of the items)
 	 */
+	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
         //TODO use language registery
@@ -67,14 +72,12 @@ public class GuiStoneInventory extends GuiContainer
 	/**
 	 * Draw the background layer for the GuiContainer (everything behind the items)
 	 */
-	protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3)
+	@Override
+	protected void drawGuiContainerBackgroundLayer(float renderParitalTicks, int mouseX, int mouseY)
 	{
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.mc.getTextureManager().bindTexture(iconLocation);
-		int k = (this.width - this.xSize) / 2;
-		int l = (this.height - this.ySize) / 2;
-		this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
-//		drawPlayerModel(k + 51, l + 75, 30, (float)(k + 51) - this.xSize_lo, (float)(l + 75 - 50) - this.ySize_lo, this.mc.thePlayer);
+		this.mc.getTextureManager().bindTexture(backgroundImage);
+		this.drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
 	}
 
 	/**

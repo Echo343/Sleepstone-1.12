@@ -22,18 +22,14 @@ public class GuiStone extends GuiScreen {
 	
 	private EntityPlayer player;
 	private World world;
-	private int xSize, ySize;
+	private final int xSize = 248;
+	private final int ySize = 166;
 	
-	private ResourceLocation backgroundImage;
-	
-	public GuiStone() {}
-	
+	private static final ResourceLocation backgroundImage = new ResourceLocation(ModInfo.ID, GUI_TEXTURE);
+		
 	public GuiStone(EntityPlayer player, World world) {
 		this.player = player;
 		this.world = world;
-		xSize = 247;
-		ySize = 165;
-		backgroundImage = new ResourceLocation(ModInfo.ID, GUI_TEXTURE);
 	}
 	
 	@SuppressWarnings("unchecked")
