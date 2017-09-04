@@ -6,13 +6,14 @@ import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.items.stone.StoneContainer;
 import com.blargsworkshop.sleepstone.items.stone.StoneInventory;
 
+import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.util.ResourceLocation;
 
 public class GuiStoneInventory extends GuiContainer
 {
     private static final String GUI_TEXTURE = "textures/gui/GuiInventoryStone.png";
-
+    
 	/** ResourceLocation takes 2 parameters: ModId, path to texture at the location:
 	 * "src/minecraft/assets/modid/"
 	 * 
@@ -20,7 +21,7 @@ public class GuiStoneInventory extends GuiContainer
 	 * from Forge_Tutorials/textures/gui/
 	 */
 	private static final ResourceLocation backgroundImage = new ResourceLocation(ModInfo.ID, GUI_TEXTURE);
-
+	
 	/** The inventory to render on screen */
 	private final StoneInventory inventory;
 
@@ -55,13 +56,10 @@ public class GuiStoneInventory extends GuiContainer
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
-        //TODO use language registery
-		// String s = this.inventory.isInventoryNameLocalized() ? this.inventory.getInventoryName() : I18n.getString(this.inventory.getInventoryName());
-		String s = this.inventory.getInventoryName();
-		this.fontRendererObj.drawString(s, (this.xSize - this.fontRendererObj.getStringWidth(s)) / 2, 5, 4210752);
-        // this.fontRendererObj.drawString(I18n.getString("container.inventory"), 26, this.ySize - 96 + 4, 4210752);
-        //TODO use language registery
-		this.fontRendererObj.drawString("Inventory", 8, this.ySize - 96 + 2, 4210752);
+		String strSleepstone = LanguageRegistry.instance().getStringLocalization(this.inventory.getInventoryName());
+		String strContainer = LanguageRegistry.instance().getStringLocalization("container.inventory");
+		this.fontRendererObj.drawString(strSleepstone, (this.xSize - this.fontRendererObj.getStringWidth(strSleepstone)) / 2, 5, 4210752);
+		this.fontRendererObj.drawString(strContainer, 8, this.ySize - 96 + 2, 4210752);
 	}
 
 	/**
