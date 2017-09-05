@@ -3,8 +3,9 @@ package com.blargsworkshop.sleepstone.items.stone.gui;
 import org.lwjgl.opengl.GL11;
 
 import com.blargsworkshop.sleepstone.ModInfo;
-import com.blargsworkshop.sleepstone.SleepstoneMod;
 import com.blargsworkshop.sleepstone.network.BasicMessage;
+import com.blargsworkshop.sleepstone.network.BasicMessage.Commands;
+import com.blargsworkshop.sleepstone.network.NetworkHandler;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.client.gui.GuiButton;
@@ -54,11 +55,11 @@ public class GuiStone extends GuiScreen {
 //		TODO turn into enum
 		switch (button.id) {
 		case 1: //Warp
-			SleepstoneMod.networkWrapper.sendToServer(new BasicMessage("Warp"));
+			NetworkHandler.networkWrapper.sendToServer(new BasicMessage(Commands.WARP));
 			this.mc.setIngameFocus();
 			break;
 		case 2:
-			SleepstoneMod.networkWrapper.sendToServer(new BasicMessage("OpenInvGui"));
+			NetworkHandler.networkWrapper.sendToServer(new BasicMessage(Commands.OpenInvGui));
 			break;
 		}
 	}

@@ -5,32 +5,24 @@ import com.blargsworkshop.sleepstone.NovelPotion;
 import com.blargsworkshop.sleepstone.SleepstoneMod;
 import com.blargsworkshop.sleepstone.gui.GuiEnum;
 import com.blargsworkshop.sleepstone.items.BaseItem;
-import com.blargsworkshop.sleepstone.network.BasicMessage;
 
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 
-public class Sleepstone extends BaseItem implements IMessageHandler<BasicMessage, IMessage> {
+public class Sleepstone extends BaseItem {
 	
-	private static final String TEXT_SLEEPSTONE_SUFFERING_EFFECTS_OF_WARPING = "text.sleepstone.suffering_effects_of_warping";
-	private static final String TEXT_SLEEPSTONE_BED_DESTROYED = "text.sleepstone.bed_destroyed";
 	private static final int WARP_SICKNESS_DURATION = 20*60*10;
 	private static final String SOUND_TELEPORT = ModInfo.ID + ":" + "Teleport";
 	private static final String SOUND_SWOOSH = ModInfo.ID + ":" + "Swoosh";
-	private static final String BASIC_SLEEPSTONE_NAME = "basicsleepstone";
 	private static final String TEXTURE_SLEEPSTONE = "sleepstonemod:sleepy";
 
 	public Sleepstone() {
-		super(BASIC_SLEEPSTONE_NAME, TEXTURE_SLEEPSTONE);
+		super("basicsleepstone", TEXTURE_SLEEPSTONE);
 		// ItemStacks that store an NBT Tag Compound are limited to stack size of 1
 		this.setMaxStackSize(1);
 	}
@@ -62,7 +54,7 @@ public class Sleepstone extends BaseItem implements IMessageHandler<BasicMessage
 //		}
 //	}
 	
-	protected void warpPlayerToBed(EntityPlayer player, World world) {		
+	public static void warpPlayerToBed(EntityPlayer player, World world) {		
 		if (!world.isRemote) {
 			ChunkCoordinates coord = player.getBedLocation(player.dimension);
 			if (coord != null) {
@@ -76,10 +68,8 @@ public class Sleepstone extends BaseItem implements IMessageHandler<BasicMessage
 				SleepstoneMod.debug("Warping to: " + (coord.posX + 0.5) + ", " + (coord.posY + 0.1) + ", " + (coord.posZ + 0.5), ModInfo.DEBUG.CASUAL, player);
 			}
 			else {
-				player.addChatMessage(new ChatComponentText(LanguageRegistry.instance().getStringLocalization(TEXT_SLEEPSTONE_BED_DESTROYED)));
+				player.addChatMessage(new ChatComponentText(LanguageRegistry.instance().getStringLocalization("text.sleepstone.bed_destroyed")));
 			}
-		}
-		else {
 		}
 	}
 	
@@ -90,28 +80,6 @@ public class Sleepstone extends BaseItem implements IMessageHandler<BasicMessage
 		return 1;
 	}
 
-//	TODO - move this out to a handler
-	@Override
-	public IMessage onMessage(BasicMessage message, MessageContext ctx) {
-		String msg = message.getMessage();
-		if ("Warp".equalsIgnoreCase(msg)) {
-			//I believe this is the player/client the message came from.
-			EntityPlayerMP player = ctx.getServerHandler().playerEntity;
-			if (player.isPotionActive(NovelPotion.warpSickness.id)) {
-				player.addChatMessage(new ChatComponentText(LanguageRegistry.instance().getStringLocalization(TEXT_SLEEPSTONE_SUFFERING_EFFECTS_OF_WARPING)));
-			}
-			else {
-				this.warpPlayerToBed(player, player.worldObj);
-			}
-		}
-		else if ("OpenInvGui".equalsIgnoreCase(msg)) {
-			EntityPlayerMP player = ctx.getServerHandler().playerEntity;
-			World world = ctx.getServerHandler().playerEntity.getEntityWorld();
-			player.openGui(SleepstoneMod.instance, GuiEnum.STONE_INVENTORY.ordinal(), world, 0, 0, 0);
-		}
-		return null;
-	}
-	
 //	@Override
 //	public EnumAction getItemUseAction(ItemStack p_77661_1_) {
 //		return EnumAction.block;
