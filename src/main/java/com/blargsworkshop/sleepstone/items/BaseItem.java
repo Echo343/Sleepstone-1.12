@@ -1,7 +1,6 @@
 package com.blargsworkshop.sleepstone.items;
 
 import com.blargsworkshop.sleepstone.ModItems;
-import com.blargsworkshop.sleepstone.SleepstoneMod;
 
 import net.minecraft.item.Item;
 
