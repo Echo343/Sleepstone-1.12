@@ -15,13 +15,16 @@ import net.minecraft.util.ResourceLocation;
 
 public class GuiStone extends GuiScreen {
 	
-	private static final String GUI_TEXTURE = "textures/gui/GuiStone.png";
-	private static final String TEXT_BUTTON_WARP = "text.guistone.warp";
+	private static enum Buttons {
+		Warp,
+		Inv
+	}
+	
+	private static final ResourceLocation backgroundImage = new ResourceLocation(ModInfo.ID, "textures/gui/GuiStone.png");
 	
 	private final int xSize = 248;
 	private final int ySize = 166;
 	
-	private static final ResourceLocation backgroundImage = new ResourceLocation(ModInfo.ID, GUI_TEXTURE);
 		
 	public GuiStone() {
 	}
@@ -30,13 +33,10 @@ public class GuiStone extends GuiScreen {
 	@Override
 	public void initGui() {
 		super.initGui();
-		
-		int buttonWidth = 70;
-		int buttonHeight = 20;
-		GuiButton warpButton = new GuiButton(1, (this.width - buttonWidth) / 2, (this.height - buttonHeight) / 2, buttonWidth, buttonHeight, LanguageRegistry.instance().getStringLocalization(TEXT_BUTTON_WARP));
+		GuiButton warpButton = new StoneGuiButton(Buttons.Warp, (this.width - 70) / 2, (this.height - 20) / 2, 70, 20, "text.guistone.warp");
+		GuiButton invButton = new StoneGuiButton(Buttons.Inv, ((this.width - xSize) / 2) + xSize - 24, (this.height - ySize) / 2 + 4, 20, 20, "text.guistone.inv"); // TODO Use an icon of some sort.
 		this.buttonList.add(warpButton);
-//		TODO Use an icon of some sort.
-		this.buttonList.add(new GuiButton(2, ((this.width - xSize) / 2) + xSize - 24, (this.height - ySize) / 2 + 4, 20, 20, "Inv"));
+		this.buttonList.add(invButton); // TODO Use an icon of some sort.
 	}
 	
 	@Override
@@ -52,13 +52,12 @@ public class GuiStone extends GuiScreen {
 	
 	@Override
 	protected void actionPerformed(GuiButton button) {
-//		TODO turn into enum
-		switch (button.id) {
-		case 1: //Warp
+		switch (((StoneGuiButton)button).getButtonType()) {
+		case Warp:
 			NetworkHandler.networkWrapper.sendToServer(new BasicMessage(Commands.WARP));
 			this.mc.setIngameFocus();
 			break;
-		case 2:
+		case Inv:
 			NetworkHandler.networkWrapper.sendToServer(new BasicMessage(Commands.OpenInvGui));
 			break;
 		}
@@ -75,5 +74,23 @@ public class GuiStone extends GuiScreen {
             i = 1;
         }
 		super.keyTyped(c, i);
+	}
+	
+	private String localize(String messageKey) {
+		return LanguageRegistry.instance().getStringLocalization(messageKey);
+	}
+	
+	protected class StoneGuiButton extends GuiButton {
+
+		private final Buttons buttonType;
+		
+		public StoneGuiButton(Buttons type, int left, int top, int width, int height, String messageKey) {
+			super(type.ordinal(), left, top, width, height, localize(messageKey));
+			buttonType = type;
+		}
+		
+		public Buttons getButtonType() {
+			return buttonType;
+		}
 	}
 }
