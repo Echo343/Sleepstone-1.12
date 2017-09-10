@@ -55,7 +55,7 @@ public class StoneContainer extends Container {
         //Group three
         this.addSlotToContainer(new GemSlot(PathfinderGem.class, this.inventory, 1, index++, 130, 57));
         this.addSlotToContainer(new GemSlot(EtherealGem.class, this.inventory, 1, index++, 112, 78));
-        this.addSlotToContainer(new GemSlot(GuardianGem.class, this.inventory, 1, index++, 130, 84));
+        this.addSlotToContainer(new GemSlot(GuardianGem.class, this.inventory, 1, index++, 130, 83));
         this.addSlotToContainer(new GemSlot(FireGem.class, this.inventory, 1, index++, 148, 78));
         
         /** Spare Gem Inventory */
