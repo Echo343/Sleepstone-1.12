@@ -5,6 +5,7 @@ import com.blargsworkshop.sleepstone.items.gems.StoneGem;
 import com.blargsworkshop.sleepstone.items.gems.support.PathfinderCraftable;
 import com.blargsworkshop.sleepstone.items.gems.support.StoneCraftable;
 import com.blargsworkshop.sleepstone.items.stone.Sleepstone;
+import com.blargsworkshop.sleepstone.items.stone.gui.TextureItem;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.creativetab.CreativeTabs;
@@ -22,12 +23,26 @@ public class ModItems {
 	public static Item itemStoneGem;
 	public static Item itemStoneCraftable;
 	
+	public static Item textureGemSlotStone = new TextureItem("textureGemSlotStone", ModInfo.ID + ":slot-gem-stone");
+	public static Item textureGemSlotPathfinder = new TextureItem("textureGemSlotPathfinder", ModInfo.ID + ":slot-gem-pathfinder");
+	public static Item textureGemSlotTimeAndSpace = new TextureItem("textureGemSlotTimeAndSpace", ModInfo.ID + ":slot-gem-time-and-space");
+	public static Item textureGemSlotFire = new TextureItem("textureGemSlotFire", ModInfo.ID + ":slot-gem-fire");
+	public static Item textureGemSlotGuardian = new TextureItem("textureGemSlotGuardian", ModInfo.ID + ":slot-gem-guardian");
+	public static Item textureGemSlotEthereal = new TextureItem("textureGemSlotEthereal", ModInfo.ID + ":slot-gem-ethereal");
+	
 	public static void init() {
 		GameRegistry.registerItem(itemSleepstone = new Sleepstone(), "modItemSleepstone");
 		GameRegistry.registerItem(itemPathfinderGem = new PathfinderGem(), "modItemPathfinderGem");
 		GameRegistry.registerItem(itemPathfinderCraftable = new PathfinderCraftable(), "modItemPathfinderCraftable");
 		GameRegistry.registerItem(itemStoneGem = new StoneGem(), "modItemStoneGem");
 		GameRegistry.registerItem(itemStoneCraftable = new StoneCraftable(), "modItemStoneCraftable");
+		
+		GameRegistry.registerItem(textureGemSlotStone, "modTextureGemSlotStone");
+		GameRegistry.registerItem(textureGemSlotPathfinder, "modTextureGemSlotPathfinder");
+		GameRegistry.registerItem(textureGemSlotTimeAndSpace, "modTextureGemSlotTimeAndSpace");
+		GameRegistry.registerItem(textureGemSlotFire, "modTextureGemSlotFire");
+		GameRegistry.registerItem(textureGemSlotGuardian, "modTextureGemSlotGuardian");
+		GameRegistry.registerItem(textureGemSlotEthereal, "modTextureGemSlotEthereal");
 	}
 	
 	public static void initRecipes() {

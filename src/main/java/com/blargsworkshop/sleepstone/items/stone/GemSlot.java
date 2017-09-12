@@ -5,6 +5,7 @@ import com.blargsworkshop.sleepstone.items.gems.Gem;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
 
 public class GemSlot extends Slot {
 	private Class<? extends Gem> gemType;
@@ -20,6 +21,13 @@ public class GemSlot extends Slot {
     	super(inv, index, xPos, yPos);
     	this.gemType = gemType;
     	this.stackLimit = stackLimit;
+    }
+    
+    public GemSlot(Class<? extends Gem> gemType, IInventory inv, int stackLimit, int index, int xPos, int yPos, IIcon ico) {
+    	super(inv, index, xPos, yPos);
+    	this.gemType = gemType;
+    	this.stackLimit = stackLimit;
+    	this.setBackgroundIcon(ico);
     }
 
     // This is the only method we need to override so that
@@ -39,4 +47,6 @@ public class GemSlot extends Slot {
     public int getSlotStackLimit() {
     	return stackLimit;
     }
+    
+    
 }

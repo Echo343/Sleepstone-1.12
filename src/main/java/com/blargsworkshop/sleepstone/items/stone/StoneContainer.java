@@ -1,5 +1,6 @@
 package com.blargsworkshop.sleepstone.items.stone;
 
+import com.blargsworkshop.sleepstone.ModItems;
 import com.blargsworkshop.sleepstone.items.gems.EtherealGem;
 import com.blargsworkshop.sleepstone.items.gems.FireGem;
 import com.blargsworkshop.sleepstone.items.gems.Gem;
@@ -13,6 +14,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
 
 public class StoneContainer extends Container {
     private final StoneInventory inventory;
@@ -39,24 +41,32 @@ public class StoneContainer extends Container {
         this.inventory = stoneInventory;
         int index = 0;
         
+        /** Slot Textures */
+        IIcon textureGemSlotStone = ModItems.textureGemSlotStone.getIconFromDamage(0);
+        IIcon textureGemSlotPathfinder = ModItems.textureGemSlotPathfinder.getIconFromDamage(0);
+        IIcon textureGemSlotTimeAndSpace = ModItems.textureGemSlotTimeAndSpace.getIconFromDamage(0);
+        IIcon textureGemSlotFire = ModItems.textureGemSlotFire.getIconFromDamage(0);
+        IIcon textureGemSlotGuardian = ModItems.textureGemSlotGuardian.getIconFromDamage(0);
+        IIcon textureGemSlotEthereal = ModItems.textureGemSlotEthereal.getIconFromDamage(0);        
+        
         /** Gem Slots */
         //Group one
-        this.addSlotToContainer(new GemSlot(StoneGem.class, this.inventory, 1, index++, 29, 57));
-        this.addSlotToContainer(new GemSlot(EtherealGem.class, this.inventory, 1, index++, 11, 78));
-        this.addSlotToContainer(new GemSlot(GuardianGem.class, this.inventory, 1, index++, 29, 83));
-        this.addSlotToContainer(new GemSlot(FireGem.class, this.inventory, 1, index++, 47, 78));
+        this.addSlotToContainer(new GemSlot(StoneGem.class, this.inventory, 1, index++, 29, 57, textureGemSlotStone));
+        this.addSlotToContainer(new GemSlot(EtherealGem.class, this.inventory, 1, index++, 11, 78, textureGemSlotEthereal));
+        this.addSlotToContainer(new GemSlot(GuardianGem.class, this.inventory, 1, index++, 29, 83, textureGemSlotGuardian));
+        this.addSlotToContainer(new GemSlot(FireGem.class, this.inventory, 1, index++, 47, 78, textureGemSlotFire));
         
         //Group two
-        this.addSlotToContainer(new GemSlot(TimeSpaceGem.class, this.inventory, 1, index++, 80, 16));
-        this.addSlotToContainer(new GemSlot(EtherealGem.class, this.inventory, 1, index++, 62, 37));
-        this.addSlotToContainer(new GemSlot(GuardianGem.class, this.inventory, 1, index++, 80, 44));
-        this.addSlotToContainer(new GemSlot(FireGem.class, this.inventory, 1, index++, 98, 37));
+        this.addSlotToContainer(new GemSlot(TimeSpaceGem.class, this.inventory, 1, index++, 80, 16, textureGemSlotTimeAndSpace));
+        this.addSlotToContainer(new GemSlot(EtherealGem.class, this.inventory, 1, index++, 62, 37, textureGemSlotEthereal));
+        this.addSlotToContainer(new GemSlot(GuardianGem.class, this.inventory, 1, index++, 80, 44, textureGemSlotGuardian));
+        this.addSlotToContainer(new GemSlot(FireGem.class, this.inventory, 1, index++, 98, 37, textureGemSlotFire));
         
         //Group three
-        this.addSlotToContainer(new GemSlot(PathfinderGem.class, this.inventory, 1, index++, 130, 57));
-        this.addSlotToContainer(new GemSlot(EtherealGem.class, this.inventory, 1, index++, 112, 78));
-        this.addSlotToContainer(new GemSlot(GuardianGem.class, this.inventory, 1, index++, 130, 83));
-        this.addSlotToContainer(new GemSlot(FireGem.class, this.inventory, 1, index++, 148, 78));
+        this.addSlotToContainer(new GemSlot(PathfinderGem.class, this.inventory, 1, index++, 130, 57, textureGemSlotPathfinder));
+        this.addSlotToContainer(new GemSlot(EtherealGem.class, this.inventory, 1, index++, 112, 78, textureGemSlotEthereal));
+        this.addSlotToContainer(new GemSlot(GuardianGem.class, this.inventory, 1, index++, 130, 83, textureGemSlotGuardian));
+        this.addSlotToContainer(new GemSlot(FireGem.class, this.inventory, 1, index++, 148, 78, textureGemSlotFire));
         
         /** Spare Gem Inventory */
         for (int i = 0; i < 9; i++) {
