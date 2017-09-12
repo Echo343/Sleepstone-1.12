@@ -19,7 +19,7 @@ public class Sleepstone extends BaseItem {
 	private static final int WARP_SICKNESS_DURATION = 20*60*10;
 	private static final String SOUND_TELEPORT = ModInfo.ID + ":" + "Teleport";
 	private static final String SOUND_SWOOSH = ModInfo.ID + ":" + "Swoosh";
-	private static final String TEXTURE_SLEEPSTONE = "sleepstonemod:sleepy";
+	private static final String TEXTURE_SLEEPSTONE = ModInfo.ID + ":sleepy";
 
 	public Sleepstone() {
 		super("basicsleepstone", TEXTURE_SLEEPSTONE);

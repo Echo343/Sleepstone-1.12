@@ -8,7 +8,7 @@ package com.blargsworkshop.sleepstone.items.gems.support;
  */
 public class PathfinderCraftable extends BaseCraftable {
 
-	private static final String UNLOCALIZED_NAME = "pathfindercraftable"; 
+	private static final String UNLOCALIZED_NAME = "craftablepathfinder"; 
 	private static final int NUMBER_OF_CRAFTABLES = 1;
 
 	public PathfinderCraftable() {

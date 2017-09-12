@@ -7,25 +7,25 @@ item.firegem.name=Fire Gem
 item.guardiangem.name=Guardian Gem
 
 item.pathfindergem.name=Pathfinder Gem
-item.pathfindercraftable_0.name=Mob Essence
+item.craftablepathfinder_0.name=Mob Essence
 
 item.stonegem.name=Stone Gem
-item.stonecraftable_0.name=Hardened Clay Piece
-item.stonecraftable_1.name=Blasted Clay Piece
-item.stonecraftable_2.name=Ceramic Foundation
-item.stonecraftable_3.name=Blasted Ceramic Foundation
-item.stonecraftable_4.name=Condensed Redstone Block
-item.stonecraftable_5.name=Hyper Lattice Redstone Block
-item.stonecraftable_6.name=Hyper Lattice Redstone Mass
-item.stonecraftable_7.name=Hyper Infused Mass
-item.stonecraftable_8.name=Refined Obsidian
-item.stonecraftable_9.name=Refined Obsidian Clump
-item.stonecraftable_10.name=Hardened Obsidian Clump
-item.stonecraftable_11.name=Brittle Diamond Lattice
-item.stonecraftable_12.name=Strengthened Diamond Lattice
-item.stonecraftable_13.name=Crystalline Lattice Structure
-item.stonecraftable_14.name=Heated Crystalline Lattice Structure
-item.stonecraftable_15.name=Radial Empowered Orb
+item.craftablestone_0.name=Hardened Clay Piece
+item.craftablestone_1.name=Blasted Clay Piece
+item.craftablestone_2.name=Ceramic Foundation
+item.craftablestone_3.name=Blasted Ceramic Foundation
+item.craftablestone_4.name=Condensed Redstone Block
+item.craftablestone_5.name=Hyper Lattice Redstone Block
+item.craftablestone_6.name=Hyper Lattice Redstone Mass
+item.craftablestone_7.name=Hyper Infused Mass
+item.craftablestone_8.name=Refined Obsidian
+item.craftablestone_9.name=Refined Obsidian Clump
+item.craftablestone_10.name=Hardened Obsidian Clump
+item.craftablestone_11.name=Brittle Diamond Lattice
+item.craftablestone_12.name=Strengthened Diamond Lattice
+item.craftablestone_13.name=Crystalline Lattice Structure
+item.craftablestone_14.name=Heated Crystalline Lattice Structure
+item.craftablestone_15.name=Radial Empowered Orb
 
 item.timespacegem.name=Time and Space Gem
 

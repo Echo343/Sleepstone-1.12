@@ -23,7 +23,7 @@ package com.blargsworkshop.sleepstone.items.gems.support;
  */
 public class StoneCraftable extends BaseCraftable {
 	
-	private static final String UNLOCALIZED_NAME = "stonecraftable"; 
+	private static final String UNLOCALIZED_NAME = "craftablestone"; 
 	private static final int NUMBER_OF_CRAFTABLES = 16;
 
 	public StoneCraftable() {

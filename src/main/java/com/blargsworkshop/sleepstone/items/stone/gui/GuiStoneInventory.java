@@ -11,16 +11,14 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.util.ResourceLocation;
 
 public class GuiStoneInventory extends GuiContainer
-{
-    private static final String GUI_TEXTURE = "textures/gui/GuiInventoryStone.png";
-    
+{    
 	/** ResourceLocation takes 2 parameters: ModId, path to texture at the location:
 	 * "src/minecraft/assets/modid/"
 	 * 
 	 * I have provided a sample texture file that works with this tutorial. Download it
 	 * from Forge_Tutorials/textures/gui/
 	 */
-	private static final ResourceLocation backgroundImage = new ResourceLocation(ModInfo.ID, GUI_TEXTURE);
+	private static final ResourceLocation backgroundImage = new ResourceLocation(ModInfo.ID, "textures/gui/GuiInventoryStone.png");
 	
 	/** The inventory to render on screen */
 	private final StoneInventory inventory;
