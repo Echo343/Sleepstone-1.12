@@ -3,6 +3,8 @@ package com.blargsworkshop.sleepstone.items.stone.gui;
 import org.lwjgl.opengl.GL11;
 
 import com.blargsworkshop.sleepstone.ModInfo;
+import com.blargsworkshop.sleepstone.gui.buttons.BasicButton;
+import com.blargsworkshop.sleepstone.gui.buttons.ToggleButton;
 import com.blargsworkshop.sleepstone.network.BasicMessage;
 import com.blargsworkshop.sleepstone.network.BasicMessage.Commands;
 import com.blargsworkshop.sleepstone.network.NetworkHandler;
@@ -15,7 +17,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class GuiStone extends GuiScreen {
 	
-	private static enum Buttons {
+	public static enum Buttons {
 		Warp,
 		NoFall,
 		Inv
@@ -26,11 +28,6 @@ public class GuiStone extends GuiScreen {
 	private final int xSize = 248;
 	private final int ySize = 166;
 	
-	private final String onStr = localize("text.guistone.on");
-	private final String offStr = localize("text.guistone.off");
-	private final String noFallStr = localize("text.guistone.no_fall_damage") + ": ";
-	private boolean noFallToggle = false;
-		
 	public GuiStone() {
 	}
 	
@@ -45,15 +42,11 @@ public class GuiStone extends GuiScreen {
 		int left = (this.width - xSize) / 2;
 		int top = (this.height - ySize) / 2;
 		
-//		String onStr = localize("text.guistone.on");
-//		String offStr = localize("text.guistone.off");
-//		String noFallStr = localize("text.guistone.no_fall_damage") + ": ";
-		
-		GuiButton noFallButton = new StoneGuiButton(Buttons.NoFall, left + 4, top + 4, noFallStr + offStr);
+		GuiButton noFallButton = new ToggleButton(Buttons.NoFall, left + 4, top + 4, localize("text.guistone.no_fall_damage"));
 		this.buttonList.add(noFallButton);
 		
-		GuiButton warpButton = new StoneGuiButton(Buttons.Warp, (this.width - 70) / 2, (this.height - 20) / 2, 70, 20, localize("text.guistone.warp"));
-		GuiButton invButton = new StoneGuiButton(Buttons.Inv, left + xSize - 24, top + 4, 20, 20, localize("text.guistone.inv"));
+		GuiButton warpButton = new BasicButton(Buttons.Warp, (this.width - 70) / 2, (this.height - 20) / 2, 70, localize("text.guistone.warp"));
+		GuiButton invButton = new BasicButton(Buttons.Inv, left + xSize - 24, top + 4, 20, localize("text.guistone.inv"));
 		this.buttonList.add(warpButton);
 		this.buttonList.add(invButton); // TODO Use an icon of some sort.
 	}
@@ -71,7 +64,7 @@ public class GuiStone extends GuiScreen {
 	
 	@Override
 	protected void actionPerformed(GuiButton button) {
-		switch (((StoneGuiButton)button).getButtonType()) {
+		switch ((Buttons)((BasicButton)button).getButtonType()) {
 		case Warp:
 			NetworkHandler.networkWrapper.sendToServer(new BasicMessage(Commands.WARP));
 			this.mc.setIngameFocus();
@@ -80,13 +73,7 @@ public class GuiStone extends GuiScreen {
 			NetworkHandler.networkWrapper.sendToServer(new BasicMessage(Commands.OpenInvGui));
 			break;
 		case NoFall:
-			if (noFallToggle) {
-				button.displayString = noFallStr + offStr;
-			}
-			else {
-				button.displayString = noFallStr + onStr;
-			}
-			noFallToggle = !noFallToggle;
+			((ToggleButton)button).toggle();
 			break;
 		default:
 			break;
@@ -108,52 +95,5 @@ public class GuiStone extends GuiScreen {
 	
 	private String localize(String messageKey) {
 		return LanguageRegistry.instance().getStringLocalization(messageKey);
-	}
-	
-	//TODO move out into separate class, rename to be more generic.
-	protected class StoneGuiButton extends GuiButton {
-
-		protected final Buttons buttonType;
-		
-		/**
-		 * Creates a button to be used on the Sleepstone Gui
-		 * @param type Enum that matches the button.  Used in actionPerformed(button).
-		 * @param left Left edge of the button on the whole screen.
-		 * @param top Top edge of the button on the whole screen.
-		 * @param width Width of the button. Default is 70.
-		 * @param height Height of the button. Default is 20.
-		 * @param text Text that appears on the button.
-		 */
-		public StoneGuiButton(Buttons type, int left, int top, int width, int height, String text) {
-			super(type.ordinal(), left, top, width, height, text);
-			buttonType = type;
-		}
-		
-		/**
-		 * Creates a button to be used on the Sleepstone Gui
-		 * @param type Enum that matches the button.  Used in actionPerformed(button).
-		 * @param left Left edge of the button on the whole screen.
-		 * @param top Top edge of the button on the whole screen.
-		 * @param width Width of the button. Default is 70.
-		 * @param text Text that appears on the button.
-		 */
-		public StoneGuiButton(Buttons type, int left, int top, int width, String text) {
-			this(type, left, top, width, 20, text);
-		}
-		
-		/**
-		 * Creates a button to be used on the Sleepstone Gui
-		 * @param type Enum that matches the button.  Used in actionPerformed(button).
-		 * @param left Left edge of the button on the whole screen.
-		 * @param top Top edge of the button on the whole screen.
-		 * @param text Text that appears on the button.
-		 */
-		public StoneGuiButton(Buttons type, int left, int top, String text) {
-			this(type, left, top, 70, 20, text);
-		}
-		
-		public Buttons getButtonType() {
-			return buttonType;
-		}
 	}
 }

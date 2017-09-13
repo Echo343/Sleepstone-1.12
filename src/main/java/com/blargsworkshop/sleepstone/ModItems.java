@@ -1,11 +1,11 @@
 package com.blargsworkshop.sleepstone;
 
+import com.blargsworkshop.sleepstone.gui.TextureItem;
 import com.blargsworkshop.sleepstone.items.gems.PathfinderGem;
 import com.blargsworkshop.sleepstone.items.gems.StoneGem;
 import com.blargsworkshop.sleepstone.items.gems.support.PathfinderCraftable;
 import com.blargsworkshop.sleepstone.items.gems.support.StoneCraftable;
 import com.blargsworkshop.sleepstone.items.stone.Sleepstone;
-import com.blargsworkshop.sleepstone.items.stone.gui.TextureItem;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.creativetab.CreativeTabs;

@@ -1,4 +1,4 @@
-package com.blargsworkshop.sleepstone.items.stone.gui;
+package com.blargsworkshop.sleepstone.gui;
 
 import net.minecraft.item.Item;
 
