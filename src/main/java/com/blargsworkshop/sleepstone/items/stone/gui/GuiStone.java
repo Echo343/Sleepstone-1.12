@@ -17,6 +17,7 @@ public class GuiStone extends GuiScreen {
 	
 	private static enum Buttons {
 		Warp,
+		NoFall,
 		Inv
 	}
 	
@@ -25,16 +26,34 @@ public class GuiStone extends GuiScreen {
 	private final int xSize = 248;
 	private final int ySize = 166;
 	
+	private final String onStr = localize("text.guistone.on");
+	private final String offStr = localize("text.guistone.off");
+	private final String noFallStr = localize("text.guistone.no_fall_damage") + ": ";
+	private boolean noFallToggle = false;
 		
 	public GuiStone() {
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public void initGui() {
 		super.initGui();
-		GuiButton warpButton = new StoneGuiButton(Buttons.Warp, (this.width - 70) / 2, (this.height - 20) / 2, 70, 20, "text.guistone.warp");
-		GuiButton invButton = new StoneGuiButton(Buttons.Inv, ((this.width - xSize) / 2) + xSize - 24, (this.height - ySize) / 2 + 4, 20, 20, "text.guistone.inv"); // TODO Use an icon of some sort.
+		initButtons();
+	}
+	
+	@SuppressWarnings("unchecked")
+	protected void initButtons() {
+		int left = (this.width - xSize) / 2;
+		int top = (this.height - ySize) / 2;
+		
+//		String onStr = localize("text.guistone.on");
+//		String offStr = localize("text.guistone.off");
+//		String noFallStr = localize("text.guistone.no_fall_damage") + ": ";
+		
+		GuiButton noFallButton = new StoneGuiButton(Buttons.NoFall, left + 4, top + 4, noFallStr + offStr);
+		this.buttonList.add(noFallButton);
+		
+		GuiButton warpButton = new StoneGuiButton(Buttons.Warp, (this.width - 70) / 2, (this.height - 20) / 2, 70, 20, localize("text.guistone.warp"));
+		GuiButton invButton = new StoneGuiButton(Buttons.Inv, left + xSize - 24, top + 4, 20, 20, localize("text.guistone.inv"));
 		this.buttonList.add(warpButton);
 		this.buttonList.add(invButton); // TODO Use an icon of some sort.
 	}
@@ -60,6 +79,17 @@ public class GuiStone extends GuiScreen {
 		case Inv:
 			NetworkHandler.networkWrapper.sendToServer(new BasicMessage(Commands.OpenInvGui));
 			break;
+		case NoFall:
+			if (noFallToggle) {
+				button.displayString = noFallStr + offStr;
+			}
+			else {
+				button.displayString = noFallStr + onStr;
+			}
+			noFallToggle = !noFallToggle;
+			break;
+		default:
+			break;
 		}
 	}
 	
@@ -80,13 +110,46 @@ public class GuiStone extends GuiScreen {
 		return LanguageRegistry.instance().getStringLocalization(messageKey);
 	}
 	
+	//TODO move out into separate class, rename to be more generic.
 	protected class StoneGuiButton extends GuiButton {
 
-		private final Buttons buttonType;
+		protected final Buttons buttonType;
 		
-		public StoneGuiButton(Buttons type, int left, int top, int width, int height, String messageKey) {
-			super(type.ordinal(), left, top, width, height, localize(messageKey));
+		/**
+		 * Creates a button to be used on the Sleepstone Gui
+		 * @param type Enum that matches the button.  Used in actionPerformed(button).
+		 * @param left Left edge of the button on the whole screen.
+		 * @param top Top edge of the button on the whole screen.
+		 * @param width Width of the button. Default is 70.
+		 * @param height Height of the button. Default is 20.
+		 * @param text Text that appears on the button.
+		 */
+		public StoneGuiButton(Buttons type, int left, int top, int width, int height, String text) {
+			super(type.ordinal(), left, top, width, height, text);
 			buttonType = type;
+		}
+		
+		/**
+		 * Creates a button to be used on the Sleepstone Gui
+		 * @param type Enum that matches the button.  Used in actionPerformed(button).
+		 * @param left Left edge of the button on the whole screen.
+		 * @param top Top edge of the button on the whole screen.
+		 * @param width Width of the button. Default is 70.
+		 * @param text Text that appears on the button.
+		 */
+		public StoneGuiButton(Buttons type, int left, int top, int width, String text) {
+			this(type, left, top, width, 20, text);
+		}
+		
+		/**
+		 * Creates a button to be used on the Sleepstone Gui
+		 * @param type Enum that matches the button.  Used in actionPerformed(button).
+		 * @param left Left edge of the button on the whole screen.
+		 * @param top Top edge of the button on the whole screen.
+		 * @param text Text that appears on the button.
+		 */
+		public StoneGuiButton(Buttons type, int left, int top, String text) {
+			this(type, left, top, 70, 20, text);
 		}
 		
 		public Buttons getButtonType() {
