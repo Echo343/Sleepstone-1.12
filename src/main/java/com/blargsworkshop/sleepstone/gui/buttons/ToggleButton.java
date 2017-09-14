@@ -1,6 +1,7 @@
 package com.blargsworkshop.sleepstone.gui.buttons;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import net.minecraft.util.EnumChatFormatting;
 
 public class ToggleButton extends BasicButton {
 	
@@ -33,12 +34,12 @@ public class ToggleButton extends BasicButton {
 	}
 	
 	public void setOn() {
-		setDisplayString(coreText + ": " + on);
+		setDisplayString(coreText + ": " + EnumChatFormatting.GREEN + on + EnumChatFormatting.WHITE);
 		isOn = true;
 	}
 	
 	public void setOff() {
-		setDisplayString(coreText + ": " + off);
+		setDisplayString(coreText + ": " + EnumChatFormatting.RED + off + EnumChatFormatting.WHITE);
 		isOn = false;
 	}
 	
