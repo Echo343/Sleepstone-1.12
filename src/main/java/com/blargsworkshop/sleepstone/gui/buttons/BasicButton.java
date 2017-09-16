@@ -1,8 +1,6 @@
 package com.blargsworkshop.sleepstone.gui.buttons;
 
-import net.minecraft.client.gui.GuiButton;
-
-public class BasicButton extends GuiButton {
+public class BasicButton extends TooltipButton {
 
 	private final static int defaultWidth = 120;
 	private final static int defaultHeight = 20;

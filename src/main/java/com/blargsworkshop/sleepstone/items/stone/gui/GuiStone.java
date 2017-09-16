@@ -42,7 +42,8 @@ public class GuiStone extends GuiScreen {
 		int left = (this.width - xSize) / 2;
 		int top = (this.height - ySize) / 2;
 		
-		GuiButton noFallButton = new ToggleButton(Buttons.NoFall, left + 4, top + 4, localize("text.guistone.no_fall_damage"));
+		ToggleButton noFallButton = new ToggleButton(Buttons.NoFall, left + 4, top + 4, localize("text.guistone.no_fall_damage"));
+		noFallButton.setToolTip("hi");
 		this.buttonList.add(noFallButton);
 		
 		GuiButton warpButton = new BasicButton(Buttons.Warp, (this.width - 70) / 2, (this.height - 20) / 2, 70, localize("text.guistone.warp"));

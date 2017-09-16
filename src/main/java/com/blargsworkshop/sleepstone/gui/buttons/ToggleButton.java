@@ -56,6 +56,10 @@ public class ToggleButton extends BasicButton {
 		return isOn;
 	}
 	
+	protected String getText() {
+		return this.coreText;
+	}
+	
 	private String localize(String messageKey) {
 		return LanguageRegistry.instance().getStringLocalization(messageKey);
 	}
