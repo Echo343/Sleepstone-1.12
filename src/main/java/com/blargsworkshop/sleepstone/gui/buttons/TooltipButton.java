@@ -11,7 +11,8 @@ public abstract class TooltipButton extends GuiButton {
 	private static final String TOOLTIP_CHAR = "?";
 	private final static int LINE_HEIGHT = 11;
 	private long mouseoverTime = 0;
-	private long prevSystemTime = -1;
+	private long prevSystemTime = 0;
+	private long systemTime;
 	private String toolTip;
 	
 	/** The amount of time in milliseconds until a tooltip is rendered */
@@ -27,11 +28,14 @@ public abstract class TooltipButton extends GuiButton {
 	private int tooltipYOffset = 10;
 	private int indicatorColor = 0xFFFFFF; // 0x99FFFFFF
 	private int indicatorMouseOverColor = 0xFFFFFF;
-	
-	
 
 	public TooltipButton(int id, int left, int top, int width, int height, String text) {
 		super(id, left, top, width, height, text);
+	}
+	
+	public TooltipButton(int id, int left, int top, int width, int height, String displayText, String tooltip) {
+		super(id, left, top, width, height, displayText);
+		this.setToolTip(tooltip);
 	}
 	
 	public TooltipButton(int id, int left, int top, String text)
@@ -75,48 +79,48 @@ public abstract class TooltipButton extends GuiButton {
 		super.drawButton(mc, mouseX, mouseY);
 		if (hasToolTip()) {
 			if (isButtonMouseOver()) {
-				RenderTooltipButtonMouseoverEffect(mc.fontRenderer);
-				long systemTime = System.currentTimeMillis();
-				
+				renderTooltipButtonMouseoverEffect(mc.fontRenderer);
+				systemTime = System.currentTimeMillis();
 				if (prevSystemTime > 0) {
 					mouseoverTime += systemTime - prevSystemTime;
 				}
 				prevSystemTime = systemTime;
 			}
 			else {
-				RenderTooltipButtonEffect(mc.fontRenderer);
+				renderTooltipButtonEffect(mc.fontRenderer);
 				mouseoverTime = 0;
-				prevSystemTime = -1;
+				prevSystemTime = 0;
 			}
 			
-			if (true || mouseoverTime > getTooltipDelay()) {
+			if (mouseoverTime > getTooltipDelay()) {
 				this.displayString = mouseX + ", " + mouseY;
-				DrawTooltip(mc.fontRenderer, mouseX, mouseY);
+				drawTooltip(mc, mouseX, mouseY);
 			}
 		}
 	}
 	
 	/**
 	 * Renders a tooltip at (x,y).
-	 * @param x
-	 * @param y
-	 * @param tooltip
+	 * @param mc Minecraft object
+	 * @param mouseX
+	 * @param mouseY
 	 */
-	protected void DrawTooltip(FontRenderer fontRenderer, int x, int y)
+	protected void drawTooltip(Minecraft mc, int mouseX, int mouseY)
 	{
-		String[] tooltipArray = ParseTooltipArrayFromString(fontRenderer);
+		FontRenderer fontRenderer = mc.fontRenderer;
+		String[] tooltipArray = parseTooltipArray(fontRenderer);
 
-        int tooltipWidth = GetTooltipWidth(fontRenderer, tooltipArray);
-        int tooltipHeight = GetTooltipHeight(fontRenderer, tooltipArray);
+        int tooltipWidth = getTooltipWidth(fontRenderer, tooltipArray);
+        int tooltipHeight = getTooltipHeight(fontRenderer, tooltipArray);
 		
-        int tooltipX = x + getTooltipXOffset();
-        int tooltipY = y + getTooltipYOffset();
+        int tooltipX = mouseX + getTooltipXOffset();
+        int tooltipY = mouseY + getTooltipYOffset();
 
-        if(tooltipX > width - tooltipWidth - 7) {
-        	tooltipX = width - tooltipWidth - 7;
+        if(tooltipX > mc.currentScreen.width - tooltipWidth - 7) {
+        	tooltipX = mc.currentScreen.width - tooltipWidth - 7;
         }
-        if(tooltipY > height -  tooltipHeight - 8) {
-        	tooltipY = height -  tooltipHeight - 8;
+        if(tooltipY > mc.currentScreen.height -  tooltipHeight - 8) {
+        	tooltipY = mc.currentScreen.height -  tooltipHeight - 8;
         }
         
         //render the background inside box
@@ -148,7 +152,7 @@ public abstract class TooltipButton extends GuiButton {
 	 * Draws the tooltip indicator.
 	 * @param mc
 	 */
-	protected void RenderTooltipButtonEffect(FontRenderer fontRenderer)
+	protected void renderTooltipButtonEffect(FontRenderer fontRenderer)
 	{
 		boolean flag = fontRenderer.getUnicodeFlag();
 		fontRenderer.setUnicodeFlag(true);
@@ -156,7 +160,7 @@ public abstract class TooltipButton extends GuiButton {
 		fontRenderer.setUnicodeFlag(flag);
 	}
 	
-	protected void RenderTooltipButtonMouseoverEffect(FontRenderer fontRenderer)
+	protected void renderTooltipButtonMouseoverEffect(FontRenderer fontRenderer)
 	{
 		boolean flag = fontRenderer.getUnicodeFlag();
 		fontRenderer.setUnicodeFlag(true);
@@ -169,7 +173,7 @@ public abstract class TooltipButton extends GuiButton {
 	 * @param s Ex: "Hello,_nI am your _ltooltip_r and you love me."
 	 * @return An array of Strings such that each String width does not exceed tooltipMaxWidth
 	 */
-	private String[] ParseTooltipArrayFromString(FontRenderer fontRenderer)
+	private String[] parseTooltipArray(FontRenderer fontRenderer)
 	{
 		String[] tooltipSections = getToolTip().split(tooltipNewlineDelimeter);
 		ArrayList<String> tooltipArrayList = new ArrayList<String>();
@@ -207,7 +211,7 @@ public abstract class TooltipButton extends GuiButton {
 	 * @param tooltipArray
 	 * @return
 	 */
-	private int GetTooltipWidth(FontRenderer fontRenderer, String[] tooltipArray)
+	private int getTooltipWidth(FontRenderer fontRenderer, String[] tooltipArray)
 	{
 		int longestWidth = 0;
 		for(String s : tooltipArray)
@@ -224,7 +228,7 @@ public abstract class TooltipButton extends GuiButton {
 	 * @param tooltipArray
 	 * @return
 	 */
-	private int GetTooltipHeight(FontRenderer fontRenderer, String[] tooltipArray)
+	private int getTooltipHeight(FontRenderer fontRenderer, String[] tooltipArray)
 	{
 		int tooltipHeight = fontRenderer.FONT_HEIGHT - 2;
         if (tooltipArray.length > 1)

@@ -29,6 +29,24 @@ public class ToggleButton extends BasicButton {
 		init();
 	}
 	
+	public ToggleButton(Enum<?> type, int left, int top, int width, int height, String text, String tooltip) {
+		super(type, left, top, width, height, text, tooltip);
+		this.coreText = text;
+		init();
+	}
+
+	public ToggleButton(Enum<?> type, int left, int top, int width, String text, String tooltip) {
+		super(type, left, top, width, text, tooltip);
+		this.coreText = text;
+		init();
+	}
+
+	public ToggleButton(Enum<?> type, int left, int top, String text, String tooltip) {
+		super(type, left, top, text, tooltip);
+		this.coreText = text;
+		init();
+	}
+	
 	private void init() {
 		setOff();
 	}
