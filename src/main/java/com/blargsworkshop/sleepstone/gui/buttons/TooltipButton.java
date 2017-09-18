@@ -89,7 +89,8 @@ public abstract class TooltipButton extends GuiButton {
 				prevSystemTime = -1;
 			}
 			
-			if (mouseoverTime > getTooltipDelay()) {
+			if (true || mouseoverTime > getTooltipDelay()) {
+				this.displayString = mouseX + ", " + mouseY;
 				DrawTooltip(mc.fontRenderer, mouseX, mouseY);
 			}
 		}
@@ -238,11 +239,11 @@ public abstract class TooltipButton extends GuiButton {
 	}
 
 	protected int getIndicatorYPos() {
-		return this.yPosition;
+		return this.yPosition + 1;
 	}
 	
 	protected int getIndicatorXPos() {
-		return this.xPosition + this.getButtonWidth() - 5;
+		return this.xPosition + this.getButtonWidth() - 6;
 	}
 
 	public int getIndicatorColor() {
