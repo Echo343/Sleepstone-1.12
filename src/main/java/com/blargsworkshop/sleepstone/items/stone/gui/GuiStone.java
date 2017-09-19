@@ -5,6 +5,8 @@ import org.lwjgl.opengl.GL11;
 import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.gui.buttons.BasicButton;
 import com.blargsworkshop.sleepstone.gui.buttons.ToggleButton;
+import com.blargsworkshop.sleepstone.items.gems.StoneGem;
+import com.blargsworkshop.sleepstone.items.stone.StoneInventory;
 import com.blargsworkshop.sleepstone.network.BasicMessage;
 import com.blargsworkshop.sleepstone.network.BasicMessage.Commands;
 import com.blargsworkshop.sleepstone.network.NetworkHandler;
@@ -27,8 +29,10 @@ public class GuiStone extends GuiScreen {
 	
 	private final int xSize = 248;
 	private final int ySize = 166;
+	private StoneInventory inventory;
 	
-	public GuiStone() {
+	public GuiStone(StoneInventory stoneInventory) {
+		this.inventory = stoneInventory;
 	}
 	
 	@Override
@@ -42,8 +46,10 @@ public class GuiStone extends GuiScreen {
 		int left = (this.width - xSize) / 2;
 		int top = (this.height - ySize) / 2;
 		
-		ToggleButton noFallButton = new ToggleButton(Buttons.NoFall, left + 4, top + 4, localize("text.guistone.no_fall_damage"), "hi");
-		this.buttonList.add(noFallButton);
+		if (inventory.hasGem(StoneGem.class)) {
+			ToggleButton noFallButton = new ToggleButton(Buttons.NoFall, left + 4, top + 4, localize("text.guistone.no_fall_damage"), "hi");
+			this.buttonList.add(noFallButton);
+		}
 		
 		GuiButton warpButton = new BasicButton(Buttons.Warp, (this.width - 70) / 2, (this.height - 20) / 2, 70, localize("text.guistone.warp"));
 		GuiButton invButton = new BasicButton(Buttons.Inv, left + xSize - 24, top + 4, 20, localize("text.guistone.inv"));

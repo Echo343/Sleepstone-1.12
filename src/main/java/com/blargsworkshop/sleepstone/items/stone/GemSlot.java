@@ -48,5 +48,8 @@ public class GemSlot extends Slot {
     	return stackLimit;
     }
     
+    public Class<? extends Gem> getGemType() {
+    	return gemType;
+    }
     
 }
