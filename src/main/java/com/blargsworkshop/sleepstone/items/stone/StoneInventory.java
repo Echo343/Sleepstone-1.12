@@ -1,8 +1,13 @@
 package com.blargsworkshop.sleepstone.items.stone;
 
 import com.blargsworkshop.sleepstone.ModItems;
+import com.blargsworkshop.sleepstone.items.gems.EtherealGem;
+import com.blargsworkshop.sleepstone.items.gems.FireGem;
 import com.blargsworkshop.sleepstone.items.gems.Gem;
+import com.blargsworkshop.sleepstone.items.gems.GuardianGem;
+import com.blargsworkshop.sleepstone.items.gems.PathfinderGem;
 import com.blargsworkshop.sleepstone.items.gems.StoneGem;
+import com.blargsworkshop.sleepstone.items.gems.TimeSpaceGem;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -55,7 +60,8 @@ public class StoneInventory implements IInventory {
     }
     
     private boolean checkGem(int index, Item gem) {
-    	if (getStackInSlot(index).getItem() == gem) {
+    	ItemStack slot = getStackInSlot(index);
+    	if (slot != null && slot.getItem() == gem) {
 			return true;
 		}
     	return false;
@@ -63,48 +69,47 @@ public class StoneInventory implements IInventory {
     
     public boolean hasGem(Class<? extends Gem> gem, Class<? extends Gem> augmentGem) {
     	boolean hasGem = false;
-    	//TODO turn into enum to minimize mistakes
     	if (gem == StoneGem.class) {
     		if (augmentGem == null) {
     			hasGem = checkGem(0, ModItems.itemStoneGem);
     		}
-//    		else if (augmentGem == EtherealGem.class) {
-//    			hasGem = checkGem(1, ModItems.itemEtherealGem);
-//    		}
-//    		else if (augmentGem == GuardianGem.class) {
-//    			hasGem = checkGem(2, ModItems.itemGuardianGem);    			
-//    		}
-//    		else if (augmentGem == FireGem.class) {
-//    			hasGem = checkGem(3, ModItems.itemFireGem);
-//    		}
-//    	}
-//    	else if (gem == TimeSpaceGem.class) {
-//    		if (augmentGem == null) {
-//    			hasGem = checkGem(4, ModItems.itemTimeSpaceGem);
-//    		}
-//    		else if (augmentGem == EtherealGem.class) {
-//    			hasGem = checkGem(5, ModItems.itemEtherealGem);
-//    		}
-//    		else if (augmentGem == GuardianGem.class) {
-//    			hasGem = checkGem(6, ModItems.itemGuardianGem);    			
-//    		}
-//    		else if (augmentGem == FireGem.class) {
-//    			hasGem = checkGem(7, ModItems.itemFireGem);
-//    		}
-//    	}
-//    	else if (gem == PathfinderGem.class) {
-//    		if (augmentGem == null) {
-//    			hasGem = checkGem(8, ModItems.itemPathfinderGem);
-//    		}
-//    		else if (augmentGem == EtherealGem.class) {
-//    			hasGem = checkGem(9, ModItems.itemEtherealGem);
-//    		}
-//    		else if (augmentGem == GuardianGem.class) {
-//    			hasGem = checkGem(10, ModItems.itemGuardianGem);    			
-//    		}
-//    		else if (augmentGem == FireGem.class) {
-//    			hasGem = checkGem(11, ModItems.itemFireGem);
-//    		}
+    		else if (augmentGem == EtherealGem.class) {
+    			hasGem = checkGem(1, ModItems.itemEtherealGem);
+    		}
+    		else if (augmentGem == GuardianGem.class) {
+    			hasGem = checkGem(2, ModItems.itemGuardianGem);    			
+    		}
+    		else if (augmentGem == FireGem.class) {
+    			hasGem = checkGem(3, ModItems.itemFireGem);
+    		}
+    	}
+    	else if (gem == TimeSpaceGem.class) {
+    		if (augmentGem == null) {
+    			hasGem = checkGem(4, ModItems.itemTimeSpaceGem);
+    		}
+    		else if (augmentGem == EtherealGem.class) {
+    			hasGem = checkGem(5, ModItems.itemEtherealGem);
+    		}
+    		else if (augmentGem == GuardianGem.class) {
+    			hasGem = checkGem(6, ModItems.itemGuardianGem);    			
+    		}
+    		else if (augmentGem == FireGem.class) {
+    			hasGem = checkGem(7, ModItems.itemFireGem);
+    		}
+    	}
+    	else if (gem == PathfinderGem.class) {
+    		if (augmentGem == null) {
+    			hasGem = checkGem(8, ModItems.itemPathfinderGem);
+    		}
+    		else if (augmentGem == EtherealGem.class) {
+    			hasGem = checkGem(9, ModItems.itemEtherealGem);
+    		}
+    		else if (augmentGem == GuardianGem.class) {
+    			hasGem = checkGem(10, ModItems.itemGuardianGem);    			
+    		}
+    		else if (augmentGem == FireGem.class) {
+    			hasGem = checkGem(11, ModItems.itemFireGem);
+    		}
     	}
     	return hasGem;
     }

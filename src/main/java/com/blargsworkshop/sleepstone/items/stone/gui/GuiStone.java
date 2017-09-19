@@ -5,6 +5,7 @@ import org.lwjgl.opengl.GL11;
 import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.gui.buttons.BasicButton;
 import com.blargsworkshop.sleepstone.gui.buttons.ToggleButton;
+import com.blargsworkshop.sleepstone.items.gems.PathfinderGem;
 import com.blargsworkshop.sleepstone.items.gems.StoneGem;
 import com.blargsworkshop.sleepstone.items.stone.StoneInventory;
 import com.blargsworkshop.sleepstone.network.BasicMessage;
@@ -21,7 +22,8 @@ public class GuiStone extends GuiScreen {
 	
 	public static enum Buttons {
 		Warp,
-		NoFall,
+		Stone,
+		Pathfinder,
 		Inv
 	}
 	
@@ -47,8 +49,12 @@ public class GuiStone extends GuiScreen {
 		int top = (this.height - ySize) / 2;
 		
 		if (inventory.hasGem(StoneGem.class)) {
-			ToggleButton noFallButton = new ToggleButton(Buttons.NoFall, left + 4, top + 4, localize("text.guistone.no_fall_damage"), "hi");
-			this.buttonList.add(noFallButton);
+			ToggleButton stoneButton = new ToggleButton(Buttons.Stone, left + 4, top + 4, localize("text.guistone.stone_button"), localize("text.guistone.stone_tooltip"));
+			this.buttonList.add(stoneButton);
+		}
+		if (inventory.hasGem(PathfinderGem.class)) {
+			ToggleButton pathfinderButton = new ToggleButton(Buttons.Pathfinder, left + 124, top + 28, localize("text.guistone.pathfinder_button"), localize("text.guistone.pathfinder_tooltip"));
+			this.buttonList.add(pathfinderButton);
 		}
 		
 		GuiButton warpButton = new BasicButton(Buttons.Warp, (this.width - 70) / 2, (this.height - 20) / 2, 70, localize("text.guistone.warp"));
@@ -78,7 +84,8 @@ public class GuiStone extends GuiScreen {
 		case Inv:
 			NetworkHandler.networkWrapper.sendToServer(new BasicMessage(Commands.OpenInvGui));
 			break;
-		case NoFall:
+		case Stone:
+		case Pathfinder:
 			((ToggleButton)button).toggle();
 			break;
 		default:

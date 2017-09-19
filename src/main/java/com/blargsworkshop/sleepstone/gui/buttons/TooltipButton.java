@@ -16,7 +16,7 @@ public abstract class TooltipButton extends GuiButton {
 	private String toolTip;
 	
 	/** The amount of time in milliseconds until a tooltip is rendered */
-	private long tooltipDelay = 900;
+	private long tooltipDelay = 500;
 	
 	/** The maximum width in pixels a tooltip can occupy before word wrapping occurs */
 	private int tooltipMaxWidth = 150;
@@ -93,7 +93,6 @@ public abstract class TooltipButton extends GuiButton {
 			}
 			
 			if (mouseoverTime > getTooltipDelay()) {
-				this.displayString = mouseX + ", " + mouseY;
 				drawTooltip(mc, mouseX, mouseY);
 			}
 		}
@@ -122,7 +121,7 @@ public abstract class TooltipButton extends GuiButton {
         if(tooltipY > mc.currentScreen.height -  tooltipHeight - 8) {
         	tooltipY = mc.currentScreen.height -  tooltipHeight - 8;
         }
-        
+                
         //render the background inside box
         int innerAlpha = -0xFEFFFF0;	//very very dark purple
         drawGradientRect(tooltipX, tooltipY - 1, tooltipX + tooltipWidth + 6, tooltipY, innerAlpha, innerAlpha);

@@ -1,8 +1,12 @@
 package com.blargsworkshop.sleepstone;
 
 import com.blargsworkshop.sleepstone.gui.TextureItem;
+import com.blargsworkshop.sleepstone.items.gems.EtherealGem;
+import com.blargsworkshop.sleepstone.items.gems.FireGem;
+import com.blargsworkshop.sleepstone.items.gems.GuardianGem;
 import com.blargsworkshop.sleepstone.items.gems.PathfinderGem;
 import com.blargsworkshop.sleepstone.items.gems.StoneGem;
+import com.blargsworkshop.sleepstone.items.gems.TimeSpaceGem;
 import com.blargsworkshop.sleepstone.items.gems.support.PathfinderCraftable;
 import com.blargsworkshop.sleepstone.items.gems.support.StoneCraftable;
 import com.blargsworkshop.sleepstone.items.stone.Sleepstone;
@@ -18,10 +22,16 @@ public class ModItems {
 	public static CreativeTabs tabSleepstone;
 	
 	public static Item itemSleepstone;
-	public static Item itemPathfinderGem;
-	public static Item itemPathfinderCraftable;
+	
 	public static Item itemStoneGem;
+	public static Item itemTimeSpaceGem;
+	public static Item itemPathfinderGem;
+	public static Item itemEtherealGem;
+	public static Item itemGuardianGem;
+	public static Item itemFireGem;
+	
 	public static Item itemStoneCraftable;
+	public static Item itemPathfinderCraftable;
 	
 	public static Item textureGemSlotStone = new TextureItem("textureGemSlotStone", ModInfo.ID + ":slot-gem-stone");
 	public static Item textureGemSlotPathfinder = new TextureItem("textureGemSlotPathfinder", ModInfo.ID + ":slot-gem-pathfinder");
@@ -32,10 +42,16 @@ public class ModItems {
 	
 	public static void init() {
 		GameRegistry.registerItem(itemSleepstone = new Sleepstone(), "modItemSleepstone");
-		GameRegistry.registerItem(itemPathfinderGem = new PathfinderGem(), "modItemPathfinderGem");
-		GameRegistry.registerItem(itemPathfinderCraftable = new PathfinderCraftable(), "modItemPathfinderCraftable");
+		
 		GameRegistry.registerItem(itemStoneGem = new StoneGem(), "modItemStoneGem");
+		GameRegistry.registerItem(itemTimeSpaceGem = new TimeSpaceGem(), "modItemTimeSpaceGem");
+		GameRegistry.registerItem(itemPathfinderGem = new PathfinderGem(), "modItemPathfinderGem");
+		GameRegistry.registerItem(itemEtherealGem = new EtherealGem(), "modItemEtherealGem");
+		GameRegistry.registerItem(itemGuardianGem = new GuardianGem(), "modItemGuardianGem");
+		GameRegistry.registerItem(itemFireGem = new FireGem(), "modItemFireGem");
+		
 		GameRegistry.registerItem(itemStoneCraftable = new StoneCraftable(), "modItemStoneCraftable");
+		GameRegistry.registerItem(itemPathfinderCraftable = new PathfinderCraftable(), "modItemPathfinderCraftable");
 		
 		GameRegistry.registerItem(textureGemSlotStone, "modTextureGemSlotStone");
 		GameRegistry.registerItem(textureGemSlotPathfinder, "modTextureGemSlotPathfinder");
