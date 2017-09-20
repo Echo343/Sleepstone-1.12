@@ -5,6 +5,7 @@ import org.lwjgl.opengl.GL11;
 import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.gui.buttons.BasicButton;
 import com.blargsworkshop.sleepstone.gui.buttons.ToggleButton;
+import com.blargsworkshop.sleepstone.gui.buttons.TooltipButton;
 import com.blargsworkshop.sleepstone.items.gems.PathfinderGem;
 import com.blargsworkshop.sleepstone.items.gems.StoneGem;
 import com.blargsworkshop.sleepstone.items.stone.StoneInventory;
@@ -72,6 +73,13 @@ public class GuiStone extends GuiScreen {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
 		super.drawScreen(mouseX, mouseY, renderPartialTicks);
+		
+		//Draw Tooltips last so they are on top.
+		for (Object button : this.buttonList) {
+			if (button instanceof TooltipButton) {
+				((TooltipButton)button).drawTooltip(this.mc, mouseX, mouseY);
+			}
+		}
 	}
 	
 	@Override

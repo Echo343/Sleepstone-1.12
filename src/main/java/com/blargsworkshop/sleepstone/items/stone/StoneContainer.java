@@ -39,7 +39,6 @@ public class StoneContainer extends Container {
     
     public StoneContainer(EntityPlayer par1Player, InventoryPlayer inventoryPlayer, StoneInventory stoneInventory) {
         this.inventory = stoneInventory;
-        int index = 0;
         
         /** Slot Textures */
         IIcon textureGemSlotStone = ModItems.textureGemSlotStone.getIconFromDamage(0);
@@ -51,26 +50,26 @@ public class StoneContainer extends Container {
         
         /** Gem Slots */
         //Group one
-        this.addSlotToContainer(new GemSlot(StoneGem.class, this.inventory, 1, index++, 29, 57, textureGemSlotStone));
-        this.addSlotToContainer(new GemSlot(EtherealGem.class, this.inventory, 1, index++, 11, 78, textureGemSlotEthereal));
-        this.addSlotToContainer(new GemSlot(GuardianGem.class, this.inventory, 1, index++, 29, 83, textureGemSlotGuardian));
-        this.addSlotToContainer(new GemSlot(FireGem.class, this.inventory, 1, index++, 47, 78, textureGemSlotFire));
+        this.addSlotToContainer(new GemSlot(StoneGem.class, this.inventory, Slots.Stone, 29, 57, textureGemSlotStone));
+        this.addSlotToContainer(new GemSlot(EtherealGem.class, this.inventory, Slots.StoneEthereal, 11, 78, textureGemSlotEthereal));
+        this.addSlotToContainer(new GemSlot(GuardianGem.class, this.inventory, Slots.StoneGuardian, 29, 83, textureGemSlotGuardian));
+        this.addSlotToContainer(new GemSlot(FireGem.class, this.inventory, Slots.StoneFire, 47, 78, textureGemSlotFire));
         
         //Group two
-        this.addSlotToContainer(new GemSlot(TimeSpaceGem.class, this.inventory, 1, index++, 80, 16, textureGemSlotTimeAndSpace));
-        this.addSlotToContainer(new GemSlot(EtherealGem.class, this.inventory, 1, index++, 62, 37, textureGemSlotEthereal));
-        this.addSlotToContainer(new GemSlot(GuardianGem.class, this.inventory, 1, index++, 80, 44, textureGemSlotGuardian));
-        this.addSlotToContainer(new GemSlot(FireGem.class, this.inventory, 1, index++, 98, 37, textureGemSlotFire));
+        this.addSlotToContainer(new GemSlot(TimeSpaceGem.class, this.inventory, Slots.TimeSpace, 80, 16, textureGemSlotTimeAndSpace));
+        this.addSlotToContainer(new GemSlot(EtherealGem.class, this.inventory, Slots.TimeSpaceEthereal, 62, 37, textureGemSlotEthereal));
+        this.addSlotToContainer(new GemSlot(GuardianGem.class, this.inventory, Slots.TimeSpaceGuardian, 80, 44, textureGemSlotGuardian));
+        this.addSlotToContainer(new GemSlot(FireGem.class, this.inventory, Slots.TimeSpaceFire, 98, 37, textureGemSlotFire));
         
         //Group three
-        this.addSlotToContainer(new GemSlot(PathfinderGem.class, this.inventory, 1, index++, 130, 57, textureGemSlotPathfinder));
-        this.addSlotToContainer(new GemSlot(EtherealGem.class, this.inventory, 1, index++, 112, 78, textureGemSlotEthereal));
-        this.addSlotToContainer(new GemSlot(GuardianGem.class, this.inventory, 1, index++, 130, 83, textureGemSlotGuardian));
-        this.addSlotToContainer(new GemSlot(FireGem.class, this.inventory, 1, index++, 148, 78, textureGemSlotFire));
+        this.addSlotToContainer(new GemSlot(PathfinderGem.class, this.inventory, Slots.Pathfinder, 130, 57, textureGemSlotPathfinder));
+        this.addSlotToContainer(new GemSlot(EtherealGem.class, this.inventory, Slots.PathfinderEthereal, 112, 78, textureGemSlotEthereal));
+        this.addSlotToContainer(new GemSlot(GuardianGem.class, this.inventory, Slots.PathfinderGuardian, 130, 83, textureGemSlotGuardian));
+        this.addSlotToContainer(new GemSlot(FireGem.class, this.inventory, Slots.PathfinderFire, 148, 78, textureGemSlotFire));
         
         /** Spare Gem Inventory */
         for (int i = 0; i < 9; i++) {
-        	this.addSlotToContainer(new GemSlot(Gem.class, this.inventory, index++, 8 + i * 18, 108));
+        	this.addSlotToContainer(new GemSlot(Gem.class, this.inventory, i + Slots.values().length, 8 + i * 18, 108));
         }
 
         // If you want, you can add ARMOR SLOTS here as well, but you need to

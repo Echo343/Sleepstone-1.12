@@ -28,6 +28,7 @@ public abstract class TooltipButton extends GuiButton {
 	private int tooltipYOffset = 10;
 	private int indicatorColor = 0xFFFFFF; // 0x99FFFFFF
 	private int indicatorMouseOverColor = 0xFFFFFF;
+	private boolean shouldDrawTooltip = false;
 
 	public TooltipButton(int id, int left, int top, int width, int height, String text) {
 		super(id, left, top, width, height, text);
@@ -90,10 +91,11 @@ public abstract class TooltipButton extends GuiButton {
 				renderTooltipButtonEffect(mc.fontRenderer);
 				mouseoverTime = 0;
 				prevSystemTime = 0;
+				shouldDrawTooltip = false;
 			}
 			
 			if (mouseoverTime > getTooltipDelay()) {
-				drawTooltip(mc, mouseX, mouseY);
+				shouldDrawTooltip = true;
 			}
 		}
 	}
@@ -104,8 +106,11 @@ public abstract class TooltipButton extends GuiButton {
 	 * @param mouseX
 	 * @param mouseY
 	 */
-	protected void drawTooltip(Minecraft mc, int mouseX, int mouseY)
+	public void drawTooltip(Minecraft mc, int mouseX, int mouseY)
 	{
+		if (!shouldDrawTooltip ) {
+			return;
+		}
 		FontRenderer fontRenderer = mc.fontRenderer;
 		String[] tooltipArray = parseTooltipArray(fontRenderer);
 
