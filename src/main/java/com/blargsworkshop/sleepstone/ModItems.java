@@ -3,6 +3,7 @@ package com.blargsworkshop.sleepstone;
 import com.blargsworkshop.sleepstone.gui.TextureItem;
 import com.blargsworkshop.sleepstone.items.gems.EtherealGem;
 import com.blargsworkshop.sleepstone.items.gems.FireGem;
+import com.blargsworkshop.sleepstone.items.gems.Gem;
 import com.blargsworkshop.sleepstone.items.gems.GuardianGem;
 import com.blargsworkshop.sleepstone.items.gems.PathfinderGem;
 import com.blargsworkshop.sleepstone.items.gems.StoneGem;
@@ -23,12 +24,12 @@ public class ModItems {
 	
 	public static Item itemSleepstone;
 	
-	public static Item itemStoneGem;
-	public static Item itemTimeSpaceGem;
-	public static Item itemPathfinderGem;
-	public static Item itemEtherealGem;
-	public static Item itemGuardianGem;
-	public static Item itemFireGem;
+	public static Gem itemStoneGem;
+	public static Gem itemTimeSpaceGem;
+	public static Gem itemPathfinderGem;
+	public static Gem itemEtherealGem;
+	public static Gem itemGuardianGem;
+	public static Gem itemFireGem;
 	
 	public static Item itemStoneCraftable;
 	public static Item itemPathfinderCraftable;

@@ -9,6 +9,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.World;
 
 public class StoneContainer extends Container {
     private final StoneInventory inventory;
@@ -30,17 +31,26 @@ public class StoneContainer extends Container {
 	public StoneInventory getInventoryItem() {
 		return this.inventory;
 	}
-    
-    public StoneContainer(EntityPlayer par1Player, InventoryPlayer inventoryPlayer, StoneInventory stoneInventory) {
+	
+    public StoneContainer(World world, EntityPlayer par1Player, InventoryPlayer inventoryPlayer, StoneInventory stoneInventory) {
         this.inventory = stoneInventory;
         
-        /** Slot Textures */
-        IIcon textureGemSlotStone = ModItems.textureGemSlotStone.getIconFromDamage(0);
-        IIcon textureGemSlotPathfinder = ModItems.textureGemSlotPathfinder.getIconFromDamage(0);
-        IIcon textureGemSlotTimeAndSpace = ModItems.textureGemSlotTimeAndSpace.getIconFromDamage(0);
-        IIcon textureGemSlotFire = ModItems.textureGemSlotFire.getIconFromDamage(0);
-        IIcon textureGemSlotGuardian = ModItems.textureGemSlotGuardian.getIconFromDamage(0);
-        IIcon textureGemSlotEthereal = ModItems.textureGemSlotEthereal.getIconFromDamage(0);        
+        IIcon textureGemSlotStone = null;
+        IIcon textureGemSlotPathfinder = null;
+        IIcon textureGemSlotTimeAndSpace = null;
+        IIcon textureGemSlotFire = null;
+        IIcon textureGemSlotGuardian = null;
+        IIcon textureGemSlotEthereal = null;	
+        
+        if (world.isRemote) {
+        	/** Slot Textures */
+        	textureGemSlotStone = ModItems.textureGemSlotStone.getIconFromDamage(0);
+        	textureGemSlotPathfinder = ModItems.textureGemSlotPathfinder.getIconFromDamage(0);
+        	textureGemSlotTimeAndSpace = ModItems.textureGemSlotTimeAndSpace.getIconFromDamage(0);
+        	textureGemSlotFire = ModItems.textureGemSlotFire.getIconFromDamage(0);
+        	textureGemSlotGuardian = ModItems.textureGemSlotGuardian.getIconFromDamage(0);
+        	textureGemSlotEthereal = ModItems.textureGemSlotEthereal.getIconFromDamage(0);        	
+        }
         
         /** Gem Slots */
         //Group one

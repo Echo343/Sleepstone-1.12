@@ -21,7 +21,9 @@ public class GemSlot extends Slot {
     	super(inv, gemSlot.ordinal(), xPos, yPos);
     	this.gemType = gemSlot.getGemType();
     	this.stackLimit = 1;
-    	this.setBackgroundIcon(ico);
+    	if (ico != null) {
+    		this.setBackgroundIcon(ico);
+    	}
     }
 
     // This is the only method we need to override so that

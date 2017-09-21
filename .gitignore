@@ -5,6 +5,15 @@ logs/
 options.txt
 saves/
 usernamecache.json
+eula.txt
+server.properties
+banned-ips.json
+banned-players.json
+ops.json
+usercache.json
+whitelist.json
+world/
+servers.dat
 
 *.class
 *.classpath
