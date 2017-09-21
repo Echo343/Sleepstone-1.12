@@ -1,17 +1,7 @@
 package com.blargsworkshop.sleepstone.items.stone;
 
-import com.blargsworkshop.sleepstone.ModItems;
-import com.blargsworkshop.sleepstone.items.gems.EtherealGem;
-import com.blargsworkshop.sleepstone.items.gems.FireGem;
-import com.blargsworkshop.sleepstone.items.gems.Gem;
-import com.blargsworkshop.sleepstone.items.gems.GuardianGem;
-import com.blargsworkshop.sleepstone.items.gems.PathfinderGem;
-import com.blargsworkshop.sleepstone.items.gems.StoneGem;
-import com.blargsworkshop.sleepstone.items.gems.TimeSpaceGem;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -55,63 +45,48 @@ public class StoneInventory implements IInventory {
         return inventory[slot];
     }
     
-    public boolean hasGem(Class<? extends Gem> gem) {
-    	return hasGem(gem, null);
-    }
-    
-    private boolean checkGem(Slots index, Item gem) {
-    	ItemStack stack = getStackInSlot(index.ordinal());
-    	if (stack != null && stack.getItem() == gem) {
-			return true;
+    private boolean checkGems(Slots mainSlot, Slots augmentSlot) {
+    	boolean hasGems = false;
+    	ItemStack mainStack = getStackInSlot(mainSlot.ordinal());
+    	if (mainStack != null && mainStack.getItem() == mainSlot.getItem()) {
+			if (augmentSlot != null) {
+				ItemStack augmentStack = getStackInSlot(augmentSlot.ordinal());
+				if (augmentStack != null && augmentStack.getItem() == augmentSlot.getItem()) {
+					hasGems = true;
+				}
+			}
+			else {
+				hasGems = true;
+			}
 		}
-    	return false;
+    	return hasGems;
     }
     
-    public boolean hasGem(Class<? extends Gem> gem, Class<? extends Gem> augmentGem) {
-    	boolean doesSlotHaveGem = false;
-    	if (gem == StoneGem.class) {
-    		if (augmentGem == null) {
-    			doesSlotHaveGem = checkGem(Slots.Stone, ModItems.itemStoneGem);
-    		}
-    		else if (augmentGem == EtherealGem.class) {
-    			doesSlotHaveGem = checkGem(Slots.StoneEthereal, ModItems.itemEtherealGem);
-    		}
-    		else if (augmentGem == GuardianGem.class) {
-    			doesSlotHaveGem = checkGem(Slots.StoneGuardian, ModItems.itemGuardianGem);    			
-    		}
-    		else if (augmentGem == FireGem.class) {
-    			doesSlotHaveGem = checkGem(Slots.StoneFire, ModItems.itemFireGem);
-    		}
+    public boolean hasGemInSlot(Slots slot) {
+    	boolean hasGems = false;
+    	switch (slot) {
+    	case Stone:
+    	case TimeSpace:
+    	case Pathfinder:
+    		hasGems = checkGems(slot, null);
+    		break;
+    	case StoneEthereal:
+    	case StoneGuardian:
+    	case StoneFire:
+    		hasGems = checkGems(Slots.Stone, slot);
+			break;
+		case TimeSpaceEthereal:
+		case TimeSpaceGuardian:
+		case TimeSpaceFire:
+			hasGems = checkGems(Slots.TimeSpace, slot);
+			break;
+		case PathfinderEthereal:
+		case PathfinderGuardian:
+		case PathfinderFire:
+			hasGems = checkGems(Slots.Pathfinder, slot);
+			break;
     	}
-    	else if (gem == TimeSpaceGem.class) {
-    		if (augmentGem == null) {
-    			doesSlotHaveGem = checkGem(Slots.TimeSpace, ModItems.itemTimeSpaceGem);
-    		}
-    		else if (augmentGem == EtherealGem.class) {
-    			doesSlotHaveGem = checkGem(Slots.TimeSpaceEthereal, ModItems.itemEtherealGem);
-    		}
-    		else if (augmentGem == GuardianGem.class) {
-    			doesSlotHaveGem = checkGem(Slots.TimeSpaceGuardian, ModItems.itemGuardianGem);    			
-    		}
-    		else if (augmentGem == FireGem.class) {
-    			doesSlotHaveGem = checkGem(Slots.TimeSpaceFire, ModItems.itemFireGem);
-    		}
-    	}
-    	else if (gem == PathfinderGem.class) {
-    		if (augmentGem == null) {
-    			doesSlotHaveGem = checkGem(Slots.Pathfinder, ModItems.itemPathfinderGem);
-    		}
-    		else if (augmentGem == EtherealGem.class) {
-    			doesSlotHaveGem = checkGem(Slots.PathfinderEthereal, ModItems.itemEtherealGem);
-    		}
-    		else if (augmentGem == GuardianGem.class) {
-    			doesSlotHaveGem = checkGem(Slots.PathfinderGuardian, ModItems.itemGuardianGem);    			
-    		}
-    		else if (augmentGem == FireGem.class) {
-    			doesSlotHaveGem = checkGem(Slots.PathfinderFire, ModItems.itemFireGem);
-    		}
-    	}
-    	return doesSlotHaveGem;
+    	return hasGems;
     }
 
     @Override

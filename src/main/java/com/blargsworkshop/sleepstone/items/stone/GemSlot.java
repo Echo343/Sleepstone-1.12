@@ -17,9 +17,9 @@ public class GemSlot extends Slot {
         this.stackLimit = super.getSlotStackLimit();
     }
     
-    public GemSlot(Class<? extends Gem> gemType, IInventory inv, Slots index, int xPos, int yPos, IIcon ico) {
-    	super(inv, index.ordinal(), xPos, yPos);
-    	this.gemType = gemType;
+    public GemSlot(Slots gemSlot, IInventory inv, int xPos, int yPos, IIcon ico) {
+    	super(inv, gemSlot.ordinal(), xPos, yPos);
+    	this.gemType = gemSlot.getGemType();
     	this.stackLimit = 1;
     	this.setBackgroundIcon(ico);
     }

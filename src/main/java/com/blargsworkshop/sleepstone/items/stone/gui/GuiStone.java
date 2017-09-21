@@ -6,8 +6,7 @@ import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.gui.buttons.BasicButton;
 import com.blargsworkshop.sleepstone.gui.buttons.ToggleButton;
 import com.blargsworkshop.sleepstone.gui.buttons.TooltipButton;
-import com.blargsworkshop.sleepstone.items.gems.PathfinderGem;
-import com.blargsworkshop.sleepstone.items.gems.StoneGem;
+import com.blargsworkshop.sleepstone.items.stone.Slots;
 import com.blargsworkshop.sleepstone.items.stone.StoneInventory;
 import com.blargsworkshop.sleepstone.network.BasicMessage;
 import com.blargsworkshop.sleepstone.network.BasicMessage.Commands;
@@ -49,11 +48,11 @@ public class GuiStone extends GuiScreen {
 		int left = (this.width - xSize) / 2;
 		int top = (this.height - ySize) / 2;
 		
-		if (inventory.hasGem(StoneGem.class)) {
+		if (inventory.hasGemInSlot(Slots.Stone)) {
 			ToggleButton stoneButton = new ToggleButton(Buttons.Stone, left + 4, top + 4, localize("text.guistone.stone_button"), localize("text.guistone.stone_tooltip"));
 			this.buttonList.add(stoneButton);
 		}
-		if (inventory.hasGem(PathfinderGem.class)) {
+		if (inventory.hasGemInSlot(Slots.Pathfinder)) {
 			ToggleButton pathfinderButton = new ToggleButton(Buttons.Pathfinder, left + 124, top + 28, localize("text.guistone.pathfinder_button"), localize("text.guistone.pathfinder_tooltip"));
 			this.buttonList.add(pathfinderButton);
 		}
