@@ -3,6 +3,9 @@ package com.blargsworkshop.sleepstone.items.stone.gui;
 import org.lwjgl.opengl.GL11;
 
 import com.blargsworkshop.sleepstone.ModInfo;
+import com.blargsworkshop.sleepstone.ModInfo.DEBUG;
+import com.blargsworkshop.sleepstone.SleepstoneMod;
+import com.blargsworkshop.sleepstone.extended_properties.ExtendedPlayer;
 import com.blargsworkshop.sleepstone.gui.buttons.BasicButton;
 import com.blargsworkshop.sleepstone.gui.buttons.ToggleButton;
 import com.blargsworkshop.sleepstone.gui.buttons.TooltipButton;
@@ -15,6 +18,7 @@ import com.blargsworkshop.sleepstone.network.NetworkHandler;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
 
@@ -32,9 +36,13 @@ public class GuiStone extends GuiScreen {
 	private final int xSize = 248;
 	private final int ySize = 166;
 	private StoneInventory inventory;
+	private EntityPlayer player;
+	private ExtendedPlayer props;
 	
-	public GuiStone(StoneInventory stoneInventory) {
+	public GuiStone(EntityPlayer player, StoneInventory stoneInventory) {
 		this.inventory = stoneInventory;
+		this.player = player;
+		this.props = ExtendedPlayer.get(player);
 	}
 	
 	@Override
@@ -50,6 +58,12 @@ public class GuiStone extends GuiScreen {
 		
 		if (inventory.hasGemInSlot(Slots.Stone)) {
 			ToggleButton stoneButton = new ToggleButton(Buttons.Stone, left + 4, top + 4, localize("text.guistone.stone_button"), localize("text.guistone.stone_tooltip"));
+			if (props != null) {
+				stoneButton.setState(props.getNoFallDamage());
+			}
+			else {
+				SleepstoneMod.debug("Error getting props", DEBUG.DETAIL, player);
+			}
 			this.buttonList.add(stoneButton);
 		}
 		if (inventory.hasGemInSlot(Slots.Pathfinder)) {
@@ -93,7 +107,9 @@ public class GuiStone extends GuiScreen {
 			break;
 		case Stone:
 		case Pathfinder:
-			((ToggleButton)button).toggle();
+			ToggleButton btn = (ToggleButton) button;
+			btn.toggle();
+			props.setNoFallDamage(btn.isOn(), true);
 			break;
 		default:
 			break;

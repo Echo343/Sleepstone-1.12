@@ -48,25 +48,47 @@ public class ToggleButton extends BasicButton {
 	}
 	
 	private void init() {
-		setOff();
+		turnOff();
 	}
 	
-	public void setOn() {
+	/**
+	 * Turns the state of the button to On.
+	 */
+	public void turnOn() {
 		setDisplayString(coreText + ": " + EnumChatFormatting.GREEN + on + EnumChatFormatting.WHITE);
 		isOn = true;
 	}
 	
-	public void setOff() {
+	/**
+	 * Turns the state of the button to Off.
+	 */
+	public void turnOff() {
 		setDisplayString(coreText + ": " + EnumChatFormatting.RED + off + EnumChatFormatting.WHITE);
 		isOn = false;
 	}
 	
+	/**
+	 * Toggles the Button
+	 */
 	public void toggle() {
 		if (isOn) {
-			setOff();
+			turnOff();
 		}
 		else {
-			setOn();
+			turnOn();
+		}
+	}
+	
+	/**
+	 * Sets the state of the button on or off.
+	 * @param isOn True = on.  False = off.
+	 */
+	public void setState(boolean state) {
+		if (state) {
+			turnOn();
+		}
+		else {
+			turnOff();
 		}
 	}
 	

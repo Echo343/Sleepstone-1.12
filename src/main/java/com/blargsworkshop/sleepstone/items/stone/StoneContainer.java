@@ -1,7 +1,6 @@
 package com.blargsworkshop.sleepstone.items.stone;
 
 import com.blargsworkshop.sleepstone.ModItems;
-import com.blargsworkshop.sleepstone.items.gems.Gem;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -73,7 +72,7 @@ public class StoneContainer extends Container {
         
         /** Spare Gem Inventory */
         for (int i = 0; i < 9; i++) {
-        	this.addSlotToContainer(new GemSlot(Gem.class, this.inventory, i + Slots.values().length, 8 + i * 18, 108));
+        	this.addSlotToContainer(new GemSlot(this.inventory, i + Slots.values().length, 8 + i * 18, 108));
         }
 
         // If you want, you can add ARMOR SLOTS here as well, but you need to
