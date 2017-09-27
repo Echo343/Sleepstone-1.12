@@ -6,6 +6,7 @@ import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.ModInfo.DEBUG;
 import com.blargsworkshop.sleepstone.SleepstoneMod;
 import com.blargsworkshop.sleepstone.extended_properties.ExtendedPlayer;
+import com.blargsworkshop.sleepstone.gui.GuiEnum;
 import com.blargsworkshop.sleepstone.gui.buttons.BasicButton;
 import com.blargsworkshop.sleepstone.gui.buttons.ToggleButton;
 import com.blargsworkshop.sleepstone.gui.buttons.TooltipButton;
@@ -14,6 +15,8 @@ import com.blargsworkshop.sleepstone.items.stone.StoneInventory;
 import com.blargsworkshop.sleepstone.network.BasicMessage;
 import com.blargsworkshop.sleepstone.network.BasicMessage.Commands;
 import com.blargsworkshop.sleepstone.network.NetworkHandler;
+import com.blargsworkshop.sleepstone.network.PacketDispatcher;
+import com.blargsworkshop.sleepstone.network.server.OpenGuiMessage;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.client.gui.GuiButton;
@@ -99,11 +102,13 @@ public class GuiStone extends GuiScreen {
 	protected void actionPerformed(GuiButton button) {
 		switch ((Buttons)((BasicButton)button).getButtonType()) {
 		case Warp:
-			NetworkHandler.networkWrapper.sendToServer(new BasicMessage(Commands.WARP));
+			// TODO send command packet.
+//			NetworkHandler.networkWrapper.sendToServer(new BasicMessage(Commands.WARP));
 			this.mc.setIngameFocus();
 			break;
 		case Inv:
-			NetworkHandler.networkWrapper.sendToServer(new BasicMessage(Commands.OpenInvGui));
+//			NetworkHandler.networkWrapper.sendToServer(new BasicMessage(Commands.OpenInvGui));
+			PacketDispatcher.sendToServer(new OpenGuiMessage(GuiEnum.STONE_INVENTORY));
 			break;
 		case Stone:
 		case Pathfinder:
