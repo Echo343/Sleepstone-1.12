@@ -1,6 +1,7 @@
 package com.blargsworkshop.sleepstone.network;
 
 import com.blargsworkshop.sleepstone.ModInfo;
+import com.blargsworkshop.sleepstone.network.client.SyncAllPlayerPropsMessage;
 import com.blargsworkshop.sleepstone.network.server.OpenGuiMessage;
 
 import cpw.mods.fml.common.network.NetworkRegistry;
@@ -25,6 +26,9 @@ public class PacketDispatcher {
 	public static final void registerPackets() {
 		//Messages handled on the server
 		registerMessage(OpenGuiMessage.class);
+		
+		//Bidirectional Messages
+		registerMessage(SyncAllPlayerPropsMessage.class);
 	}
 
 	/**

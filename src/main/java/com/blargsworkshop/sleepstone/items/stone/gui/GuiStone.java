@@ -12,10 +12,8 @@ import com.blargsworkshop.sleepstone.gui.buttons.ToggleButton;
 import com.blargsworkshop.sleepstone.gui.buttons.TooltipButton;
 import com.blargsworkshop.sleepstone.items.stone.Slots;
 import com.blargsworkshop.sleepstone.items.stone.StoneInventory;
-import com.blargsworkshop.sleepstone.network.BasicMessage;
-import com.blargsworkshop.sleepstone.network.BasicMessage.Commands;
-import com.blargsworkshop.sleepstone.network.NetworkHandler;
 import com.blargsworkshop.sleepstone.network.PacketDispatcher;
+import com.blargsworkshop.sleepstone.network.client.SyncAllPlayerPropsMessage;
 import com.blargsworkshop.sleepstone.network.server.OpenGuiMessage;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -107,14 +105,14 @@ public class GuiStone extends GuiScreen {
 			this.mc.setIngameFocus();
 			break;
 		case Inv:
-//			NetworkHandler.networkWrapper.sendToServer(new BasicMessage(Commands.OpenInvGui));
 			PacketDispatcher.sendToServer(new OpenGuiMessage(GuiEnum.STONE_INVENTORY));
 			break;
 		case Stone:
 		case Pathfinder:
 			ToggleButton btn = (ToggleButton) button;
 			btn.toggle();
-			props.setNoFallDamage(btn.isOn(), true);
+			props.setNoFallDamage(btn.isOn(), false);
+			PacketDispatcher.sendToServer(new SyncAllPlayerPropsMessage(this.player));
 			break;
 		default:
 			break;
