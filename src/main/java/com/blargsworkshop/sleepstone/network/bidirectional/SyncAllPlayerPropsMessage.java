@@ -1,4 +1,4 @@
-package com.blargsworkshop.sleepstone.network.client;
+package com.blargsworkshop.sleepstone.network.bidirectional;
 
 import java.io.IOException;
 
@@ -17,7 +17,7 @@ public class SyncAllPlayerPropsMessage extends AbstractMessage<SyncAllPlayerProp
 	public SyncAllPlayerPropsMessage() {}
 	
 	public SyncAllPlayerPropsMessage(EntityPlayer player) {
-		data = new  NBTTagCompound();
+		data = new NBTTagCompound();
 		ExtendedPlayer.get(player).saveNBTData(data);
 	}
 
