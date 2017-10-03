@@ -6,14 +6,14 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 
 public class BasicMessage implements IMessage {
 	
-	public static enum Commands {
+	public static enum Commands_old {
 		WARP,
 		OpenInvGui
 	}
 	
-	protected Commands command;
+	protected Commands_old command;
 	
-	public BasicMessage(Commands command) {
+	public BasicMessage(Commands_old command) {
 		this.command = command;
 	}
 	
@@ -21,18 +21,18 @@ public class BasicMessage implements IMessage {
 		
 	}
 	
-	public void setCommand(Commands command) {
+	public void setCommand(Commands_old command) {
 		this.command = command;
 	}
 	
-	public Commands getCommand() {
+	public Commands_old getCommand() {
 		return this.command;
 	}
 
 	@Override
 	public void fromBytes(ByteBuf buf) {
 		int commandInt = ByteBufUtils.readVarInt(buf, 4);
-		this.command = Commands.values()[commandInt];
+		this.command = Commands_old.values()[commandInt];
 	}
 
 	@Override

@@ -13,7 +13,8 @@ import com.blargsworkshop.sleepstone.gui.buttons.TooltipButton;
 import com.blargsworkshop.sleepstone.items.stone.Slots;
 import com.blargsworkshop.sleepstone.items.stone.StoneInventory;
 import com.blargsworkshop.sleepstone.network.PacketDispatcher;
-import com.blargsworkshop.sleepstone.network.bidirectional.SyncAllPlayerPropsMessage;
+import com.blargsworkshop.sleepstone.network.server.CommandMessage;
+import com.blargsworkshop.sleepstone.network.server.CommandMessage.Commands;
 import com.blargsworkshop.sleepstone.network.server.OpenGuiMessage;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
@@ -100,8 +101,8 @@ public class GuiStone extends GuiScreen {
 	protected void actionPerformed(GuiButton button) {
 		switch ((Buttons)((BasicButton)button).getButtonType()) {
 		case Warp:
-			// TODO send command packet.
 //			NetworkHandler.networkWrapper.sendToServer(new BasicMessage(Commands.WARP));
+			PacketDispatcher.sendToServer(new CommandMessage(Commands.Warp));
 			this.mc.setIngameFocus();
 			break;
 		case Inv:
@@ -109,10 +110,8 @@ public class GuiStone extends GuiScreen {
 			break;
 		case Stone:
 		case Pathfinder:
-			ToggleButton btn = (ToggleButton) button;
-			btn.toggle();
-			props.setNoFallDamage(btn.isOn(), false);
-			PacketDispatcher.sendToServer(new SyncAllPlayerPropsMessage(this.player));
+			((ToggleButton) button).toggle();
+			props.setNoFallDamage(((ToggleButton) button).isOn(), true);
 			break;
 		default:
 			break;

@@ -1,7 +1,12 @@
 package com.blargsworkshop.sleepstone.extended_properties;
 
+import com.blargsworkshop.sleepstone.network.PacketDispatcher;
+import com.blargsworkshop.sleepstone.network.bidirectional.SyncBoolPlayerPropMessage;
+import com.blargsworkshop.sleepstone.network.bidirectional.SyncBoolPlayerPropMessage.ExtendedPlayerFields;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
@@ -47,7 +52,7 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 		NBTTagCompound properties = (NBTTagCompound) compound.getTag(EXT_PROP_NAME);
 		this.hasNoFallDamage = properties.getBoolean(NO_FALL_DAMAGE);
 	}
-	
+
 	public void syncAll() {
 		if (!player.worldObj.isRemote) {
 			//TODO sync stuff to client
@@ -65,17 +70,21 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 	public void setNoFallDamage(boolean noFallDamage, boolean sync) {
 		this.hasNoFallDamage = noFallDamage;
 		if (sync) {
-			if (isServer()) {
-				//TODO sync to client.
+			if (isClient()){
+				PacketDispatcher.sendToServer(new SyncBoolPlayerPropMessage(ExtendedPlayerFields.NoFallDmg, noFallDamage));
 			}
 			else {
-				//TODO sync to server
+				PacketDispatcher.sendTo(new SyncBoolPlayerPropMessage(ExtendedPlayerFields.NoFallDmg, noFallDamage), (EntityPlayerMP) player);
 			}
 		}
 	}
 	
 	private boolean isServer() {
 		return !player.worldObj.isRemote;
+	}
+	
+	private boolean isClient() {
+		return !isServer();
 	}
 
 }
