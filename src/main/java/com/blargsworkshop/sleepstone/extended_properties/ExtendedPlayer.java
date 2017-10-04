@@ -53,12 +53,6 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 		this.hasNoFallDamage = properties.getBoolean(NO_FALL_DAMAGE);
 	}
 
-	public void syncAll() {
-		if (!player.worldObj.isRemote) {
-			//TODO sync stuff to client
-		}
-	}
-
 	@Override
 	public void init(Entity entity, World world) {
 	}
@@ -67,6 +61,16 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 		return hasNoFallDamage;
 	}
 
+	/**
+	 * Sets the noFallDamage flag.
+	 * This will auto sync.
+	 * To set without syncing, use overloaded method.
+	 * @param noFallDamage
+	 */
+	public void setNoFallDamage(boolean noFallDamage) {
+		setNoFallDamage(noFallDamage, true);
+	}
+	
 	public void setNoFallDamage(boolean noFallDamage, boolean sync) {
 		this.hasNoFallDamage = noFallDamage;
 		if (sync) {
@@ -74,7 +78,7 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 				PacketDispatcher.sendToServer(new SyncBoolPlayerPropMessage(ExtendedPlayerFields.NoFallDmg, noFallDamage));
 			}
 			else {
-				PacketDispatcher.sendTo(new SyncBoolPlayerPropMessage(ExtendedPlayerFields.NoFallDmg, noFallDamage), (EntityPlayerMP) player);
+				PacketDispatcher.sendToPlayer((EntityPlayerMP) player, new SyncBoolPlayerPropMessage(ExtendedPlayerFields.NoFallDmg, noFallDamage));
 			}
 		}
 	}

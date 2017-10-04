@@ -35,7 +35,7 @@ public class ClientProxy extends CommonProxy {
 		// Sounds absurd, but it's true.
 
 		// Solution is to double-check side before returning the player:
-		SleepstoneMod.debug("Retrieving player from ClientProxy for message on side " + ctx.side, DEBUG.CASUAL);
+		SleepstoneMod.debug("Retrieving player from ClientProxy for message on side " + ctx.side, DEBUG.DETAIL);
 		return (ctx.side.isClient() ? Minecraft.getMinecraft().thePlayer : super.getPlayerEntity(ctx));
     }
     

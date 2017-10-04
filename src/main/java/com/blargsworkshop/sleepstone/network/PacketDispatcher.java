@@ -57,10 +57,10 @@ public class PacketDispatcher {
 	/**
 	 * Send this message to the specified player's client-side counterpart.
 	 * See {@link SimpleNetworkWrapper#sendTo(IMessage, EntityPlayerMP)}
-	 * @param message
 	 * @param player
+	 * @param message
 	 */
-	public static final void sendTo(IMessage message, EntityPlayerMP player) {
+	public static final void sendToPlayer(EntityPlayerMP player, IMessage message) {
 		PacketDispatcher.dispatcher.sendTo(message, player);
 	}
 	

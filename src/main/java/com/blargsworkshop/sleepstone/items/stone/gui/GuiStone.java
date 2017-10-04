@@ -99,9 +99,19 @@ public class GuiStone extends GuiScreen {
 	
 	@Override
 	protected void actionPerformed(GuiButton button) {
-		switch ((Buttons)((BasicButton)button).getButtonType()) {
+		Buttons btn = (Buttons)((BasicButton)button).getButtonType();
+		
+		switch (btn) {
+		case Stone:
+		case Pathfinder:
+			((ToggleButton) button).toggle();		
+			break;
+		default:
+			break;
+		}
+		
+		switch (btn) {
 		case Warp:
-//			NetworkHandler.networkWrapper.sendToServer(new BasicMessage(Commands.WARP));
 			PacketDispatcher.sendToServer(new CommandMessage(Commands.Warp));
 			this.mc.setIngameFocus();
 			break;
@@ -109,9 +119,11 @@ public class GuiStone extends GuiScreen {
 			PacketDispatcher.sendToServer(new OpenGuiMessage(GuiEnum.STONE_INVENTORY));
 			break;
 		case Stone:
+//			toggleButton(btn);
+			props.setNoFallDamage(((ToggleButton) button).isOn());
+			break;
 		case Pathfinder:
-			((ToggleButton) button).toggle();
-			props.setNoFallDamage(((ToggleButton) button).isOn(), true);
+//			toggleButton(btn);
 			break;
 		default:
 			break;

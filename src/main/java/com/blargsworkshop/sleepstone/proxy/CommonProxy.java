@@ -32,10 +32,6 @@ public class CommonProxy implements IProxy {
     	// GUI Handler
     	NetworkRegistry.INSTANCE.registerGuiHandler(SleepstoneMod.instance, new GuiHandler());
     	
-    	// Network Handler for sending packets
-//    	NetworkHandler.networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(ModInfo.ID);
-//    	NetworkHandler.networkWrapper.registerMessage(NetworkHandler.class, BasicMessage.class, 0, Side.SERVER);
-    	
 		ModItems.initRecipes();
 		PacketDispatcher.registerPackets();
     }
@@ -52,7 +48,7 @@ public class CommonProxy implements IProxy {
      */
     @Override
     public EntityPlayer getPlayerEntity(MessageContext ctx) {
-    	SleepstoneMod.debug("Retrieving player from CommonProxy for message on side " + ctx.side, DEBUG.CASUAL);
+    	SleepstoneMod.debug("Retrieving player from CommonProxy for message on side " + ctx.side, DEBUG.DETAIL);
     	return ctx.getServerHandler().playerEntity;
     }
     

@@ -19,32 +19,41 @@ public class CommandMessage extends AbstractServerMessage<CommandMessage> {
 		Warp
 	}
 	
-	private int commandId;
+	private Commands command;
 	
 	public CommandMessage() {}
 	
 	public CommandMessage(Commands commandEnum) {
-		this.commandId = commandEnum.ordinal();
+		this.command = commandEnum;
 	}
 
 	@Override
 	protected void read(PacketBuffer buffer) throws IOException {
-		commandId = buffer.readInt();
+		command = Commands.values()[buffer.readInt()];
 	}
 
 	@Override
 	protected void write(PacketBuffer buffer) throws IOException {
-		buffer.writeInt(commandId);
+		buffer.writeInt(command.ordinal());
 	}
 
 	@Override
 	public void process(EntityPlayer player, Side side) {
-		EntityPlayerMP playerMP = (EntityPlayerMP) player;
-		if (playerMP.isPotionActive(NovelPotion.warpSickness.id)) {
-			playerMP.addChatMessage(new ChatComponentText(LanguageRegistry.instance().getStringLocalization("text.sleepstone.suffering_effects_of_warping")));
+		switch (command) {
+		case Warp:
+			warp((EntityPlayerMP) player);
+			break;
+		default:
+			break;
+		}
+	}
+	
+	private void warp(EntityPlayerMP player) {
+		if (player.isPotionActive(NovelPotion.warpSickness.id)) {
+			player.addChatMessage(new ChatComponentText(LanguageRegistry.instance().getStringLocalization("text.sleepstone.suffering_effects_of_warping")));
 		}
 		else {
-			Sleepstone.warpPlayerToBed(playerMP, playerMP.getEntityWorld());
+			Sleepstone.warpPlayerToBed(player, player.getEntityWorld());
 		}
 	}
 }
