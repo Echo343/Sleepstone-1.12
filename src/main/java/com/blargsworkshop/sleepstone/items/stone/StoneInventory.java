@@ -1,5 +1,7 @@
 package com.blargsworkshop.sleepstone.items.stone;
 
+import java.util.UUID;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -13,6 +15,8 @@ public class StoneInventory implements IInventory {
 
     /** Provides NBT Tag Compound to reference */
     private final ItemStack invItem;
+    
+    private String uniqueId = "";
 
     /** Defining your inventory size this way is handy */
     public static final int INV_SIZE = 21;
@@ -29,6 +33,7 @@ public class StoneInventory implements IInventory {
         // Create a new NBT Tag Compound if one doesn't already exist, or you will crash
 		if (!stack.hasTagCompound()) {
 			stack.setTagCompound(new NBTTagCompound());
+			uniqueId = UUID.randomUUID().toString();
 		}
 
 		// Read the inventory contents from NBT
@@ -202,6 +207,12 @@ public class StoneInventory implements IInventory {
 	 */
 	public void readFromNBT(NBTTagCompound compound)
 	{
+		if ("".equals(uniqueId)) {
+			uniqueId = compound.getString("uniqueId");
+			if ("".equals(uniqueId)) {
+				uniqueId = UUID.randomUUID().toString();
+			}
+		}
 		// Gets the custom taglist we wrote to this compound, if any
 		NBTTagList items = compound.getTagList("ItemInventory", Constants.NBT.TAG_COMPOUND);
 
@@ -240,7 +251,13 @@ public class StoneInventory implements IInventory {
 				items.appendTag(item);
 			}
 		}
+		// Add the UID to the Tag Compound
+		tagcompound.setString("uniqueId", this.uniqueId);
 		// Add the TagList to the ItemStack's Tag Compound with the name "ItemInventory"
 		tagcompound.setTag("ItemInventory", items);
+	}
+
+	public String getUniqueId() {
+		return uniqueId;
 	}
 }

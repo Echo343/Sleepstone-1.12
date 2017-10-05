@@ -2,7 +2,7 @@ package com.blargsworkshop.sleepstone.network;
 
 import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.network.bidirectional.SyncAllPlayerPropsMessage;
-import com.blargsworkshop.sleepstone.network.bidirectional.SyncBoolPlayerPropMessage;
+import com.blargsworkshop.sleepstone.network.bidirectional.SyncPlayerPropMessage;
 import com.blargsworkshop.sleepstone.network.server.CommandMessage;
 import com.blargsworkshop.sleepstone.network.server.OpenGuiMessage;
 
@@ -32,7 +32,7 @@ public class PacketDispatcher {
 		
 		//Bidirectional Messages
 		registerMessage(SyncAllPlayerPropsMessage.class);
-		registerMessage(SyncBoolPlayerPropMessage.class);
+		registerMessage(SyncPlayerPropMessage.class);
 	}
 
 	/**

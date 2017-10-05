@@ -2,8 +2,7 @@ package com.blargsworkshop.sleepstone.extended_properties;
 
 import com.blargsworkshop.sleepstone.network.PacketDispatcher;
 import com.blargsworkshop.sleepstone.network.bidirectional.SyncAllPlayerPropsMessage;
-import com.blargsworkshop.sleepstone.network.bidirectional.SyncBoolPlayerPropMessage;
-import com.blargsworkshop.sleepstone.network.bidirectional.SyncBoolPlayerPropMessage.ExtendedPlayerFields;
+import com.blargsworkshop.sleepstone.network.bidirectional.SyncPlayerPropMessage;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,11 +12,18 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
 public class ExtendedPlayer implements IExtendedEntityProperties {
+	public static enum PlayerFields {
+		BondedStoneId,
+		NoFallDmg
+	}
+
+	private static final String BONDED_ID = "BondedStoneId";
 	private static final String NO_FALL_DAMAGE = "NoFallDamage";
 
 	public final static String EXT_PROP_NAME = "ExtendedPlayer";
 	
 	private final EntityPlayer player;
+	private String bondedStoneId = "";
 	private boolean hasNoFallDamage = false;
 
 	public ExtendedPlayer(EntityPlayer player) {
@@ -44,6 +50,7 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 	@Override
 	public void saveNBTData(NBTTagCompound compound) {
 		NBTTagCompound properties = new NBTTagCompound();
+		properties.setString(BONDED_ID, this.bondedStoneId);
 		properties.setBoolean(NO_FALL_DAMAGE, this.hasNoFallDamage);
 		compound.setTag(EXT_PROP_NAME, properties);
 	}
@@ -51,6 +58,7 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 	@Override
 	public void loadNBTData(NBTTagCompound compound) {
 		NBTTagCompound properties = (NBTTagCompound) compound.getTag(EXT_PROP_NAME);
+		this.bondedStoneId = properties.getString(BONDED_ID);
 		this.hasNoFallDamage = properties.getBoolean(NO_FALL_DAMAGE);
 	}
 	
@@ -65,6 +73,14 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 
 	@Override
 	public void init(Entity entity, World world) {
+	}
+
+	private boolean isServer() {
+		return !player.worldObj.isRemote;
+	}
+	
+	private boolean isClient() {
+		return !isServer();
 	}
 
 	public boolean getNoFallDamage() {
@@ -87,21 +103,38 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 		}
 		this.hasNoFallDamage = noFallDamage;
 		if (sync) {
-			if (isClient()){
-				PacketDispatcher.sendToServer(new SyncBoolPlayerPropMessage(ExtendedPlayerFields.NoFallDmg, noFallDamage));
+			if (isClient()) {
+				PacketDispatcher.sendToServer(new SyncPlayerPropMessage(ExtendedPlayer.PlayerFields.NoFallDmg, noFallDamage));
 			}
 			else {
-				PacketDispatcher.sendToPlayer((EntityPlayerMP) player, new SyncBoolPlayerPropMessage(ExtendedPlayerFields.NoFallDmg, noFallDamage));
+				PacketDispatcher.sendToPlayer((EntityPlayerMP) player, new SyncPlayerPropMessage(ExtendedPlayer.PlayerFields.NoFallDmg, noFallDamage));
 			}
 		}
 	}
 	
-	private boolean isServer() {
-		return !player.worldObj.isRemote;
+	public String getBondedStoneId() {
+		return bondedStoneId;
+	}
+
+	public void setBondedStoneId(String bondedStoneId) {
+		setBondedStoneId(bondedStoneId, true);
 	}
 	
-	private boolean isClient() {
-		return !isServer();
+	public void setBondedStoneId(String bondId, boolean sync) {
+		bondId = bondId == null ? "" : bondId.trim();
+		if (this.bondedStoneId == bondId) {
+			return;
+		}
+		this.bondedStoneId = bondId;
+		if (sync) {
+			if (isClient()) {
+				PacketDispatcher.sendToServer(new SyncPlayerPropMessage(ExtendedPlayer.PlayerFields.BondedStoneId, bondedStoneId));
+			}
+			else {
+				PacketDispatcher.sendToPlayer(player, new SyncPlayerPropMessage(ExtendedPlayer.PlayerFields.BondedStoneId, bondedStoneId));
+			}
+		}
 	}
+
 
 }
