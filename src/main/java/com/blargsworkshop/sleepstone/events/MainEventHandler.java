@@ -1,12 +1,9 @@
 package com.blargsworkshop.sleepstone.events;
 
 import com.blargsworkshop.sleepstone.extended_properties.ExtendedPlayer;
-import com.blargsworkshop.sleepstone.network.PacketDispatcher;
-import com.blargsworkshop.sleepstone.network.bidirectional.SyncAllPlayerPropsMessage;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
@@ -26,7 +23,7 @@ public class MainEventHandler {
 	public void onEntityJoinWorld(EntityJoinWorldEvent event) {
 		if (!event.entity.worldObj.isRemote) {
 			if (event.entity instanceof EntityPlayer) {
-				PacketDispatcher.sendToPlayer((EntityPlayerMP) event.entity, new SyncAllPlayerPropsMessage((EntityPlayer) event.entity));
+				ExtendedPlayer.get((EntityPlayer) event.entity).syncAll();
 			}
 		}
 	}

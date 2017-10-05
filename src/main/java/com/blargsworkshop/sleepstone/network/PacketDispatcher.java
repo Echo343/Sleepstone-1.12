@@ -65,6 +65,16 @@ public class PacketDispatcher {
 	}
 	
 	/**
+	 * Send this message to the specified player's client-side counterpart.
+	 * See {@link SimpleNetworkWrapper#sendTo(IMessage, EntityPlayerMP)}
+	 * @param player This will auto-downcast EntityPlayer to EntityPlayerMP
+	 * @param message
+	 */
+	public static final void sendToPlayer(EntityPlayer player, IMessage message) {
+		PacketDispatcher.sendToPlayer((EntityPlayerMP) player, message);
+	}
+	
+	/**
 	 * Send this message to everyone.
 	 * See {@link SimpleNetworkWrapper#sendToAll(IMessage)}
 	 * @param message

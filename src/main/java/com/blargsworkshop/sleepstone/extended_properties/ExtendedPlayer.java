@@ -1,6 +1,7 @@
 package com.blargsworkshop.sleepstone.extended_properties;
 
 import com.blargsworkshop.sleepstone.network.PacketDispatcher;
+import com.blargsworkshop.sleepstone.network.bidirectional.SyncAllPlayerPropsMessage;
 import com.blargsworkshop.sleepstone.network.bidirectional.SyncBoolPlayerPropMessage;
 import com.blargsworkshop.sleepstone.network.bidirectional.SyncBoolPlayerPropMessage.ExtendedPlayerFields;
 
@@ -52,6 +53,15 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 		NBTTagCompound properties = (NBTTagCompound) compound.getTag(EXT_PROP_NAME);
 		this.hasNoFallDamage = properties.getBoolean(NO_FALL_DAMAGE);
 	}
+	
+	public void syncAll() {
+		if (isServer()) {
+			PacketDispatcher.sendToPlayer(player, new SyncAllPlayerPropsMessage(player));
+		}
+		else {
+			PacketDispatcher.sendToServer(new SyncAllPlayerPropsMessage(player));
+		}
+	}
 
 	@Override
 	public void init(Entity entity, World world) {
@@ -72,6 +82,9 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 	}
 	
 	public void setNoFallDamage(boolean noFallDamage, boolean sync) {
+		if (this.hasNoFallDamage == noFallDamage) {
+			return;
+		}
 		this.hasNoFallDamage = noFallDamage;
 		if (sync) {
 			if (isClient()){
