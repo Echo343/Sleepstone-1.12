@@ -21,6 +21,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ResourceLocation;
 
 
@@ -51,6 +52,15 @@ public class GuiStone extends GuiScreen {
 	public void initGui() {
 		super.initGui();
 		initButtons();
+		attunePlayer();
+	}
+	
+	private void attunePlayer() {
+		if (!inventory.getUniqueId().equals(props.getBondedStoneId())) {
+			props.setBondedStoneId(inventory.getUniqueId());
+			//TODO Localize
+			player.addChatMessage(new ChatComponentText("The Sleepstone glows brightly as it attunes to you."));
+		}
 	}
 	
 	@SuppressWarnings("unchecked")

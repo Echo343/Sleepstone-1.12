@@ -4,9 +4,11 @@ import com.blargsworkshop.sleepstone.extended_properties.ExtendedPlayer;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 
 /**
  * EventHandler
@@ -27,6 +29,16 @@ public class MainEventHandler {
 			}
 		}
 	}
+	
+//	This is not needed right now, because you will need to lose your powers on death anyways.
+//	@SubscribeEvent
+//	public void onClonePlayer(PlayerEvent.Clone event) {
+//		if (event.wasDeath) {
+//			NBTTagCompound compound = new NBTTagCompound();
+//			ExtendedPlayer.get(event.original).saveNBTData(compound);
+//			ExtendedPlayer.get(event.entityPlayer).loadNBTData(compound);
+//		}
+//	}
 	
 	@SubscribeEvent
 	public void onLivingFallEvent(LivingFallEvent event) {
