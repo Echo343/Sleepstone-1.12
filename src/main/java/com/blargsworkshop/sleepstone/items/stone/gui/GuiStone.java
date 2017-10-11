@@ -108,16 +108,7 @@ public class GuiStone extends GuiScreen {
 	@Override
 	protected void actionPerformed(GuiButton button) {
 		Buttons btn = (Buttons)((BasicButton)button).getButtonType();
-		
-		switch (btn) {
-		case Stone:
-		case Pathfinder:
-			((ToggleButton) button).toggle();		
-			break;
-		default:
-			break;
-		}
-		
+				
 		switch (btn) {
 		case Warp:
 			PacketDispatcher.sendToServer(new CommandMessage(Commands.Warp));
@@ -127,14 +118,20 @@ public class GuiStone extends GuiScreen {
 			PacketDispatcher.sendToServer(new OpenGuiMessage(GuiEnum.STONE_INVENTORY));
 			break;
 		case Stone:
-//			toggleButton(btn);
+			toggleButton(button);
 			props.setNoFallDamage(((ToggleButton) button).isOn());
 			break;
 		case Pathfinder:
-//			toggleButton(btn);
+			toggleButton(button);
 			break;
 		default:
 			break;
+		}
+	}
+	
+	private void toggleButton(GuiButton btn) {
+		if (btn instanceof ToggleButton) {
+			((ToggleButton) btn).toggle();
 		}
 	}
 	
