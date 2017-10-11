@@ -3,6 +3,7 @@ package com.blargsworkshop.sleepstone.items.stone;
 import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.NovelPotion;
 import com.blargsworkshop.sleepstone.SleepstoneMod;
+import com.blargsworkshop.sleepstone.Utils;
 import com.blargsworkshop.sleepstone.gui.GuiEnum;
 import com.blargsworkshop.sleepstone.items.BaseItem;
 
@@ -68,7 +69,7 @@ public class Sleepstone extends BaseItem {
 				SleepstoneMod.debug("Warping to: " + (coord.posX + 0.5) + ", " + (coord.posY + 0.1) + ", " + (coord.posZ + 0.5), ModInfo.DEBUG.CASUAL, player);
 			}
 			else {
-				player.addChatMessage(new ChatComponentText(LanguageRegistry.instance().getStringLocalization("text.sleepstone.bed_destroyed")));
+				Utils.addChatMessage(player, "text.sleepstone.bed_destroyed");
 			}
 		}
 	}

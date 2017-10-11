@@ -1,12 +1,13 @@
 package com.blargsworkshop.sleepstone.gui.buttons;
 
-import cpw.mods.fml.common.registry.LanguageRegistry;
+import com.blargsworkshop.sleepstone.Utils;
+
 import net.minecraft.util.EnumChatFormatting;
 
 public class ToggleButton extends BasicButton {
 	
-	protected final String on = localize("text.toggle_button.on");
-	protected final String off = localize("text.toggle_button.off");
+	protected final String on = Utils.localize("text.toggle_button.on");
+	protected final String off = Utils.localize("text.toggle_button.off");
 	
 	private final String coreText;
 	private boolean isOn;
@@ -99,9 +100,4 @@ public class ToggleButton extends BasicButton {
 	protected String getText() {
 		return this.coreText;
 	}
-	
-	private String localize(String messageKey) {
-		return LanguageRegistry.instance().getStringLocalization(messageKey);
-	}
-
 }

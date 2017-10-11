@@ -5,6 +5,7 @@ import org.lwjgl.opengl.GL11;
 import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.ModInfo.DEBUG;
 import com.blargsworkshop.sleepstone.SleepstoneMod;
+import com.blargsworkshop.sleepstone.Utils;
 import com.blargsworkshop.sleepstone.extended_properties.ExtendedPlayer;
 import com.blargsworkshop.sleepstone.gui.GuiEnum;
 import com.blargsworkshop.sleepstone.gui.buttons.BasicButton;
@@ -17,11 +18,9 @@ import com.blargsworkshop.sleepstone.network.server.CommandMessage;
 import com.blargsworkshop.sleepstone.network.server.CommandMessage.Commands;
 import com.blargsworkshop.sleepstone.network.server.OpenGuiMessage;
 
-import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ResourceLocation;
 
 
@@ -58,7 +57,7 @@ public class GuiStone extends GuiScreen {
 	private void attunePlayer() {
 		if (!inventory.getUniqueId().equals(props.getBondedStoneId())) {
 			props.setBondedStoneId(inventory.getUniqueId());
-			player.addChatMessage(new ChatComponentText(localize("text.guistone.sleepstone_attunes_to_you")));
+			Utils.addChatMessage(player, "text.guistone.sleepstone_attunes_to_you");
 		}
 	}
 	
@@ -68,7 +67,7 @@ public class GuiStone extends GuiScreen {
 		int top = (this.height - ySize) / 2;
 		
 		if (inventory.hasGemInSlot(Slots.Stone)) {
-			ToggleButton stoneButton = new ToggleButton(Buttons.Stone, left + 4, top + 4, localize("text.guistone.stone_button"), localize("text.guistone.stone_tooltip"));
+			ToggleButton stoneButton = new ToggleButton(Buttons.Stone, left + 4, top + 4, Utils.localize("text.guistone.stone_button"), Utils.localize("text.guistone.stone_tooltip"));
 			if (props != null) {
 				stoneButton.setState(props.getNoFallDamage());
 			}
@@ -78,12 +77,12 @@ public class GuiStone extends GuiScreen {
 			this.buttonList.add(stoneButton);
 		}
 		if (inventory.hasGemInSlot(Slots.Pathfinder)) {
-			ToggleButton pathfinderButton = new ToggleButton(Buttons.Pathfinder, left + 124, top + 28, localize("text.guistone.pathfinder_button"), localize("text.guistone.pathfinder_tooltip"));
+			ToggleButton pathfinderButton = new ToggleButton(Buttons.Pathfinder, left + 124, top + 28, Utils.localize("text.guistone.pathfinder_button"), Utils.localize("text.guistone.pathfinder_tooltip"));
 			this.buttonList.add(pathfinderButton);
 		}
 		
-		GuiButton warpButton = new BasicButton(Buttons.Warp, (this.width - 70) / 2, (this.height - 20) / 2, 70, localize("text.guistone.warp"));
-		GuiButton invButton = new BasicButton(Buttons.Inv, left + xSize - 24, top + 4, 20, localize("text.guistone.inv"));
+		GuiButton warpButton = new BasicButton(Buttons.Warp, (this.width - 70) / 2, (this.height - 20) / 2, 70, Utils.localize("text.guistone.warp"));
+		GuiButton invButton = new BasicButton(Buttons.Inv, left + xSize - 24, top + 4, 20, Utils.localize("text.guistone.inv"));
 		this.buttonList.add(warpButton);
 		this.buttonList.add(invButton); // TODO Use an icon of some sort.
 	}
@@ -150,9 +149,5 @@ public class GuiStone extends GuiScreen {
             i = 1;
         }
 		super.keyTyped(c, i);
-	}
-	
-	private String localize(String messageKey) {
-		return LanguageRegistry.instance().getStringLocalization(messageKey);
 	}
 }
