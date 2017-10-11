@@ -42,6 +42,7 @@ text.guistone.stone_button=Stone Gem
 text.guistone.pathfinder_button=Pathfinder Gem
 text.guistone.stone_tooltip=The Stone Gem imbues the power of preventing fall damage.
 text.guistone.pathfinder_tooltip=The Pathfinder Gem allows the wielder to travel long distances without becoming hungry.
+text.guistone.sleepstone_attunes_to_you=The Sleepstone glows brightly as it attunes to you.
 text.guistone.warp=Warp
 text.guistoneinventory.inventory=Inventory
 text.stoneinventory.sleepstone=Sleepstone

@@ -58,8 +58,7 @@ public class GuiStone extends GuiScreen {
 	private void attunePlayer() {
 		if (!inventory.getUniqueId().equals(props.getBondedStoneId())) {
 			props.setBondedStoneId(inventory.getUniqueId());
-			//TODO Localize
-			player.addChatMessage(new ChatComponentText("The Sleepstone glows brightly as it attunes to you."));
+			player.addChatMessage(new ChatComponentText(localize("text.guistone.sleepstone_attunes_to_you")));
 		}
 	}
 	
