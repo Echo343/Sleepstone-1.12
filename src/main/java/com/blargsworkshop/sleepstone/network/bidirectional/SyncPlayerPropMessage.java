@@ -46,9 +46,8 @@ public class SyncPlayerPropMessage extends AbstractMessage<SyncPlayerPropMessage
 		buffer.writeInt(field.ordinal());
 		switch (field) {
 		case BondedStoneId:
-			byte[] utf8Bytes = stringValue.getBytes("UTF-8");
-			buffer.writeInt(utf8Bytes.length);
-			buffer.writeBytes(utf8Bytes);
+			buffer.writeInt(stringValue.length());
+			buffer.writeStringToBuffer(stringValue);
 			break;
 		case NoFallDmg:
 			buffer.writeBoolean(boolValue);
