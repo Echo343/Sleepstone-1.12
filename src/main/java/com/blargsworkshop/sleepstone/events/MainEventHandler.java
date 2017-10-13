@@ -1,11 +1,17 @@
 package com.blargsworkshop.sleepstone.events;
 
+import com.blargsworkshop.sleepstone.ModItems;
+import com.blargsworkshop.sleepstone.SleepstoneMod;
+import com.blargsworkshop.sleepstone.Utils;
+import com.blargsworkshop.sleepstone.ModInfo.DEBUG;
 import com.blargsworkshop.sleepstone.extended_properties.ExtendedPlayer;
+import com.blargsworkshop.sleepstone.items.stone.StoneInventory;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.item.ItemTossEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 
 /**
@@ -37,6 +43,24 @@ public class MainEventHandler {
 //			ExtendedPlayer.get(event.entityPlayer).loadNBTData(compound);
 //		}
 //	}
+	
+	@SubscribeEvent
+	public void onItemTossEvent(ItemTossEvent event) {
+		if (event.entityItem.getEntityItem().getItem() == ModItems.itemSleepstone) {
+			ExtendedPlayer extPlayer = ExtendedPlayer.get(event.player);
+			if (event.player.isClientWorld()) {
+				SleepstoneMod.debug(event.player.getDisplayName() + " just dropped a Sleepstone from the client.", DEBUG.DETAIL, event.player);				
+			}
+			else {
+				SleepstoneMod.debug(event.player.getDisplayName() + " just dropped a Sleepstone from the server.", DEBUG.DETAIL, event.player);				
+			}
+			StoneInventory stone = new StoneInventory(event.entityItem.getEntityItem());
+			if (extPlayer.getBondedStoneId() == stone.getUniqueId()) {
+				extPlayer.setBondedStoneId(null, false);
+				Utils.addChatMessage(event.player, "text.event.lost_attunment");
+			}
+		}
+	}
 	
 	@SubscribeEvent
 	public void onLivingFallEvent(LivingFallEvent event) {
