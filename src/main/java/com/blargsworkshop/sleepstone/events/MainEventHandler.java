@@ -47,6 +47,7 @@ public class MainEventHandler {
 	
 	@SubscribeEvent
 	public void onItemTossEvent(ItemTossEvent event) {
+		Utils.addUnlocalizedChatMessage(event.player, "Toss Event");
 		if (isServer(event.player) && event.entityItem.getEntityItem().getItem() == ModItems.itemSleepstone) {
 			ExtendedPlayer extPlayer = ExtendedPlayer.get(event.player);
 			StoneInventory stone = new StoneInventory(event.entityItem.getEntityItem());

@@ -13,4 +13,8 @@ public class Utils {
 	public static void addChatMessage(EntityPlayer player, String messageKey) {
 		player.addChatMessage(new ChatComponentText(localize(messageKey)));
 	}
+
+	public static void addUnlocalizedChatMessage(EntityPlayer player, String message) {
+		player.addChatMessage(new ChatComponentText(message));
+	}
 }

@@ -34,6 +34,8 @@ public class StoneInventory implements IInventory {
 		if (!stack.hasTagCompound()) {
 			stack.setTagCompound(new NBTTagCompound());
 			uniqueId = UUID.randomUUID().toString();
+			//TODO Request TagCompound from server or convert to container.
+			markDirty();
 		}
 
 		// Read the inventory contents from NBT
@@ -207,11 +209,10 @@ public class StoneInventory implements IInventory {
 	 */
 	public void readFromNBT(NBTTagCompound compound)
 	{
+		uniqueId = compound.getString("uniqueId");
 		if ("".equals(uniqueId)) {
-			uniqueId = compound.getString("uniqueId");
-			if ("".equals(uniqueId)) {
-				uniqueId = UUID.randomUUID().toString();
-			}
+			uniqueId = UUID.randomUUID().toString();
+			
 		}
 		// Gets the custom taglist we wrote to this compound, if any
 		NBTTagList items = compound.getTagList("ItemInventory", Constants.NBT.TAG_COMPOUND);

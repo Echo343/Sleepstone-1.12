@@ -13,6 +13,10 @@ public class GuiHandler implements IGuiHandler {
 
 	@Override
 	public Object getServerGuiElement(int guiId, EntityPlayer player, World world,	int x, int y, int z) {
+		if (guiId == GuiEnum.STONE.ordinal()) {
+			new StoneInventory(player.getHeldItem());
+			return null;
+		}
 		if (guiId == GuiEnum.STONE_INVENTORY.ordinal()) {
 			return new StoneContainer(world, player, player.inventory, new StoneInventory(player.getHeldItem()));
 		}
