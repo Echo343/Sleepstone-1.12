@@ -38,7 +38,6 @@ text.sleepstone.suffering_effects_of_warping=You are still suffering the effects
 text.guistone.inv=Inv
 text.toggle_button.off=Off
 text.toggle_button.on=On
-text.event.lost_attunment=Your attunement to the sleepstone has faded.
 text.guistone.stone_button=Stone Gem
 text.guistone.pathfinder_button=Pathfinder Gem
 text.guistone.stone_tooltip=The Stone Gem imbues the power of preventing fall damage.

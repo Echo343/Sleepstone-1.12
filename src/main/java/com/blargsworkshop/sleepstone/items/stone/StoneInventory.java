@@ -34,7 +34,6 @@ public class StoneInventory implements IInventory {
 		if (!stack.hasTagCompound()) {
 			stack.setTagCompound(new NBTTagCompound());
 			uniqueId = UUID.randomUUID().toString();
-			//TODO Request TagCompound from server or convert to container.
 			markDirty();
 		}
 

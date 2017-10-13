@@ -1,5 +1,7 @@
 package com.blargsworkshop.sleepstone.gui;
 
+import com.blargsworkshop.sleepstone.Utils;
+import com.blargsworkshop.sleepstone.extended_properties.ExtendedPlayer;
 import com.blargsworkshop.sleepstone.items.stone.StoneContainer;
 import com.blargsworkshop.sleepstone.items.stone.StoneInventory;
 import com.blargsworkshop.sleepstone.items.stone.gui.GuiStone;
@@ -14,7 +16,12 @@ public class GuiHandler implements IGuiHandler {
 	@Override
 	public Object getServerGuiElement(int guiId, EntityPlayer player, World world,	int x, int y, int z) {
 		if (guiId == GuiEnum.STONE.ordinal()) {
-			new StoneInventory(player.getHeldItem());
+			StoneInventory sInv = new StoneInventory(player.getHeldItem());
+			ExtendedPlayer props = ExtendedPlayer.get(player);
+			if (!sInv.getUniqueId().equals(props.getBondedStoneId())) {
+				props.setBondedStoneId(sInv.getUniqueId());
+				Utils.addChatMessage(player, "text.guistone.sleepstone_attunes_to_you");
+			}
 			return null;
 		}
 		if (guiId == GuiEnum.STONE_INVENTORY.ordinal()) {

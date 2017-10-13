@@ -51,14 +51,6 @@ public class GuiStone extends GuiScreen {
 	public void initGui() {
 		super.initGui();
 		initButtons();
-		attunePlayer();
-	}
-	
-	private void attunePlayer() {
-		if (!inventory.getUniqueId().equals(props.getBondedStoneId())) {
-			props.attune(inventory.getUniqueId());
-			Utils.addChatMessage(player, "text.guistone.sleepstone_attunes_to_you");
-		}
 	}
 	
 	@SuppressWarnings("unchecked")

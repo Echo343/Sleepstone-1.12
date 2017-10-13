@@ -2,6 +2,7 @@ package com.blargsworkshop.sleepstone.extended_properties;
 
 import com.blargsworkshop.sleepstone.ModInfo.DEBUG;
 import com.blargsworkshop.sleepstone.SleepstoneMod;
+import com.blargsworkshop.sleepstone.items.stone.Slots;
 import com.blargsworkshop.sleepstone.network.PacketDispatcher;
 import com.blargsworkshop.sleepstone.network.bidirectional.SyncAllPlayerPropsMessage;
 import com.blargsworkshop.sleepstone.network.bidirectional.SyncPlayerPropMessage;
@@ -72,16 +73,6 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 			PacketDispatcher.sendToServer(new SyncAllPlayerPropsMessage(player));
 		}
 	}
-	
-	public void attune(String bondId) {
-		setBondedStoneId(bondId);
-	}
-	
-	public void unattune() {
-		setBondedStoneId(null, false);
-		setNoFallDamage(false, false);
-		syncAll();
-	}
 
 	@Override
 	public void init(Entity entity, World world) {
@@ -149,6 +140,15 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 				PacketDispatcher.sendToPlayer(player, new SyncPlayerPropMessage(ExtendedPlayer.PlayerFields.BondedStoneId, bondedStoneId));
 				SleepstoneMod.debug("Setting UUID to " + getBondedStoneId() + " on server", DEBUG.DETAIL, this.player);
 			}
+		}
+	}
+	
+	public boolean isGemTurnedOn(Slots slot) {
+		switch (slot) {
+		case Stone:
+			return getNoFallDamage();
+		default:
+			return false;
 		}
 	}
 
