@@ -1,14 +1,15 @@
 package com.blargsworkshop.sleepstone.events;
 
+import com.blargsworkshop.sleepstone.ModInfo.DEBUG;
 import com.blargsworkshop.sleepstone.ModItems;
 import com.blargsworkshop.sleepstone.SleepstoneMod;
 import com.blargsworkshop.sleepstone.Utils;
-import com.blargsworkshop.sleepstone.ModInfo.DEBUG;
 import com.blargsworkshop.sleepstone.extended_properties.ExtendedPlayer;
 import com.blargsworkshop.sleepstone.items.stone.StoneInventory;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.item.ItemTossEvent;
@@ -27,7 +28,7 @@ public class MainEventHandler {
 	
 	@SubscribeEvent
 	public void onEntityJoinWorld(EntityJoinWorldEvent event) {
-		if (!event.entity.worldObj.isRemote) {
+		if (isServer(event.entity.worldObj)) {
 			if (event.entity instanceof EntityPlayer) {
 				ExtendedPlayer.get((EntityPlayer) event.entity).syncAll();
 			}
@@ -46,17 +47,12 @@ public class MainEventHandler {
 	
 	@SubscribeEvent
 	public void onItemTossEvent(ItemTossEvent event) {
-		if (event.entityItem.getEntityItem().getItem() == ModItems.itemSleepstone) {
+		if (isServer(event.player) && event.entityItem.getEntityItem().getItem() == ModItems.itemSleepstone) {
 			ExtendedPlayer extPlayer = ExtendedPlayer.get(event.player);
-			if (event.player.isClientWorld()) {
-				SleepstoneMod.debug(event.player.getDisplayName() + " just dropped a Sleepstone from the client.", DEBUG.DETAIL, event.player);				
-			}
-			else {
-				SleepstoneMod.debug(event.player.getDisplayName() + " just dropped a Sleepstone from the server.", DEBUG.DETAIL, event.player);				
-			}
 			StoneInventory stone = new StoneInventory(event.entityItem.getEntityItem());
-			if (extPlayer.getBondedStoneId() == stone.getUniqueId()) {
-				extPlayer.setBondedStoneId(null, false);
+			SleepstoneMod.debug(event.player.getDisplayName() + " just dropped a Sleepstone from the server.", DEBUG.DETAIL, event.player);				
+			if (extPlayer.getBondedStoneId().equals(stone.getUniqueId())) {
+				extPlayer.unattune();
 				Utils.addChatMessage(event.player, "text.event.lost_attunment");
 			}
 		}
@@ -64,11 +60,21 @@ public class MainEventHandler {
 	
 	@SubscribeEvent
 	public void onLivingFallEvent(LivingFallEvent event) {
-		if (event.entity instanceof EntityPlayer) {
+		if (isServer(event.entity.worldObj) && event.entity instanceof EntityPlayer) {
+			EntityPlayer player = (EntityPlayer) event.entity;
 			ExtendedPlayer props = ExtendedPlayer.get((EntityPlayer) event.entity);
 			if (event.distance > 3.0F && props.getNoFallDamage()) {
 				event.distance = 2.0F;
+				SleepstoneMod.debug(player.getDisplayName() + " just fell on the server.", DEBUG.DETAIL, player);				
 			}
 		}
+	}
+	
+	private static boolean isServer(World worldObj) {
+		return !worldObj.isRemote;
+	}
+	
+	private static boolean isServer(EntityPlayer player) {
+		return isServer(player.worldObj);
 	}
 }

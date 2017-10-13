@@ -56,7 +56,7 @@ public class GuiStone extends GuiScreen {
 	
 	private void attunePlayer() {
 		if (!inventory.getUniqueId().equals(props.getBondedStoneId())) {
-			props.setBondedStoneId(inventory.getUniqueId());
+			props.attune(inventory.getUniqueId());
 			Utils.addChatMessage(player, "text.guistone.sleepstone_attunes_to_you");
 		}
 	}
