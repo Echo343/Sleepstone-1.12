@@ -12,9 +12,7 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
-import net.minecraft.util.ChatComponentText;
 
 @Mod(modid = ModInfo.ID, name = ModInfo.NAME, version = ModInfo.VERSION)
 public class SleepstoneMod {
@@ -31,9 +29,9 @@ public class SleepstoneMod {
 	 */
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent e) {
-		SleepstoneMod.debug("PreInit Start", ModInfo.DEBUG.DETAIL);
+		Log.detail("PreInit Start");
 		proxy.preInit(e);
-		SleepstoneMod.debug("PreInit End", ModInfo.DEBUG.DETAIL);
+		Log.detail("PreInit End");
 	}
 
 	/**
@@ -42,11 +40,11 @@ public class SleepstoneMod {
 	 */
 	@EventHandler
 	public void init(FMLInitializationEvent e) {
-		SleepstoneMod.debug("Hi! Hello There! ZZZZZZZZZZZZZZZZZ Sleepstone mod!", ModInfo.DEBUG.CASUAL);
-		SleepstoneMod.debug("Init Start", ModInfo.DEBUG.DETAIL);
+		Log.info("Hi! Hello There! ZZZZZZZZZZZZZZZZZ Sleepstone mod!");
+		Log.detail("Init Start");
 		preInitPotions();
 		proxy.init(e);
-		SleepstoneMod.debug("Init End", ModInfo.DEBUG.DETAIL);
+		Log.detail("Init End");
 	}
 
 	/**
@@ -55,13 +53,13 @@ public class SleepstoneMod {
 	 */
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent e) {
-		SleepstoneMod.debug("PostInit Start", ModInfo.DEBUG.DETAIL);
+		Log.detail("PostInit Start");
 		proxy.postInit(e);
-		SleepstoneMod.debug("PostInit End", ModInfo.DEBUG.DETAIL);
+		Log.detail("PostInit End");
 	}
 
 	private void preInitPotions() {
-		SleepstoneMod.debug("Potions Start - length: " + Potion.potionTypes.length, ModInfo.DEBUG.DETAIL);
+		Log.detail("Potions Start - length: " + Potion.potionTypes.length);
 		Potion[] potionTypes = null;
 		for (Field field : Potion.class.getDeclaredFields()) {
 			field.setAccessible(true);
@@ -82,7 +80,7 @@ public class SleepstoneMod {
 				System.out.println("Error with PotionTypes - " + exc);
 			}
 		}
-		SleepstoneMod.debug("Potions End - length: " + Potion.potionTypes.length, ModInfo.DEBUG.DETAIL);
+		Log.detail("Potions End - length: " + Potion.potionTypes.length);
 
 		int warpSicknessId = -1;
 		for (int i = 0; i < Potion.potionTypes.length; i++) {
@@ -97,31 +95,5 @@ public class SleepstoneMod {
 		NovelPotion.warpSickness = new NovelPotion(warpSicknessId, false, 0);
 		NovelPotion.warpSickness.setPotionName("potion.warpingsickness");
 		NovelPotion.warpSickness.setIconIndex(5, 1);
-	}
-
-	public static void debug(String str, ModInfo.DEBUG option) {
-		debug(str, option, null);
-	}
-
-	public static void debug(String str, ModInfo.DEBUG option, EntityPlayer player) {
-		switch (ModInfo.DEBUG_LVL) {
-		case CASUAL:
-			if (option == ModInfo.DEBUG.CASUAL) {
-				if (ModInfo.DEBUG_CHAT && player != null) {
-					player.addChatMessage(new ChatComponentText(str));
-				}
-				System.out.println(str);
-			}
-			break;
-		case DETAIL:
-			if (ModInfo.DEBUG_CHAT && player != null) {
-				player.addChatMessage(new ChatComponentText(str));
-			}
-			System.out.println(str);
-			break;
-		case NONE:
-		default:
-			break;
-		}
 	}
 }

@@ -9,7 +9,7 @@ public class NovelPotion extends Potion {
 
 	protected NovelPotion(int potionId, boolean isBadEffect, int liquidColor) {
 		super(potionId, isBadEffect, liquidColor);
-		SleepstoneMod.debug("Registering NovelPotion: " + potionId, ModInfo.DEBUG.DETAIL);
+		Log.detail("Registering NovelPotion: " + potionId);
 	}
 	
 	@Override

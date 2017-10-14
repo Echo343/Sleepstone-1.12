@@ -1,7 +1,6 @@
 package com.blargsworkshop.sleepstone.events;
 
-import com.blargsworkshop.sleepstone.ModInfo.DEBUG;
-import com.blargsworkshop.sleepstone.SleepstoneMod;
+import com.blargsworkshop.sleepstone.Log;
 import com.blargsworkshop.sleepstone.Utils;
 import com.blargsworkshop.sleepstone.extended_properties.ExtendedPlayer;
 import com.blargsworkshop.sleepstone.items.stone.Slots;
@@ -50,7 +49,7 @@ public class MainEventHandler {
 			EntityPlayer player = (EntityPlayer) event.entity;
 			if (event.distance > 3.0F && Utils.isPowerAvailable(player, Slots.Stone)) {
 				event.distance = 2.0F;
-				SleepstoneMod.debug(player.getDisplayName() + " just fell on the server.", DEBUG.DETAIL, player);				
+				Log.debug(player.getDisplayName() + " just fell on the server.", player);				
 			}
 		}
 	}

@@ -4,7 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 
 public class Log {
 	public static LogLevel Level = LogLevel.Detail;
-	public static boolean LogChat = true;
+	private static boolean LogChat = true;
 	
 	public static enum LogLevel {
 		Off,
@@ -18,7 +18,7 @@ public class Log {
 		Log.error(message, null);
 	}
 	public static void error(String message, EntityPlayer player) {
-		Log.log(message, LogLevel.Error, player);
+		Log.log("ERROR: " + message, LogLevel.Error, player);
 	}
 	
 	public static void info(String message) {
@@ -32,14 +32,14 @@ public class Log {
 		Log.debug(message, null);
 	}
 	public static void debug(String message, EntityPlayer player) {
-		Log.log(message, LogLevel.Debug, player);
+		Log.log("DEBUG: " + message, LogLevel.Debug, player);
 	}
 	
 	public static void detail(String message) {
 		Log.detail(message, null);
 	}
 	public static void detail(String message, EntityPlayer player) {
-		Log.log(message, LogLevel.Detail, player);
+		Log.log("DETAIL: " + message, LogLevel.Detail, player);
 	}
 	
 	private static void log(String str, LogLevel level, EntityPlayer player) {

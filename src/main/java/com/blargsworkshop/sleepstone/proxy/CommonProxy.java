@@ -1,6 +1,6 @@
 package com.blargsworkshop.sleepstone.proxy;
 
-import com.blargsworkshop.sleepstone.ModInfo.DEBUG;
+import com.blargsworkshop.sleepstone.Log;
 import com.blargsworkshop.sleepstone.ModItems;
 import com.blargsworkshop.sleepstone.SleepstoneMod;
 import com.blargsworkshop.sleepstone.events.MainEventHandler;
@@ -48,7 +48,7 @@ public class CommonProxy implements IProxy {
      */
     @Override
     public EntityPlayer getPlayerEntity(MessageContext ctx) {
-    	SleepstoneMod.debug("Retrieving player from CommonProxy for message on side " + ctx.side, DEBUG.DETAIL);
+    	Log.detail("Retrieving player from CommonProxy for message on side " + ctx.side);
     	return ctx.getServerHandler().playerEntity;
     }
     

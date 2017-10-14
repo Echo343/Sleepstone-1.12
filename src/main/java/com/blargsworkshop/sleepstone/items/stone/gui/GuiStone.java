@@ -2,9 +2,8 @@ package com.blargsworkshop.sleepstone.items.stone.gui;
 
 import org.lwjgl.opengl.GL11;
 
+import com.blargsworkshop.sleepstone.Log;
 import com.blargsworkshop.sleepstone.ModInfo;
-import com.blargsworkshop.sleepstone.ModInfo.DEBUG;
-import com.blargsworkshop.sleepstone.SleepstoneMod;
 import com.blargsworkshop.sleepstone.Utils;
 import com.blargsworkshop.sleepstone.extended_properties.ExtendedPlayer;
 import com.blargsworkshop.sleepstone.gui.GuiEnum;
@@ -55,17 +54,17 @@ public class GuiStone extends GuiScreen {
 	
 	@SuppressWarnings("unchecked")
 	protected void initButtons() {
+		if (props == null) {
+			Log.error("Error getting props", player);
+			return;
+		}
+		
 		int left = (this.width - xSize) / 2;
 		int top = (this.height - ySize) / 2;
 		
 		if (inventory.hasGemInSlot(Slots.Stone)) {
 			ToggleButton stoneButton = new ToggleButton(Buttons.Stone, left + 4, top + 4, Utils.localize("text.guistone.stone_button"), Utils.localize("text.guistone.stone_tooltip"));
-			if (props != null) {
-				stoneButton.setState(props.getNoFallDamage());
-			}
-			else {
-				SleepstoneMod.debug("Error getting props", DEBUG.DETAIL, player);
-			}
+			stoneButton.setState(props.getNoFallDamage());
 			this.buttonList.add(stoneButton);
 		}
 		if (inventory.hasGemInSlot(Slots.Pathfinder)) {

@@ -1,7 +1,6 @@
 package com.blargsworkshop.sleepstone.proxy;
 
-import com.blargsworkshop.sleepstone.SleepstoneMod;
-import com.blargsworkshop.sleepstone.ModInfo.DEBUG;
+import com.blargsworkshop.sleepstone.Log;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -35,7 +34,7 @@ public class ClientProxy extends CommonProxy {
 		// Sounds absurd, but it's true.
 
 		// Solution is to double-check side before returning the player:
-		SleepstoneMod.debug("Retrieving player from ClientProxy for message on side " + ctx.side, DEBUG.DETAIL);
+		Log.detail("Retrieving player from ClientProxy for message on side " + ctx.side);
 		return (ctx.side.isClient() ? Minecraft.getMinecraft().thePlayer : super.getPlayerEntity(ctx));
     }
     

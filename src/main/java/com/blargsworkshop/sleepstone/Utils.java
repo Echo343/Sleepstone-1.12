@@ -1,6 +1,5 @@
 package com.blargsworkshop.sleepstone;
 
-import com.blargsworkshop.sleepstone.ModInfo.DEBUG;
 import com.blargsworkshop.sleepstone.extended_properties.ExtendedPlayer;
 import com.blargsworkshop.sleepstone.items.stone.Slots;
 import com.blargsworkshop.sleepstone.items.stone.StoneInventory;
@@ -56,9 +55,9 @@ public class Utils {
 			hasGems = stoneInv.hasGemInSlot(slot);
 		}
 		
-		if (!doesPlayer) SleepstoneMod.debug(slot.name() + " is turned off by the player", DEBUG.CASUAL, player);
-		if (!hasStone) SleepstoneMod.debug("Attuned sleepstone was not found in inventory", DEBUG.CASUAL, player);
-		if (hasStone && !hasGems) SleepstoneMod.debug("The sleepstone lacks the neccessary gem(s): " + slot.name(), DEBUG.CASUAL, player);
+		if (!doesPlayer) Log.info(slot.name() + " is turned off by the player", player);
+		if (!hasStone) Log.info("Attuned sleepstone was not found in inventory", player);
+		if (hasStone && !hasGems) Log.info("The sleepstone lacks the neccessary gem(s): " + slot.name(), player);
     	
 		return doesPlayer && hasStone && hasGems;
 	}	

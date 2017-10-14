@@ -1,7 +1,6 @@
 package com.blargsworkshop.sleepstone.extended_properties;
 
-import com.blargsworkshop.sleepstone.ModInfo.DEBUG;
-import com.blargsworkshop.sleepstone.SleepstoneMod;
+import com.blargsworkshop.sleepstone.Log;
 import com.blargsworkshop.sleepstone.items.stone.Slots;
 import com.blargsworkshop.sleepstone.network.PacketDispatcher;
 import com.blargsworkshop.sleepstone.network.bidirectional.SyncAllPlayerPropsMessage;
@@ -108,11 +107,11 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 		if (sync) {
 			if (isClient()) {
 				PacketDispatcher.sendToServer(new SyncPlayerPropMessage(ExtendedPlayer.PlayerFields.NoFallDmg, noFallDamage));
-				SleepstoneMod.debug("Setting noFall to " + getNoFallDamage() + " on client", DEBUG.DETAIL, this.player);
+				Log.debug("Setting noFall to " + getNoFallDamage() + " on client", this.player);
 			}
 			else {
 				PacketDispatcher.sendToPlayer((EntityPlayerMP) player, new SyncPlayerPropMessage(ExtendedPlayer.PlayerFields.NoFallDmg, noFallDamage));
-				SleepstoneMod.debug("Setting noFall to " + getNoFallDamage() + " on server", DEBUG.DETAIL, this.player);
+				Log.debug("Setting noFall to " + getNoFallDamage() + " on server", this.player);
 			}
 		}
 	}
@@ -134,11 +133,11 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 		if (sync) {
 			if (isClient()) {
 				PacketDispatcher.sendToServer(new SyncPlayerPropMessage(ExtendedPlayer.PlayerFields.BondedStoneId, bondedStoneId));
-				SleepstoneMod.debug("Setting UUID to " + getBondedStoneId() + " on client", DEBUG.DETAIL, this.player);
+				Log.debug("Setting UUID to " + getBondedStoneId() + " on client", this.player);
 			}
 			else {
 				PacketDispatcher.sendToPlayer(player, new SyncPlayerPropMessage(ExtendedPlayer.PlayerFields.BondedStoneId, bondedStoneId));
-				SleepstoneMod.debug("Setting UUID to " + getBondedStoneId() + " on server", DEBUG.DETAIL, this.player);
+				Log.debug("Setting UUID to " + getBondedStoneId() + " on server", this.player);
 			}
 		}
 	}
