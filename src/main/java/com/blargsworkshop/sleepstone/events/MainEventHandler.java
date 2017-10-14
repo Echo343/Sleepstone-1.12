@@ -6,11 +6,18 @@ import com.blargsworkshop.sleepstone.extended_properties.ExtendedPlayer;
 import com.blargsworkshop.sleepstone.items.stone.Slots;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.monster.EntityGhast;
+import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 
@@ -18,6 +25,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
  * EventHandler
  */
 public class MainEventHandler {
+	
 	@SubscribeEvent
 	public void onEntityConstructing(EntityConstructing event) {
 		if (event.entity instanceof EntityPlayer && ExtendedPlayer.get((EntityPlayer) event.entity) == null) {
@@ -50,6 +58,25 @@ public class MainEventHandler {
 			if (event.distance > 3.0F && Utils.isPowerAvailable(player, Slots.Stone)) {
 				event.distance = 2.0F;
 				Log.debug(player.getDisplayName() + " just fell on the server.", player);				
+			}
+		}
+	}
+	
+	@SubscribeEvent
+	public void onLivingEntityDrops(LivingDropsEvent event) {
+		if (!isServer(event.entity.worldObj)) { return; }
+		
+		EntityLivingBase mob = event.entityLiving;
+		if (	mob instanceof EntityMob ||
+				mob instanceof EntitySlime && ((EntitySlime) mob).getSlimeSize() == 1 ||
+				mob instanceof EntityGhast) {
+			double dropChance = Math.random();
+			// 0.5% drop chance
+			if (dropChance <= 0.0005) {
+				// Pick a random gem
+				int gemIndex = (int) (Math.random() * Slots.values().length);
+				ItemStack loot = new ItemStack(Slots.values()[gemIndex].getItem());
+				event.drops.add(new EntityItem(mob.worldObj, mob.posX, mob.posY, mob.posZ, loot));
 			}
 		}
 	}
