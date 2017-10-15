@@ -29,7 +29,7 @@ public class Sleepstone extends BaseItem {
 	
 	@Override
 	public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer player) {
-		if (player.isSneaking()) {
+		if (!player.isSneaking()) {
 			player.openGui(SleepstoneMod.instance, GuiEnum.STONE.ordinal(), world, (int)player.posX, (int)player.posY, (int)player.posZ);
 		}
 		else {

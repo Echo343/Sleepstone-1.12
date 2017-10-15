@@ -1,11 +1,15 @@
 package com.blargsworkshop.sleepstone;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import com.blargsworkshop.sleepstone.extended_properties.ExtendedPlayer;
 import com.blargsworkshop.sleepstone.items.stone.Slots;
 import com.blargsworkshop.sleepstone.items.stone.StoneInventory;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 
@@ -60,5 +64,13 @@ public class Utils {
 		if (hasStone && !hasGems) Log.info("The sleepstone lacks the neccessary gem(s): " + slot.name(), player);
     	
 		return doesPlayer && hasStone && hasGems;
+	}
+
+	public static Set<Item> getUniqueGems() {
+		Set<Item> gemSet = new HashSet<Item>(Slots.values().length, 1f);
+		for (Slots gem : Slots.values()) {
+			gemSet.add(gem.getItem());
+		}
+		return gemSet;
 	}	
 }

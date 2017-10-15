@@ -33,6 +33,7 @@ public class CommonProxy implements IProxy {
     	NetworkRegistry.INSTANCE.registerGuiHandler(SleepstoneMod.instance, new GuiHandler());
     	
 		ModItems.initRecipes();
+		ModItems.initChestLoot();
 		PacketDispatcher.registerPackets();
     }
 

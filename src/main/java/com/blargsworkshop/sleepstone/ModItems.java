@@ -1,5 +1,7 @@
 package com.blargsworkshop.sleepstone;
 
+import java.util.Set;
+
 import com.blargsworkshop.sleepstone.gui.TextureItem;
 import com.blargsworkshop.sleepstone.items.gems.EtherealGem;
 import com.blargsworkshop.sleepstone.items.gems.FireGem;
@@ -18,6 +20,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.WeightedRandomChestContent;
+import net.minecraftforge.common.ChestGenHooks;
 
 public class ModItems {
 	public static CreativeTabs tabSleepstone;
@@ -161,5 +165,21 @@ public class ModItems {
 				return ModItems.itemSleepstone;
 			}
 		};
+	}
+
+	public static void initChestLoot() {
+		Set<Item> gems = Utils.getUniqueGems();
+		for (Item gem : gems) {
+			// Add gem chance to each type of loot chest.  (Item, meta, min, max, weight)
+			ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new WeightedRandomChestContent(gem, 0, 0, 1, 1));
+			ChestGenHooks.addItem(ChestGenHooks.MINESHAFT_CORRIDOR, new WeightedRandomChestContent(gem, 0, 0, 1, 1));
+			ChestGenHooks.addItem(ChestGenHooks.PYRAMID_DESERT_CHEST, new WeightedRandomChestContent(gem, 0, 0, 1, 1));
+			ChestGenHooks.addItem(ChestGenHooks.PYRAMID_JUNGLE_CHEST, new WeightedRandomChestContent(gem, 0, 0, 1, 1));
+			ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_LIBRARY, new WeightedRandomChestContent(gem, 0, 0, 1, 1));
+		}
+		for (int subtype = 0; subtype < 16; subtype++) {
+			ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(itemStoneCraftable, subtype, 0, 4, 1));
+		}
+		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(itemSleepstone, 0, 0, 1, 1));
 	}
 }
