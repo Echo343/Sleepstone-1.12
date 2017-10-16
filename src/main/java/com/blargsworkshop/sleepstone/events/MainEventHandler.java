@@ -6,13 +6,7 @@ import com.blargsworkshop.sleepstone.extended_properties.ExtendedPlayer;
 import com.blargsworkshop.sleepstone.items.stone.Slots;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.monster.EntityGhast;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
@@ -65,20 +59,9 @@ public class MainEventHandler {
 	@SubscribeEvent
 	public void onLivingEntityDrops(LivingDropsEvent event) {
 		if (!isServer(event.entity.worldObj)) { return; }
-		
-		EntityLivingBase mob = event.entityLiving;
-		if (	mob instanceof EntityMob ||
-				mob instanceof EntitySlime && ((EntitySlime) mob).getSlimeSize() == 1 ||
-				mob instanceof EntityGhast) {
-			double dropChance = Math.random();
-			// 0.5% drop chance
-			if (dropChance <= 0.0005) {
-				// Pick a random gem
-				int gemIndex = (int) (Math.random() * Slots.values().length);
-				ItemStack loot = new ItemStack(Slots.values()[gemIndex].getItem());
-				event.drops.add(new EntityItem(mob.worldObj, mob.posX, mob.posY, mob.posZ, loot));
-			}
-		}
+		MobDrops.handleGlobalGemDropRates(event);
+		MobDrops.handleFireGemDropRates(event);
+		MobDrops.handleEtherealGemDropRates(event);
 	}
 	
 	private static boolean isServer(World worldObj) {

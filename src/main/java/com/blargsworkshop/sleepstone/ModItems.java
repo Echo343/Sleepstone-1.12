@@ -178,14 +178,15 @@ public class ModItems {
 			ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_LIBRARY, new WeightedRandomChestContent(gem, 0, 0, 1, 1));
 		}
 		
-		
 		//Add stonecraftables & Sleepstone to Village_Blacksmith chest
 		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(itemStoneCraftable, 1, 3, 8, 15));
 		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(itemStoneCraftable, 3, 1, 1, 10));
 		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(itemStoneCraftable, 4, 1, 4, 9));
 		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(itemStoneCraftable, 5, 1, 1, 7));
-		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(itemStoneCraftable, 7, 1, 1, 3));
-		//TODO Obsidian
-		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(itemSleepstone, 0, 0, 1, 1));
+		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(itemStoneCraftable, 7, 0, 1, 3));
+		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(itemStoneCraftable, 10, 1, 64, 3));
+		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(itemStoneCraftable, 12, 1, 3, 2));
+		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(itemStoneCraftable, 14, 0, 3, 1));
+		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(itemSleepstone, 0, 1, 1, 5));
 	}
 }
