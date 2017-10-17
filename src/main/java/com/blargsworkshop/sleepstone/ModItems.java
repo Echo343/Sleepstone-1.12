@@ -10,6 +10,7 @@ import com.blargsworkshop.sleepstone.items.gems.GuardianGem;
 import com.blargsworkshop.sleepstone.items.gems.PathfinderGem;
 import com.blargsworkshop.sleepstone.items.gems.StoneGem;
 import com.blargsworkshop.sleepstone.items.gems.TimeSpaceGem;
+import com.blargsworkshop.sleepstone.items.gems.support.EnderShard;
 import com.blargsworkshop.sleepstone.items.gems.support.PathfinderCraftable;
 import com.blargsworkshop.sleepstone.items.gems.support.StoneCraftable;
 import com.blargsworkshop.sleepstone.items.stone.Sleepstone;
@@ -37,6 +38,7 @@ public class ModItems {
 	
 	public static Item itemStoneCraftable;
 	public static Item itemPathfinderCraftable;
+	public static Item itemEnderShard;
 	
 	public static Item textureGemSlotStone = new TextureItem("textureGemSlotStone", ModInfo.ID + ":slot-gem-stone");
 	public static Item textureGemSlotPathfinder = new TextureItem("textureGemSlotPathfinder", ModInfo.ID + ":slot-gem-pathfinder");
@@ -57,6 +59,7 @@ public class ModItems {
 		
 		GameRegistry.registerItem(itemStoneCraftable = new StoneCraftable(), "modItemStoneCraftable");
 		GameRegistry.registerItem(itemPathfinderCraftable = new PathfinderCraftable(), "modItemPathfinderCraftable");
+		GameRegistry.registerItem(itemEnderShard = new EnderShard(), "modItemEnderShard");
 		
 		GameRegistry.registerItem(textureGemSlotStone, "modTextureGemSlotStone");
 		GameRegistry.registerItem(textureGemSlotPathfinder, "modTextureGemSlotPathfinder");
@@ -168,7 +171,13 @@ public class ModItems {
 	}
 
 	public static void initChestLoot() {
+		//Adjust some of the chests to have higher weights
+		adjustChestWeights(ChestGenHooks.DUNGEON_CHEST, 200);
+		adjustChestWeights(ChestGenHooks.MINESHAFT_CORRIDOR, 300);
+		adjustChestWeights(ChestGenHooks.VILLAGE_BLACKSMITH, 100);
+		
 		Set<Item> gems = Utils.getUniqueGems();
+		
 		// Add gem chance to each type of loot chest.  (Item, meta, min, max, weight)
 		for (Item gem : gems) {
 			ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new WeightedRandomChestContent(gem, 0, 0, 1, 1));
@@ -188,5 +197,19 @@ public class ModItems {
 		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(itemStoneCraftable, 12, 1, 3, 2));
 		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(itemStoneCraftable, 14, 0, 3, 1));
 		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(itemSleepstone, 0, 1, 1, 5));
+	}
+	
+	private static void adjustChestWeights(String chestType, int factor) {
+		WeightedRandomChestContent[] chestItems = ChestGenHooks.getItems(chestType, null);
+		int totalChestWeight = 0 ;
+		for (WeightedRandomChestContent item : chestItems) {
+			totalChestWeight += item.itemWeight;
+		}
+		if (totalChestWeight < factor) {
+			int weightFactor = (factor / totalChestWeight) + 1;
+			for (WeightedRandomChestContent item : chestItems) {
+				item.itemWeight *= weightFactor;
+			}
+		}
 	}
 }
