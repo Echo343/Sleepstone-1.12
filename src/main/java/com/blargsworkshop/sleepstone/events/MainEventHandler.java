@@ -67,8 +67,4 @@ public class MainEventHandler {
 	private static boolean isServer(World worldObj) {
 		return !worldObj.isRemote;
 	}
-	
-//	private static boolean isServer(EntityPlayer player) {
-//		return isServer(player.worldObj);
-//	}
 }
