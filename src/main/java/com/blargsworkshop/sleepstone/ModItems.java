@@ -157,7 +157,12 @@ public class ModItems {
 		GameRegistry.addShapedRecipe(new ItemStack(itemStoneCraftable, 1, 15), "ccc", "cic", "ccc",
 				'c', new ItemStack(itemStoneCraftable, 1, 14),
 				'i', new ItemStack(itemStoneCraftable, 1, 7));
-		GameRegistry.addSmelting(new ItemStack(itemStoneCraftable, 1, 15), new ItemStack(itemStoneGem), 1f);		
+		GameRegistry.addSmelting(new ItemStack(itemStoneCraftable, 1, 15), new ItemStack(itemStoneGem), 1f);
+		
+		// Time and Space Gem
+		GameRegistry.addShapedRecipe(new ItemStack(itemTimeSpaceGem), "xxx", "xex", "xxx",
+				'x', Blocks.end_stone,
+				'e', Items.ender_eye);
 	}
 	
 	public static void initCreativeTabs() {
