@@ -2,8 +2,8 @@ package com.blargsworkshop.sleepstone.gui.buttons;
 
 public class BasicButton extends TooltipButton {
 
-	private final static int defaultWidth = 120;
-	private final static int defaultHeight = 20;
+	public final static int defaultWidth = 120;
+	public final static int defaultHeight = 20;
 	
 	protected final Enum<?> buttonType;
 	

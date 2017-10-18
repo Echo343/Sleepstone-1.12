@@ -30,18 +30,53 @@ item.endershard.name=Ender Shard
 
 itemGroup.sleepstoneCreativeTab=Sleepstone
 
-potion.warpingsickness=Warp Sickness
-
 text.sleepstone.bed_destroyed=Your bed seems to have been destroyed. :'-(
 text.sleepstone.suffering_effects_of_warping=You are still suffering the effects of Warping.
-text.guistone.inv=Inv
+
+potion.warpingsickness=Warp Sickness
+
 text.toggle_button.off=Off
 text.toggle_button.on=On
-text.guistone.stone_button=Stone Gem
-text.guistone.pathfinder_button=Pathfinder Gem
-text.guistone.stone_tooltip=The Stone Gem imbues the power of preventing fall damage.
-text.guistone.pathfinder_tooltip=The Pathfinder Gem allows the wielder to travel long distances without becoming hungry.
-text.guistone.sleepstone_attunes_to_you=The Sleepstone glows brightly as it attunes to you.
-text.guistone.warp=Warp
-text.guistoneinventory.inventory=Inventory
+
 text.stoneinventory.sleepstone=Sleepstone
+text.guistoneinventory.inventory=Inventory
+text.guistone.inv=Inv
+text.guistone.sleepstone_attunes_to_you=The Sleepstone glows brightly as it attunes to you.
+
+text.guistone.stone_button=Stone Gem
+text.guistone.stone_tooltip=The Stone Gem imbues the power of preventing fall damage.
+
+text.guistone.pathfinder_button=Pathfinder Gem
+text.guistone.pathfinder_tooltip=The Pathfinder Gem allows the wielder to travel long distances without becoming hungry.
+
+text.guistone.timespace_button=Time & Space Gem
+text.guistone.timespace_tooltip=The Time & Space Gem allows the player to move through time more quickly than normal.
+
+text.guistone.stone_ethereal_button=Ethereal Gem
+text.guistone.stone_ethereal_tooltip=Does something.
+
+text.guistone.stone_guardian_button=Guardian Gem
+text.guistone.stone_guardian_tooltip=Does something.
+
+text.guistone.stone_fire_button=Fire Gem
+text.guistone.stone_fire_tooltip=Does something.
+
+text.guistone.timespace_ethereal_button=Ethereal Gem
+text.guistone.timespace_ethereal_tooltip=Does something.
+
+text.guistone.timespace_guardian_button=Guardian Gem
+text.guistone.timespace_guardian_tooltip=Does something.
+
+text.guistone.timespace_fire_button=Fire Gem
+text.guistone.timespace_fire_tooltip=Does something.
+
+text.guistone.pathfinder_ethereal_button=Ethereal Gem
+text.guistone.pathfinder_ethereal_tooltip=Does something.
+
+text.guistone.pathfinder_guardian_button=Guardian Gem
+text.guistone.pathfinder_guardian_tooltip=Does something.
+
+text.guistone.pathfinder_fire_button=Fire Gem
+text.guistone.pathfinder_fire_tooltip=Does something.
+
+text.guistone.warp=Warp
