@@ -49,7 +49,7 @@ public class MainEventHandler {
 	public void onLivingFallEvent(LivingFallEvent event) {
 		if (isServer(event.entity.worldObj) && event.entity instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) event.entity;
-			if (event.distance > 3.0F && Utils.isPowerAvailable(player, Slots.Stone)) {
+			if (event.distance > 3.0F && Utils.isAbilityAvailable(player, Slots.Stone)) {
 				event.distance = 2.0F;
 				Log.debug(player.getDisplayName() + " just fell on the server.", player);				
 			}

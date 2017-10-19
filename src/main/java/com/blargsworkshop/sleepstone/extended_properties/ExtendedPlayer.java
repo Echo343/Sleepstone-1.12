@@ -1,5 +1,7 @@
 package com.blargsworkshop.sleepstone.extended_properties;
 
+import java.util.EnumMap;
+
 import com.blargsworkshop.sleepstone.Log;
 import com.blargsworkshop.sleepstone.items.stone.Slots;
 import com.blargsworkshop.sleepstone.network.PacketDispatcher;
@@ -19,6 +21,8 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 		NoFallDmg
 	}
 
+	private EnumMap<Slots, Boolean> abilities = new EnumMap<Slots, Boolean>(Slots.class);
+
 	private static final String BONDED_ID = "BondedStoneId";
 	private static final String NO_FALL_DAMAGE = "NoFallDamage";
 
@@ -30,6 +34,9 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 
 	public ExtendedPlayer(EntityPlayer player) {
 		this.player = player;
+		for (Slots slot : Slots.values()) {
+			abilities.put(slot, false);
+		}
 	}
 	
 	/**
@@ -142,7 +149,7 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 		}
 	}
 	
-	public boolean isGemTurnedOn(Slots slot) {
+	public boolean isSlotTurnedOn(Slots slot) {
 		switch (slot) {
 		case Stone:
 			return getNoFallDamage();

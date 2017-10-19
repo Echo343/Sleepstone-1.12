@@ -27,13 +27,13 @@ public class Utils {
 		player.addChatMessage(new ChatComponentText(message));
 	}
 
-	public static boolean isPowerAvailable(EntityPlayer player, Slots slot) {
+	public static boolean isAbilityAvailable(EntityPlayer player, Slots slot) {
 		ExtendedPlayer props = ExtendedPlayer.get(player);
 		boolean doesPlayer = false;
 		boolean hasStone = false;
 		boolean hasGems = false;
 		
-		doesPlayer = props.isGemTurnedOn(slot);
+		doesPlayer = props.isSlotTurnedOn(slot);
 		
 		//TODO search through in priority order
 		ItemStack[] playerInv = player.inventory.mainInventory;
