@@ -55,13 +55,14 @@ public class GuiStone extends GuiScreen {
 	
 	private static final ResourceLocation backgroundImage = new ResourceLocation(ModInfo.ID, "textures/gui/GuiStone.png");
 	
-//	private static final int xSize = 248;
-	private static final int xSize = 376;
+	private static final int xSize = 248;
+//	private static final int xSize = 376;
 	private static final int ySize = 166;
 	private static final int leftMargin = 4;
 	private static final int topMargin = 4;
 	private static final int horizontalSpacing = 4;
 	private static final int verticalSpacing = -1;
+	private static final int btnScrnWidth = BasicButton.defaultWidth * 3 + leftMargin * 2 + horizontalSpacing * 2;
 	private StoneInventory inventory;
 	private EntityPlayer player;
 	private ExtendedPlayer props;
@@ -86,9 +87,10 @@ public class GuiStone extends GuiScreen {
 		}
 		
 		int left = (this.width - xSize) / 2;
+		int btnLeft = (this.width - btnScrnWidth) / 2;
 		int top = (this.height - ySize) / 2;
 		
-		int firstColumn = left + leftMargin;
+		int firstColumn = btnLeft + leftMargin;
 		int secondColumn = firstColumn + BasicButton.defaultWidth + horizontalSpacing;
 		int thirdColumn = secondColumn + BasicButton.defaultWidth + horizontalSpacing;
 		
@@ -159,7 +161,7 @@ public class GuiStone extends GuiScreen {
 		}
 		
 //		GuiButton warpButton = new BasicButton(Buttons.Warp, (this.width - 70) / 2, (this.height - 20) / 2, 70, Utils.localize("text.guistone.warp"));
-		GuiButton invButton = new BasicButton(Buttons.Inv, left + xSize + 4, top - 30, 20, Utils.localize("text.guistone.inv"));
+		GuiButton invButton = new BasicButton(Buttons.Inv, left + xSize - 40, top + ySize - 30, 20, Utils.localize("text.guistone.inv"));
 //		this.buttonList.add(warpButton);
 		this.buttonList.add(invButton); // TODO Use an icon of some sort.
 	}
