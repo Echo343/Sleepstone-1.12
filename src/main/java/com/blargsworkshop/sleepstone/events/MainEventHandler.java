@@ -8,7 +8,6 @@ import com.blargsworkshop.sleepstone.items.stone.Slots;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.world.World;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
@@ -29,7 +28,7 @@ public class MainEventHandler {
 	
 	@SubscribeEvent
 	public void onEntityJoinWorld(EntityJoinWorldEvent event) {
-		if (isServer(event.entity.worldObj)) {
+		if (Utils.isServer(event.entity.worldObj)) {
 			if (event.entity instanceof EntityPlayer) {
 				ExtendedPlayer.get((EntityPlayer) event.entity).syncAll();
 			}
@@ -47,7 +46,7 @@ public class MainEventHandler {
 	
 	@SubscribeEvent
 	public void onLivingFallEvent(LivingFallEvent event) {
-		if (isServer(event.entity.worldObj) && event.entity instanceof EntityPlayer) {
+		if (Utils.isServer(event.entity.worldObj) && event.entity instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) event.entity;
 			if (event.distance > 3.0F && Utils.isAbilityAvailable(player, Slots.Stone)) {
 				event.distance = 2.0F;
@@ -58,13 +57,9 @@ public class MainEventHandler {
 	
 	@SubscribeEvent
 	public void onLivingEntityDrops(LivingDropsEvent event) {
-		if (!isServer(event.entity.worldObj)) { return; }
+		if (!Utils.isServer(event.entity.worldObj)) { return; }
 		MobDrops.handleGlobalGemDropRates(event);
 		MobDrops.handleFireGemDropRates(event);
 		MobDrops.handleEtherealGemDropRates(event);
-	}
-	
-	private static boolean isServer(World worldObj) {
-		return !worldObj.isRemote;
 	}
 }

@@ -3,41 +3,38 @@ package com.blargsworkshop.sleepstone.network.bidirectional;
 import java.io.IOException;
 
 import com.blargsworkshop.sleepstone.extended_properties.ExtendedPlayer;
-import com.blargsworkshop.sleepstone.items.stone.Slots;
 import com.blargsworkshop.sleepstone.network.AbstractMessage;
 
 import cpw.mods.fml.relauncher.Side;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
 
-public class SyncPlayerPropMessage extends AbstractMessage<SyncPlayerPropMessage> {
+public class SyncPlayerBondedIdMessage extends AbstractMessage<SyncPlayerBondedIdMessage> {
 	
-	private Slots ability;
-	private boolean bool;
+	private String bondedId = "";
 	
-	public SyncPlayerPropMessage() {}
+	public SyncPlayerBondedIdMessage() {}
 	
-	public SyncPlayerPropMessage(Slots ability, boolean value) {
-		this.ability = ability;
-		this.bool = value;
+	public SyncPlayerBondedIdMessage(String bondedId) {
+		this.bondedId = bondedId == null ? "" : bondedId.trim();
 	}
-	
+
 	@Override
 	protected void read(PacketBuffer buffer) throws IOException {
-		ability = Slots.values()[buffer.readInt()];
-		bool = buffer.readBoolean();
+		int len = buffer.readInt();
+		bondedId = buffer.readStringFromBuffer(len);
 	}
 
 	@Override
 	protected void write(PacketBuffer buffer) throws IOException {
-		buffer.writeInt(ability.ordinal());
-		buffer.writeBoolean(bool);
+		buffer.writeInt(bondedId.length());
+		buffer.writeStringToBuffer(bondedId);
 	}
 
 	@Override
 	public void process(EntityPlayer player, Side side) {
 		ExtendedPlayer extPlayer = ExtendedPlayer.get(player);
-		extPlayer.setAbilityWithoutSync(ability, bool);
+		extPlayer.setBondedStoneId(bondedId, false);
 	}
 
 }

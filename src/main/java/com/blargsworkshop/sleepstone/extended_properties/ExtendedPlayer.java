@@ -1,11 +1,14 @@
 package com.blargsworkshop.sleepstone.extended_properties;
 
 import java.util.EnumMap;
+import java.util.Map.Entry;
 
 import com.blargsworkshop.sleepstone.Log;
+import com.blargsworkshop.sleepstone.Utils;
 import com.blargsworkshop.sleepstone.items.stone.Slots;
 import com.blargsworkshop.sleepstone.network.PacketDispatcher;
 import com.blargsworkshop.sleepstone.network.bidirectional.SyncAllPlayerPropsMessage;
+import com.blargsworkshop.sleepstone.network.bidirectional.SyncPlayerBondedIdMessage;
 import com.blargsworkshop.sleepstone.network.bidirectional.SyncPlayerPropMessage;
 
 import net.minecraft.entity.Entity;
@@ -16,21 +19,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
 public class ExtendedPlayer implements IExtendedEntityProperties {
-	public static enum PlayerFields {
-		BondedStoneId,
-		NoFallDmg
-	}
-
-	private EnumMap<Slots, Boolean> abilities = new EnumMap<Slots, Boolean>(Slots.class);
-
-	private static final String BONDED_ID = "BondedStoneId";
-	private static final String NO_FALL_DAMAGE = "NoFallDamage";
-
 	public final static String EXT_PROP_NAME = "ExtendedPlayer";
+
+	private String bondedStoneId = "";
+	private EnumMap<Slots, Boolean> abilities = new EnumMap<Slots, Boolean>(Slots.class);
 	
 	private final EntityPlayer player;
-	private String bondedStoneId = "";
-	private boolean hasNoFallDamage = false;
+	private static final String BONDED_ID = "BondedStoneId";
 
 	public ExtendedPlayer(EntityPlayer player) {
 		this.player = player;
@@ -60,7 +55,11 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 	public void saveNBTData(NBTTagCompound compound) {
 		NBTTagCompound properties = new NBTTagCompound();
 		properties.setString(BONDED_ID, this.bondedStoneId);
-		properties.setBoolean(NO_FALL_DAMAGE, this.hasNoFallDamage);
+		// This for loop should work bc the docs say the .entrySet()
+		// returns the same order every time.
+		for (Entry<Slots, Boolean> prop : abilities.entrySet()) {
+			properties.setBoolean(prop.getKey().name(), prop.getValue());
+		}
 		compound.setTag(EXT_PROP_NAME, properties);
 	}
 
@@ -68,11 +67,14 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 	public void loadNBTData(NBTTagCompound compound) {
 		NBTTagCompound properties = (NBTTagCompound) compound.getTag(EXT_PROP_NAME);
 		this.bondedStoneId = properties.getString(BONDED_ID);
-		this.hasNoFallDamage = properties.getBoolean(NO_FALL_DAMAGE);
+		//TODO not thread safe
+		for (Entry<Slots, Boolean> prop : abilities.entrySet()) {
+			prop.setValue(properties.getBoolean(prop.getKey().name()));
+		}
 	}
 	
 	public void syncAll() {
-		if (isServer()) {
+		if (Utils.isServer(player.worldObj)) {
 			PacketDispatcher.sendToPlayer(player, new SyncAllPlayerPropsMessage(player));
 		}
 		else {
@@ -84,41 +86,32 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 	public void init(Entity entity, World world) {
 	}
 
-	private boolean isServer() {
-		return !player.worldObj.isRemote;
+	public boolean getAbility(Slots gem) {
+		Boolean bool = abilities.get(gem);
+		return bool != null ? bool : false;
 	}
 	
-	private boolean isClient() {
-		return !isServer();
-	}
-
-	public boolean getNoFallDamage() {
-		return hasNoFallDamage;
-	}
-
-	/**
-	 * Sets the noFallDamage flag.
-	 * This will auto sync.
-	 * To set without syncing, use overloaded method.
-	 * @param noFallDamage
-	 */
-	public void setNoFallDamage(boolean noFallDamage) {
-		setNoFallDamage(noFallDamage, true);
+	public void setAbility(Slots gem, boolean flag) {
+		setAbility(gem, flag, true);
 	}
 	
-	public void setNoFallDamage(boolean noFallDamage, boolean sync) {
-		if (this.hasNoFallDamage == noFallDamage) {
+	public void setAbilityWithoutSync(Slots gem, boolean flag) {
+		setAbility(gem, flag, false);
+	}
+	
+	protected void setAbility(Slots gem, boolean flag, boolean sync) {
+		if (Boolean.valueOf(flag).equals(abilities.get(gem))) {
 			return;
 		}
-		this.hasNoFallDamage = noFallDamage;
+		abilities.put(gem, flag);
 		if (sync) {
-			if (isClient()) {
-				PacketDispatcher.sendToServer(new SyncPlayerPropMessage(ExtendedPlayer.PlayerFields.NoFallDmg, noFallDamage));
-				Log.debug("Setting noFall to " + getNoFallDamage() + " on client", this.player);
+			if (Utils.isClient(player.worldObj)) {
+				PacketDispatcher.sendToServer(new SyncPlayerPropMessage(gem, abilities.get(gem)));
+				Log.debug("Setting " + gem + " to " + abilities.get(gem) + " on client and syncing to server", this.player);
 			}
 			else {
-				PacketDispatcher.sendToPlayer((EntityPlayerMP) player, new SyncPlayerPropMessage(ExtendedPlayer.PlayerFields.NoFallDmg, noFallDamage));
-				Log.debug("Setting noFall to " + getNoFallDamage() + " on server", this.player);
+				PacketDispatcher.sendToPlayer((EntityPlayerMP) player, new SyncPlayerPropMessage(gem, abilities.get(gem)));
+				Log.debug("Setting " + gem + " to " + abilities.get(gem) + " on server and syncing to client", this.player);
 			}
 		}
 	}
@@ -138,25 +131,14 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 		}
 		this.bondedStoneId = bondId;
 		if (sync) {
-			if (isClient()) {
-				PacketDispatcher.sendToServer(new SyncPlayerPropMessage(ExtendedPlayer.PlayerFields.BondedStoneId, bondedStoneId));
+			if (Utils.isClient(player.worldObj)) {
+				PacketDispatcher.sendToServer(new SyncPlayerBondedIdMessage(bondedStoneId));
 				Log.debug("Setting UUID to " + getBondedStoneId() + " on client", this.player);
 			}
 			else {
-				PacketDispatcher.sendToPlayer(player, new SyncPlayerPropMessage(ExtendedPlayer.PlayerFields.BondedStoneId, bondedStoneId));
+				PacketDispatcher.sendToPlayer(player, new SyncPlayerBondedIdMessage(bondedStoneId));
 				Log.debug("Setting UUID to " + getBondedStoneId() + " on server", this.player);
 			}
 		}
 	}
-	
-	public boolean isSlotTurnedOn(Slots slot) {
-		switch (slot) {
-		case Stone:
-			return getNoFallDamage();
-		default:
-			return false;
-		}
-	}
-
-
 }

@@ -12,6 +12,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.world.World;
 
 public class Utils {
 
@@ -26,6 +27,14 @@ public class Utils {
 	public static void addUnlocalizedChatMessage(EntityPlayer player, String message) {
 		player.addChatMessage(new ChatComponentText(message));
 	}
+	
+	public static boolean isServer(World worldObj) {
+		return !worldObj.isRemote;
+	}
+	
+	public static boolean isClient(World worldObj) {
+		return !isServer(worldObj);
+	}
 
 	public static boolean isAbilityAvailable(EntityPlayer player, Slots slot) {
 		ExtendedPlayer props = ExtendedPlayer.get(player);
@@ -33,7 +42,7 @@ public class Utils {
 		boolean hasStone = false;
 		boolean hasGems = false;
 		
-		doesPlayer = props.isSlotTurnedOn(slot);
+		doesPlayer = props.getAbility(slot);
 		
 		//TODO search through in priority order
 		ItemStack[] playerInv = player.inventory.mainInventory;

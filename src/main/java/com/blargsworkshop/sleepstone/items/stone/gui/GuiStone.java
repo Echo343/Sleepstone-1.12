@@ -13,8 +13,6 @@ import com.blargsworkshop.sleepstone.gui.buttons.TooltipButton;
 import com.blargsworkshop.sleepstone.items.stone.Slots;
 import com.blargsworkshop.sleepstone.items.stone.StoneInventory;
 import com.blargsworkshop.sleepstone.network.PacketDispatcher;
-import com.blargsworkshop.sleepstone.network.server.CommandMessage;
-import com.blargsworkshop.sleepstone.network.server.CommandMessage.Commands;
 import com.blargsworkshop.sleepstone.network.server.OpenGuiMessage;
 
 import net.minecraft.client.gui.GuiButton;
@@ -25,21 +23,34 @@ import net.minecraft.util.ResourceLocation;
 
 public class GuiStone extends GuiScreen {
 	
-	public static enum Buttons {
-		Warp,
-		Stone,
-		TimeSpace,
-		Pathfinder,
-		StoneEthereal,
-		StoneGuardian,
-		StoneFire,
-		TimeSpaceEthereal,
-		TimeSpaceGuardian,
-		TimeSpaceFire,
-		PathfinderEthereal,
-		PathfinderGuardian,
-		PathfinderFire,
-		Inv
+	protected static enum Buttons {
+//		Warp,
+		NoFallDmg(Slots.Stone),
+		TimeSpace(Slots.TimeSpace),
+		Pathfinder(Slots.Pathfinder),
+		StoneEthereal(Slots.StoneEthereal),
+		StoneGuardian(Slots.StoneGuardian),
+		StoneFire(Slots.StoneFire),
+		TimeSpaceEthereal(Slots.TimeSpaceEthereal),
+		TimeSpaceGuardian(Slots.TimeSpaceGuardian),
+		TimeSpaceFire(Slots.TimeSpaceFire),
+		PathfinderEthereal(Slots.PathfinderEthereal),
+		PathfinderGuardian(Slots.PathfinderGuardian),
+		PathfinderFire(Slots.PathfinderFire),
+		Inv;
+		
+		private Slots slot = null;
+		
+		Buttons() {
+		}
+		
+		Buttons(Slots slot) {
+			this.slot = slot;
+		}
+		
+		public Slots getSlot() {
+			return slot;
+		}
 	}
 	
 	private static final ResourceLocation backgroundImage = new ResourceLocation(ModInfo.ID, "textures/gui/GuiStone.png");
@@ -86,8 +97,8 @@ public class GuiStone extends GuiScreen {
 		int fourthRow = thirdRow + BasicButton.defaultHeight + verticalSpacing;
 		
 		if (inventory.hasGemInSlot(Slots.Stone)) {
-			ToggleButton stoneButton = new ToggleButton(Buttons.Stone, firstColumn, firstRow, Utils.localize("text.guistone.stone_button"), Utils.localize("text.guistone.stone_tooltip"));
-			stoneButton.setState(props.getNoFallDamage());
+			ToggleButton stoneButton = new ToggleButton(Buttons.NoFallDmg, firstColumn, firstRow, Utils.localize("text.guistone.stone_button"), Utils.localize("text.guistone.stone_tooltip"));
+			stoneButton.setState(props.getAbility(Slots.Stone));
 			this.buttonList.add(stoneButton);
 		}
 		if (inventory.hasGemInSlot(Slots.StoneEthereal)) {
@@ -164,49 +175,27 @@ public class GuiStone extends GuiScreen {
 		Buttons btn = (Buttons)((BasicButton)button).getButtonType();
 				
 		switch (btn) {
-		case Warp:
-			PacketDispatcher.sendToServer(new CommandMessage(Commands.Warp));
-			this.mc.setIngameFocus();
-			break;
+//		case Warp:
+//			PacketDispatcher.sendToServer(new CommandMessage(Commands.Warp));
+//			this.mc.setIngameFocus();
+//			break;
 		case Inv:
 			PacketDispatcher.sendToServer(new OpenGuiMessage(GuiEnum.STONE_INVENTORY));
 			break;
-		case Stone:
-			toggleButton(button);
-			props.setNoFallDamage(((ToggleButton) button).isOn());
-			break;
+		case NoFallDmg:
 		case StoneEthereal:
-			toggleButton(button);
-			break;
 		case StoneGuardian:
-			toggleButton(button);
-			break;
 		case StoneFire:
-			toggleButton(button);
-			break;
 		case Pathfinder:
-			toggleButton(button);
-			break;
 		case PathfinderEthereal:
-			toggleButton(button);
-			break;
 		case PathfinderGuardian:
-			toggleButton(button);
-			break;
 		case PathfinderFire:
-			toggleButton(button);
-			break;
 		case TimeSpace:
-			toggleButton(button);
-			break;
 		case TimeSpaceEthereal:
-			toggleButton(button);
-			break;
 		case TimeSpaceGuardian:
-			toggleButton(button);
-			break;
 		case TimeSpaceFire:
 			toggleButton(button);
+			props.setAbility(btn.getSlot(), ((ToggleButton) button).isOn());
 			break;
 		default:
 			break;
