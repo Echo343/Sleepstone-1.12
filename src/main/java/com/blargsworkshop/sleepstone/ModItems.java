@@ -176,10 +176,11 @@ public class ModItems {
 	}
 
 	public static void initChestLoot() {
+		// This causes an NPE.  Not worth fixing at the moment.
 		//Adjust some of the chests to have higher weights
-		adjustChestWeights(ChestGenHooks.DUNGEON_CHEST, 200);
-		adjustChestWeights(ChestGenHooks.MINESHAFT_CORRIDOR, 300);
-		adjustChestWeights(ChestGenHooks.VILLAGE_BLACKSMITH, 100);
+//		adjustChestWeights(ChestGenHooks.DUNGEON_CHEST, 200);
+//		adjustChestWeights(ChestGenHooks.MINESHAFT_CORRIDOR, 300);
+//		adjustChestWeights(ChestGenHooks.VILLAGE_BLACKSMITH, 100);
 		
 		Set<Item> gems = Utils.getUniqueGems();
 		
@@ -204,17 +205,17 @@ public class ModItems {
 		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(itemSleepstone, 0, 1, 1, 5));
 	}
 	
-	private static void adjustChestWeights(String chestType, int factor) {
-		WeightedRandomChestContent[] chestItems = ChestGenHooks.getItems(chestType, null);
-		int totalChestWeight = 0 ;
-		for (WeightedRandomChestContent item : chestItems) {
-			totalChestWeight += item.itemWeight;
-		}
-		if (totalChestWeight < factor) {
-			int weightFactor = (factor / totalChestWeight) + 1;
-			for (WeightedRandomChestContent item : chestItems) {
-				item.itemWeight *= weightFactor;
-			}
-		}
-	}
+//	private static void adjustChestWeights(String chestType, int factor) {
+//		WeightedRandomChestContent[] chestItems = ChestGenHooks.getItems(chestType, null);
+//		int totalChestWeight = 0 ;
+//		for (WeightedRandomChestContent item : chestItems) {
+//			totalChestWeight += item.itemWeight;
+//		}
+//		if (totalChestWeight < factor) {
+//			int weightFactor = (factor / totalChestWeight) + 1;
+//			for (WeightedRandomChestContent item : chestItems) {
+//				item.itemWeight *= weightFactor;
+//			}
+//		}
+//	}
 }
