@@ -52,7 +52,7 @@ public class CommandMessage extends AbstractServerMessage<CommandMessage> {
 			Utils.addChatMessage(player, "text.sleepstone.suffering_effects_of_warping");
 		}
 		else {
-			Sleepstone.warpPlayerToBed(player, player.getEntityWorld());
+			Sleepstone.warpPlayerToBed(player);
 		}
 	}
 }

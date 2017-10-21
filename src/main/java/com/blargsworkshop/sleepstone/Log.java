@@ -82,4 +82,8 @@ public class Log {
 			Utils.addUnlocalizedChatMessage(player, str);
 		}
 	}
+	
+	public static void checkSide(EntityPlayer player) {
+		debug("This is on side: " + (player.worldObj.isRemote ? "client" : "server"), player);
+	}
 }

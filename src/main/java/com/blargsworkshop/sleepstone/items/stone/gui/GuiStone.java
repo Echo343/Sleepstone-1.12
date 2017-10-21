@@ -24,7 +24,6 @@ import net.minecraft.util.ResourceLocation;
 public class GuiStone extends GuiScreen {
 	
 	protected static enum Buttons {
-//		Warp,
 		NoFallDmg(Slots.Stone),
 		TimeSpace(Slots.TimeSpace),
 		Pathfinder(Slots.Pathfinder),
@@ -160,9 +159,7 @@ public class GuiStone extends GuiScreen {
 			this.buttonList.add(button);
 		}
 		
-//		GuiButton warpButton = new BasicButton(Buttons.Warp, (this.width - 70) / 2, (this.height - 20) / 2, 70, Utils.localize("text.guistone.warp"));
 		GuiButton invButton = new BasicButton(Buttons.Inv, left + xSize - 40, top + ySize - 30, 20, Utils.localize("text.guistone.inv"));
-//		this.buttonList.add(warpButton);
 		this.buttonList.add(invButton); // TODO Use an icon of some sort.
 	}
 	
@@ -189,10 +186,6 @@ public class GuiStone extends GuiScreen {
 		Buttons btn = (Buttons)((BasicButton)button).getButtonType();
 				
 		switch (btn) {
-//		case Warp:
-//			PacketDispatcher.sendToServer(new CommandMessage(Commands.Warp));
-//			this.mc.setIngameFocus();
-//			break;
 		case Inv:
 			PacketDispatcher.sendToServer(new OpenGuiMessage(GuiEnum.STONE_INVENTORY));
 			break;

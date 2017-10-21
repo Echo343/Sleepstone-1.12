@@ -81,5 +81,5 @@ public class Utils {
 			gemSet.add(gem.getItem());
 		}
 		return gemSet;
-	}	
+	}
 }
