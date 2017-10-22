@@ -1,5 +1,7 @@
 package com.blargsworkshop.sleepstone;
 
+import com.blargsworkshop.sleepstone.utility.Utils;
+
 import net.minecraft.entity.player.EntityPlayer;
 
 public class Log {

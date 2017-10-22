@@ -4,9 +4,9 @@ import com.blargsworkshop.sleepstone.Log;
 import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.NovelPotion;
 import com.blargsworkshop.sleepstone.SleepstoneMod;
-import com.blargsworkshop.sleepstone.Utils;
 import com.blargsworkshop.sleepstone.gui.GuiEnum;
 import com.blargsworkshop.sleepstone.items.BaseItem;
+import com.blargsworkshop.sleepstone.utility.Utils;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -45,7 +45,8 @@ public class Sleepstone extends BaseItem {
 				}
 				else {
 					// Warp after channeling
-					player.setItemInUse(item, item.getMaxItemUseDuration());
+//					player.setItemInUse(item, item.getMaxItemUseDuration());
+					
 				}
 			}
 		}

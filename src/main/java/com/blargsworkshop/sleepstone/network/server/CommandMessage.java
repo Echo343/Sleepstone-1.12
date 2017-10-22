@@ -3,9 +3,9 @@ package com.blargsworkshop.sleepstone.network.server;
 import java.io.IOException;
 
 import com.blargsworkshop.sleepstone.NovelPotion;
-import com.blargsworkshop.sleepstone.Utils;
 import com.blargsworkshop.sleepstone.items.stone.Sleepstone;
 import com.blargsworkshop.sleepstone.network.AbstractMessage.AbstractServerMessage;
+import com.blargsworkshop.sleepstone.utility.Utils;
 
 import cpw.mods.fml.relauncher.Side;
 import net.minecraft.entity.player.EntityPlayer;

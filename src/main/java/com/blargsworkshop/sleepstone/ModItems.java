@@ -14,6 +14,7 @@ import com.blargsworkshop.sleepstone.items.gems.support.EnderShard;
 import com.blargsworkshop.sleepstone.items.gems.support.PathfinderCraftable;
 import com.blargsworkshop.sleepstone.items.gems.support.StoneCraftable;
 import com.blargsworkshop.sleepstone.items.stone.Sleepstone;
+import com.blargsworkshop.sleepstone.utility.Utils;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.creativetab.CreativeTabs;

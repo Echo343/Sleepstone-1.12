@@ -1,9 +1,9 @@
 package com.blargsworkshop.sleepstone.events;
 
 import com.blargsworkshop.sleepstone.Log;
-import com.blargsworkshop.sleepstone.Utils;
 import com.blargsworkshop.sleepstone.extended_properties.ExtendedPlayer;
 import com.blargsworkshop.sleepstone.items.stone.Slots;
+import com.blargsworkshop.sleepstone.utility.Utils;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.player.EntityPlayer;

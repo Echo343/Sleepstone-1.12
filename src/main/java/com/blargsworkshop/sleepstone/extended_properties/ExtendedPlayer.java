@@ -4,12 +4,12 @@ import java.util.EnumMap;
 import java.util.Map.Entry;
 
 import com.blargsworkshop.sleepstone.Log;
-import com.blargsworkshop.sleepstone.Utils;
 import com.blargsworkshop.sleepstone.items.stone.Slots;
 import com.blargsworkshop.sleepstone.network.PacketDispatcher;
 import com.blargsworkshop.sleepstone.network.bidirectional.SyncAllPlayerPropsMessage;
 import com.blargsworkshop.sleepstone.network.bidirectional.SyncPlayerBondedIdMessage;
 import com.blargsworkshop.sleepstone.network.bidirectional.SyncPlayerPropMessage;
+import com.blargsworkshop.sleepstone.utility.Utils;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;

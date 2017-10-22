@@ -1,18 +1,23 @@
-package com.blargsworkshop.sleepstone;
+package com.blargsworkshop.sleepstone.utility;
 
 import java.util.HashSet;
 import java.util.Set;
 
+import com.blargsworkshop.sleepstone.Log;
+import com.blargsworkshop.sleepstone.ModItems;
 import com.blargsworkshop.sleepstone.extended_properties.ExtendedPlayer;
 import com.blargsworkshop.sleepstone.items.stone.Slots;
 import com.blargsworkshop.sleepstone.items.stone.StoneInventory;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 
 public class Utils {
 
@@ -81,5 +86,23 @@ public class Utils {
 			gemSet.add(gem.getItem());
 		}
 		return gemSet;
+	}
+	
+	public static void teleportPlayerToDimension(EntityPlayer player, int dimension, double x, double y, double z) {
+		int oldDimension = player.worldObj.provider.dimensionId;
+		EntityPlayerMP playerMP = (EntityPlayerMP) player;
+		MinecraftServer server = playerMP.mcServer;
+		WorldServer worldServer = server.worldServerForDimension(dimension);
+		player.addExperienceLevel(0);
+		
+		playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, dimension, new SimpleTeleporter(worldServer, x, y, z));
+		player.setPositionAndUpdate(x, y, z);
+		if (oldDimension == 1) {
+			// For some reason teleporting out of the End does weird things.
+			player.setPositionAndUpdate(x, y, z);
+			worldServer.spawnEntityInWorld(player);
+			worldServer.updateEntityWithOptionalForce(player, false);
+		}
+		
 	}
 }

@@ -4,7 +4,6 @@ import org.lwjgl.opengl.GL11;
 
 import com.blargsworkshop.sleepstone.Log;
 import com.blargsworkshop.sleepstone.ModInfo;
-import com.blargsworkshop.sleepstone.Utils;
 import com.blargsworkshop.sleepstone.extended_properties.ExtendedPlayer;
 import com.blargsworkshop.sleepstone.gui.GuiEnum;
 import com.blargsworkshop.sleepstone.gui.buttons.BasicButton;
@@ -14,6 +13,7 @@ import com.blargsworkshop.sleepstone.items.stone.Slots;
 import com.blargsworkshop.sleepstone.items.stone.StoneInventory;
 import com.blargsworkshop.sleepstone.network.PacketDispatcher;
 import com.blargsworkshop.sleepstone.network.server.OpenGuiMessage;
+import com.blargsworkshop.sleepstone.utility.Utils;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;

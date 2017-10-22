@@ -1,11 +1,11 @@
 package com.blargsworkshop.sleepstone.gui;
 
-import com.blargsworkshop.sleepstone.Utils;
 import com.blargsworkshop.sleepstone.extended_properties.ExtendedPlayer;
 import com.blargsworkshop.sleepstone.items.stone.StoneContainer;
 import com.blargsworkshop.sleepstone.items.stone.StoneInventory;
 import com.blargsworkshop.sleepstone.items.stone.gui.GuiStone;
 import com.blargsworkshop.sleepstone.items.stone.gui.GuiStoneInventory;
+import com.blargsworkshop.sleepstone.utility.Utils;
 
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;

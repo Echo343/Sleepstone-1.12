@@ -1,6 +1,6 @@
 package com.blargsworkshop.sleepstone.gui.buttons;
 
-import com.blargsworkshop.sleepstone.Utils;
+import com.blargsworkshop.sleepstone.utility.Utils;
 
 import net.minecraft.util.EnumChatFormatting;
 
