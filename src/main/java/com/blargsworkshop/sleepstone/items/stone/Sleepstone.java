@@ -46,7 +46,9 @@ public class Sleepstone extends BaseItem {
 				else {
 					// Warp after channeling
 //					player.setItemInUse(item, item.getMaxItemUseDuration());
-					
+					if (Utils.isServer(player.worldObj)) {
+						player.travelToDimension(1);
+					}
 				}
 			}
 		}

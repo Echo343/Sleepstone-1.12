@@ -16,6 +16,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
@@ -88,18 +89,22 @@ public class Utils {
 		return gemSet;
 	}
 	
-	public static void teleportPlayerToDimension(EntityPlayer player, int dimension, double x, double y, double z) {
+	public static void teleportPlayerToDimension(EntityPlayer player, int dimension) {
+		if (Utils.isClient(player.worldObj)) { return; }
+		
 		int oldDimension = player.worldObj.provider.dimensionId;
 		EntityPlayerMP playerMP = (EntityPlayerMP) player;
 		MinecraftServer server = playerMP.mcServer;
 		WorldServer worldServer = server.worldServerForDimension(dimension);
+		ChunkCoordinates chunkcoordinates = worldServer.getSpawnPoint();
 		player.addExperienceLevel(0);
 		
-		playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, dimension, new SimpleTeleporter(worldServer, x, y, z));
-		player.setPositionAndUpdate(x, y, z);
+		SimpleTeleporter teleporter = new SimpleTeleporter(worldServer, chunkcoordinates.posX, chunkcoordinates.posY, chunkcoordinates.posZ);
+		playerMP.mcServer.getConfigurationManager().transferPlayerToDimension(playerMP, dimension, teleporter);
+		player.setPositionAndUpdate(chunkcoordinates.posX, chunkcoordinates.posY, chunkcoordinates.posZ);
 		if (oldDimension == 1) {
 			// For some reason teleporting out of the End does weird things.
-			player.setPositionAndUpdate(x, y, z);
+			player.setPositionAndUpdate(chunkcoordinates.posX, chunkcoordinates.posY, chunkcoordinates.posZ);
 			worldServer.spawnEntityInWorld(player);
 			worldServer.updateEntityWithOptionalForce(player, false);
 		}
