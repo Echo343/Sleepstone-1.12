@@ -43,40 +43,40 @@ text.guistoneinventory.inventory=Inventory
 text.guistone.inv=Inv
 text.guistone.sleepstone_attunes_to_you=The Sleepstone glows brightly as it attunes to you.
 
-text.guistone.stone_button=Stone Gem
-text.guistone.stone_tooltip=The Stone Gem imbues the power of preventing fall damage.
+text.guistone.stone_button=Stone Feet
+text.guistone.stone_tooltip=When the player falls too hard, the Stone Gem near instantly transforms the player's feet and most of their skeletal structure to rock, hard, stone - allowing the player to fall unhindered from great heights.
 
-text.guistone.pathfinder_button=Pathfinder Gem
-text.guistone.pathfinder_tooltip=The Pathfinder Gem allows the wielder to travel long distances without becoming hungry.
+text.guistone.pathfinder_button=Pathfinder
+text.guistone.pathfinder_tooltip=Those holding the power of the Pathfinder Gem, find themselves becoming true Pathfinder being able to travel farther without tiring or falling to hunger as often.
 
-text.guistone.timespace_button=Time & Space Gem
-text.guistone.timespace_tooltip=The Time & Space Gem allows the player to move through time more quickly than normal.
+text.guistone.timespace_button=Chronowalker
+text.guistone.timespace_tooltip=The Time & Space Gem imbues the power to travel the threads of time and space.  A player using this gem will find they are able to travel forward through time at a faster pace.
 
-text.guistone.stone_ethereal_button=Ethereal Gem
-text.guistone.stone_ethereal_tooltip=Does something.
+text.guistone.stone_ethereal_button=Ethereal Phasing
+text.guistone.stone_ethereal_tooltip=When combined with the Stone Gem, the Ethereal Gem allows the player to phase through solid stone.  Be wary, as you never know what is beyond the next wall.
 
-text.guistone.stone_guardian_button=Guardian Gem
-text.guistone.stone_guardian_tooltip=Does something.
+text.guistone.stone_guardian_button=Rock Wall
+text.guistone.stone_guardian_tooltip=In a pinch, the player can summon the stone beneath their feet to surround themselves and their allies in a protective stone barrier.  The last mage to use this gem lost his finger by being too close to wall as it formed.  
 
-text.guistone.stone_fire_button=Fire Gem
-text.guistone.stone_fire_tooltip=Does something.
+text.guistone.stone_fire_button=Lavawalker
+text.guistone.stone_fire_tooltip=The Fire Gem allows the powers of the Lavawalkers of old.  Using this gem, a player can walk across the very lava that would burn them.  Oddly, this gem does not grant fire resistance.
 
-text.guistone.timespace_ethereal_button=Ethereal Gem
+text.guistone.timespace_ethereal_button=Ethereal Beacon
 text.guistone.timespace_ethereal_tooltip=Does something.
 
-text.guistone.timespace_guardian_button=Guardian Gem
-text.guistone.timespace_guardian_tooltip=Does something.
+text.guistone.timespace_guardian_button=Chroniton Jump
+text.guistone.timespace_guardian_tooltip=The fastest way to aid your allies is to jump through time & space to stand (or fall) by their side.  When matched with the Time & Space gem, the Guardian gem locks onto the chroniton signature of the friend you are thinking about, bring you to their location almost instantly.
 
-text.guistone.timespace_fire_button=Fire Gem
-text.guistone.timespace_fire_tooltip=Does something.
+text.guistone.timespace_fire_button=Helljump
+text.guistone.timespace_fire_tooltip=This gem puts the player in the ranks of all those known as Helljumpers.  With the power of Helljumping, the player can instantly navigate to and from the Nether in the blink of an eye.  Be wary, many helljumpers have lost their lives jumping into a pit of lava.
 
-text.guistone.pathfinder_ethereal_button=Ethereal Gem
-text.guistone.pathfinder_ethereal_tooltip=Does something.
+text.guistone.pathfinder_ethereal_button=High Jump
+text.guistone.pathfinder_ethereal_tooltip=With access to the Ethereal realm, a Pathfinder can use this power to jump great heights above a normal player.  Caution is advised as with great heights come great depths, and broken legs.  
 
-text.guistone.pathfinder_guardian_button=Guardian Gem
-text.guistone.pathfinder_guardian_tooltip=Does something.
+text.guistone.pathfinder_guardian_button=Venom Immunity
+text.guistone.pathfinder_guardian_tooltip=The Guardian gem strives for survival, and the Pathfinder gem seeks adventure.  Combined the two give the power to mine the deep caves of the spiders, and face off against the withered ones.
 
-text.guistone.pathfinder_fire_button=Fire Gem
-text.guistone.pathfinder_fire_tooltip=Does something.
+text.guistone.pathfinder_fire_button=Lenirium
+text.guistone.pathfinder_fire_tooltip=Forge in the magical heat of a Fire gem, Lenirium is a catalyst for a source of great light.
 
 text.guistone.warp=Warp
