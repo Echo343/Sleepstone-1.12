@@ -10,10 +10,12 @@ import com.blargsworkshop.sleepstone.utility.Utils;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
 public class Sleepstone extends BaseItem {
@@ -36,7 +38,11 @@ public class Sleepstone extends BaseItem {
 	public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer player) {
 		if (this.isReadyToUse) {
 			if (!player.isSneaking()) {
-				player.openGui(SleepstoneMod.instance, GuiEnum.STONE.ordinal(), world, (int)player.posX, (int)player.posY, (int)player.posZ);
+//				player.openGui(SleepstoneMod.instance, GuiEnum.STONE.ordinal(), world, (int)player.posX, (int)player.posY, (int)player.posZ);
+				if (Utils.isServer(player.worldObj)) {
+//					player.travelToDimension(1);
+					Utils.transferPlayerToDimension((EntityPlayerMP) player, 0, Vec3.createVectorHelper(100, 100, 100), 0.0);
+				}
 			}
 			else {
 				if (player.isPotionActive(NovelPotion.warpSickness.id)) {
@@ -47,7 +53,8 @@ public class Sleepstone extends BaseItem {
 					// Warp after channeling
 //					player.setItemInUse(item, item.getMaxItemUseDuration());
 					if (Utils.isServer(player.worldObj)) {
-						player.travelToDimension(1);
+//						player.travelToDimension(1);
+						Utils.transferPlayerToDimension((EntityPlayerMP) player, 1, Vec3.createVectorHelper(100, 100, 100), 0.0);
 					}
 				}
 			}
