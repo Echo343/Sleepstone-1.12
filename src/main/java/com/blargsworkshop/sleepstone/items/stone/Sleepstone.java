@@ -4,6 +4,7 @@ import com.blargsworkshop.sleepstone.Log;
 import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.NovelPotion;
 import com.blargsworkshop.sleepstone.items.BaseItem;
+import com.blargsworkshop.sleepstone.utility.SimpleTeleporter;
 import com.blargsworkshop.sleepstone.utility.Utils;
 
 import net.minecraft.entity.Entity;
@@ -13,7 +14,6 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
 public class Sleepstone extends BaseItem {
@@ -39,7 +39,7 @@ public class Sleepstone extends BaseItem {
 //				player.openGui(SleepstoneMod.instance, GuiEnum.STONE.ordinal(), world, (int)player.posX, (int)player.posY, (int)player.posZ);
 				if (Utils.isServer(player.worldObj)) {
 //					player.travelToDimension(1);
-					Utils.transferPlayerToDimension((EntityPlayerMP) player, 0, Vec3.createVectorHelper(100, 100, 100), 0.0);
+					SimpleTeleporter.teleportPlayerToDimension((EntityPlayerMP) player, 0, new ChunkCoordinates(100, 100, 100), 0.0);
 				}
 			}
 			else {
@@ -52,7 +52,7 @@ public class Sleepstone extends BaseItem {
 //					player.setItemInUse(item, item.getMaxItemUseDuration());
 					if (Utils.isServer(player.worldObj)) {
 //						player.travelToDimension(1);
-						Utils.transferPlayerToDimension((EntityPlayerMP) player, 1, Vec3.createVectorHelper(100, 100, 100), 0.0);
+						SimpleTeleporter.teleportPlayerToDimension((EntityPlayerMP) player, 1, new ChunkCoordinates(100, 100, 100), 0.0);
 					}
 				}
 			}

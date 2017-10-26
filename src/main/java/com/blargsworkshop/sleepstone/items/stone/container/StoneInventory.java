@@ -1,6 +1,9 @@
-package com.blargsworkshop.sleepstone.items.stone;
+package com.blargsworkshop.sleepstone.items.stone.container;
 
 import java.util.UUID;
+
+import com.blargsworkshop.sleepstone.items.stone.Sleepstone;
+import com.blargsworkshop.sleepstone.items.stone.Slots;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;

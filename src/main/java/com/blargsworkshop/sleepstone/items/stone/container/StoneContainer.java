@@ -1,6 +1,7 @@
-package com.blargsworkshop.sleepstone.items.stone;
+package com.blargsworkshop.sleepstone.items.stone.container;
 
 import com.blargsworkshop.sleepstone.ModItems;
+import com.blargsworkshop.sleepstone.items.stone.Slots;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

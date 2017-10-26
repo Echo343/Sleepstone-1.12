@@ -1,6 +1,7 @@
-package com.blargsworkshop.sleepstone.items.stone;
+package com.blargsworkshop.sleepstone.items.stone.container;
 
 import com.blargsworkshop.sleepstone.items.gems.Gem;
+import com.blargsworkshop.sleepstone.items.stone.Slots;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;

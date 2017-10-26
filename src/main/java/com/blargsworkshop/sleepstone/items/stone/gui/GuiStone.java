@@ -10,7 +10,7 @@ import com.blargsworkshop.sleepstone.gui.buttons.BasicButton;
 import com.blargsworkshop.sleepstone.gui.buttons.ToggleButton;
 import com.blargsworkshop.sleepstone.gui.buttons.TooltipButton;
 import com.blargsworkshop.sleepstone.items.stone.Slots;
-import com.blargsworkshop.sleepstone.items.stone.StoneInventory;
+import com.blargsworkshop.sleepstone.items.stone.container.StoneInventory;
 import com.blargsworkshop.sleepstone.network.PacketDispatcher;
 import com.blargsworkshop.sleepstone.network.server.OpenGuiMessage;
 import com.blargsworkshop.sleepstone.utility.Utils;

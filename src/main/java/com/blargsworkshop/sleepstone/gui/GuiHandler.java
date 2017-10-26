@@ -1,8 +1,8 @@
 package com.blargsworkshop.sleepstone.gui;
 
 import com.blargsworkshop.sleepstone.extended_properties.ExtendedPlayer;
-import com.blargsworkshop.sleepstone.items.stone.StoneContainer;
-import com.blargsworkshop.sleepstone.items.stone.StoneInventory;
+import com.blargsworkshop.sleepstone.items.stone.container.StoneContainer;
+import com.blargsworkshop.sleepstone.items.stone.container.StoneInventory;
 import com.blargsworkshop.sleepstone.items.stone.gui.GuiStone;
 import com.blargsworkshop.sleepstone.items.stone.gui.GuiStoneInventory;
 import com.blargsworkshop.sleepstone.utility.Utils;

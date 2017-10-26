@@ -3,8 +3,8 @@ package com.blargsworkshop.sleepstone.items.stone.gui;
 import org.lwjgl.opengl.GL11;
 
 import com.blargsworkshop.sleepstone.ModInfo;
-import com.blargsworkshop.sleepstone.items.stone.StoneContainer;
-import com.blargsworkshop.sleepstone.items.stone.StoneInventory;
+import com.blargsworkshop.sleepstone.items.stone.container.StoneContainer;
+import com.blargsworkshop.sleepstone.items.stone.container.StoneInventory;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.client.gui.inventory.GuiContainer;
