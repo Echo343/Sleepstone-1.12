@@ -1,7 +1,6 @@
 package com.blargsworkshop.sleepstone.extended_properties;
 
 import java.util.EnumMap;
-import java.util.Map.Entry;
 
 import com.blargsworkshop.sleepstone.Log;
 import com.blargsworkshop.sleepstone.items.stone.Slots;
@@ -55,11 +54,10 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 	public void saveNBTData(NBTTagCompound compound) {
 		NBTTagCompound properties = new NBTTagCompound();
 		properties.setString(BONDED_ID, this.bondedStoneId);
-		// This for loop should work bc the docs say the .entrySet()
-		// returns the same order every time.
-		for (Entry<Slots, Boolean> prop : abilities.entrySet()) {
-			properties.setBoolean(prop.getKey().name(), prop.getValue());
-		}
+		// This loop should keep the order every time.
+		abilities.forEach((Slots ability, Boolean value) -> {
+			properties.setBoolean(ability.name(), value);
+		});
 		compound.setTag(EXT_PROP_NAME, properties);
 	}
 
@@ -67,10 +65,9 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 	public void loadNBTData(NBTTagCompound compound) {
 		NBTTagCompound properties = (NBTTagCompound) compound.getTag(EXT_PROP_NAME);
 		this.bondedStoneId = properties.getString(BONDED_ID);
-		//TODO not thread safe
-		for (Entry<Slots, Boolean> prop : abilities.entrySet()) {
-			prop.setValue(properties.getBoolean(prop.getKey().name()));
-		}
+		abilities.forEach((Slots ability, Boolean value) -> {
+			value = properties.getBoolean(ability.name());
+		});
 	}
 	
 	public void syncAll() {
@@ -100,18 +97,19 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 	}
 	
 	protected void setAbility(Slots gem, boolean flag, boolean sync) {
-		if (Boolean.valueOf(flag).equals(abilities.get(gem))) {
+		Boolean abilityValue = abilities.get(gem);
+		if (Boolean.valueOf(flag).equals(abilityValue)) {
 			return;
 		}
-		abilities.put(gem, flag);
+		abilityValue = flag;
 		if (sync) {
 			if (Utils.isClient(player.worldObj)) {
-				PacketDispatcher.sendToServer(new SyncPlayerPropMessage(gem, abilities.get(gem)));
-				Log.debug("Setting " + gem + " to " + abilities.get(gem) + " on client and syncing to server", this.player);
+				PacketDispatcher.sendToServer(new SyncPlayerPropMessage(gem, abilityValue));
+				Log.debug("Setting " + gem + " to " + abilityValue + " on client and syncing to server", this.player);
 			}
 			else {
-				PacketDispatcher.sendToPlayer((EntityPlayerMP) player, new SyncPlayerPropMessage(gem, abilities.get(gem)));
-				Log.debug("Setting " + gem + " to " + abilities.get(gem) + " on server and syncing to client", this.player);
+				PacketDispatcher.sendToPlayer((EntityPlayerMP) player, new SyncPlayerPropMessage(gem, abilityValue));
+				Log.debug("Setting " + gem + " to " + abilityValue + " on server and syncing to client", this.player);
 			}
 		}
 	}
