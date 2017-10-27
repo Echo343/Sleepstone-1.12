@@ -31,7 +31,7 @@ public class SimpleTeleporter {
         channel.writeAndFlush(msg).addListener(ChannelFutureListener.FIRE_EXCEPTION_ON_FAILURE);
     }
 	
-	public static void teleportPlayerToDimension(EntityPlayerMP player, int newDimension, ChunkCoordinates p, double a) {
+	public static void teleportPlayerToDimension(EntityPlayerMP player, int newDimension, ChunkCoordinates p) {
         //System.out.printf("SGBaseTE.transferPlayerToDimension: %s to dimension %d\n", repr(player), newDimension);
         MinecraftServer server = MinecraftServer.getServer();
         ServerConfigurationManager scm = server.getConfigurationManager();
@@ -51,11 +51,11 @@ public class SimpleTeleporter {
         		player.theItemInWorldManager.getGameType()));
         oldWorld.removePlayerEntityDangerously(player); // Removes player right now instead of waiting for next tick
         player.isDead = false;
-        player.setLocationAndAngles(p.posX, p.posY, p.posZ, (float)a, player.rotationPitch);
+        player.setLocationAndAngles(p.posX, p.posY, p.posZ, player.rotationYaw, player.rotationPitch);
         newWorld.spawnEntityInWorld(player);
         player.setWorld(newWorld);
         scm.func_72375_a(player, oldWorld); // scmPreparePlayer(scm, player, oldWorld);
-        player.playerNetServerHandler.setPlayerLocation(p.posX, p.posY, p.posZ, (float)a, player.rotationPitch);
+        player.playerNetServerHandler.setPlayerLocation(p.posX, p.posY, p.posZ, player.rotationYaw, player.rotationPitch);
         player.theItemInWorldManager.setWorld(newWorld);
         scm.updateTimeAndWeatherForPlayer(player, newWorld);
         scm.syncPlayerInventory(player);
@@ -68,8 +68,7 @@ public class SimpleTeleporter {
         FMLCommonHandler.instance().firePlayerChangedDimensionEvent(player, oldDimension, newDimension);
 	}
 	
-	static void teleportPlayerWithinDimension(EntityPlayerMP player, ChunkCoordinates p, double rotYaw) {
-        player.rotationYaw = (float) rotYaw;
+	public static void teleportPlayerWithinDimension(EntityPlayerMP player, ChunkCoordinates p) {
         player.setPositionAndUpdate(p.posX, p.posY, p.posZ);
         player.worldObj.updateEntityWithOptionalForce(player, false);
     }

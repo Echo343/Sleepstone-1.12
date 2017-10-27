@@ -9,10 +9,12 @@ import com.blargsworkshop.sleepstone.NovelPotion;
 import com.blargsworkshop.sleepstone.SleepstoneMod;
 import com.blargsworkshop.sleepstone.gui.GuiEnum;
 import com.blargsworkshop.sleepstone.items.BaseItem;
+import com.blargsworkshop.sleepstone.utility.SimpleTeleporter;
 import com.blargsworkshop.sleepstone.utility.Utils;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
@@ -46,7 +48,7 @@ public class Sleepstone extends BaseItem {
 					cooldownTimer.startCooldown(player);
 				}
 				else {
-					// Warp after channeling
+					// Start channeling for warp.
 					player.setItemInUse(item, item.getMaxItemUseDuration());
 				}
 			}
@@ -60,8 +62,8 @@ public class Sleepstone extends BaseItem {
 			Log.debug("Ticks until warp: " + count, player);
 		}
 		if (count <= 1) {
-			if (Utils.isServer(player.worldObj)) {
-				warpPlayerToBed(player);
+			if (Utils.isServer(player.worldObj) && player instanceof EntityPlayerMP) {
+				warpPlayerToBed((EntityPlayerMP) player);
 			}
 			cooldownTimer.startCooldown(player);
 		}
@@ -78,16 +80,20 @@ public class Sleepstone extends BaseItem {
 		}
 	}
 	
-	public static void warpPlayerToBed(EntityPlayer player) {
+	public static void warpPlayerToBed(EntityPlayerMP player) {
 		World world = player.worldObj;
 		if (Utils.isServer(world)) {
+			
 			ChunkCoordinates coord = player.getBedLocation(player.dimension);
 			if (coord != null) {
 				coord = EntityPlayer.verifyRespawnCoordinates(world, coord, false);
 			}
 			if (coord != null) {
+				coord.posX += 0.5;
+				coord.posY += 0.1;
+				coord.posZ += 0.5;
 				world.playSoundAtEntity(player, SOUND_SWOOSH, 1f, 1f);
-				player.setPositionAndUpdate(coord.posX + 0.5, coord.posY + 0.1, coord.posZ + 0.5);
+				SimpleTeleporter.teleportPlayerWithinDimension(player, coord);
 				PotionEffect warpSicknessEffect = new PotionEffect(NovelPotion.warpSickness.id, WARP_SICKNESS_DURATION);
 				warpSicknessEffect.getCurativeItems().clear();
 				player.addPotionEffect(warpSicknessEffect);
