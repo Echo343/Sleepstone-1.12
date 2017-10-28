@@ -2,7 +2,7 @@ package com.blargsworkshop.sleepstone.network.server;
 
 import java.io.IOException;
 
-import com.blargsworkshop.sleepstone.NovelPotion;
+import com.blargsworkshop.sleepstone.ModItems.Potions;
 import com.blargsworkshop.sleepstone.items.stone.Sleepstone;
 import com.blargsworkshop.sleepstone.network.AbstractMessage.AbstractServerMessage;
 import com.blargsworkshop.sleepstone.utility.Utils;
@@ -48,7 +48,7 @@ public class CommandMessage extends AbstractServerMessage<CommandMessage> {
 	}
 	
 	private void warp(EntityPlayerMP player) {
-		if (player.isPotionActive(NovelPotion.warpSickness.id)) {
+		if (player.isPotionActive(Potions.warpSickness.id)) {
 			Utils.addChatMessage(player, "text.sleepstone.suffering_effects_of_warping");
 		}
 		else {

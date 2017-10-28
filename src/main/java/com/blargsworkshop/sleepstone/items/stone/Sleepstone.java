@@ -5,10 +5,11 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import com.blargsworkshop.sleepstone.Log;
 import com.blargsworkshop.sleepstone.ModInfo;
-import com.blargsworkshop.sleepstone.NovelPotion;
+import com.blargsworkshop.sleepstone.ModItems.Potions;
 import com.blargsworkshop.sleepstone.SleepstoneMod;
 import com.blargsworkshop.sleepstone.gui.GuiEnum;
 import com.blargsworkshop.sleepstone.items.BaseItem;
+import com.blargsworkshop.sleepstone.potions.BlargsPotionEffect;
 import com.blargsworkshop.sleepstone.utility.SimpleTeleporter;
 import com.blargsworkshop.sleepstone.utility.Utils;
 
@@ -43,7 +44,7 @@ public class Sleepstone extends BaseItem {
 				player.openGui(SleepstoneMod.instance, GuiEnum.STONE.ordinal(), world, (int) player.posX, (int) player.posY, (int) player.posZ);
 			}
 			else {
-				if (player.isPotionActive(NovelPotion.warpSickness.id)) {
+				if (player.isPotionActive(Potions.warpSickness.id)) {
 					Utils.addChatMessage(player, "text.sleepstone.suffering_effects_of_warping");
 					cooldownTimer.startCooldown(player);
 				}
@@ -94,7 +95,7 @@ public class Sleepstone extends BaseItem {
 				coord.posZ += 0.5;
 				world.playSoundAtEntity(player, SOUND_SWOOSH, 1f, 1f);
 				SimpleTeleporter.teleportPlayerWithinDimension(player, coord);
-				PotionEffect warpSicknessEffect = new PotionEffect(NovelPotion.warpSickness.id, WARP_SICKNESS_DURATION);
+				PotionEffect warpSicknessEffect = new BlargsPotionEffect(Potions.warpSickness.id, WARP_SICKNESS_DURATION);
 				warpSicknessEffect.getCurativeItems().clear();
 				player.addPotionEffect(warpSicknessEffect);
 				world.playSoundAtEntity(player, SOUND_TELEPORT, 1f, 1f);

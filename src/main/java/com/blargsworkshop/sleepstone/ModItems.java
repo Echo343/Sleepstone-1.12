@@ -1,5 +1,7 @@
 package com.blargsworkshop.sleepstone;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.Set;
 
 import com.blargsworkshop.sleepstone.gui.TextureItem;
@@ -14,6 +16,7 @@ import com.blargsworkshop.sleepstone.items.gems.support.EnderShard;
 import com.blargsworkshop.sleepstone.items.gems.support.PathfinderCraftable;
 import com.blargsworkshop.sleepstone.items.gems.support.StoneCraftable;
 import com.blargsworkshop.sleepstone.items.stone.Sleepstone;
+import com.blargsworkshop.sleepstone.potions.WarpSicknessPotion;
 import com.blargsworkshop.sleepstone.utility.Utils;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -22,6 +25,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
 
@@ -47,6 +51,10 @@ public class ModItems {
 	public static Item textureGemSlotFire = new TextureItem("textureGemSlotFire", ModInfo.ID + ":slot-gem-fire");
 	public static Item textureGemSlotGuardian = new TextureItem("textureGemSlotGuardian", ModInfo.ID + ":slot-gem-guardian");
 	public static Item textureGemSlotEthereal = new TextureItem("textureGemSlotEthereal", ModInfo.ID + ":slot-gem-ethereal");
+	
+	public static class Potions {
+		public static WarpSicknessPotion warpSickness;
+	}
 	
 	public static void init() {
 		GameRegistry.registerItem(itemSleepstone = new Sleepstone(), "modItemSleepstone");
@@ -174,6 +182,48 @@ public class ModItems {
 				return ModItems.itemSleepstone;
 			}
 		};
+	}
+	
+	/**
+	 * Recreates the potion array to make it longer.
+	 * Also init's our custom potions.
+	 * Note: I think a later version of Forge handles this for us.
+	 */
+	public static void preInitPotions() {
+		Log.detail("Potions Start - length: " + Potion.potionTypes.length);
+		Potion[] potionTypes = null;
+		for (Field field : Potion.class.getDeclaredFields()) {
+			field.setAccessible(true);
+			try {
+				if (field.getName().equalsIgnoreCase("potionTypes")
+						|| field.getName().equalsIgnoreCase("field_76425_a")) {
+					Field modField = Field.class.getDeclaredField("modifiers");
+					modField.setAccessible(true);
+					modField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
+					potionTypes = (Potion[]) field.get(null);
+					final Potion[] newPotionTypes = new Potion[256];
+					System.arraycopy(potionTypes, 0, newPotionTypes, 0, potionTypes.length);
+					field.set(null, newPotionTypes);
+					break;
+				}
+			} catch (Exception exc) {
+				System.err.println("Error (reflection) - " + exc);
+				System.out.println("Error with PotionTypes - " + exc);
+			}
+		}
+		Log.detail("Potions End - length: " + Potion.potionTypes.length);
+
+		int warpSicknessId = -1;
+		for (int i = 0; i < Potion.potionTypes.length; i++) {
+			if (Potion.potionTypes[i] == null) {
+				warpSicknessId = i;
+				break;
+			}
+		}
+		if (warpSicknessId == -1) {
+			throw new IndexOutOfBoundsException();
+		}
+		Potions.warpSickness = new WarpSicknessPotion(warpSicknessId, false, 0);
 	}
 
 	public static void initChestLoot() {

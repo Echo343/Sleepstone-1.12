@@ -25,6 +25,8 @@ public class CommonProxy implements IProxy {
 
     @Override
     public void init(FMLInitializationEvent e) {
+		ModItems.preInitPotions();
+		
     	// Event Handlers
     	MinecraftForge.EVENT_BUS.register(new MainEventHandler());
 //    	FMLCommonHandler.instance().bus().register(new FMLEventHandler());
