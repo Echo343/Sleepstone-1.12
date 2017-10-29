@@ -8,18 +8,22 @@ public class BlargsPotionEffect extends PotionEffect {
 
 	public BlargsPotionEffect(PotionEffect potionEffect) {
 		super(potionEffect);
+		this.getCurativeItems().clear();
 	}
 
 	public BlargsPotionEffect(int potionId, int duration) {
 		super(potionId, duration);
+		this.getCurativeItems().clear();
 	}
 
 	public BlargsPotionEffect(int potionId, int duration, int amplifier) {
 		super(potionId, duration, amplifier);
+		this.getCurativeItems().clear();
 	}
 
 	public BlargsPotionEffect(int potionId, int duration, int amplifier, boolean isAmbient) {
 		super(potionId, duration, amplifier, isAmbient);
+		this.getCurativeItems().clear();
 	}
 	
 	@Override
