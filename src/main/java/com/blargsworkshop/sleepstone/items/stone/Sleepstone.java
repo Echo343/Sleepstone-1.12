@@ -134,7 +134,7 @@ public class Sleepstone extends BaseItem {
 		public void nextTick(EntityPlayer player) {
 			Integer count = timers.get(player.getDisplayName());
 			if (count != null && count > 0) {
-				count--;
+				timers.put(player.getDisplayName(), --count);
 			}
 		}
 	}

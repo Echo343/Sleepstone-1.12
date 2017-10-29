@@ -66,7 +66,7 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 		NBTTagCompound properties = (NBTTagCompound) compound.getTag(EXT_PROP_NAME);
 		this.bondedStoneId = properties.getString(BONDED_ID);
 		abilities.forEach((Slots ability, Boolean value) -> {
-			value = properties.getBoolean(ability.name());
+			abilities.put(ability, properties.getBoolean(ability.name()));
 		});
 	}
 	
@@ -102,6 +102,7 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 			return;
 		}
 		abilityValue = flag;
+		abilities.put(gem, abilityValue);
 		if (sync) {
 			if (Utils.isClient(player.worldObj)) {
 				PacketDispatcher.sendToServer(new SyncPlayerPropMessage(gem, abilityValue));

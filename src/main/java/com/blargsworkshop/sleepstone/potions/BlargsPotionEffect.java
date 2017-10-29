@@ -6,36 +6,39 @@ import net.minecraft.potion.PotionEffect;
 
 public class BlargsPotionEffect extends PotionEffect {
 
-	public BlargsPotionEffect(PotionEffect p_i1577_1_) {
-		super(p_i1577_1_);
-		// TODO Auto-generated constructor stub
+	public BlargsPotionEffect(PotionEffect potionEffect) {
+		super(potionEffect);
 	}
 
-	public BlargsPotionEffect(int p_i1574_1_, int p_i1574_2_) {
-		super(p_i1574_1_, p_i1574_2_);
-		// TODO Auto-generated constructor stub
+	public BlargsPotionEffect(int potionId, int duration) {
+		super(potionId, duration);
 	}
 
-	public BlargsPotionEffect(int p_i1575_1_, int p_i1575_2_, int p_i1575_3_) {
-		super(p_i1575_1_, p_i1575_2_, p_i1575_3_);
-		// TODO Auto-generated constructor stub
+	public BlargsPotionEffect(int potionId, int duration, int amplifier) {
+		super(potionId, duration, amplifier);
 	}
 
-	public BlargsPotionEffect(int p_i1576_1_, int p_i1576_2_, int p_i1576_3_, boolean p_i1576_4_) {
-		super(p_i1576_1_, p_i1576_2_, p_i1576_3_, p_i1576_4_);
-		// TODO Auto-generated constructor stub
+	public BlargsPotionEffect(int potionId, int duration, int amplifier, boolean isAmbient) {
+		super(potionId, duration, amplifier, isAmbient);
 	}
 	
 	@Override
 	public boolean onUpdate(EntityLivingBase entity) {
 		// Potion Effect is about to end.  Do something cool.
 		if (this.getDuration() == 1) {
-			Potion p = Potion.potionTypes[this.getPotionID()];
-			if (p instanceof BlargsPotion) {
-				((BlargsPotion) p).onFinishedPotion(entity, this.getDuration(), this.getAmplifier());
-			}
+			onFinishedPotionEffect(entity);
 		}
 		return super.onUpdate(entity);
+	}
+
+	/**
+	 * @param entity
+	 */
+	protected void onFinishedPotionEffect(EntityLivingBase entity) {
+		Potion p = Potion.potionTypes[this.getPotionID()];
+		if (p instanceof BlargsPotion) {
+			((BlargsPotion) p).onFinishedPotion(entity, this.getDuration(), this.getAmplifier());
+		}
 	}
 
 }

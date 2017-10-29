@@ -34,6 +34,7 @@ text.sleepstone.bed_destroyed=Your bed seems to have been destroyed. :'-(
 text.sleepstone.suffering_effects_of_warping=You are still suffering the effects of Warping.
 
 potion.warpingsickness=Warp Sickness
+potion.endershard=Unstable Ender Field
 
 text.toggle_button.off=Off
 text.toggle_button.on=On
