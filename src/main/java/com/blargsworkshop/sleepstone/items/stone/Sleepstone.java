@@ -24,7 +24,8 @@ import net.minecraft.world.World;
 
 public class Sleepstone extends BaseItem {
 	
-	private static final int WARP_SICKNESS_DURATION = (Log.Level == LogLevel.Debug || Log.Level == LogLevel.Detail) ? 20*10 : 20*60*10;
+	private static final int WARP_SICKNESS_DURATION = (Log.Level == LogLevel.Debug || Log.Level == LogLevel.Detail) ? 20 * 10 : 20 * 60 * 10;
+	private static final int WARP_CHANNEL_DURATION = 20 * 4;
 	private static final String SOUND_TELEPORT = ModInfo.ID + ":" + "Teleport";
 	private static final String SOUND_SWOOSH = ModInfo.ID + ":" + "Swoosh";
 	private static final String TEXTURE_SLEEPSTONE = ModInfo.ID + ":sleepy";
@@ -109,7 +110,7 @@ public class Sleepstone extends BaseItem {
 	@Override
 	public int getMaxItemUseDuration(ItemStack stack) {
 		// return any value greater than zero
-		return 20 * 4; // 4 seconds
+		return WARP_CHANNEL_DURATION;
 	}
 
 	@Override

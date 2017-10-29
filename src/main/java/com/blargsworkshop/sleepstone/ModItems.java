@@ -16,6 +16,7 @@ import com.blargsworkshop.sleepstone.items.gems.support.EnderShard;
 import com.blargsworkshop.sleepstone.items.gems.support.PathfinderCraftable;
 import com.blargsworkshop.sleepstone.items.gems.support.StoneCraftable;
 import com.blargsworkshop.sleepstone.items.stone.Sleepstone;
+import com.blargsworkshop.sleepstone.potions.EnderShardPotion;
 import com.blargsworkshop.sleepstone.potions.WarpSicknessPotion;
 import com.blargsworkshop.sleepstone.utility.Utils;
 
@@ -54,6 +55,7 @@ public class ModItems {
 	
 	public static class Potions {
 		public static WarpSicknessPotion warpSickness;
+		public static EnderShardPotion enderShardWarp;
 	}
 	
 	public static void init() {
@@ -214,16 +216,23 @@ public class ModItems {
 		Log.detail("Potions End - length: " + Potion.potionTypes.length);
 
 		int warpSicknessId = -1;
+		int enderShardPotionId = -1;
 		for (int i = 0; i < Potion.potionTypes.length; i++) {
 			if (Potion.potionTypes[i] == null) {
-				warpSicknessId = i;
-				break;
+				if (warpSicknessId != -1) {
+					enderShardPotionId = i;
+					break;
+				}
+				else {
+					warpSicknessId = i;
+				}
 			}
 		}
-		if (warpSicknessId == -1) {
+		if (warpSicknessId == -1 || enderShardPotionId == -1) {
 			throw new IndexOutOfBoundsException();
 		}
 		Potions.warpSickness = new WarpSicknessPotion(warpSicknessId, false, 0);
+		Potions.enderShardWarp = new EnderShardPotion(enderShardPotionId, false, 0);
 	}
 
 	public static void initChestLoot() {

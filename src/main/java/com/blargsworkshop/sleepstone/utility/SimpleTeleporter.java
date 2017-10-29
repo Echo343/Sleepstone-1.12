@@ -21,6 +21,32 @@ import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.network.ForgeMessage;
 
 public class SimpleTeleporter {
+	public static enum Dimension {
+		Nether(-1),
+		Overworld(0),
+		End(1);
+		
+		private int id;
+		
+		Dimension(int id) {
+			this.id = id;
+		}
+		
+		public int getId() {
+			return this.id;
+		}
+		
+		public static Dimension getDimensionFromInt(int dimensionId) {
+			Dimension result = null;
+			for (Dimension dim : Dimension.values()) {
+				if (dim.getId() == dimensionId) {
+					result = dim;
+					break;
+				}
+			}
+			return result;
+		}
+	}
 
 	static void sendDimensionRegister(EntityPlayerMP player, int dimensionID) {
         int providerID = DimensionManager.getProviderType(dimensionID);
@@ -31,7 +57,8 @@ public class SimpleTeleporter {
         channel.writeAndFlush(msg).addListener(ChannelFutureListener.FIRE_EXCEPTION_ON_FAILURE);
     }
 	
-	public static void teleportPlayerToDimension(EntityPlayerMP player, int newDimension, ChunkCoordinates p) {
+	public static void teleportPlayerToDimension(EntityPlayerMP player, Dimension destDimension, ChunkCoordinates p) {
+		int newDimension = destDimension.getId();
         //System.out.printf("SGBaseTE.transferPlayerToDimension: %s to dimension %d\n", repr(player), newDimension);
         MinecraftServer server = MinecraftServer.getServer();
         ServerConfigurationManager scm = server.getConfigurationManager();
