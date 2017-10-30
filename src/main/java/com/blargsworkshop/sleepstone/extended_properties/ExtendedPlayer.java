@@ -21,6 +21,8 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 	public final static String EXT_PROP_NAME = "ExtendedPlayer";
 
 	private String bondedStoneId = "";
+	// TODO might need to make this thread-safe?
+	// At the moment, I don't think it is needed since the structure will not change.
 	private EnumMap<Slots, Boolean> abilities = new EnumMap<Slots, Boolean>(Slots.class);
 	
 	private final EntityPlayer player;
@@ -96,21 +98,19 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 		setAbility(gem, flag, false);
 	}
 	
-	protected void setAbility(Slots gem, boolean flag, boolean sync) {
-		Boolean abilityValue = abilities.get(gem);
-		if (Boolean.valueOf(flag).equals(abilityValue)) {
+	protected void setAbility(Slots gem, boolean value, boolean sync) {
+		if (Boolean.valueOf(value).equals(abilities.get(gem))) {
 			return;
 		}
-		abilityValue = flag;
-		abilities.put(gem, abilityValue);
+		abilities.put(gem, value);
 		if (sync) {
 			if (Utils.isClient(player.worldObj)) {
-				PacketDispatcher.sendToServer(new SyncPlayerPropMessage(gem, abilityValue));
-				Log.debug("Setting " + gem + " to " + abilityValue + " on client and syncing to server", this.player);
+				PacketDispatcher.sendToServer(new SyncPlayerPropMessage(gem, value));
+				Log.debug("Setting " + gem + " to " + value + " on client and syncing to server", this.player);
 			}
 			else {
-				PacketDispatcher.sendToPlayer((EntityPlayerMP) player, new SyncPlayerPropMessage(gem, abilityValue));
-				Log.debug("Setting " + gem + " to " + abilityValue + " on server and syncing to client", this.player);
+				PacketDispatcher.sendToPlayer((EntityPlayerMP) player, new SyncPlayerPropMessage(gem, value));
+				Log.debug("Setting " + gem + " to " + value + " on server and syncing to client", this.player);
 			}
 		}
 	}
