@@ -61,5 +61,6 @@ public class MainEventHandler {
 		MobDrops.handleGlobalGemDropRates(event);
 		MobDrops.handleFireGemDropRates(event);
 		MobDrops.handleEtherealGemDropRates(event);
+		MobDrops.handleEnderShardDropRates(event);
 	}
 }

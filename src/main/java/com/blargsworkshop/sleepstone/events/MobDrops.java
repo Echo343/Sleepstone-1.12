@@ -6,11 +6,10 @@ import com.blargsworkshop.sleepstone.items.stone.Slots;
 import net.minecraft.entity.EntityFlying;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySlime;
-import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 
 public class MobDrops {
@@ -48,9 +47,18 @@ public class MobDrops {
 
 	public static void handleEtherealGemDropRates(LivingDropsEvent event) {
 		EntityLivingBase mob = event.entityLiving;
-		if (mob instanceof EntitySpider && mob.isPotionActive(Potion.invisibility)) {
-			ItemStack etherealGem = new ItemStack(ModItems.itemEtherealGem);
-			event.drops.add(new EntityItem(mob.worldObj, mob.posX, mob.posY, mob.posZ, etherealGem));
+		// TODO 12.2 include ender mites
+		if (mob instanceof EntityEnderman) {
+			double dropChance = Math.random();
+			// ~7% drop chance (1/15)
+			if (dropChance <= 0.067) {
+				ItemStack enderShard = new ItemStack(ModItems.itemEnderShard);
+				event.drops.add(new EntityItem(mob.worldObj, mob.posX, mob.posY, mob.posZ, enderShard));
+			}
 		}
+	}
+	
+	public static void handleEnderShardDropRates(LivingDropsEvent event) {
+		
 	}
 }
