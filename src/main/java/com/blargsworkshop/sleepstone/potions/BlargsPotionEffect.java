@@ -1,29 +1,32 @@
 package com.blargsworkshop.sleepstone.potions;
 
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 
-public class BlargsPotionEffect extends PotionEffect {
+public abstract class BlargsPotionEffect extends PotionEffect {
 
 	public BlargsPotionEffect(PotionEffect potionEffect) {
 		super(potionEffect);
-		this.getCurativeItems().clear();
+		init();
 	}
 
 	public BlargsPotionEffect(int potionId, int duration) {
 		super(potionId, duration);
-		this.getCurativeItems().clear();
+		init();
 	}
 
 	public BlargsPotionEffect(int potionId, int duration, int amplifier) {
 		super(potionId, duration, amplifier);
-		this.getCurativeItems().clear();
+		init();
 	}
 
 	public BlargsPotionEffect(int potionId, int duration, int amplifier, boolean isAmbient) {
 		super(potionId, duration, amplifier, isAmbient);
-		this.getCurativeItems().clear();
+		init();
+	}
+	
+	private void init() {
+		this.getCurativeItems().clear();		
 	}
 	
 	@Override
@@ -38,11 +41,12 @@ public class BlargsPotionEffect extends PotionEffect {
 	/**
 	 * @param entity
 	 */
-	protected void onFinishedPotionEffect(EntityLivingBase entity) {
-		Potion p = Potion.potionTypes[this.getPotionID()];
-		if (p instanceof BlargsPotion) {
-			((BlargsPotion) p).onFinishedPotion(entity, this.getDuration(), this.getAmplifier());
-		}
-	}
+	protected abstract void onFinishedPotionEffect(EntityLivingBase entity);
+//	{
+//		Potion p = Potion.potionTypes[this.getPotionID()];
+//		if (p instanceof BlargsPotion) {
+//			((BlargsPotion) p).onFinishedPotion(entity, this.getDuration(), this.getAmplifier());
+//		}
+//	}
 
 }

@@ -5,11 +5,14 @@ import com.blargsworkshop.sleepstone.Log;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.Potion;
 
-public abstract class BlargsPotion extends Potion {
+public class BlargsPotion extends Potion {
 	
-	public BlargsPotion(int potionId, boolean isBadEffect, int liquidColor) {
-		super(potionId, isBadEffect, liquidColor);
-		Log.detail("Registering BlargsPotion: " + potionId);
+	public BlargsPotion(int potionId, String messageKey) {
+		super(potionId, false, 0);
+		setPotionName(messageKey);
+		// TODO use custom icon
+		setIconIndex(5, 1);
+		Log.detail("Registering BlargsPotion: " + potionId + " for " + messageKey);
 	}
 	
 	/**
@@ -25,6 +28,4 @@ public abstract class BlargsPotion extends Potion {
 	public boolean isReady(int duration, int amplifier) {
 		return false;
 	}
-	
-	public void onFinishedPotion(EntityLivingBase entity, int duration, int amplifier) { }
 }

@@ -32,14 +32,14 @@ public class SimpleTeleporter {
 			this.id = id;
 		}
 		
-		public int getId() {
+		public int getValue() {
 			return this.id;
 		}
 		
 		public static Dimension getDimensionFromInt(int dimensionId) {
 			Dimension result = null;
 			for (Dimension dim : Dimension.values()) {
-				if (dim.getId() == dimensionId) {
+				if (dim.getValue() == dimensionId) {
 					result = dim;
 					break;
 				}
@@ -58,7 +58,7 @@ public class SimpleTeleporter {
     }
 	
 	public static void teleportPlayerToDimension(EntityPlayerMP player, Dimension destDimension, ChunkCoordinates p) {
-		int newDimension = destDimension.getId();
+		int newDimension = destDimension.getValue();
         //System.out.printf("SGBaseTE.transferPlayerToDimension: %s to dimension %d\n", repr(player), newDimension);
         MinecraftServer server = MinecraftServer.getServer();
         ServerConfigurationManager scm = server.getConfigurationManager();

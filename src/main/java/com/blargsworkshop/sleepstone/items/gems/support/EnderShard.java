@@ -14,11 +14,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 
 public class EnderShard extends BaseItem {
-	private static final int ENDERWARP_DURATION = 20 * 30;
 	private static final int ENDERWARP_CHANNEL_DURATION = (Log.Level == LogLevel.Debug || Log.Level == LogLevel.Detail) ? 20 * 4 : 20 * 10;
 	private static final String UNLOCALIZEDNAME = "endershard";
 	private static final String TEXTURE = ModInfo.ID + ":endershard";
@@ -29,7 +27,7 @@ public class EnderShard extends BaseItem {
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer player) {
-		if (!player.isPotionActive(Potions.enderShardWarp.id) && player.dimension != Dimension.End.getId()) {
+		if (!player.isPotionActive(Potions.enderShardWarp.id) && player.dimension != Dimension.End.getValue()) {
 			// Start channeling for ender warp.
 			player.setItemInUse(item, item.getMaxItemUseDuration());
 		}
@@ -49,14 +47,9 @@ public class EnderShard extends BaseItem {
 	}
 	
 	public static void warpPlayerToEnd(EntityPlayerMP player, ItemStack item) {
-		ChunkCoordinates returnCoordinates = new ChunkCoordinates((int) player.posX, (int) player.posY, (int) player.posZ);
 		player.inventory.consumeInventoryItem(ModItems.itemEnderShard);
-		EnderShardPotionEffect enderShardPotionEffect = new EnderShardPotionEffect(Potions.enderShardWarp.id, ENDERWARP_DURATION);
-		// TODO place these in a constructor
-		enderShardPotionEffect.setDepartureCoordinates(returnCoordinates);
-		enderShardPotionEffect.setDimension(Dimension.getDimensionFromInt(player.dimension));
-		player.addPotionEffect(enderShardPotionEffect);
-		player.travelToDimension(Dimension.End.getId());
+		player.addPotionEffect(new EnderShardPotionEffect(player));
+		player.travelToDimension(Dimension.End.getValue());
 	}
 	
 	@Override

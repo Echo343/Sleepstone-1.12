@@ -1,53 +1,49 @@
 package com.blargsworkshop.sleepstone.potions;
 
+import com.blargsworkshop.sleepstone.Log;
+import com.blargsworkshop.sleepstone.ModItems.Potions;
+import com.blargsworkshop.sleepstone.utility.SimpleTeleporter;
 import com.blargsworkshop.sleepstone.utility.SimpleTeleporter.Dimension;
+import com.blargsworkshop.sleepstone.utility.Utils;
 
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ChunkCoordinates;
 
 public class EnderShardPotionEffect extends BlargsPotionEffect {
-	private ChunkCoordinates departurePosition;
-	private Dimension departureDimension;
+	private static final int ENDERWARP_DURATION = 20 * 30;
+	
+	private ChunkCoordinates returnPosition;
+	private Dimension returnDimension;
 
-	public EnderShardPotionEffect(PotionEffect potionEffect) {
-		super(potionEffect);
-	}
-
-	public EnderShardPotionEffect(int potionId, int duration) {
-		super(potionId, duration);
-	}
-
-	public EnderShardPotionEffect(int potionId, int duration, int amplifier) {
-		super(potionId, duration, amplifier);
-	}
-
-	public EnderShardPotionEffect(int potionId, int duration, int amplifier, boolean isAmbient) {
-		super(potionId, duration, amplifier, isAmbient);
+	public EnderShardPotionEffect(EntityPlayer player) {
+		super(Potions.enderShardWarp.id, ENDERWARP_DURATION);
+		setReturnCoordinates(new ChunkCoordinates((int) player.posX, (int) player.posY, (int) player.posZ));
+		setReturnDimension(Dimension.getDimensionFromInt(player.dimension));
 	}
 	
-	public void setDepartureCoordinates(ChunkCoordinates position) {
-		this.departurePosition = position;
+	protected void setReturnCoordinates(ChunkCoordinates position) {
+		this.returnPosition = position;
 	}
 	
-	public ChunkCoordinates getDepartureCoordinates() {
-		return this.departurePosition;
+	protected ChunkCoordinates getDepartureCoordinates() {
+		return this.returnPosition;
 	}
 	
-	public void setDimension(Dimension dim) {
-		this.departureDimension = dim;
+	protected void setReturnDimension(Dimension dim) {
+		this.returnDimension = dim;
 	}
 	
-	public Dimension getDimension() {
-		return departureDimension;
+	protected Dimension getDimension() {
+		return returnDimension;
 	}
 	
 	@Override
-	protected void onFinishedPotionEffect(EntityLivingBase entity) {
-		Potion p = Potion.potionTypes[this.getPotionID()];
-		if (p instanceof EnderShardPotion) {
-			((EnderShardPotion) p).onFinishedPotion(entity, this.getDuration(), this.getAmplifier(),this.getDimension(), this.getDepartureCoordinates());
-		}}
-
+	protected void onFinishedPotionEffect(EntityLivingBase entity) {		
+		if (Utils.isServer(entity.worldObj) && entity instanceof EntityPlayerMP) {
+			Log.debug("Ender Shard just ended.", (EntityPlayer) entity);
+			SimpleTeleporter.teleportPlayerToDimension((EntityPlayerMP) entity, getDimension(), getDepartureCoordinates());
+		}
+	}
 }

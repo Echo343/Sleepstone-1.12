@@ -16,8 +16,7 @@ import com.blargsworkshop.sleepstone.items.gems.support.EnderShard;
 import com.blargsworkshop.sleepstone.items.gems.support.PathfinderCraftable;
 import com.blargsworkshop.sleepstone.items.gems.support.StoneCraftable;
 import com.blargsworkshop.sleepstone.items.stone.Sleepstone;
-import com.blargsworkshop.sleepstone.potions.EnderShardPotion;
-import com.blargsworkshop.sleepstone.potions.WarpSicknessPotion;
+import com.blargsworkshop.sleepstone.potions.BlargsPotion;
 import com.blargsworkshop.sleepstone.utility.Utils;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -54,8 +53,8 @@ public class ModItems {
 	public static Item textureGemSlotEthereal = new TextureItem("textureGemSlotEthereal", ModInfo.ID + ":slot-gem-ethereal");
 	
 	public static class Potions {
-		public static WarpSicknessPotion warpSickness;
-		public static EnderShardPotion enderShardWarp;
+		public static BlargsPotion warpSickness;
+		public static BlargsPotion enderShardWarp;
 	}
 	
 	public static void init() {
@@ -231,8 +230,8 @@ public class ModItems {
 		if (warpSicknessId == -1 || enderShardPotionId == -1) {
 			throw new IndexOutOfBoundsException();
 		}
-		Potions.warpSickness = new WarpSicknessPotion(warpSicknessId, false, 0);
-		Potions.enderShardWarp = new EnderShardPotion(enderShardPotionId, false, 0);
+		Potions.warpSickness = new BlargsPotion(warpSicknessId, "potion.warpingsickness");
+		Potions.enderShardWarp = new BlargsPotion(enderShardPotionId, "potion.endershard");
 	}
 
 	public static void initChestLoot() {

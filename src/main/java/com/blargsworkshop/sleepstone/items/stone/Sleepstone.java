@@ -4,13 +4,12 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.blargsworkshop.sleepstone.Log;
-import com.blargsworkshop.sleepstone.Log.LogLevel;
 import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.ModItems.Potions;
 import com.blargsworkshop.sleepstone.SleepstoneMod;
 import com.blargsworkshop.sleepstone.gui.GuiEnum;
 import com.blargsworkshop.sleepstone.items.BaseItem;
-import com.blargsworkshop.sleepstone.potions.BlargsPotionEffect;
+import com.blargsworkshop.sleepstone.potions.WarpSicknessPotionEffect;
 import com.blargsworkshop.sleepstone.utility.SimpleTeleporter;
 import com.blargsworkshop.sleepstone.utility.Utils;
 
@@ -24,7 +23,6 @@ import net.minecraft.world.World;
 
 public class Sleepstone extends BaseItem {
 	
-	private static final int WARP_SICKNESS_DURATION = (Log.Level == LogLevel.Debug || Log.Level == LogLevel.Detail) ? 20 * 10 : 20 * 60 * 10;
 	private static final int WARP_CHANNEL_DURATION = 20 * 4;
 	private static final String SOUND_TELEPORT = ModInfo.ID + ":" + "Teleport";
 	private static final String SOUND_SWOOSH = ModInfo.ID + ":" + "Swoosh";
@@ -96,7 +94,7 @@ public class Sleepstone extends BaseItem {
 				coord.posZ += 0.5;
 				world.playSoundAtEntity(player, SOUND_SWOOSH, 1f, 1f);
 				SimpleTeleporter.teleportPlayerWithinDimension(player, coord);
-				player.addPotionEffect(new BlargsPotionEffect(Potions.warpSickness.id, WARP_SICKNESS_DURATION));
+				player.addPotionEffect(new WarpSicknessPotionEffect());
 				world.playSoundAtEntity(player, SOUND_TELEPORT, 1f, 1f);
 				Log.debug("Warping to: " + (coord.posX + 0.5) + ", " + (coord.posY + 0.1) + ", " + (coord.posZ + 0.5), player);
 			}
