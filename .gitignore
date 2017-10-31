@@ -70,7 +70,10 @@ bin
 
 # Eclipse stuff
 !eclipse/**
-eclipse\.metadata\.plugins\org.eclipse.core.resources\.projects\Minecraft\*.location
+Sleepstone_Client.launch
+Sleepstone_Server.launch
+eclipse/.metadata/.plugins/org.eclipse.core.resources/.projects/
+run
 
 # Windows
 # =========================
