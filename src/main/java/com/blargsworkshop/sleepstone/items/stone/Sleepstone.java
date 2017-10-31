@@ -10,6 +10,7 @@ import com.blargsworkshop.sleepstone.SleepstoneMod;
 import com.blargsworkshop.sleepstone.gui.GuiEnum;
 import com.blargsworkshop.sleepstone.items.BaseItem;
 import com.blargsworkshop.sleepstone.potions.WarpSicknessPotionEffect;
+import com.blargsworkshop.sleepstone.sound.SoundManager;
 import com.blargsworkshop.sleepstone.utility.SimpleTeleporter;
 import com.blargsworkshop.sleepstone.utility.Utils;
 
@@ -92,10 +93,10 @@ public class Sleepstone extends BaseItem {
 				coord.posX += 0.5;
 				coord.posY += 0.1;
 				coord.posZ += 0.5;
-				world.playSoundAtEntity(player, SOUND_SWOOSH, 1f, 1f);
+				SoundManager.playSoundAtEntity(player, SOUND_SWOOSH);
 				SimpleTeleporter.teleportPlayerWithinDimension(player, coord);
 				player.addPotionEffect(new WarpSicknessPotionEffect());
-				world.playSoundAtEntity(player, SOUND_TELEPORT, 1f, 1f);
+				SoundManager.playSoundAtEntity(player, SOUND_TELEPORT);
 				Log.debug("Warping to: " + (coord.posX + 0.5) + ", " + (coord.posY + 0.1) + ", " + (coord.posZ + 0.5), player);
 			}
 			else {
