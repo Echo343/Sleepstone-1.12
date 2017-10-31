@@ -1,10 +1,17 @@
 package com.blargsworkshop.sleepstone.sound;
 
+import com.blargsworkshop.sleepstone.ModInfo;
+
 import net.minecraft.entity.Entity;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 
 public class SoundManager {
-	//TODO shrink this class to SoundUtil if it doesn't get much bigger in 12.2 update.
 
+	public static class Sounds {
+		public static final SoundEvent teleport = new SoundEvent(new ResourceLocation(ModInfo.ID, "teleport"));
+		public static final SoundEvent swoosh = new SoundEvent(new ResourceLocation(ModInfo.ID, "swoosh"));
+	}
 	/**
 	 * Plays a sound at the entity's position.
 	 * @param entity
@@ -12,8 +19,9 @@ public class SoundManager {
 	 * @param volume relative to 1.0
 	 * @param pitch relative to 1.0
 	 */
-	public static void playSoundAtEntity(Entity entity, String soundPath, float volume, float pitch) {
-		entity.worldObj.playSoundAtEntity(entity, soundPath, volume, pitch);
+	public static void playSoundAtEntity(Entity entity, SoundEvent sound, float volume, float pitch) {
+//		entity.playSoundAtEntity(entity, soundPath, volume, pitch);
+		entity.playSound(sound, volume, pitch);
 	}
 	
 	/**
@@ -23,8 +31,8 @@ public class SoundManager {
 	 * @param volume relative to 1.0
 	 * @param pitch relative to 1.0
 	 */
-	public static void playSoundAtEntity(Entity entity, String soundPath) {
-		playSoundAtEntity(entity, soundPath, 1f, 1f);
+	public static void playSoundAtEntity(Entity entity, SoundEvent sound) {
+		playSoundAtEntity(entity, sound, 1f, 1f);
 	}
 
 }

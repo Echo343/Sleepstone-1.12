@@ -1,10 +1,10 @@
 {
-	"Teleport": {
+	"teleport": {
 		"category": "player",
-		"sounds": [{"name": "bhab", "stream": false}]
+		"sounds": [{"name": "sleepstonemod:bhab", "stream": false}]
 	},
-	"Swoosh": {
+	"swoosh": {
 		"category": "player",
-		"sounds": [{"name": "swoosh", "stream": false}]
+		"sounds": [{"name": "sleepstonemod:swoosh", "stream": false}]
 	}
 }

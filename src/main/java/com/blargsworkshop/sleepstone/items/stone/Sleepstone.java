@@ -11,6 +11,7 @@ import com.blargsworkshop.sleepstone.gui.GuiEnum;
 import com.blargsworkshop.sleepstone.items.BaseItem;
 import com.blargsworkshop.sleepstone.potions.WarpSicknessPotionEffect;
 import com.blargsworkshop.sleepstone.sound.SoundManager;
+import com.blargsworkshop.sleepstone.sound.SoundManager.Sounds;
 import com.blargsworkshop.sleepstone.utility.SimpleTeleporter;
 import com.blargsworkshop.sleepstone.utility.Utils;
 
@@ -25,8 +26,6 @@ import net.minecraft.world.World;
 public class Sleepstone extends BaseItem {
 	
 	private static final int WARP_CHANNEL_DURATION = 20 * 4;
-	private static final String SOUND_TELEPORT = ModInfo.ID + ":" + "Teleport";
-	private static final String SOUND_SWOOSH = ModInfo.ID + ":" + "Swoosh";
 	private static final String TEXTURE_SLEEPSTONE = ModInfo.ID + ":sleepy";
 	
 	protected CooldownTimer cooldownTimer = new CooldownTimer();
@@ -59,11 +58,11 @@ public class Sleepstone extends BaseItem {
 		
 	@Override
 	public void onUsingTick(ItemStack stack, EntityPlayer player, int count) {
-		if (Utils.isServer(player.worldObj)) {
+		if (Utils.isServer(player.getEntityWorld())) {
 			Log.debug("Ticks until warp: " + count, player);
 		}
 		if (count <= 1) {
-			if (Utils.isServer(player.worldObj) && player instanceof EntityPlayerMP) {
+			if (Utils.isServer(player.getEntityWorld()) && player instanceof EntityPlayerMP) {
 				warpPlayerToBed((EntityPlayerMP) player);
 			}
 			cooldownTimer.startCooldown(player);
@@ -82,7 +81,7 @@ public class Sleepstone extends BaseItem {
 	}
 	
 	public static void warpPlayerToBed(EntityPlayerMP player) {
-		World world = player.worldObj;
+		World world = player.getEntityWorld();
 		if (Utils.isServer(world)) {
 			
 			ChunkCoordinates coord = player.getBedLocation(player.dimension);
@@ -93,10 +92,10 @@ public class Sleepstone extends BaseItem {
 				coord.posX += 0.5;
 				coord.posY += 0.1;
 				coord.posZ += 0.5;
-				SoundManager.playSoundAtEntity(player, SOUND_SWOOSH);
+				SoundManager.playSoundAtEntity(player, Sounds.swoosh);
 				SimpleTeleporter.teleportPlayerWithinDimension(player, coord);
 				player.addPotionEffect(new WarpSicknessPotionEffect());
-				SoundManager.playSoundAtEntity(player, SOUND_TELEPORT);
+				SoundManager.playSoundAtEntity(player, Sounds.teleport);
 				Log.debug("Warping to: " + (coord.posX + 0.5) + ", " + (coord.posY + 0.1) + ", " + (coord.posZ + 0.5), player);
 			}
 			else {
