@@ -1,4 +1,4 @@
-package com.blargsworkshop.sleepstone.items.gems.support;
+package com.blargsworkshop.sleepstone.items.gems.mats;
 
 import java.util.List;
 

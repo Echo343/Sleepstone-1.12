@@ -1,11 +1,10 @@
-package com.blargsworkshop.sleepstone.items.gems.support;
+package com.blargsworkshop.sleepstone.items;
 
 import com.blargsworkshop.sleepstone.Log;
 import com.blargsworkshop.sleepstone.Log.LogLevel;
 import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.ModItems;
 import com.blargsworkshop.sleepstone.ModItems.Potions;
-import com.blargsworkshop.sleepstone.items.BaseItem;
 import com.blargsworkshop.sleepstone.potions.EnderShardPotionEffect;
 import com.blargsworkshop.sleepstone.utility.SimpleTeleporter.Dimension;
 import com.blargsworkshop.sleepstone.utility.Utils;
