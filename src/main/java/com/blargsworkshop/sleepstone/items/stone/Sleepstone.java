@@ -92,10 +92,10 @@ public class Sleepstone extends BaseItem {
 				coord.posX += 0.5;
 				coord.posY += 0.1;
 				coord.posZ += 0.5;
-				SoundManager.playSoundAtEntity(player, Sounds.swoosh);
+				SoundManager.playSoundAtEntityFromServer(player, Sounds.swoosh);
 				SimpleTeleporter.teleportPlayerWithinDimension(player, coord);
 				player.addPotionEffect(new WarpSicknessPotionEffect());
-				SoundManager.playSoundAtEntity(player, Sounds.teleport);
+				SoundManager.playSoundAtEntityFromServer(player, Sounds.teleport);
 				Log.debug("Warping to: " + (coord.posX + 0.5) + ", " + (coord.posY + 0.1) + ", " + (coord.posZ + 0.5), player);
 			}
 			else {
