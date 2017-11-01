@@ -86,6 +86,6 @@ public class Log {
 	}
 	
 	public static void checkSide(EntityPlayer player) {
-		debug("This is on side: " + (player.worldObj.isRemote ? "client" : "server"), player);
+		debug("This is on side: " + (player.getEntityWorld().isRemote ? "client" : "server"), player);
 	}
 }
