@@ -6,9 +6,9 @@ import com.blargsworkshop.sleepstone.SleepstoneMod;
 import com.blargsworkshop.sleepstone.gui.GuiEnum;
 import com.blargsworkshop.sleepstone.network.AbstractMessage.AbstractServerMessage;
 
-import cpw.mods.fml.relauncher.Side;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
+import net.minecraftforge.fml.relauncher.Side;
 
 /**
  * A simple message telling the server that the client wants to open a GUI.
@@ -35,7 +35,7 @@ public class OpenGuiMessage extends AbstractServerMessage<OpenGuiMessage> {
 
 	@Override
 	public void process(EntityPlayer player, Side side) {
-		player.openGui(SleepstoneMod.instance, this.guiId, player.worldObj, (int) player.posX, (int) player.posY, (int) player.posZ);
+		player.openGui(SleepstoneMod.instance, this.guiId, player.getEntityWorld(), (int) player.posX, (int) player.posY, (int) player.posZ);
 	}
 
 }

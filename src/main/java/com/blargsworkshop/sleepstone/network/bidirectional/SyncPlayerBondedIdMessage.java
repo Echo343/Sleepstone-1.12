@@ -5,9 +5,9 @@ import java.io.IOException;
 import com.blargsworkshop.sleepstone.extended_properties.ExtendedPlayer;
 import com.blargsworkshop.sleepstone.network.AbstractMessage;
 
-import cpw.mods.fml.relauncher.Side;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
+import net.minecraftforge.fml.relauncher.Side;
 
 public class SyncPlayerBondedIdMessage extends AbstractMessage<SyncPlayerBondedIdMessage> {
 	
@@ -22,13 +22,13 @@ public class SyncPlayerBondedIdMessage extends AbstractMessage<SyncPlayerBondedI
 	@Override
 	protected void read(PacketBuffer buffer) throws IOException {
 		int len = buffer.readInt();
-		bondedId = buffer.readStringFromBuffer(len);
+		bondedId = buffer.readString(len);
 	}
 
 	@Override
 	protected void write(PacketBuffer buffer) throws IOException {
 		buffer.writeInt(bondedId.length());
-		buffer.writeStringToBuffer(bondedId);
+		buffer.writeString(bondedId);
 	}
 
 	@Override

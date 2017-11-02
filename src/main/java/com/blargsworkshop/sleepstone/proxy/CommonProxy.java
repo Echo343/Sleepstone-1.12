@@ -7,13 +7,14 @@ import com.blargsworkshop.sleepstone.events.MainEventHandler;
 import com.blargsworkshop.sleepstone.gui.GuiHandler;
 import com.blargsworkshop.sleepstone.network.PacketDispatcher;
 
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.IThreadListener;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class CommonProxy implements IProxy {
 
@@ -51,18 +52,18 @@ public class CommonProxy implements IProxy {
     @Override
     public EntityPlayer getPlayerEntity(MessageContext ctx) {
     	Log.detail("Retrieving player from CommonProxy for message on side " + ctx.side);
-    	return ctx.getServerHandler().playerEntity;
+    	return ctx.getServerHandler().player;
     }
     
-//    /**
-//     * Returns the current thread based on side during message handling,
-//     * used for ensuring that the message is being handled by the main thread.
-//     * req. 1.8+ only
-//     * @param ctx
-//     * @return
-//     */
-//    @Override
-//    public IThreadListener getThreadFromContext(MessageContext ctx) {
-//		return ctx.getServerHandler().playerEntity.getServerForPlayer();
-//	}
+    /**
+     * Returns the current thread based on side during message handling,
+     * used for ensuring that the message is being handled by the main thread.
+     * req. 1.8+ only
+     * @param ctx
+     * @return
+     */
+    @Override
+    public IThreadListener getThreadFromContext(MessageContext ctx) {
+		return ctx.getServerHandler().player.getServerWorld();
+	}
 }

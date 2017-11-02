@@ -3,15 +3,15 @@ package com.blargsworkshop.sleepstone.network;
 import java.io.IOException;
 
 import com.blargsworkshop.sleepstone.SleepstoneMod;
-import com.google.common.base.Throwables;
 
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
-import cpw.mods.fml.relauncher.Side;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.IThreadListener;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import net.minecraftforge.fml.relauncher.Side;
 
 /**
  * Abstract message class used for packets.
@@ -65,8 +65,8 @@ public abstract class AbstractMessage<T extends AbstractMessage<T>> implements I
 	 * Remove final when going to 1.8.
 	 * @return False for < 1.8, True for 1.8+
 	 */
-	protected final boolean requiresMainThread() {
-		return false;
+	protected boolean requiresMainThread() {
+		return true;
 	}
 
 	@Override
@@ -75,7 +75,7 @@ public abstract class AbstractMessage<T extends AbstractMessage<T>> implements I
 			read(new PacketBuffer(buffer));
 		}
 		catch (IOException e) {
-			throw Throwables.propagate(e);
+			throw new RuntimeException(e);
 		}
 	}
 
@@ -85,7 +85,7 @@ public abstract class AbstractMessage<T extends AbstractMessage<T>> implements I
 			write(new PacketBuffer(buffer));
 		}
 		catch (IOException e) {
-			throw Throwables.propagate(e);
+			throw new RuntimeException(e);
 		}
 	}
 	
@@ -109,13 +109,13 @@ public abstract class AbstractMessage<T extends AbstractMessage<T>> implements I
 	 * @param ctx
 	 */
 	private static final <T extends AbstractMessage<T>> void checkThreadAndEnqueue(final AbstractMessage<T> msg, final MessageContext ctx) {
-//		IThreadListener thread = TutorialMain.proxy.getThreadFromContext(ctx);
-//		// pretty much copied straight from vanilla code, see {@link PacketThreadUtil#checkThreadAndEnqueue}
-//		thread.addScheduledTask(new Runnable() {
-//			public void run() {
-//				msg.process(TutorialMain.proxy.getPlayerEntity(ctx), ctx.side);
-//			}
-//		});
+		IThreadListener thread = SleepstoneMod.proxy.getThreadFromContext(ctx);
+		// pretty much copied straight from vanilla code, see {@link PacketThreadUtil#checkThreadAndEnqueue}
+		thread.addScheduledTask(new Runnable() {
+			public void run() {
+				msg.process(SleepstoneMod.proxy.getPlayerEntity(ctx), ctx.side);
+			}
+		});
 	}
 	
 	/**

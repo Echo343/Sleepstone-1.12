@@ -5,10 +5,10 @@ import java.io.IOException;
 import com.blargsworkshop.sleepstone.extended_properties.ExtendedPlayer;
 import com.blargsworkshop.sleepstone.network.AbstractMessage;
 
-import cpw.mods.fml.relauncher.Side;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
+import net.minecraftforge.fml.relauncher.Side;
 
 public class SyncAllPlayerPropsMessage extends AbstractMessage<SyncAllPlayerPropsMessage> {
 
@@ -23,12 +23,12 @@ public class SyncAllPlayerPropsMessage extends AbstractMessage<SyncAllPlayerProp
 
 	@Override
 	protected void read(PacketBuffer buffer) throws IOException {
-		data = buffer.readNBTTagCompoundFromBuffer();
+		data = buffer.readCompoundTag();
 	}
 
 	@Override
 	protected void write(PacketBuffer buffer) throws IOException {
-		buffer.writeNBTTagCompoundToBuffer(data);
+		buffer.writeCompoundTag(data);
 	}
 
 	@Override

@@ -6,13 +6,13 @@ import com.blargsworkshop.sleepstone.network.bidirectional.SyncPlayerPropMessage
 import com.blargsworkshop.sleepstone.network.server.CommandMessage;
 import com.blargsworkshop.sleepstone.network.server.OpenGuiMessage;
 
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-import cpw.mods.fml.relauncher.Side;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
+import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import net.minecraftforge.fml.relauncher.Side;
 
 /**
  * Wrapper for sending packets
@@ -115,7 +115,7 @@ public class PacketDispatcher {
 	 * @param range
 	 */
 	public static final void sendToAllAround(IMessage message, EntityPlayer player, double range) {
-		PacketDispatcher.sendToAllAround(message, player.worldObj.provider.dimensionId, player.posX, player.posY, player.posZ, range);
+		PacketDispatcher.sendToAllAround(message, player.getEntityWorld().provider.getDimension(), player.posX, player.posY, player.posZ, range);
 	}
 	
 	/**

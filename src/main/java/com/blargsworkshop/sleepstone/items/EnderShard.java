@@ -9,10 +9,13 @@ import com.blargsworkshop.sleepstone.potions.EnderShardPotionEffect;
 import com.blargsworkshop.sleepstone.utility.SimpleTeleporter.Dimension;
 import com.blargsworkshop.sleepstone.utility.Utils;
 
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
 public class EnderShard extends BaseItem {
@@ -25,30 +28,32 @@ public class EnderShard extends BaseItem {
 	}
 
 	@Override
-	public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer player) {
-		if (!player.isPotionActive(Potions.enderShardWarp.id) && player.dimension != Dimension.End.getValue()) {
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+		if (!player.isPotionActive(Potions.enderShardWarp) && player.dimension != Dimension.End.getValue()) {
 			// Start channeling for ender warp.
-			player.setItemInUse(item, item.getMaxItemUseDuration());
+			player.setActiveHand(hand);
 		}
-		return item;
+		return super.onItemRightClick(world, player, hand);
 	}
 	
 	@Override
-	public void onUsingTick(ItemStack item, EntityPlayer player, int count) {
-		if (Utils.isServer(player.worldObj)) {
+	public void onUsingTick(ItemStack item, EntityLivingBase living, int count) {
+		if (!(living instanceof EntityPlayer)) { return; }
+		EntityPlayer player = (EntityPlayer) living;
+		if (Utils.isServer(player.getEntityWorld())) {
 			Log.debug("Ticks until ender warp: " + count, player);
 		}
 		if (count <= 1) {
-			if (Utils.isServer(player.worldObj) && player instanceof EntityPlayerMP) {
+			if (Utils.isServer(player.getEntityWorld()) && player instanceof EntityPlayerMP) {
 				warpPlayerToEnd((EntityPlayerMP) player, item);
 			}
 		}
 	}
 	
 	public static void warpPlayerToEnd(EntityPlayerMP player, ItemStack item) {
-		player.inventory.consumeInventoryItem(ModItems.itemEnderShard);
+		player.inventory.clearMatchingItems(ModItems.itemEnderShard, -1, 1, null);
 		player.addPotionEffect(new EnderShardPotionEffect(player));
-		player.travelToDimension(Dimension.End.getValue());
+		player.changeDimension(Dimension.End.getValue());
 	}
 	
 	@Override
@@ -58,6 +63,6 @@ public class EnderShard extends BaseItem {
 	
 	@Override
 	public EnumAction getItemUseAction(ItemStack p_77661_1_) {
-		return EnumAction.block;
+		return EnumAction.BLOCK;
 	}
 }

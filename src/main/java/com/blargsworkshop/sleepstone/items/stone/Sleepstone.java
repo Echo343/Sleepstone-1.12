@@ -16,10 +16,13 @@ import com.blargsworkshop.sleepstone.utility.SimpleTeleporter;
 import com.blargsworkshop.sleepstone.utility.Utils;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -37,27 +40,30 @@ public class Sleepstone extends BaseItem {
 	}
 	
 	@Override
-	public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer player) {
+//	public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer player) {
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 		if (cooldownTimer.isItemReadyToUse(player)) {
 			if (!player.isSneaking()) {
 				player.openGui(SleepstoneMod.instance, GuiEnum.STONE.ordinal(), world, (int) player.posX, (int) player.posY, (int) player.posZ);
 			}
 			else {
-				if (player.isPotionActive(Potions.warpSickness.id)) {
+				if (player.isPotionActive(Potions.warpSickness)) {
 					Utils.addChatMessage(player, "text.sleepstone.suffering_effects_of_warping");
 					cooldownTimer.startCooldown(player);
 				}
 				else {
 					// Start channeling for warp.
-					player.setItemInUse(item, item.getMaxItemUseDuration());
+					player.setActiveHand(hand);
 				}
 			}
 		}
-		return item;
+		return super.onItemRightClick(world, player, hand);
 	}
 		
 	@Override
-	public void onUsingTick(ItemStack stack, EntityPlayer player, int count) {
+	public void onUsingTick(ItemStack stack, EntityLivingBase living, int count) {
+		if (!(living instanceof EntityPlayer)) { return; }
+		EntityPlayer player = (EntityPlayer) living;
 		if (Utils.isServer(player.getEntityWorld())) {
 			Log.debug("Ticks until warp: " + count, player);
 		}
@@ -107,25 +113,25 @@ public class Sleepstone extends BaseItem {
 
 	@Override
 	public EnumAction getItemUseAction(ItemStack p_77661_1_) {
-		return EnumAction.block;
+		return EnumAction.BLOCK;
 	}
 	
 	private class CooldownTimer {
 		private Map<String, Integer> timers = new ConcurrentHashMap<>();
 			
 		public boolean isItemReadyToUse(EntityPlayer player) {
-			Integer value = timers.get(player.getDisplayName());
+			Integer value = timers.get(player.getDisplayNameString());
 			return (value != null && value > 0) ? false : true;
 		}
 		
 		public void startCooldown(EntityPlayer player) {
-			timers.put(player.getDisplayName(), 20 * 3); // ticks
+			timers.put(player.getDisplayNameString(), 20 * 3); // ticks
 		}
 		
 		public void nextTick(EntityPlayer player) {
-			Integer count = timers.get(player.getDisplayName());
+			Integer count = timers.get(player.getDisplayNameString());
 			if (count != null && count > 0) {
-				timers.put(player.getDisplayName(), --count);
+				timers.put(player.getDisplayNameString(), --count);
 			}
 		}
 	}
