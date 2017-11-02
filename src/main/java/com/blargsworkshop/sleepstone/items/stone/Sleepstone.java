@@ -20,7 +20,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class Sleepstone extends BaseItem {
@@ -84,19 +84,13 @@ public class Sleepstone extends BaseItem {
 		World world = player.getEntityWorld();
 		if (Utils.isServer(world)) {
 			
-			ChunkCoordinates coord = player.getBedLocation(player.dimension);
-			if (coord != null) {
-				coord = EntityPlayer.verifyRespawnCoordinates(world, coord, false);
-			}
-			if (coord != null) {
-				coord.posX += 0.5;
-				coord.posY += 0.1;
-				coord.posZ += 0.5;
+			BlockPos bedPos = EntityPlayer.getBedSpawnLocation(world, player.getBedLocation(player.dimension), false);
+			if (bedPos != null) {
 				SoundManager.playSoundAtEntityFromServer(player, Sounds.swoosh);
-				SimpleTeleporter.teleportPlayerWithinDimension(player, coord);
+				SimpleTeleporter.teleportPlayerWithinDimension(player, bedPos);
 				player.addPotionEffect(new WarpSicknessPotionEffect());
 				SoundManager.playSoundAtEntityFromServer(player, Sounds.teleport);
-				Log.debug("Warping to: " + (coord.posX + 0.5) + ", " + (coord.posY + 0.1) + ", " + (coord.posZ + 0.5), player);
+				Log.debug("Warping to: " + (bedPos.getX()) + ", " + (bedPos.getY()) + ", " + (bedPos.getZ()), player);
 			}
 			else {
 				Utils.addChatMessage(player, "text.sleepstone.bed_destroyed");

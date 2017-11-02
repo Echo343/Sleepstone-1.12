@@ -1,6 +1,7 @@
 package com.blargsworkshop.sleepstone.utility;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import com.blargsworkshop.sleepstone.Log;
@@ -47,13 +48,12 @@ public class Utils {
 		doesPlayer = props.getAbility(slot);
 		
 		//TODO search through in priority order
-		ItemStack[] playerInv = player.inventory.mainInventory;
+		List<ItemStack> playerInv = player.inventory.mainInventory;
 		ItemStack backupStone = null;
-		for (int i = 0; i < playerInv.length; i++) {
-			ItemStack indexedItemStack = playerInv[i];
-			if (indexedItemStack != null && indexedItemStack.isItemEqual(new ItemStack(ModItems.itemSleepstone))) {
-				backupStone = backupStone == null ? indexedItemStack : backupStone;
-				StoneInventory sInv = new StoneInventory(indexedItemStack);
+		for (ItemStack itemStack : playerInv) {
+			if (itemStack != null && itemStack.isItemEqual(new ItemStack(ModItems.itemSleepstone))) {
+				backupStone = backupStone == null ? itemStack : backupStone;
+				StoneInventory sInv = new StoneInventory(itemStack);
 				if (sInv.getUniqueId().equals(props.getBondedStoneId())) {
 					hasStone = true;
 					hasGems = sInv.hasGemInSlot(slot);
