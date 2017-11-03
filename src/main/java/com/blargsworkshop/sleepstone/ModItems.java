@@ -19,7 +19,6 @@ import com.blargsworkshop.sleepstone.items.stone.Sleepstone;
 import com.blargsworkshop.sleepstone.potions.BlargsPotion;
 import com.blargsworkshop.sleepstone.utility.Utils;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -28,6 +27,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ModItems {
 	public static CreativeTabs tabSleepstone;
