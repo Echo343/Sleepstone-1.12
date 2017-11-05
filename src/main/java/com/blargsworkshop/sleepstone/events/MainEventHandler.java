@@ -5,7 +5,6 @@ import com.blargsworkshop.sleepstone.extended_properties.ExtendedPlayer;
 import com.blargsworkshop.sleepstone.items.stone.Slots;
 import com.blargsworkshop.sleepstone.utility.Utils;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
@@ -13,6 +12,7 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 /**
  * EventHandler

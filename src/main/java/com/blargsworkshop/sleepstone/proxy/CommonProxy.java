@@ -4,6 +4,7 @@ import com.blargsworkshop.sleepstone.Log;
 import com.blargsworkshop.sleepstone.ModItems;
 import com.blargsworkshop.sleepstone.SleepstoneMod;
 import com.blargsworkshop.sleepstone.events.MainEventHandler;
+import com.blargsworkshop.sleepstone.events.RegisterModComponents;
 import com.blargsworkshop.sleepstone.gui.GuiHandler;
 import com.blargsworkshop.sleepstone.network.PacketDispatcher;
 
@@ -21,11 +22,11 @@ public class CommonProxy implements IProxy {
 	@Override
     public void preInit(FMLPreInitializationEvent e) {
 		ModItems.initCreativeTabs();
-		ModItems.init();
     }
 
     @Override
     public void init(FMLInitializationEvent e) {
+    	RegisterModComponents.initRecipes();
 		ModItems.preInitPotions();
 		
     	// Event Handlers
@@ -35,8 +36,8 @@ public class CommonProxy implements IProxy {
     	// GUI Handler
     	NetworkRegistry.INSTANCE.registerGuiHandler(SleepstoneMod.instance, new GuiHandler());
     	
-		ModItems.initRecipes();
-		ModItems.initChestLoot();
+//		ModItems.initRecipes();
+//		ModItems.initChestLoot();
 		PacketDispatcher.registerPackets();
     }
 
