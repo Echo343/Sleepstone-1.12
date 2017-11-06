@@ -1,0 +1,18 @@
+{
+    // Condensed Redstone Block
+    "type": "crafting_shaped",
+    "pattern": [
+        "###",
+        "###",
+        "###"
+    ],
+    "key": {
+        "#": {
+            "item": "minecraft:redstone_block"
+        }
+    },
+    "result": {
+        "item": "sleepstonemod:modItemStoneCraftable",
+        "data": 4
+    }
+}

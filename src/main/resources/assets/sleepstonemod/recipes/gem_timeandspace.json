@@ -1,0 +1,19 @@
+{
+    "type": "crafting_shaped",
+    "pattern": [
+        "XXX",
+        "XEX",
+        "XXX"
+    ],
+    "key": {
+        "X": {
+            "item": "minecraft:end_stone"
+        },
+        "E": {
+            "item": "minecraft:ender_eye"
+        }
+    },
+    "result": {
+        "item": "sleepstonemod:modItemTimeSpaceGem"
+    }
+}

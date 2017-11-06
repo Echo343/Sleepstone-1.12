@@ -1,0 +1,47 @@
+{
+    "type": "crafting_shapeless",
+    "ingredients": [
+        [
+            {
+                "item": "minecraft:melon_seeds"
+            },
+            {
+                "item": "minecraft:pumpkin_seeds"
+            }
+        ],
+        {
+            // Cactus Green
+            "item": "minecraft:dye",
+            "data": 2
+        },
+        {
+            // Rose Bush
+            "item": "minecraft:double_plant",
+            "data": 4
+        },
+        {
+            // Coco Beans
+            "item": "minecraft:dye",
+            "data": 3
+        },
+        {
+            "item": "minecraft:saddle"
+        },
+        {
+            // Mob Essence
+            "item": "sleepstonemod:modItemPathfinderCraftable"
+        },
+        {
+            "item": "minecraft:snowball"
+        },
+        {
+            "item": "minecraft:slime_ball"
+        },
+        {
+            "item": "minecraft:emerald"
+        }
+    ],
+    "result": {
+        "item": "sleepstonemod:modItemPathfinderGem"
+    }
+}

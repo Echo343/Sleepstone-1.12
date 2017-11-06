@@ -1,0 +1,23 @@
+{
+    // Radial Empowered Orb
+    "type": "crafting_shaped",
+    "pattern": [
+        "###",
+        "#X#",
+        "###"
+    ],
+    "key": {
+        "#": {
+            "item": "sleepstonemod:modItemStoneCraftable",
+            "data": 14
+        },
+        "X": {
+            "item": "sleepstonemod:modItemStoneCraftable",
+            "data": 7
+        }
+    },
+    "result": {
+        "item": "sleepstonemod:modItemStoneCraftable",
+        "data": 15
+    }
+}

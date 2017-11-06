@@ -1,0 +1,23 @@
+{
+    // Ceramic Foundation
+    "type": "crafting_shaped",
+    "pattern": [
+        "###",
+        "#X#",
+        "###"
+    ],
+    "key": {
+        "#": {
+            "item": "sleepstonemod:modItemStoneCraftable",
+            "data": 1
+        },
+        "X": {
+            "item": "minecraft:coal",
+            "data": 1
+        }
+    },
+    "result": {
+        "item": "sleepstonemod:modItemStoneCraftable",
+        "data": 2
+    }
+}

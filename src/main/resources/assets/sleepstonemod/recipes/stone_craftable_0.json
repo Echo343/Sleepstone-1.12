@@ -1,0 +1,21 @@
+{
+    // Hardened Clay Piece
+    "type": "crafting_shaped",
+    "pattern": [
+        "###",
+        "#X#",
+        "###"
+    ],
+    "key": {
+        "#": {
+            "item": "minecraft:hardened_clay"
+        },
+        "X": {
+            "item": "minecraft:sandstone"
+        }
+    },
+    "result": {
+        "item": "sleepstonemod:modItemStoneCraftable",
+        "data": 0
+    }
+}

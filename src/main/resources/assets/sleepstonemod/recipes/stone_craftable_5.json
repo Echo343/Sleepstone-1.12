@@ -1,0 +1,22 @@
+{
+    // Hyper Lattice Redstone Block
+    "type": "crafting_shaped",
+    "pattern": [
+        "GRG",
+        "RGR",
+        "GRG"
+    ],
+    "key": {
+        "G": {
+            "item": "minecraft:gold_block"
+        },
+        "R": {
+            "item": "sleepstonemod:modItemStoneCraftable",
+            "data": 4
+        }
+    },
+    "result": {
+        "item": "sleepstonemod:modItemStoneCraftable",
+        "data": 5
+    }
+}

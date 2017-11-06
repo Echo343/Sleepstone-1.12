@@ -1,0 +1,23 @@
+{
+    // Hyper Lattice Redstone Mass
+    "type": "crafting_shaped",
+    "pattern": [
+        " # ",
+        "#X#",
+        " # "
+    ],
+    "key": {
+        "#": {
+            "item": "sleepstonemod:modItemStoneCraftable",
+            "data": 5
+        },
+        "X": {
+            "item": "sleepstonemod:modItemStoneCraftable",
+            "data": 3
+        }
+    },
+    "result": {
+        "item": "sleepstonemod:modItemStoneCraftable",
+        "data": 6
+    }
+}

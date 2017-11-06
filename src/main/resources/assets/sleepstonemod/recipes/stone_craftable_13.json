@@ -1,0 +1,23 @@
+{
+    // Crystalline Lattice Structure
+    "type": "crafting_shaped",
+    "pattern": [
+        "###",
+        "#X#",
+        "###"
+    ],
+    "key": {
+        "#": {
+            "item": "sleepstonemod:modItemStoneCraftable",
+            "data": 10
+        },
+        "X": {
+            "item": "sleepstonemod:modItemStoneCraftable",
+            "data": 12
+        }
+    },
+    "result": {
+        "item": "sleepstonemod:modItemStoneCraftable",
+        "data": 13
+    }
+}
