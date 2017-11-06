@@ -21,7 +21,7 @@ public class CommonProxy implements IProxy {
 
 	@Override
     public void preInit(FMLPreInitializationEvent e) {
-		ModItems.initCreativeTabs();
+		RegisterModComponents.initCreativeTabs();
     }
 
     @Override

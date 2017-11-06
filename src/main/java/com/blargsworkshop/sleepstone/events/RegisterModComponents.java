@@ -3,7 +3,9 @@ package com.blargsworkshop.sleepstone.events;
 import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.ModItems;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.RegistryEvent;
@@ -153,4 +155,13 @@ public class RegisterModComponents {
 //				'e', Items.ender_eye);
 	}
 
+	public static void initCreativeTabs() {
+		ModItems.tabSleepstone = new CreativeTabs(ModInfo.CREATIVE_TAB_SLEEPSTONE) {
+
+			@Override
+			public ItemStack getTabIconItem() {
+				return new ItemStack(ModItems.itemSleepstone);
+			}
+		};
+	}
 }

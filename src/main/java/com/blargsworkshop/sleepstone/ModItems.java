@@ -59,18 +59,6 @@ public class ModItems {
 		public static BlargsPotion enderShardWarp;
 	}
 	
-	
-	
-	public static void initCreativeTabs() {
-		tabSleepstone = new CreativeTabs(ModInfo.CREATIVE_TAB_SLEEPSTONE) {
-
-			@Override
-			public Item getTabIconItem() {
-				return ModItems.itemSleepstone;
-			}
-		};
-	}
-	
 	/**
 	 * Recreates the potion array to make it longer.
 	 * Also init's our custom potions.
