@@ -24,7 +24,7 @@ package com.blargsworkshop.sleepstone.items.gems.mats;
 public class StoneCraftable extends BaseCraftable {
 	
 	private static final String UNLOCALIZED_NAME = "craftablestone"; 
-	private static final int NUMBER_OF_CRAFTABLES = 16;
+	public static final int NUMBER_OF_CRAFTABLES = 16;
 
 	public StoneCraftable() {
 		super(UNLOCALIZED_NAME, NUMBER_OF_CRAFTABLES);

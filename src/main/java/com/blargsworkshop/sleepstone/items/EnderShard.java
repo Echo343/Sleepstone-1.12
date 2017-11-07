@@ -3,7 +3,6 @@ package com.blargsworkshop.sleepstone.items;
 import com.blargsworkshop.sleepstone.Log;
 import com.blargsworkshop.sleepstone.Log.LogLevel;
 import com.blargsworkshop.sleepstone.ModInfo;
-import com.blargsworkshop.sleepstone.ModItems;
 import com.blargsworkshop.sleepstone.ModItems.Potions;
 import com.blargsworkshop.sleepstone.potions.EnderShardPotionEffect;
 import com.blargsworkshop.sleepstone.utility.SimpleTeleporter.Dimension;
@@ -51,7 +50,8 @@ public class EnderShard extends BaseItem {
 	}
 	
 	public static void warpPlayerToEnd(EntityPlayerMP player, ItemStack item) {
-		player.inventory.clearMatchingItems(ModItems.itemEnderShard, -1, 1, null);
+//		player.inventory.clearMatchingItems(ModItems.itemEnderShard, -1, 1, null);
+		item.shrink(1);
 		player.addPotionEffect(new EnderShardPotionEffect(player));
 		player.changeDimension(Dimension.End.getValue());
 	}
