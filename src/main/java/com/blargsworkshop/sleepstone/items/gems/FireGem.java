@@ -1,14 +1,13 @@
 package com.blargsworkshop.sleepstone.items.gems;
 
-import com.blargsworkshop.sleepstone.ModInfo;
-
 public class FireGem extends Gem {
 
 	private static final String UNLOCALIZEDNAME = "firegem";
-	private static final String TEXTURE = ModInfo.ID + ":gem-fire";
+	private static final String REG_NAME = "modItemFireGem";
+//	private static final String TEXTURE = ModInfo.ID + ":gem-fire";
 	
 	public FireGem() {
-		super(UNLOCALIZEDNAME, TEXTURE);
+		super(UNLOCALIZEDNAME, REG_NAME);
 	}
 
 }

@@ -4,7 +4,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.blargsworkshop.sleepstone.Log;
-import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.ModItems.Potions;
 import com.blargsworkshop.sleepstone.SleepstoneMod;
 import com.blargsworkshop.sleepstone.gui.GuiEnum;
@@ -29,12 +28,13 @@ import net.minecraft.world.World;
 public class Sleepstone extends BaseItem {
 	
 	private static final int WARP_CHANNEL_DURATION = 20 * 4;
-	private static final String TEXTURE_SLEEPSTONE = ModInfo.ID + ":sleepy";
+	private static final String REG_NAME = "modItemSleepstone";
+//	private static final String TEXTURE_SLEEPSTONE = ModInfo.ID + ":sleepy";
 	
 	protected CooldownTimer cooldownTimer = new CooldownTimer();
 	
 	public Sleepstone() {
-		super("basicsleepstone", TEXTURE_SLEEPSTONE);
+		super("basicsleepstone", REG_NAME);
 		// ItemStacks that store an NBT Tag Compound are limited to stack size of 1
 		this.setMaxStackSize(1);
 	}

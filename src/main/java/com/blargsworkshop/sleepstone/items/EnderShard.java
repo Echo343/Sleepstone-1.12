@@ -2,7 +2,6 @@ package com.blargsworkshop.sleepstone.items;
 
 import com.blargsworkshop.sleepstone.Log;
 import com.blargsworkshop.sleepstone.Log.LogLevel;
-import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.ModItems.Potions;
 import com.blargsworkshop.sleepstone.potions.EnderShardPotionEffect;
 import com.blargsworkshop.sleepstone.utility.SimpleTeleporter.Dimension;
@@ -20,10 +19,11 @@ import net.minecraft.world.World;
 public class EnderShard extends BaseItem {
 	private static final int ENDERWARP_CHANNEL_DURATION = (Log.Level == LogLevel.Debug || Log.Level == LogLevel.Detail) ? 20 * 4 : 20 * 10;
 	private static final String UNLOCALIZEDNAME = "endershard";
-	private static final String TEXTURE = ModInfo.ID + ":endershard";
+	private static final String REG_NAME = "modItemEnderShard";
+//	private static final String TEXTURE = ModInfo.ID + ":endershard";
 	
 	public EnderShard() {
-		super(UNLOCALIZEDNAME, TEXTURE);
+		super(UNLOCALIZEDNAME, REG_NAME);
 	}
 
 	@Override

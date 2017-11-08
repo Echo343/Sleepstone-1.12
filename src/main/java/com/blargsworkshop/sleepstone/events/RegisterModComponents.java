@@ -24,25 +24,25 @@ public class RegisterModComponents {
 	public static void registerItems(RegistryEvent.Register<Item> event) {
 		// TODO change this to reflection
 		event.getRegistry().registerAll(
-				ModItems.itemSleepstone,
-				ModItems.itemStoneGem,
-				ModItems.itemTimeSpaceGem,
-				ModItems.itemPathfinderGem,
-				ModItems.itemEtherealGem,
-				ModItems.itemGuardianGem,
-				ModItems.itemFireGem,
+			ModItems.itemSleepstone,
+			ModItems.itemStoneGem,
+			ModItems.itemTimeSpaceGem,
+			ModItems.itemPathfinderGem,
+			ModItems.itemEtherealGem,
+			ModItems.itemGuardianGem,
+			ModItems.itemFireGem
 
-				ModItems.itemStoneCraftable,
-				ModItems.itemPathfinderCraftable,
-				ModItems.itemEnderShard,
-				
-				ModItems.textureGemSlotStone,
-				ModItems.textureGemSlotPathfinder,
-				ModItems.textureGemSlotTimeAndSpace,
-				ModItems.textureGemSlotFire,
-				ModItems.textureGemSlotGuardian,
-				ModItems.textureGemSlotEthereal
-			);
+//			ModItems.itemStoneCraftable,
+//			ModItems.itemPathfinderCraftable,
+//			ModItems.itemEnderShard,
+			
+//			ModItems.textureGemSlotStone,
+//			ModItems.textureGemSlotPathfinder,
+//			ModItems.textureGemSlotTimeAndSpace,
+//			ModItems.textureGemSlotFire,
+//			ModItems.textureGemSlotGuardian,
+//			ModItems.textureGemSlotEthereal
+		);
 		
 //		GameRegistry.registerItem(itemSleepstone = new Sleepstone(), "modItemSleepstone");
 //		
@@ -77,18 +77,18 @@ public class RegisterModComponents {
 		mesher.register(ModItems.itemFireGem, 0, new ModelResourceLocation(ModInfo.ID + ":" + "gem_fire"));
 		
 		// TODO do something with this.
-		for (int i = 0; i < StoneCraftable.NUMBER_OF_CRAFTABLES; i++) {
-			mesher.register(ModItems.itemStoneCraftable, i, new ModelResourceLocation(ModInfo.ID + ":" + "craftablestone_" + i));
-		}
-		mesher.register(ModItems.itemPathfinderCraftable, 0, new ModelResourceLocation(ModInfo.ID + ":" + "craftablepathfinder"));
-		mesher.register(ModItems.itemEnderShard, 0, new ModelResourceLocation(ModInfo.ID + ":" + "endershard"));
-		
-		mesher.register(ModItems.textureGemSlotStone, 0, new ModelResourceLocation(ModInfo.ID + ":" + "slot-gem-stone"));
-		mesher.register(ModItems.textureGemSlotPathfinder, 0, new ModelResourceLocation(ModInfo.ID + ":" + "slot-gem-pathfinder"));
-		mesher.register(ModItems.textureGemSlotTimeAndSpace, 0, new ModelResourceLocation(ModInfo.ID + ":" + "slot-gem-time-and-space"));
-		mesher.register(ModItems.textureGemSlotFire, 0, new ModelResourceLocation(ModInfo.ID + ":" + "slot-gem-fire"));
-		mesher.register(ModItems.textureGemSlotGuardian, 0, new ModelResourceLocation(ModInfo.ID + ":" + "slot-gem-guardian"));
-		mesher.register(ModItems.textureGemSlotEthereal, 0, new ModelResourceLocation(ModInfo.ID + ":" + "slot-gem-ethereal"));
+//		for (int i = 0; i < StoneCraftable.NUMBER_OF_CRAFTABLES; i++) {
+//			mesher.register(ModItems.itemStoneCraftable, i, new ModelResourceLocation(ModInfo.ID + ":" + "craftablestone_" + i));
+//		}
+//		mesher.register(ModItems.itemPathfinderCraftable, 0, new ModelResourceLocation(ModInfo.ID + ":" + "craftablepathfinder"));
+//		mesher.register(ModItems.itemEnderShard, 0, new ModelResourceLocation(ModInfo.ID + ":" + "endershard"));
+//		
+//		mesher.register(ModItems.textureGemSlotStone, 0, new ModelResourceLocation(ModInfo.ID + ":" + "slot-gem-stone"));
+//		mesher.register(ModItems.textureGemSlotPathfinder, 0, new ModelResourceLocation(ModInfo.ID + ":" + "slot-gem-pathfinder"));
+//		mesher.register(ModItems.textureGemSlotTimeAndSpace, 0, new ModelResourceLocation(ModInfo.ID + ":" + "slot-gem-time-and-space"));
+//		mesher.register(ModItems.textureGemSlotFire, 0, new ModelResourceLocation(ModInfo.ID + ":" + "slot-gem-fire"));
+//		mesher.register(ModItems.textureGemSlotGuardian, 0, new ModelResourceLocation(ModInfo.ID + ":" + "slot-gem-guardian"));
+//		mesher.register(ModItems.textureGemSlotEthereal, 0, new ModelResourceLocation(ModInfo.ID + ":" + "slot-gem-ethereal"));
 	}
 	
 	public static void initRecipes() {
