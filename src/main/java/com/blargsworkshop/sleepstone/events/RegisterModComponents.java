@@ -64,8 +64,7 @@ public class RegisterModComponents {
 //		GameRegistry.registerItem(textureGemSlotEthereal, "modTextureGemSlotEthereal");
 	}
 	
-	@SubscribeEvent
-	public static void registerTextures(ModelRegistryEvent event) {
+	public static void registerTextures() {
 		ItemModelMesher mesher = Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
 		mesher.register(ModItems.itemSleepstone, 0, new ModelResourceLocation(ModInfo.ID + ":" + "sleepstone"));
 		mesher.register(ModItems.itemStoneGem, 0, new ModelResourceLocation(ModInfo.ID + ":" + "gem_stone"));
@@ -191,7 +190,7 @@ public class RegisterModComponents {
 
 			@Override
 			public ItemStack getTabIconItem() {
-				return new ItemStack(ModItems.itemSleepstone);
+				return new ItemStack(ModItems.itemPathfinderGem);
 			}
 		};
 	}
