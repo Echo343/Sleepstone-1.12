@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.util.EnumChatFormatting;
 
 public abstract class TooltipButton extends GuiButton {
 	private static final String TOOLTIP_CHAR = "?";
@@ -69,35 +68,35 @@ public abstract class TooltipButton extends GuiButton {
 	 * @return true if mousedOver, false if disable or not mousedOver.
 	 */
 	protected boolean isButtonMouseOver() {
-		if (this.getHoverState(this.field_146123_n) == 2) {
-			return true;
-		}
+//		if (this.getHoverState(this.field_146123_n) == 2) {
+//			return true;
+//		}
 		return false;
 	}
 	
-	@Override
+//	@Override
 	public void drawButton(Minecraft mc, int mouseX, int mouseY) {
-		super.drawButton(mc, mouseX, mouseY);
-		if (hasToolTip()) {
-			if (isButtonMouseOver()) {
-				renderTooltipButtonMouseoverEffect(mc.fontRenderer);
-				systemTime = System.currentTimeMillis();
-				if (prevSystemTime > 0) {
-					mouseoverTime += systemTime - prevSystemTime;
-				}
-				prevSystemTime = systemTime;
-			}
-			else {
-				renderTooltipButtonEffect(mc.fontRenderer);
-				mouseoverTime = 0;
-				prevSystemTime = 0;
-				shouldDrawTooltip = false;
-			}
-			
-			if (mouseoverTime > getTooltipDelay()) {
-				shouldDrawTooltip = true;
-			}
-		}
+//		super.drawButton(mc, mouseX, mouseY);
+//		if (hasToolTip()) {
+//			if (isButtonMouseOver()) {
+//				renderTooltipButtonMouseoverEffect(mc.fontRenderer);
+//				systemTime = System.currentTimeMillis();
+//				if (prevSystemTime > 0) {
+//					mouseoverTime += systemTime - prevSystemTime;
+//				}
+//				prevSystemTime = systemTime;
+//			}
+//			else {
+//				renderTooltipButtonEffect(mc.fontRenderer);
+//				mouseoverTime = 0;
+//				prevSystemTime = 0;
+//				shouldDrawTooltip = false;
+//			}
+//			
+//			if (mouseoverTime > getTooltipDelay()) {
+//				shouldDrawTooltip = true;
+//			}
+//		}
 	}
 	
 	/**
@@ -160,7 +159,7 @@ public abstract class TooltipButton extends GuiButton {
 	{
 		boolean flag = fontRenderer.getUnicodeFlag();
 		fontRenderer.setUnicodeFlag(true);
-		fontRenderer.drawString(EnumChatFormatting.AQUA + getIndicatorString(), getIndicatorXPos(), getIndicatorYPos(), getIndicatorColor());
+//		fontRenderer.drawString(EnumChatFormatting.AQUA + getIndicatorString(), getIndicatorXPos(), getIndicatorYPos(), getIndicatorColor());
 		fontRenderer.setUnicodeFlag(flag);
 	}
 	
@@ -168,7 +167,7 @@ public abstract class TooltipButton extends GuiButton {
 	{
 		boolean flag = fontRenderer.getUnicodeFlag();
 		fontRenderer.setUnicodeFlag(true);
-		fontRenderer.drawString(EnumChatFormatting.AQUA + getIndicatorString(), getIndicatorXPos(), getIndicatorYPos(), getIndicatorMouseOverColor());
+//		fontRenderer.drawString(EnumChatFormatting.AQUA + getIndicatorString(), getIndicatorXPos(), getIndicatorYPos(), getIndicatorMouseOverColor());
 		fontRenderer.setUnicodeFlag(flag);
 	}
 	
@@ -247,11 +246,13 @@ public abstract class TooltipButton extends GuiButton {
 	}
 
 	protected int getIndicatorYPos() {
-		return this.yPosition + 1;
+//		return this.yPosition + 1;
+		return 1;
 	}
 	
 	protected int getIndicatorXPos() {
-		return this.xPosition + this.getButtonWidth() - 6;
+//		return this.xPosition + this.getButtonWidth() - 6;
+		return 6;
 	}
 
 	public int getIndicatorColor() {

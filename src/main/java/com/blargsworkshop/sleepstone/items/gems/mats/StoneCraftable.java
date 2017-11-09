@@ -27,6 +27,7 @@ public class StoneCraftable extends BaseCraftable {
 	public static final int NUMBER_OF_CRAFTABLES = 16;
 
 	public StoneCraftable() {
-		super(UNLOCALIZED_NAME, NUMBER_OF_CRAFTABLES);
+//		super(UNLOCALIZED_NAME, NUMBER_OF_CRAFTABLES);
+		super(UNLOCALIZED_NAME, "");
 	}
 }

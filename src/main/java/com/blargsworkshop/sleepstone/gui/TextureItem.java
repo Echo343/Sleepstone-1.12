@@ -6,7 +6,7 @@ public class TextureItem extends Item {
 
 	public TextureItem(String unlocalizedName, String texture) {
 		this.setUnlocalizedName(unlocalizedName);
-		this.setTextureName(texture);
+//		this.setTextureName(texture);
 	}
 
 }

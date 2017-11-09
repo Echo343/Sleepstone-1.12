@@ -1,20 +1,23 @@
 package com.blargsworkshop.sleepstone.potions;
 
-import com.blargsworkshop.sleepstone.Log;
-
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.Potion;
 
 public class BlargsPotion extends Potion {
 	
-	public BlargsPotion(int potionId, String messageKey) {
-		super(potionId, false, 0);
-		setPotionName(messageKey);
-		// TODO use custom icon
-		setIconIndex(5, 1);
-		Log.detail("Registering BlargsPotion: " + potionId + " for " + messageKey);
-	}
+//	public BlargsPotion(int potionId, String messageKey) {
+//		super(potionId, false, 0);
+//		setPotionName(messageKey);
+//		// TODO use custom icon
+//		setIconIndex(5, 1);
+//		Log.detail("Registering BlargsPotion: " + potionId + " for " + messageKey);
+//	}
 	
+	protected BlargsPotion(boolean isBadEffectIn, int liquidColorIn) {
+		super(isBadEffectIn, liquidColorIn);
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * Override this method to add effects.
 	 */

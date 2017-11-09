@@ -18,7 +18,7 @@ public class SyncAllPlayerPropsMessage extends AbstractMessage<SyncAllPlayerProp
 	
 	public SyncAllPlayerPropsMessage(EntityPlayer player) {
 		data = new NBTTagCompound();
-		ExtendedPlayer.get(player).saveNBTData(data);
+//		ExtendedPlayer.get(player).saveNBTData(data);
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class SyncAllPlayerPropsMessage extends AbstractMessage<SyncAllPlayerProp
 
 	@Override
 	public void process(EntityPlayer player, Side side) {
-		ExtendedPlayer.get(player).loadNBTData(data);
+//		ExtendedPlayer.get(player).loadNBTData(data);
 	}
 
 }

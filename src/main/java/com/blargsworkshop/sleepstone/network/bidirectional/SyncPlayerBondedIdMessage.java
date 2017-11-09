@@ -33,8 +33,8 @@ public class SyncPlayerBondedIdMessage extends AbstractMessage<SyncPlayerBondedI
 
 	@Override
 	public void process(EntityPlayer player, Side side) {
-		ExtendedPlayer extPlayer = ExtendedPlayer.get(player);
-		extPlayer.setBondedStoneId(bondedId, false);
+//		ExtendedPlayer extPlayer = ExtendedPlayer.get(player);
+//		extPlayer.setBondedStoneId(bondedId, false);
 	}
 
 }

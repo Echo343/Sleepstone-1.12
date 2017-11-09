@@ -2,7 +2,6 @@ package com.blargsworkshop.sleepstone.events;
 
 import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.ModItems;
-import com.blargsworkshop.sleepstone.items.gems.mats.StoneCraftable;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemModelMesher;

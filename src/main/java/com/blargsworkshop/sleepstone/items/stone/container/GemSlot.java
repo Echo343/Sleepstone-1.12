@@ -1,12 +1,10 @@
 package com.blargsworkshop.sleepstone.items.stone.container;
 
 import com.blargsworkshop.sleepstone.items.gems.Gem;
-import com.blargsworkshop.sleepstone.items.stone.Slots;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
 
 public class GemSlot extends Slot {
 	private Class<? extends Gem> gemType;
@@ -18,14 +16,14 @@ public class GemSlot extends Slot {
         this.stackLimit = super.getSlotStackLimit();
     }
     
-    public GemSlot(Slots gemSlot, IInventory inv, int xPos, int yPos, IIcon ico) {
-    	super(inv, gemSlot.ordinal(), xPos, yPos);
-    	this.gemType = gemSlot.getGemType();
-    	this.stackLimit = 1;
-    	if (ico != null) {
-    		this.setBackgroundIcon(ico);
-    	}
-    }
+//    public GemSlot(Slots gemSlot, IInventory inv, int xPos, int yPos, IIcon ico) {
+//    	super(inv, gemSlot.ordinal(), xPos, yPos);
+//    	this.gemType = gemSlot.getGemType();
+//    	this.stackLimit = 1;
+//    	if (ico != null) {
+//    		this.setBackgroundIcon(ico);
+//    	}
+//    }
 
     // This is the only method we need to override so that
     // we can't place our inventory-storing Item within

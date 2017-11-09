@@ -12,6 +12,7 @@ public class PathfinderCraftable extends BaseCraftable {
 	private static final int NUMBER_OF_CRAFTABLES = 1;
 
 	public PathfinderCraftable() {
-		super(UNLOCALIZED_NAME, NUMBER_OF_CRAFTABLES);
+//		super(UNLOCALIZED_NAME, NUMBER_OF_CRAFTABLES);
+		super(UNLOCALIZED_NAME, "");
 	}
 }

@@ -36,8 +36,8 @@ public class SyncPlayerPropMessage extends AbstractMessage<SyncPlayerPropMessage
 
 	@Override
 	public void process(EntityPlayer player, Side side) {
-		ExtendedPlayer extPlayer = ExtendedPlayer.get(player);
-		extPlayer.setAbilityWithoutSync(ability, bool);
+//		ExtendedPlayer extPlayer = ExtendedPlayer.get(player);
+//		extPlayer.setAbilityWithoutSync(ability, bool);
 	}
 
 }
