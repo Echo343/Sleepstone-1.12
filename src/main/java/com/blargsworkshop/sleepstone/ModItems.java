@@ -32,13 +32,13 @@ public class ModItems {
 	public static Item itemStoneCraftable = new StoneCraftable();
 	public static Item itemPathfinderCraftable = new PathfinderCraftable();
 	public static Item itemEnderShard = new EnderShard();
-	
-	public static Item textureGemSlotStone = new TextureItem("textureGemSlotStone", ModInfo.ID + ":slot-gem-stone");
-	public static Item textureGemSlotPathfinder = new TextureItem("textureGemSlotPathfinder", ModInfo.ID + ":slot-gem-pathfinder");
-	public static Item textureGemSlotTimeAndSpace = new TextureItem("textureGemSlotTimeAndSpace", ModInfo.ID + ":slot-gem-time-and-space");
-	public static Item textureGemSlotFire = new TextureItem("textureGemSlotFire", ModInfo.ID + ":slot-gem-fire");
-	public static Item textureGemSlotGuardian = new TextureItem("textureGemSlotGuardian", ModInfo.ID + ":slot-gem-guardian");
-	public static Item textureGemSlotEthereal = new TextureItem("textureGemSlotEthereal", ModInfo.ID + ":slot-gem-ethereal");
+//	
+//	public static Item textureGemSlotStone = new TextureItem("textureGemSlotStone", ModInfo.ID + ":slot-gem-stone");
+//	public static Item textureGemSlotPathfinder = new TextureItem("textureGemSlotPathfinder", ModInfo.ID + ":slot-gem-pathfinder");
+//	public static Item textureGemSlotTimeAndSpace = new TextureItem("textureGemSlotTimeAndSpace", ModInfo.ID + ":slot-gem-time-and-space");
+//	public static Item textureGemSlotFire = new TextureItem("textureGemSlotFire", ModInfo.ID + ":slot-gem-fire");
+//	public static Item textureGemSlotGuardian = new TextureItem("textureGemSlotGuardian", ModInfo.ID + ":slot-gem-guardian");
+//	public static Item textureGemSlotEthereal = new TextureItem("textureGemSlotEthereal", ModInfo.ID + ":slot-gem-ethereal");
 	
 	public static class Potions {
 		public static BlargsPotion warpSickness;

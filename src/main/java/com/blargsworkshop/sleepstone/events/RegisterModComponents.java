@@ -11,6 +11,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -23,13 +24,13 @@ public class RegisterModComponents {
 	public static void registerItems(RegistryEvent.Register<Item> event) {
 		// TODO change this to reflection
 		event.getRegistry().registerAll(
-			ModItems.itemSleepstone,
-			ModItems.itemStoneGem,
-			ModItems.itemTimeSpaceGem,
-			ModItems.itemPathfinderGem,
-			ModItems.itemEtherealGem,
-			ModItems.itemGuardianGem,
-			ModItems.itemFireGem
+//			ModItems.itemSleepstone,
+//			ModItems.itemStoneGem,
+//			ModItems.itemTimeSpaceGem,
+			ModItems.itemPathfinderGem
+//			ModItems.itemEtherealGem,
+//			ModItems.itemGuardianGem,
+//			ModItems.itemFireGem
 
 //			ModItems.itemStoneCraftable,
 //			ModItems.itemPathfinderCraftable,
@@ -64,15 +65,16 @@ public class RegisterModComponents {
 //		GameRegistry.registerItem(textureGemSlotEthereal, "modTextureGemSlotEthereal");
 	}
 	
-	public static void registerTextures() {
-		ItemModelMesher mesher = Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
-		mesher.register(ModItems.itemSleepstone, 0, new ModelResourceLocation(ModInfo.ID + ":" + "sleepstone"));
-		mesher.register(ModItems.itemStoneGem, 0, new ModelResourceLocation(ModInfo.ID + ":" + "gem_stone"));
-		mesher.register(ModItems.itemTimeSpaceGem, 0, new ModelResourceLocation(ModInfo.ID + ":" + "gem_timeandspace"));
-		mesher.register(ModItems.itemPathfinderGem, 0, new ModelResourceLocation(ModInfo.ID + ":" + "gem_pathfinder"));
-		mesher.register(ModItems.itemEtherealGem, 0, new ModelResourceLocation(ModInfo.ID + ":" + "gem_ethereal"));
-		mesher.register(ModItems.itemGuardianGem, 0, new ModelResourceLocation(ModInfo.ID + ":" + "gem_guardian"));
-		mesher.register(ModItems.itemFireGem, 0, new ModelResourceLocation(ModInfo.ID + ":" + "gem_fire"));
+	//TODO Client Only
+	@SubscribeEvent
+	public static void onModelRegistry(ModelRegistryEvent event) {
+//		ModelLoader.setCustomModelResourceLocation(ModItems.itemSleepstone, 0, new ModelResourceLocation(ModInfo.ID + ":" + "sleepstone"));
+//		ModelLoader.setCustomModelResourceLocation(ModItems.itemStoneGem, 0, new ModelResourceLocation(ModInfo.ID + ":" + "gem_stone"));
+//		ModelLoader.setCustomModelResourceLocation(ModItems.itemTimeSpaceGem, 0, new ModelResourceLocation(ModInfo.ID + ":" + "gem_timeandspace"));
+		ModelLoader.setCustomModelResourceLocation(ModItems.itemPathfinderGem, 0, new ModelResourceLocation(ModInfo.ID + ":" + "gem_pathfinder"));
+//		ModelLoader.setCustomModelResourceLocation(ModItems.itemEtherealGem, 0, new ModelResourceLocation(ModInfo.ID + ":" + "gem_ethereal"));
+//		ModelLoader.setCustomModelResourceLocation(ModItems.itemGuardianGem, 0, new ModelResourceLocation(ModInfo.ID + ":" + "gem_guardian"));
+//		ModelLoader.setCustomModelResourceLocation(ModItems.itemFireGem, 0, new ModelResourceLocation(ModInfo.ID + ":" + "gem_fire"));
 		
 		// TODO do something with this.
 //		for (int i = 0; i < StoneCraftable.NUMBER_OF_CRAFTABLES; i++) {
@@ -145,39 +147,39 @@ public class RegisterModComponents {
 		 * item.stonecraftable_14.name=Heated Crystalline Lattice Structure
 		 * item.stonecraftable_15.name=Radial Empowered Orb
 		 * */
-//		GameRegistry.addShapedRecipe(new ItemStack(itemStoneCraftable, 1, 0), "ccc", "csc", "ccc",
-//				'c', Blocks.hardened_clay,
-//				's', Blocks.sandstone);
-		GameRegistry.addSmelting(new ItemStack(ModItems.itemStoneCraftable, 1, 0), new ItemStack(ModItems.itemStoneCraftable, 1, 1), 0.1f);
-//		GameRegistry.addShapedRecipe(new ItemStack(itemStoneCraftable, 1, 2), "xxx", "xcx", "xxx",
-//				'x', new ItemStack(itemStoneCraftable, 1, 1),
-//				'c', new ItemStack(Items.coal, 1, 1));
-		GameRegistry.addSmelting(new ItemStack(ModItems.itemStoneCraftable, 1, 2), new ItemStack(ModItems.itemStoneCraftable, 1, 3), 1f);
-//		GameRegistry.addShapedRecipe(new ItemStack(itemStoneCraftable, 1, 4), "xxx", "xxx", "xxx",
-//				'x', Blocks.redstone_block);
-//		GameRegistry.addShapedRecipe(new ItemStack(itemStoneCraftable, 1, 5), "grg", "rgr", "grg",
-//				'r', new ItemStack(itemStoneCraftable, 1, 4),
-//				'g', Blocks.gold_block);
-//		GameRegistry.addShapedRecipe(new ItemStack(itemStoneCraftable, 1, 6), " r ", "rcr", " r ",
-//				'r', new ItemStack(itemStoneCraftable, 1, 5),
-//				'c', new ItemStack(itemStoneCraftable, 1, 3));
-		GameRegistry.addSmelting(new ItemStack(ModItems.itemStoneCraftable, 1, 6), new ItemStack(ModItems.itemStoneCraftable, 1, 7), 1f);
-		GameRegistry.addSmelting(new ItemStack(Blocks.OBSIDIAN), new ItemStack(ModItems.itemStoneCraftable, 1, 8), 0.4f);
-//		GameRegistry.addShapedRecipe(new ItemStack(itemStoneCraftable, 1, 9), "ooo", "odo", "ooo",
-//				'o', new ItemStack(itemStoneCraftable, 1, 8),
-//				'd', Items.diamond);
-		GameRegistry.addSmelting(new ItemStack(ModItems.itemStoneCraftable, 1, 9), new ItemStack(ModItems.itemStoneCraftable, 1, 10), 0.7f);
-//		GameRegistry.addShapedRecipe(new ItemStack(itemStoneCraftable, 1, 11), "d d", " d ", "d d",
-//				'd', Items.diamond);
-		GameRegistry.addSmelting(new ItemStack(ModItems.itemStoneCraftable, 1, 11), new ItemStack(ModItems.itemStoneCraftable, 1, 12), 1f);
-//		GameRegistry.addShapedRecipe(new ItemStack(itemStoneCraftable, 1, 13), "ooo", "odo", "ooo",
-//				'o', new ItemStack(itemStoneCraftable, 1, 10),
-//				'd', new ItemStack(itemStoneCraftable, 1, 12));
-		GameRegistry.addSmelting(new ItemStack(ModItems.itemStoneCraftable, 1, 13), new ItemStack(ModItems.itemStoneCraftable, 1, 14), 1f);
-//		GameRegistry.addShapedRecipe(new ItemStack(itemStoneCraftable, 1, 15), "ccc", "cic", "ccc",
-//				'c', new ItemStack(itemStoneCraftable, 1, 14),
-//				'i', new ItemStack(itemStoneCraftable, 1, 7));
-		GameRegistry.addSmelting(new ItemStack(ModItems.itemStoneCraftable, 1, 15), new ItemStack(ModItems.itemStoneGem), 1f);
+////		GameRegistry.addShapedRecipe(new ItemStack(itemStoneCraftable, 1, 0), "ccc", "csc", "ccc",
+////				'c', Blocks.hardened_clay,
+////				's', Blocks.sandstone);
+//		GameRegistry.addSmelting(new ItemStack(ModItems.itemStoneCraftable, 1, 0), new ItemStack(ModItems.itemStoneCraftable, 1, 1), 0.1f);
+////		GameRegistry.addShapedRecipe(new ItemStack(itemStoneCraftable, 1, 2), "xxx", "xcx", "xxx",
+////				'x', new ItemStack(itemStoneCraftable, 1, 1),
+////				'c', new ItemStack(Items.coal, 1, 1));
+//		GameRegistry.addSmelting(new ItemStack(ModItems.itemStoneCraftable, 1, 2), new ItemStack(ModItems.itemStoneCraftable, 1, 3), 1f);
+////		GameRegistry.addShapedRecipe(new ItemStack(itemStoneCraftable, 1, 4), "xxx", "xxx", "xxx",
+////				'x', Blocks.redstone_block);
+////		GameRegistry.addShapedRecipe(new ItemStack(itemStoneCraftable, 1, 5), "grg", "rgr", "grg",
+////				'r', new ItemStack(itemStoneCraftable, 1, 4),
+////				'g', Blocks.gold_block);
+////		GameRegistry.addShapedRecipe(new ItemStack(itemStoneCraftable, 1, 6), " r ", "rcr", " r ",
+////				'r', new ItemStack(itemStoneCraftable, 1, 5),
+////				'c', new ItemStack(itemStoneCraftable, 1, 3));
+//		GameRegistry.addSmelting(new ItemStack(ModItems.itemStoneCraftable, 1, 6), new ItemStack(ModItems.itemStoneCraftable, 1, 7), 1f);
+//		GameRegistry.addSmelting(new ItemStack(Blocks.OBSIDIAN), new ItemStack(ModItems.itemStoneCraftable, 1, 8), 0.4f);
+////		GameRegistry.addShapedRecipe(new ItemStack(itemStoneCraftable, 1, 9), "ooo", "odo", "ooo",
+////				'o', new ItemStack(itemStoneCraftable, 1, 8),
+////				'd', Items.diamond);
+//		GameRegistry.addSmelting(new ItemStack(ModItems.itemStoneCraftable, 1, 9), new ItemStack(ModItems.itemStoneCraftable, 1, 10), 0.7f);
+////		GameRegistry.addShapedRecipe(new ItemStack(itemStoneCraftable, 1, 11), "d d", " d ", "d d",
+////				'd', Items.diamond);
+//		GameRegistry.addSmelting(new ItemStack(ModItems.itemStoneCraftable, 1, 11), new ItemStack(ModItems.itemStoneCraftable, 1, 12), 1f);
+////		GameRegistry.addShapedRecipe(new ItemStack(itemStoneCraftable, 1, 13), "ooo", "odo", "ooo",
+////				'o', new ItemStack(itemStoneCraftable, 1, 10),
+////				'd', new ItemStack(itemStoneCraftable, 1, 12));
+//		GameRegistry.addSmelting(new ItemStack(ModItems.itemStoneCraftable, 1, 13), new ItemStack(ModItems.itemStoneCraftable, 1, 14), 1f);
+////		GameRegistry.addShapedRecipe(new ItemStack(itemStoneCraftable, 1, 15), "ccc", "cic", "ccc",
+////				'c', new ItemStack(itemStoneCraftable, 1, 14),
+////				'i', new ItemStack(itemStoneCraftable, 1, 7));
+//		GameRegistry.addSmelting(new ItemStack(ModItems.itemStoneCraftable, 1, 15), new ItemStack(ModItems.itemStoneGem), 1f);
 		
 		// Time and Space Gem
 //		GameRegistry.addShapedRecipe(new ItemStack(itemTimeSpaceGem), "xxx", "xex", "xxx",

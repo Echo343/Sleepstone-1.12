@@ -19,7 +19,6 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void init(FMLInitializationEvent e) {
-//    	RegisterModComponents.registerTextures();
         super.init(e);
     }
 
