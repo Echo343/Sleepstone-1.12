@@ -11,12 +11,11 @@ package com.blargsworkshop.sleepstone.items.gems;
  */
 public class TimeSpaceGem extends Gem {
 
-	private static final String UNLOCALIZEDNAME = "timespacegem";
-	private static final String REG_NAME = "modItemTimeSpaceGem";
-//	private static final String TEXTURE = ModInfo.ID + ":gem-time-and-space";
+	private static final String UNLOCALIZED_NAME = "timespacegem";
+	private static final String REGISTRY_NAME = "gem_timeandspace";
 	
 	public TimeSpaceGem() {
-		super(UNLOCALIZEDNAME, REG_NAME);
+		super(UNLOCALIZED_NAME, REGISTRY_NAME);
 	}
 
 }

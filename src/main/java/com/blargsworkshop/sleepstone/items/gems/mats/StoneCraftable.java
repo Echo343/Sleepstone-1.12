@@ -23,11 +23,11 @@ package com.blargsworkshop.sleepstone.items.gems.mats;
  */
 public class StoneCraftable extends BaseCraftable {
 	
-	private static final String UNLOCALIZED_NAME = "craftablestone"; 
-	public static final int NUMBER_OF_CRAFTABLES = 16;
+	private static final String UNLOCALIZED_NAME = "craftablestone";
+	private static final String REGISTRY_NAME = "craftablestone";
+	private static final int NUMBER_OF_CRAFTABLES = 16;
 
 	public StoneCraftable() {
-//		super(UNLOCALIZED_NAME, NUMBER_OF_CRAFTABLES);
-		super(UNLOCALIZED_NAME, "");
+		super(UNLOCALIZED_NAME, REGISTRY_NAME, NUMBER_OF_CRAFTABLES);
 	}
 }

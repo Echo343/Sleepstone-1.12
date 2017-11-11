@@ -6,7 +6,6 @@ public abstract class Gem extends BaseItem {
 
 	public Gem(String unlocalizedName, String registeryName) {
 		super(unlocalizedName, registeryName);
-		// ItemStacks that store an NBT Tag Compound are limited to stack size of 1
 		this.setMaxStackSize(16);
 	}
 }

@@ -7,12 +7,11 @@ package com.blargsworkshop.sleepstone.items.gems;
  */
 public class StoneGem extends Gem {
 
-	private static final String UNLOCALIZEDNAME = "stonegem";
-	private static final String REG_NAME = "modItemStoneGem";
-//	private static final String TEXTURE = ModInfo.ID + ":gem-stone";
+	private static final String UNLOCALIZED_NAME = "stonegem";
+	private static final String REGISTRY_NAME = "gem_stone";
 	
 	public StoneGem() {
-		super(UNLOCALIZEDNAME, REG_NAME);
+		super(UNLOCALIZED_NAME, REGISTRY_NAME);
 	}
 
 }

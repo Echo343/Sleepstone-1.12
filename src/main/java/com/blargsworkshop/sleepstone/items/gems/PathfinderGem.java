@@ -1,11 +1,10 @@
 package com.blargsworkshop.sleepstone.items.gems;
 
 public class PathfinderGem extends Gem {
-	private static final String UNLOCALIZEDNAME = "pathfindergem";
-	private static final String REG_NAME = "gem_pathfinder";
-//	private static final String TEXTURE = ModInfo.ID + ":gem-pathfinder";
+	private static final String UNLOCALIZED_NAME = "pathfindergem";
+	private static final String REGISTRY_NAME = "gem_pathfinder";
 	
 	public PathfinderGem() {
-		super(UNLOCALIZEDNAME, REG_NAME);
+		super(UNLOCALIZED_NAME, REGISTRY_NAME);
 	}
 }
