@@ -24,7 +24,7 @@ public class RegisterModComponents {
 	public static void registerItems(RegistryEvent.Register<Item> event) {
 		// TODO change this to reflection
 		event.getRegistry().registerAll(
-//			ModItems.itemSleepstone,
+			ModItems.itemSleepstone,
 //			ModItems.itemStoneGem,
 //			ModItems.itemTimeSpaceGem,
 			ModItems.itemPathfinderGem

@@ -18,7 +18,7 @@ public class RegisterModels {
 	@SubscribeEvent
 	public static void onModelRegistry(ModelRegistryEvent event) {
 		//TODO make reflective and ask for subType to loop
-//		ModelLoader.setCustomModelResourceLocation(ModItems.itemSleepstone, 0, new ModelResourceLocation(ModInfo.ID + ":" + "sleepstone"));
+		ModelLoader.setCustomModelResourceLocation(ModItems.itemSleepstone, 0, new ModelResourceLocation(ModItems.itemSleepstone.getRegistryName(), null));
 //		ModelLoader.setCustomModelResourceLocation(ModItems.itemStoneGem, 0, new ModelResourceLocation(ModInfo.ID + ":" + "gem_stone"));
 //		ModelLoader.setCustomModelResourceLocation(ModItems.itemTimeSpaceGem, 0, new ModelResourceLocation(ModInfo.ID + ":" + "gem_timeandspace"));
 		ModelLoader.setCustomModelResourceLocation(ModItems.itemPathfinderGem, 0, new ModelResourceLocation(ModItems.itemPathfinderGem.getRegistryName(), null));

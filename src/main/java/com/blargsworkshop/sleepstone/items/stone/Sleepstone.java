@@ -29,7 +29,7 @@ public class Sleepstone extends BaseItem {
 	
 	private static final int WARP_CHANNEL_DURATION = 20 * 4;
 	private static final String UNLOCALIZED_NAME = "basicsleepstone";
-	private static final String REGISTRY_NAME = "modItemSleepstone";
+	private static final String REGISTRY_NAME = "sleepstone";
 	
 	protected CooldownTimer cooldownTimer = new CooldownTimer();
 	
