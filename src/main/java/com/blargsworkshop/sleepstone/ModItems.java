@@ -16,9 +16,15 @@ import com.blargsworkshop.sleepstone.potions.BlargsPotion;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 public class ModItems {
-	public static CreativeTabs tabSleepstone;
+	public static CreativeTabs tabSleepstone = new CreativeTabs(ModInfo.CREATIVE_TAB_SLEEPSTONE) {
+		@Override
+		public ItemStack getTabIconItem() {
+			return new ItemStack(ModItems.itemSleepstone);
+		}
+	};
 	
 	public static Item itemSleepstone = new Sleepstone();
 	
