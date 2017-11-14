@@ -1,6 +1,5 @@
 {
-    // Brittle Diamond Lattice
-    "type": "crafting_shaped",
+    "type": "minecraft:crafting_shaped",
     "pattern": [
         "# #",
         " # ",
@@ -12,7 +11,7 @@
         }
     },
     "result": {
-        "item": "sleepstonemod:modItemStoneCraftable",
+        "item": "sleepstonemod:craftablestone",
         "data": 11
     }
 }

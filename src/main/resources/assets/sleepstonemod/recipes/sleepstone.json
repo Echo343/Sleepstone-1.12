@@ -1,5 +1,5 @@
 {
-    "type": "crafting_shaped",
+    "type": "minecraft:crafting_shaped",
     "pattern": [
         "SRS",
         "GBG",
@@ -20,6 +20,6 @@
         }
     },
     "result": {
-        "item": "sleepstonemod:modItemSleepstone"
+        "item": "sleepstonemod:sleepstone"
     }
 }

@@ -1,6 +1,5 @@
 {
-    // Crystalline Lattice Structure
-    "type": "crafting_shaped",
+    "type": "minecraft:crafting_shaped",
     "pattern": [
         "###",
         "#X#",
@@ -8,16 +7,16 @@
     ],
     "key": {
         "#": {
-            "item": "sleepstonemod:modItemStoneCraftable",
+            "item": "sleepstonemod:craftablestone",
             "data": 10
         },
         "X": {
-            "item": "sleepstonemod:modItemStoneCraftable",
+            "item": "sleepstonemod:craftablestone",
             "data": 12
         }
     },
     "result": {
-        "item": "sleepstonemod:modItemStoneCraftable",
+        "item": "sleepstonemod:craftablestone",
         "data": 13
     }
 }

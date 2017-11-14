@@ -1,5 +1,5 @@
 {
-    "type": "crafting_shapeless",
+    "type": "minecraft:crafting_shapeless",
     "ingredients": [
       {
         "item": "minecraft:feather"
@@ -79,6 +79,6 @@
       ]
     ],
     "result": {
-      "item": "sleepstonemod:modItemPathfinderCraftable"
+      "item": "sleepstonemod:craftablepathfinder"
     }
   }

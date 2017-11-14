@@ -1,6 +1,5 @@
 {
-    // Refined Obsidian Clump
-    "type": "crafting_shaped",
+    "type": "minecraft:crafting_shaped",
     "pattern": [
         "###",
         "#X#",
@@ -8,7 +7,7 @@
     ],
     "key": {
         "#": {
-            "item": "sleepstonemod:modItemStoneCraftable",
+            "item": "sleepstonemod:craftablestone",
             "data": 8
         },
         "X": {
@@ -16,7 +15,7 @@
         }
     },
     "result": {
-        "item": "sleepstonemod:modItemStoneCraftable",
+        "item": "sleepstonemod:craftablestone",
         "data": 9
     }
 }

@@ -1,6 +1,5 @@
 {
-    // Hardened Clay Piece
-    "type": "crafting_shaped",
+    "type": "minecraft:crafting_shaped",
     "pattern": [
         "###",
         "#X#",
@@ -15,7 +14,7 @@
         }
     },
     "result": {
-        "item": "sleepstonemod:modItemStoneCraftable",
+        "item": "sleepstonemod:craftablestone",
         "data": 0
     }
 }
