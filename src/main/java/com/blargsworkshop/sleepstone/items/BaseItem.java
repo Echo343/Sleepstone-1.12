@@ -23,13 +23,4 @@ public abstract class BaseItem extends Item {
 	public String getName() {
 		return name;
 	}
-	
-//	/**
-//	 * Used for items that have a different texture for each subtype.
-//	 * @param unlocalizedName
-//	 */
-//	public BaseItem(String unlocalizedName) {
-//		this.setUnlocalizedName(unlocalizedName);
-//		this.setCreativeTab(ModItems.tabSleepstone);
-//	}
 }

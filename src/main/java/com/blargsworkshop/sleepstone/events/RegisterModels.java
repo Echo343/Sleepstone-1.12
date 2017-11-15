@@ -2,8 +2,11 @@ package com.blargsworkshop.sleepstone.events;
 
 import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.ModItems;
+import com.blargsworkshop.sleepstone.items.gems.mats.BaseCraftable;
 
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.Mod;
@@ -18,27 +21,37 @@ public class RegisterModels {
 	@SubscribeEvent
 	public static void onModelRegistry(ModelRegistryEvent event) {
 		//TODO make reflective and ask for subType to loop
-		ModelLoader.setCustomModelResourceLocation(ModItems.itemSleepstone, 0, new ModelResourceLocation(ModItems.itemSleepstone.getRegistryName(), null));
-//		ModelLoader.setCustomModelResourceLocation(ModItems.itemStoneGem, 0, new ModelResourceLocation(ModInfo.ID + ":" + "gem_stone"));
-//		ModelLoader.setCustomModelResourceLocation(ModItems.itemTimeSpaceGem, 0, new ModelResourceLocation(ModInfo.ID + ":" + "gem_timeandspace"));
-		ModelLoader.setCustomModelResourceLocation(ModItems.itemPathfinderGem, 0, new ModelResourceLocation(ModItems.itemPathfinderGem.getRegistryName(), null));
-//		ModelLoader.setCustomModelResourceLocation(ModItems.itemEtherealGem, 0, new ModelResourceLocation(ModInfo.ID + ":" + "gem_ethereal"));
-//		ModelLoader.setCustomModelResourceLocation(ModItems.itemGuardianGem, 0, new ModelResourceLocation(ModInfo.ID + ":" + "gem_guardian"));
-//		ModelLoader.setCustomModelResourceLocation(ModItems.itemFireGem, 0, new ModelResourceLocation(ModInfo.ID + ":" + "gem_fire"));
+		registerItemModel(ModItems.itemSleepstone);
+		registerItemModel(ModItems.itemStoneGem);
+		registerItemModel(ModItems.itemTimeSpaceGem);
+		registerItemModel(ModItems.itemPathfinderGem);
+		registerItemModel(ModItems.itemEtherealGem);
+		registerItemModel(ModItems.itemGuardianGem); 
+		registerItemModel(ModItems.itemFireGem);
 		
-		// TODO do something with this.
-//		for (int i = 0; i < StoneCraftable.NUMBER_OF_CRAFTABLES; i++) {
-//			mesher.register(ModItems.itemStoneCraftable, i, new ModelResourceLocation(ModInfo.ID + ":" + "craftablestone_" + i));
-//		}
-//		mesher.register(ModItems.itemPathfinderCraftable, 0, new ModelResourceLocation(ModInfo.ID + ":" + "craftablepathfinder"));
-//		mesher.register(ModItems.itemEnderShard, 0, new ModelResourceLocation(ModInfo.ID + ":" + "endershard"));
-//		
+		registerItemModel(ModItems.itemStoneCraftable);
+		registerItemModel(ModItems.itemPathfinderCraftable);
+		registerItemModel(ModItems.itemEnderShard);
+		
 //		mesher.register(ModItems.textureGemSlotStone, 0, new ModelResourceLocation(ModInfo.ID + ":" + "slot-gem-stone"));
 //		mesher.register(ModItems.textureGemSlotPathfinder, 0, new ModelResourceLocation(ModInfo.ID + ":" + "slot-gem-pathfinder"));
 //		mesher.register(ModItems.textureGemSlotTimeAndSpace, 0, new ModelResourceLocation(ModInfo.ID + ":" + "slot-gem-time-and-space"));
 //		mesher.register(ModItems.textureGemSlotFire, 0, new ModelResourceLocation(ModInfo.ID + ":" + "slot-gem-fire"));
 //		mesher.register(ModItems.textureGemSlotGuardian, 0, new ModelResourceLocation(ModInfo.ID + ":" + "slot-gem-guardian"));
 //		mesher.register(ModItems.textureGemSlotEthereal, 0, new ModelResourceLocation(ModInfo.ID + ":" + "slot-gem-ethereal"));
+	}
+	
+	private static void registerItemModel(Item item) {
+		// TODO interface here
+		if (item.getHasSubtypes() && item instanceof BaseCraftable) {
+			BaseCraftable craftable = (BaseCraftable) item;
+			craftable.getResourceLocationMap().forEach((Integer meta, ResourceLocation resource) -> {
+				ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(resource, null));
+			});
+		}
+		else {
+			ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), null));
+		}
 	}
 
 }

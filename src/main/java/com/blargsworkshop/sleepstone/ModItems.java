@@ -1,6 +1,6 @@
 package com.blargsworkshop.sleepstone;
 
-import com.blargsworkshop.sleepstone.gui.TextureItem;
+import com.blargsworkshop.sleepstone.events.RegisterModComponents;
 import com.blargsworkshop.sleepstone.items.EnderShard;
 import com.blargsworkshop.sleepstone.items.gems.EtherealGem;
 import com.blargsworkshop.sleepstone.items.gems.FireGem;
@@ -16,15 +16,9 @@ import com.blargsworkshop.sleepstone.potions.BlargsPotion;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 
 public class ModItems {
-	public static CreativeTabs tabSleepstone = new CreativeTabs(ModInfo.CREATIVE_TAB_SLEEPSTONE) {
-		@Override
-		public ItemStack getTabIconItem() {
-			return new ItemStack(ModItems.itemSleepstone);
-		}
-	};
+	public static CreativeTabs tabSleepstone = RegisterModComponents.getCreativeTab();
 	
 	public static Item itemSleepstone = new Sleepstone();
 	
@@ -38,7 +32,7 @@ public class ModItems {
 	public static Item itemStoneCraftable = new StoneCraftable();
 	public static Item itemPathfinderCraftable = new PathfinderCraftable();
 	public static Item itemEnderShard = new EnderShard();
-//	
+	
 //	public static Item textureGemSlotStone = new TextureItem("textureGemSlotStone", ModInfo.ID + ":slot-gem-stone");
 //	public static Item textureGemSlotPathfinder = new TextureItem("textureGemSlotPathfinder", ModInfo.ID + ":slot-gem-pathfinder");
 //	public static Item textureGemSlotTimeAndSpace = new TextureItem("textureGemSlotTimeAndSpace", ModInfo.ID + ":slot-gem-time-and-space");
