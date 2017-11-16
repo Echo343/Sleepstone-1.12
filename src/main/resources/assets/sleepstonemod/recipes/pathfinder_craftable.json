@@ -79,6 +79,7 @@
       ]
     ],
     "result": {
-      "item": "sleepstonemod:craftablepathfinder"
+      "item": "sleepstonemod:craftablepathfinder",
+      "data": 0
     }
   }
