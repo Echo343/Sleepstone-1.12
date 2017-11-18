@@ -1,5 +1,6 @@
 package com.blargsworkshop.sleepstone.items.stone.container;
 
+import java.util.List;
 import java.util.UUID;
 
 import com.blargsworkshop.sleepstone.items.stone.Sleepstone;
@@ -7,14 +8,17 @@ import com.blargsworkshop.sleepstone.items.stone.Slots;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.common.util.Constants;
 
 public class StoneInventory implements IInventory {
-	private boolean isNameLocalized = false;
     private String name = "text.stoneinventory.sleepstone";
 
     /** Provides NBT Tag Compound to reference */
@@ -26,7 +30,7 @@ public class StoneInventory implements IInventory {
     public static final int INV_SIZE = 21;
 
     /** Inventory's size must be the same as number of slots you add to the Container class */
-    private ItemStack[] inventory = new ItemStack[INV_SIZE];
+    private List<ItemStack> inventory = NonNullList.withSize(INV_SIZE, ItemStack.EMPTY);
 
     /**
      * @param itemstack - the ItemStack to which this inventory belongs
@@ -47,12 +51,12 @@ public class StoneInventory implements IInventory {
     
     @Override
     public int getSizeInventory() {
-        return inventory.length;
+        return inventory.size();
     }
 
     @Override
     public ItemStack getStackInSlot(int slot) {
-        return inventory[slot];
+        return inventory.get(slot);
     }
     
     private boolean checkGems(Slots mainSlot, Slots augmentSlot) {
@@ -102,10 +106,18 @@ public class StoneInventory implements IInventory {
     @Override
 	public ItemStack decrStackSize(int slot, int amount)
 	{
-		ItemStack stack = getStackInSlot(slot);
-//		if(stack != null)
+    	ItemStack stack = ItemStack.EMPTY;
+    	
+    	if (!inventory.get(slot).isEmpty()) {
+    		stack = ItemStackHelper.getAndSplit(inventory, slot, amount);
+    	}
+    	
+    	return stack;
+    	
+//		ItemStack stack = getStackInSlot(slot);
+//		if(stack != null && !stack.isEmpty())
 //		{
-//			if(stack.stackSize > amount)
+//			if(stack.getCount() > amount)
 //			{
 //				stack = stack.splitStack(amount);
 //				// Don't forget this line or your inventory will not be saved!
@@ -117,43 +129,21 @@ public class StoneInventory implements IInventory {
 //				setInventorySlotContents(slot, null);
 //			}
 //		}
-		return stack;
-	}
-
-//	@Override
-	public ItemStack getStackInSlotOnClosing(int slot)
-	{
-		ItemStack stack = getStackInSlot(slot);
-		setInventorySlotContents(slot, null);
-		return stack;
+//		return stack;
 	}
 
 	@Override
 	public void setInventorySlotContents(int slot, ItemStack stack)
 	{
-//		inventory[slot] = stack;
-//
-//		if (stack != null && stack.stackSize > getInventoryStackLimit())
-//		{
-//			stack.stackSize = getInventoryStackLimit();
-//		}
+		inventory.set(slot, stack);
+
+		if (stack != null && stack.getCount() > getInventoryStackLimit())
+		{
+			stack.setCount(getInventoryStackLimit());
+		}
 
 		// Don't forget this line or your inventory will not be saved!
 		markDirty();
-    }
-
-//    @Override
-    public String getInventoryName() {
-        return name;
-	}
-	
-	public boolean isInventoryNameLocalized() {
-		return isNameLocalized;
-	}
-    
-//    @Override
-    public boolean hasCustomInventoryName() {
-        return name.length() > 0;
     }
 
     @Override
@@ -169,42 +159,38 @@ public class StoneInventory implements IInventory {
 	@Override
 	public void markDirty()
 	{
+		// TODO might need this to set to ItemStack.EMPTY
 //		for (int i = 0; i < getSizeInventory(); ++i)
 //		{
-//			if (getStackInSlot(i) != null && getStackInSlot(i).stackSize == 0) {
-//				inventory[i] = null;
+//			if (getStackInSlot(i) != null && getStackInSlot(i).getCount() == 0) {
+//				inventory.set(i, null);
 //			}
 //		}
-//		
-//		// This line here does the work:		
-//		writeToNBT(invItem.getTagCompound());
+		
+		// This line here does the work:		
+		writeToNBT(invItem.getTagCompound());
     }
     
-//    @Override
-    public boolean isUseableByPlayer(EntityPlayer entityPlayer) {
-        return true;
-    }
-
-//    @Override
-    public void openInventory() {
-    }
-
-//    @Override
-    public void closeInventory() {
+    @Override
+    public boolean isUsableByPlayer(EntityPlayer entityPlayer) {
+    	if (entityPlayer.isDead)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 
     /**
-	 * This method doesn't seem to do what it claims to do, as
-	 * items can still be left-clicked and placed in the inventory
-	 * even when this returns false
-	 */
+     * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot. For
+     * guis use Slot.isItemValid
+     */
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack itemstack)
 	{
-		// Don't want to be able to store the inventory item within itself
-		// Bad things will happen, like losing your inventory
-		// Actually, this needs a custom Slot to work
-		return !(itemstack.getItem() instanceof Sleepstone);
+		return true;
     }
     
     /**
@@ -212,24 +198,24 @@ public class StoneInventory implements IInventory {
 	 */
 	public void readFromNBT(NBTTagCompound compound)
 	{
-//		uniqueId = compound.getString("uniqueId");
-//		if ("".equals(uniqueId)) {
-//			uniqueId = UUID.randomUUID().toString();
-//			
-//		}
-//		// Gets the custom taglist we wrote to this compound, if any
-//		NBTTagList items = compound.getTagList("ItemInventory", Constants.NBT.TAG_COMPOUND);
-//
-//		for (int i = 0; i < items.tagCount(); ++i)
-//		{
-//			NBTTagCompound item = (NBTTagCompound) items.getCompoundTagAt(i);
-//			int slot = item.getInteger("Slot");
-//
-//			// Just double-checking that the saved slot index is within our inventory array bounds
-//			if (slot >= 0 && slot < getSizeInventory()) {
-//				inventory[slot] = ItemStack.loadItemStackFromNBT(item);
-//			}
-//		}
+		uniqueId = compound.getString("uniqueId");
+		if ("".equals(uniqueId)) {
+			uniqueId = UUID.randomUUID().toString();
+			
+		}
+		// Gets the custom taglist we wrote to this compound, if any
+		NBTTagList items = compound.getTagList("ItemInventory", Constants.NBT.TAG_COMPOUND);
+
+		for (int i = 0; i < items.tagCount(); ++i)
+		{
+			NBTTagCompound item = (NBTTagCompound) items.getCompoundTagAt(i);
+			int slot = item.getInteger("Slot");
+
+			// Just double-checking that the saved slot index is within our inventory array bounds
+			if (slot >= 0 && slot < getSizeInventory()) {
+				inventory.set(slot, ItemStack.loadItemStackFromNBT(item));
+			}
+		}
 	}
 
 	/**
@@ -237,28 +223,28 @@ public class StoneInventory implements IInventory {
 	 */
 	public void writeToNBT(NBTTagCompound tagcompound)
 	{
-//		// Create a new NBT Tag List to store itemstacks as NBT Tags
-//		NBTTagList items = new NBTTagList();
-//
-//		for (int i = 0; i < getSizeInventory(); ++i)
-//		{
-//			// Only write stacks that contain items
-//			if (getStackInSlot(i) != null)
-//			{
-//				// Make a new NBT Tag Compound to write the itemstack and slot index to
-//				NBTTagCompound item = new NBTTagCompound();
-//				item.setInteger("Slot", i);
-//				// Writes the itemstack in slot(i) to the Tag Compound we just made
-//				getStackInSlot(i).writeToNBT(item);
-//
-//				// add the tag compound to our tag list
-//				items.appendTag(item);
-//			}
-//		}
-//		// Add the UID to the Tag Compound
-//		tagcompound.setString("uniqueId", this.uniqueId);
-//		// Add the TagList to the ItemStack's Tag Compound with the name "ItemInventory"
-//		tagcompound.setTag("ItemInventory", items);
+		// Create a new NBT Tag List to store itemstacks as NBT Tags
+		NBTTagList items = new NBTTagList();
+
+		for (int i = 0; i < getSizeInventory(); ++i)
+		{
+			// Only write stacks that contain items
+			if (getStackInSlot(i) != null)
+			{
+				// Make a new NBT Tag Compound to write the itemstack and slot index to
+				NBTTagCompound item = new NBTTagCompound();
+				item.setInteger("Slot", i);
+				// Writes the itemstack in slot(i) to the Tag Compound we just made
+				item = getStackInSlot(i).writeToNBT(item);
+
+				// add the tag compound to our tag list
+				items.appendTag(item);
+			}
+		}
+		// Add the UID to the Tag Compound
+		tagcompound.setString("uniqueId", this.uniqueId);
+		// Add the TagList to the ItemStack's Tag Compound with the name "ItemInventory"
+		tagcompound.setTag("ItemInventory", items);
 	}
 
 	public String getUniqueId() {
@@ -267,73 +253,67 @@ public class StoneInventory implements IInventory {
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+        return name;
 	}
 
 	@Override
 	public boolean hasCustomName() {
-		// TODO Auto-generated method stub
-		return false;
+        return false;
 	}
 
 	@Override
 	public ITextComponent getDisplayName() {
-		// TODO Auto-generated method stub
-		return null;
+		return (ITextComponent)(this.hasCustomName() ? new TextComponentString(this.getName()) : new TextComponentTranslation(this.getName(), new Object[0]));
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		for (ItemStack stack : inventory) {
+			if (!stack.isEmpty()) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	@Override
 	public ItemStack removeStackFromSlot(int index) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean isUsableByPlayer(EntityPlayer player) {
-		// TODO Auto-generated method stub
-		return false;
+		ItemStack stack = inventory.get(index);
+		if (!stack.isEmpty())
+        {
+            inventory.set(index, ItemStack.EMPTY);
+            return stack;
+        }
+        else
+        {
+            return ItemStack.EMPTY;
+        }
 	}
 
 	@Override
 	public void openInventory(EntityPlayer player) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void closeInventory(EntityPlayer player) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public int getField(int id) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public void setField(int id, int value) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public int getFieldCount() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
-		
+		inventory.clear();
 	}
 }

@@ -1,5 +1,7 @@
 package com.blargsworkshop.sleepstone.extended_properties;
 
+import net.minecraft.entity.player.EntityPlayer;
+
 public class ExtendedPlayer {// implements IExtendedEntityProperties {
 	public final static String EXT_PROP_NAME = "ExtendedPlayer";
 
@@ -11,12 +13,12 @@ public class ExtendedPlayer {// implements IExtendedEntityProperties {
 //	private final EntityPlayer player;
 //	private static final String BONDED_ID = "BondedStoneId";
 //
-//	public ExtendedPlayer(EntityPlayer player) {
+	public ExtendedPlayer(EntityPlayer player) {
 //		this.player = player;
 //		for (Slots slot : Slots.values()) {
 //			abilities.put(slot, false);
 //		}
-//	}
+	}
 //	
 //	/**
 //	 * Used to register these extended properties for the player during EntityConstructing event.
@@ -26,14 +28,15 @@ public class ExtendedPlayer {// implements IExtendedEntityProperties {
 //		player.registerExtendedProperties(ExtendedPlayer.EXT_PROP_NAME, new ExtendedPlayer(player));
 //	}
 //
-//	/**
-//	 * Returns ExtendedPlayer properties for a player.
-//	 * @param player Player to return properties from.
-//	 * @return Returns the extended properties.
-//	 */
-//	public static final ExtendedPlayer get(EntityPlayer player) {
+	/**
+	 * Returns ExtendedPlayer properties for a player.
+	 * @param player Player to return properties from.
+	 * @return Returns the extended properties.
+	 */
+	public static final ExtendedPlayer get(EntityPlayer player) {
+		return new ExtendedPlayer(player);
 //		return (ExtendedPlayer) player.getExtendedProperties(EXT_PROP_NAME);
-//	}
+	}
 //	
 //	@Override
 //	public void saveNBTData(NBTTagCompound compound) {
