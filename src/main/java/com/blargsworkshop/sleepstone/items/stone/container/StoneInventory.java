@@ -3,7 +3,6 @@ package com.blargsworkshop.sleepstone.items.stone.container;
 import java.util.List;
 import java.util.UUID;
 
-import com.blargsworkshop.sleepstone.items.stone.Sleepstone;
 import com.blargsworkshop.sleepstone.items.stone.Slots;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -213,7 +212,7 @@ public class StoneInventory implements IInventory {
 
 			// Just double-checking that the saved slot index is within our inventory array bounds
 			if (slot >= 0 && slot < getSizeInventory()) {
-				inventory.set(slot, ItemStack.loadItemStackFromNBT(item));
+				inventory.set(slot, new ItemStack(item));
 			}
 		}
 	}

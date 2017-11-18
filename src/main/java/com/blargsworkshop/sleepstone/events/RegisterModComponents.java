@@ -47,7 +47,7 @@ public class RegisterModComponents {
 //		GameRegistry.registerItem(textureGemSlotEthereal, "modTextureGemSlotEthereal");
 	}
 	
-	public static void initRecipes() {
+	public static void initSmeltingRecipes() {
 		/** Sleepstone */
 //		GameRegistry.addShapedRecipe(new ItemStack(itemSleepstone), "srs", "gbg", "srs",
 //				's', new ItemStack(Blocks.stone),

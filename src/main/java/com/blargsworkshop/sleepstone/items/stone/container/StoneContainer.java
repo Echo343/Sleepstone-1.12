@@ -102,7 +102,7 @@ public class StoneContainer extends Container {
     public boolean canInteractWith(EntityPlayer player) {
         // be sure to return the inventory's isUseableByPlayer method
 		// if you defined special behavior there:
-        return inventory.isUseableByPlayer(player);
+        return inventory.isUsableByPlayer(player);
     }
 
     /**

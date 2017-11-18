@@ -53,7 +53,7 @@ public class GuiStone extends GuiScreen {
 		}
 	}
 	
-	private static final ResourceLocation backgroundImage = new ResourceLocation(ModInfo.ID, "textures/gui/GuiStone.png");
+	private static final ResourceLocation backgroundImage = new ResourceLocation(ModInfo.ID, "textures/gui/guistone.png");
 	
 	private static final int xSize = 248;
 //	private static final int xSize = 376;
