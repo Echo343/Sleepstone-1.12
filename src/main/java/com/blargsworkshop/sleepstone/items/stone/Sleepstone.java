@@ -40,7 +40,6 @@ public class Sleepstone extends BaseItem {
 	}
 	
 	@Override
-//	public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer player) {
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 		if (cooldownTimer.isItemReadyToUse(player)) {
 			if (!player.isSneaking()) {

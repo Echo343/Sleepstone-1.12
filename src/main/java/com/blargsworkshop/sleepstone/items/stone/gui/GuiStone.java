@@ -15,6 +15,7 @@ import com.blargsworkshop.sleepstone.items.stone.Slots;
 import com.blargsworkshop.sleepstone.items.stone.container.StoneInventory;
 import com.blargsworkshop.sleepstone.network.PacketDispatcher;
 import com.blargsworkshop.sleepstone.network.server.OpenGuiMessage;
+import com.blargsworkshop.sleepstone.utility.Utils;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -158,9 +159,9 @@ public class GuiStone extends GuiScreen {
 //			button.setState(props.getAbility(Buttons.PathfinderFire.getSlot()));
 //			this.buttonList.add(button);
 //		}
-//		
-//		GuiButton invButton = new BasicButton(Buttons.Inv, left + xSize - 40, top + ySize - 30, 20, Utils.localize("text.guistone.inv"));
-//		this.buttonList.add(invButton); // TODO Use an icon of some sort.
+		
+		GuiButton invButton = new BasicButton(Buttons.Inv, left + xSize - 40, top + ySize - 30, 20, Utils.localize("text.guistone.inv"));
+		this.buttonList.add(invButton); // TODO Use an icon of some sort.
 	}
 	
 	@Override

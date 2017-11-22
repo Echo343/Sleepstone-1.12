@@ -1,12 +1,19 @@
 package com.blargsworkshop.sleepstone.items.stone.container;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.items.stone.Slots;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 public class StoneContainer extends Container {
@@ -21,6 +28,25 @@ public class StoneContainer extends Container {
     private static final int INV_END = INV_START + 26;
     private static final int HOTBAR_START = INV_END + 1;
     private static final int HOTBAR_END = HOTBAR_START + 8;
+    
+    private static final ResourceLocation textureGemSlotStone = new ResourceLocation(ModInfo.ID, "items/slot-gem-stone");
+    private static final ResourceLocation textureGemSlotPathfinder = new ResourceLocation(ModInfo.ID, "items/slot-gem-pathfinder");
+    private static final ResourceLocation textureGemSlotTimeAndSpace = new ResourceLocation(ModInfo.ID, "items/slot-gem-time-and-space");
+    private static final ResourceLocation textureGemSlotFire = new ResourceLocation(ModInfo.ID, "items/slot-gem-fire");
+    private static final ResourceLocation textureGemSlotGuardian = new ResourceLocation(ModInfo.ID, "items/slot-gem-guardian");
+    private static final ResourceLocation textureGemSlotEthereal = new ResourceLocation(ModInfo.ID, "items/slot-gem-ethereal");
+    
+    public static List<ResourceLocation> getSpritesToRegister() {
+    	List<ResourceLocation> sprites = new ArrayList<>();
+    	Collections.addAll(sprites,
+    			textureGemSlotStone,
+    			textureGemSlotPathfinder,
+    			textureGemSlotTimeAndSpace,
+    			textureGemSlotFire,
+    			textureGemSlotGuardian,
+    			textureGemSlotEthereal);
+    	return sprites;
+    }
 
     // If you're planning to add armor slots, put those first like this:
 	// ARMOR_START = InventoryItem.INV_SIZE, ARMOR_END = ARMOR_START+3,
@@ -33,41 +59,24 @@ public class StoneContainer extends Container {
     public StoneContainer(World world, EntityPlayer par1Player, InventoryPlayer inventoryPlayer, StoneInventory stoneInventory) {
         this.inventory = stoneInventory;
         
-//        IIcon textureGemSlotStone = null;
-//        IIcon textureGemSlotPathfinder = null;
-//        IIcon textureGemSlotTimeAndSpace = null;
-//        IIcon textureGemSlotFire = null;
-//        IIcon textureGemSlotGuardian = null;
-//        IIcon textureGemSlotEthereal = null;	
-        
-//        if (world.isRemote) {
-//        	/** Slot Textures */
-//        	textureGemSlotStone = ModItems.textureGemSlotStone.getIconFromDamage(0);
-//        	textureGemSlotPathfinder = ModItems.textureGemSlotPathfinder.getIconFromDamage(0);
-//        	textureGemSlotTimeAndSpace = ModItems.textureGemSlotTimeAndSpace.getIconFromDamage(0);
-//        	textureGemSlotFire = ModItems.textureGemSlotFire.getIconFromDamage(0);
-//        	textureGemSlotGuardian = ModItems.textureGemSlotGuardian.getIconFromDamage(0);
-//        	textureGemSlotEthereal = ModItems.textureGemSlotEthereal.getIconFromDamage(0);        	
-//        }
-        
         /** Gem Slots */
         //Group one
-//        this.addSlotToContainer(new GemSlot(Slots.Stone, this.inventory, 29, 57, textureGemSlotStone));
-//        this.addSlotToContainer(new GemSlot(Slots.StoneEthereal, this.inventory, 11, 78, textureGemSlotEthereal));
-//        this.addSlotToContainer(new GemSlot(Slots.StoneGuardian, this.inventory, 29, 83, textureGemSlotGuardian));
-//        this.addSlotToContainer(new GemSlot(Slots.StoneFire, this.inventory, 47, 78, textureGemSlotFire));
-//        
-//        //Group two
-//        this.addSlotToContainer(new GemSlot(Slots.TimeSpace, this.inventory, 80, 16, textureGemSlotTimeAndSpace));
-//        this.addSlotToContainer(new GemSlot(Slots.TimeSpaceEthereal, this.inventory, 62, 37, textureGemSlotEthereal));
-//        this.addSlotToContainer(new GemSlot(Slots.TimeSpaceGuardian, this.inventory, 80, 44, textureGemSlotGuardian));
-//        this.addSlotToContainer(new GemSlot(Slots.TimeSpaceFire, this.inventory, 98, 37, textureGemSlotFire));
-//        
-//        //Group three
-//        this.addSlotToContainer(new GemSlot(Slots.Pathfinder, this.inventory, 130, 57, textureGemSlotPathfinder));
-//        this.addSlotToContainer(new GemSlot(Slots.PathfinderEthereal, this.inventory, 112, 78, textureGemSlotEthereal));
-//        this.addSlotToContainer(new GemSlot(Slots.PathfinderGuardian, this.inventory, 130, 83, textureGemSlotGuardian));
-//        this.addSlotToContainer(new GemSlot(Slots.PathfinderFire, this.inventory, 148, 78, textureGemSlotFire));
+        this.addSlotToContainer(new GemSlot(Slots.Stone, this.inventory, 29, 57, textureGemSlotStone));
+        this.addSlotToContainer(new GemSlot(Slots.StoneEthereal, this.inventory, 11, 78, textureGemSlotEthereal));
+        this.addSlotToContainer(new GemSlot(Slots.StoneGuardian, this.inventory, 29, 83, textureGemSlotGuardian));
+        this.addSlotToContainer(new GemSlot(Slots.StoneFire, this.inventory, 47, 78, textureGemSlotFire));
+        
+        //Group two
+        this.addSlotToContainer(new GemSlot(Slots.TimeSpace, this.inventory, 80, 16, textureGemSlotTimeAndSpace));
+        this.addSlotToContainer(new GemSlot(Slots.TimeSpaceEthereal, this.inventory, 62, 37, textureGemSlotEthereal));
+        this.addSlotToContainer(new GemSlot(Slots.TimeSpaceGuardian, this.inventory, 80, 44, textureGemSlotGuardian));
+        this.addSlotToContainer(new GemSlot(Slots.TimeSpaceFire, this.inventory, 98, 37, textureGemSlotFire));
+        
+        //Group three
+        this.addSlotToContainer(new GemSlot(Slots.Pathfinder, this.inventory, 130, 57, textureGemSlotPathfinder));
+        this.addSlotToContainer(new GemSlot(Slots.PathfinderEthereal, this.inventory, 112, 78, textureGemSlotEthereal));
+        this.addSlotToContainer(new GemSlot(Slots.PathfinderGuardian, this.inventory, 130, 83, textureGemSlotGuardian));
+        this.addSlotToContainer(new GemSlot(Slots.PathfinderFire, this.inventory, 148, 78, textureGemSlotFire));
         
         /** Spare Gem Inventory */
         for (int i = 0; i < 9; i++) {
@@ -111,6 +120,7 @@ public class StoneContainer extends Container {
     @Override
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int index)
 	{
+    	// TODO Fix
 		ItemStack itemstack = null;
 		Slot slot = (Slot) this.inventorySlots.get(index);
 
@@ -198,21 +208,21 @@ public class StoneContainer extends Container {
 				// }
 			}
 
-//			if (itemstack1.stackSize == 0)
-//			{
-//				slot.putStack((ItemStack) null);
-//			}
-//			else
-//			{
-//				slot.onSlotChanged();
-//			}
-//
-//			if (itemstack1.stackSize == itemstack.stackSize)
-//			{
-//				return null;
-//			}
-//
-//			slot.onPickupFromSlot(par1EntityPlayer, itemstack1);
+			if (itemstack1.getCount() == 0)
+			{
+				slot.putStack((ItemStack) null);
+			}
+			else
+			{
+				slot.onSlotChanged();
+			}
+
+			if (itemstack1.getCount() == itemstack.getCount())
+			{
+				return null;
+			}
+
+			slot.onTake(par1EntityPlayer, itemstack1);
 		}
 		return itemstack;
     }
@@ -222,14 +232,13 @@ public class StoneContainer extends Container {
 	 * opened the inventory, otherwise if the player moves it, the inventory will not
 	 * be able to save properly
 	 */
-//	@Override
-	public ItemStack slotClick(int slot, int button, int flag, EntityPlayer player) {
-//		// this will prevent the player from interacting with the item that opened the inventory:
-//		if (slot >= 0 && getSlot(slot) != null && getSlot(slot).getStack() == player.getHeldItem()) {
-//			return null;
-//		}
-//		return super.slotClick(slot, button, flag, player);
-		return null;
+	@Override
+	public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player) {
+		// this will prevent the player from interacting with the item that opened the inventory:
+		if (slotId >= 0 && getSlot(slotId) != null && getSlot(slotId).getStack() == player.getHeldItemMainhand()) {
+			return null;
+		}
+		return super.slotClick(slotId, dragType, clickTypeIn, player);
     }
     
 	/*
@@ -245,72 +254,72 @@ public class StoneContainer extends Container {
 	@Override
 	protected boolean mergeItemStack(ItemStack stack, int start, int end, boolean backwards) {
 		boolean flag1 = false;
-//		int k = (backwards ? end - 1 : start);
-//		Slot slot;
-//		ItemStack itemstack1;
-//
-//		if (stack.isStackable()) {
-//			while (stack.stackSize > 0 && (!backwards && k < end || backwards && k >= start)) {
-//				slot = (Slot) inventorySlots.get(k);
-//				itemstack1 = slot.getStack();
-//
-//				if (!slot.isItemValid(stack)) {
-//					k += (backwards ? -1 : 1);
-//					continue;
-//				}
-//
-//				if (itemstack1 != null && itemstack1.getItem() == stack.getItem()
-//						&& (!stack.getHasSubtypes() || stack.getItemDamage() == itemstack1.getItemDamage())
-//						&& ItemStack.areItemStackTagsEqual(stack, itemstack1)) {
-//					int l = itemstack1.stackSize + stack.stackSize;
-//
-//					if (l <= stack.getMaxStackSize() && l <= slot.getSlotStackLimit()) {
-//						stack.stackSize = 0;
-//						itemstack1.stackSize = l;
-//						inventory.markDirty();
-//						flag1 = true;
-//					} else if (itemstack1.stackSize < stack.getMaxStackSize() && l < slot.getSlotStackLimit()) {
-//						stack.stackSize -= stack.getMaxStackSize() - itemstack1.stackSize;
-//						itemstack1.stackSize = stack.getMaxStackSize();
-//						inventory.markDirty();
-//						flag1 = true;
-//					}
-//				}
-//
-//				k += (backwards ? -1 : 1);
-//			}
-//		}
-//		if (stack.stackSize > 0) {
-//			k = (backwards ? end - 1 : start);
-//			while (!backwards && k < end || backwards && k >= start) {
-//				slot = (Slot) inventorySlots.get(k);
-//				itemstack1 = slot.getStack();
-//
-//				if (!slot.isItemValid(stack)) {
-//					k += (backwards ? -1 : 1);
-//					continue;
-//				}
-//
-//				if (itemstack1 == null) {
-//					int l = stack.stackSize;
-//					if (l <= slot.getSlotStackLimit()) {
-//						slot.putStack(stack.copy());
-//						stack.stackSize = 0;
-//						inventory.markDirty();
-//						flag1 = true;
-//						break;
-//					} else {
-//						putStackInSlot(k,
-//								new ItemStack(stack.getItem(), slot.getSlotStackLimit(), stack.getItemDamage()));
-//						stack.stackSize -= slot.getSlotStackLimit();
-//						inventory.markDirty();
-//						flag1 = true;
-//					}
-//				}
-//
-//				k += (backwards ? -1 : 1);
-//			}
-//		}
+		int k = (backwards ? end - 1 : start);
+		Slot slot;
+		ItemStack itemstack1;
+
+		if (stack.isStackable()) {
+			while (stack.getCount() > 0 && (!backwards && k < end || backwards && k >= start)) {
+				slot = (Slot) inventorySlots.get(k);
+				itemstack1 = slot.getStack();
+
+				if (!slot.isItemValid(stack)) {
+					k += (backwards ? -1 : 1);
+					continue;
+				}
+
+				if (itemstack1 != null && itemstack1.getItem() == stack.getItem()
+						&& (!stack.getHasSubtypes() || stack.getItemDamage() == itemstack1.getItemDamage())
+						&& ItemStack.areItemStackTagsEqual(stack, itemstack1)) {
+					int l = itemstack1.getCount() + stack.getCount();
+
+					if (l <= stack.getMaxStackSize() && l <= slot.getSlotStackLimit()) {
+						stack.setCount(0);
+						itemstack1.setCount(l);
+						inventory.markDirty();
+						flag1 = true;
+					} else if (itemstack1.getCount() < stack.getMaxStackSize() && l < slot.getSlotStackLimit()) {
+						stack.setCount(stack.getCount() - stack.getMaxStackSize() - itemstack1.getCount());
+						itemstack1.setCount(stack.getMaxStackSize());
+						inventory.markDirty();
+						flag1 = true;
+					}
+				}
+
+				k += (backwards ? -1 : 1);
+			}
+		}
+		if (stack.getCount() > 0) {
+			k = (backwards ? end - 1 : start);
+			while (!backwards && k < end || backwards && k >= start) {
+				slot = (Slot) inventorySlots.get(k);
+				itemstack1 = slot.getStack();
+
+				if (!slot.isItemValid(stack)) {
+					k += (backwards ? -1 : 1);
+					continue;
+				}
+
+				if (itemstack1 == null) {
+					int l = stack.getCount();
+					if (l <= slot.getSlotStackLimit()) {
+						slot.putStack(stack.copy());
+						stack.setCount(0);
+						inventory.markDirty();
+						flag1 = true;
+						break;
+					} else {
+						putStackInSlot(k,
+								new ItemStack(stack.getItem(), slot.getSlotStackLimit(), stack.getItemDamage()));
+						stack.setCount(stack.getCount() - slot.getSlotStackLimit());
+						inventory.markDirty();
+						flag1 = true;
+					}
+				}
+
+				k += (backwards ? -1 : 1);
+			}
+		}
 		return flag1;
 	}
 }

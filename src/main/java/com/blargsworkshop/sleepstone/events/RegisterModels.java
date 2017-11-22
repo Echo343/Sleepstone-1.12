@@ -3,19 +3,19 @@ package com.blargsworkshop.sleepstone.events;
 import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.ModItems;
 import com.blargsworkshop.sleepstone.items.gems.mats.BaseCraftable;
+import com.blargsworkshop.sleepstone.items.stone.container.StoneContainer;
 
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-@SideOnly(Side.CLIENT)
-@Mod.EventBusSubscriber(modid = ModInfo.ID)
+@Mod.EventBusSubscriber(modid = ModInfo.ID, value = {Side.CLIENT})
 public class RegisterModels {
 
 	@SubscribeEvent
@@ -32,13 +32,11 @@ public class RegisterModels {
 		registerItemModel(ModItems.itemStoneCraftable);
 		registerItemModel(ModItems.itemPathfinderCraftable);
 		registerItemModel(ModItems.itemEnderShard);
-		
-//		mesher.register(ModItems.textureGemSlotStone, 0, new ModelResourceLocation(ModInfo.ID + ":" + "slot-gem-stone"));
-//		mesher.register(ModItems.textureGemSlotPathfinder, 0, new ModelResourceLocation(ModInfo.ID + ":" + "slot-gem-pathfinder"));
-//		mesher.register(ModItems.textureGemSlotTimeAndSpace, 0, new ModelResourceLocation(ModInfo.ID + ":" + "slot-gem-time-and-space"));
-//		mesher.register(ModItems.textureGemSlotFire, 0, new ModelResourceLocation(ModInfo.ID + ":" + "slot-gem-fire"));
-//		mesher.register(ModItems.textureGemSlotGuardian, 0, new ModelResourceLocation(ModInfo.ID + ":" + "slot-gem-guardian"));
-//		mesher.register(ModItems.textureGemSlotEthereal, 0, new ModelResourceLocation(ModInfo.ID + ":" + "slot-gem-ethereal"));
+	}
+	
+	@SubscribeEvent
+	public static void onTextureRegistry(TextureStitchEvent.Pre event) {
+		StoneContainer.getSpritesToRegister().forEach((ResourceLocation rl) -> event.getMap().registerSprite(rl).generateMipmaps(1));
 	}
 	
 	private static void registerItemModel(Item item) {
