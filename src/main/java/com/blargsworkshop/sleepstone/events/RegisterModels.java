@@ -3,7 +3,7 @@ package com.blargsworkshop.sleepstone.events;
 import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.ModItems;
 import com.blargsworkshop.sleepstone.items.gems.mats.BaseCraftable;
-import com.blargsworkshop.sleepstone.items.stone.container.StoneContainer;
+import com.blargsworkshop.sleepstone.items.stone.container.GemSlot;
 
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -36,7 +36,7 @@ public class RegisterModels {
 	
 	@SubscribeEvent
 	public static void onTextureRegistry(TextureStitchEvent.Pre event) {
-		StoneContainer.getSpritesToRegister().forEach((ResourceLocation rl) -> event.getMap().registerSprite(rl).generateMipmaps(1));
+		GemSlot.getSpritesToRegister().forEach((ResourceLocation rl) -> event.getMap().registerSprite(rl));
 	}
 	
 	private static void registerItemModel(Item item) {

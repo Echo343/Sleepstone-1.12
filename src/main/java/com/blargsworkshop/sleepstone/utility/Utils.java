@@ -1,18 +1,12 @@
 package com.blargsworkshop.sleepstone.utility;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-import com.blargsworkshop.sleepstone.Log;
-import com.blargsworkshop.sleepstone.ModItems;
-import com.blargsworkshop.sleepstone.extended_properties.ExtendedPlayer;
+import com.blargsworkshop.sleepstone.items.gems.Gem;
 import com.blargsworkshop.sleepstone.items.stone.Slots;
-import com.blargsworkshop.sleepstone.items.stone.container.StoneInventory;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class Utils {
@@ -77,11 +71,11 @@ public class Utils {
 		return false;
 	}
 
-	public static Set<Item> getUniqueGems() {
-		Set<Item> gemSet = new HashSet<Item>(Slots.values().length, 1f);
+	public static Set<Class<? extends Gem>> getUniqueGemTypes() {
+		Set<Class<? extends Gem>> gemTypeSet = new HashSet<Class<? extends Gem>>(Slots.values().length, 1f);
 		for (Slots gem : Slots.values()) {
-			gemSet.add(gem.getItem());
+			gemTypeSet.add(gem.getGemType());
 		}
-		return gemSet;
+		return gemTypeSet;
 	}
 }

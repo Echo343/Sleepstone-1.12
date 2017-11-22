@@ -1,7 +1,19 @@
 package com.blargsworkshop.sleepstone.items.stone.container;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+import com.blargsworkshop.sleepstone.ModInfo;
+import com.blargsworkshop.sleepstone.items.gems.EtherealGem;
+import com.blargsworkshop.sleepstone.items.gems.FireGem;
 import com.blargsworkshop.sleepstone.items.gems.Gem;
+import com.blargsworkshop.sleepstone.items.gems.GuardianGem;
+import com.blargsworkshop.sleepstone.items.gems.PathfinderGem;
+import com.blargsworkshop.sleepstone.items.gems.StoneGem;
+import com.blargsworkshop.sleepstone.items.gems.TimeSpaceGem;
 import com.blargsworkshop.sleepstone.items.stone.Slots;
+import com.blargsworkshop.sleepstone.utility.Utils;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
@@ -9,6 +21,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 public class GemSlot extends Slot {
+ 
+    public static List<ResourceLocation> getSpritesToRegister() {
+    	List<ResourceLocation> sprites = new ArrayList<>();
+    	Set<Class<? extends Gem>> uniqueGemTypes = Utils.getUniqueGemTypes();
+    	uniqueGemTypes.forEach(gemType -> sprites.add(getResourceLocationFromGemType(gemType)));
+    	return sprites;
+    }
+	
 	private Class<? extends Gem> gemType;
 	private final int stackLimit;
 	
@@ -18,13 +38,11 @@ public class GemSlot extends Slot {
         this.stackLimit = super.getSlotStackLimit();
     }
     
-    public GemSlot(Slots gemSlot, IInventory inv, int xPos, int yPos, ResourceLocation texture) {
+    public GemSlot(Slots gemSlot, IInventory inv, int xPos, int yPos) {
     	super(inv, gemSlot.ordinal(), xPos, yPos);
     	this.gemType = gemSlot.getGemType();
     	this.stackLimit = 1;
-    	if (texture != null) {
-    		this.setBackgroundName(texture.toString());
-    	}
+    	this.setBackgroundName(getResourceLocationFromGemType(gemSlot.getGemType()).toString());
     }
 
     // This is the only method we need to override so that
@@ -49,4 +67,26 @@ public class GemSlot extends Slot {
     	return gemType;
     }
     
+    private static ResourceLocation getResourceLocationFromGemType(Class<? extends Gem> gemType) {
+    	ResourceLocation slotTexture = null;
+    	if (gemType.equals(StoneGem.class)) {
+    		slotTexture = new ResourceLocation(ModInfo.ID, "items/slot-gem-stone");
+    	}
+    	else if (gemType.equals(PathfinderGem.class)) {
+			slotTexture = new ResourceLocation(ModInfo.ID, "items/slot-gem-pathfinder");
+    	}
+    	else if (gemType.equals(TimeSpaceGem.class)) {
+			slotTexture = new ResourceLocation(ModInfo.ID, "items/slot-gem-time-and-space");
+    	}
+    	else if (gemType.equals(FireGem.class)) {
+			slotTexture = new ResourceLocation(ModInfo.ID, "items/slot-gem-fire");
+    	}
+    	else if (gemType.equals(GuardianGem.class)) {
+			slotTexture = new ResourceLocation(ModInfo.ID, "items/slot-gem-guardian");
+    	}
+    	else if (gemType.equals(EtherealGem.class)) {
+			slotTexture = new ResourceLocation(ModInfo.ID, "items/slot-gem-ethereal");
+    	}
+    	return slotTexture;
+    }    
 }

@@ -1,10 +1,5 @@
 package com.blargsworkshop.sleepstone.items.stone.container;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.items.stone.Slots;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,7 +8,6 @@ import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 public class StoneContainer extends Container {
@@ -29,25 +23,6 @@ public class StoneContainer extends Container {
     private static final int HOTBAR_START = INV_END + 1;
     private static final int HOTBAR_END = HOTBAR_START + 8;
     
-    private static final ResourceLocation textureGemSlotStone = new ResourceLocation(ModInfo.ID, "items/slot-gem-stone");
-    private static final ResourceLocation textureGemSlotPathfinder = new ResourceLocation(ModInfo.ID, "items/slot-gem-pathfinder");
-    private static final ResourceLocation textureGemSlotTimeAndSpace = new ResourceLocation(ModInfo.ID, "items/slot-gem-time-and-space");
-    private static final ResourceLocation textureGemSlotFire = new ResourceLocation(ModInfo.ID, "items/slot-gem-fire");
-    private static final ResourceLocation textureGemSlotGuardian = new ResourceLocation(ModInfo.ID, "items/slot-gem-guardian");
-    private static final ResourceLocation textureGemSlotEthereal = new ResourceLocation(ModInfo.ID, "items/slot-gem-ethereal");
-    
-    public static List<ResourceLocation> getSpritesToRegister() {
-    	List<ResourceLocation> sprites = new ArrayList<>();
-    	Collections.addAll(sprites,
-    			textureGemSlotStone,
-    			textureGemSlotPathfinder,
-    			textureGemSlotTimeAndSpace,
-    			textureGemSlotFire,
-    			textureGemSlotGuardian,
-    			textureGemSlotEthereal);
-    	return sprites;
-    }
-
     // If you're planning to add armor slots, put those first like this:
 	// ARMOR_START = InventoryItem.INV_SIZE, ARMOR_END = ARMOR_START+3,
 	// INV_START = ARMOR_END+1, and then carry on like above.
@@ -61,22 +36,22 @@ public class StoneContainer extends Container {
         
         /** Gem Slots */
         //Group one
-        this.addSlotToContainer(new GemSlot(Slots.Stone, this.inventory, 29, 57, textureGemSlotStone));
-        this.addSlotToContainer(new GemSlot(Slots.StoneEthereal, this.inventory, 11, 78, textureGemSlotEthereal));
-        this.addSlotToContainer(new GemSlot(Slots.StoneGuardian, this.inventory, 29, 83, textureGemSlotGuardian));
-        this.addSlotToContainer(new GemSlot(Slots.StoneFire, this.inventory, 47, 78, textureGemSlotFire));
+        this.addSlotToContainer(new GemSlot(Slots.Stone, this.inventory, 29, 57));
+        this.addSlotToContainer(new GemSlot(Slots.StoneEthereal, this.inventory, 11, 78));
+        this.addSlotToContainer(new GemSlot(Slots.StoneGuardian, this.inventory, 29, 83));
+        this.addSlotToContainer(new GemSlot(Slots.StoneFire, this.inventory, 47, 78));
         
         //Group two
-        this.addSlotToContainer(new GemSlot(Slots.TimeSpace, this.inventory, 80, 16, textureGemSlotTimeAndSpace));
-        this.addSlotToContainer(new GemSlot(Slots.TimeSpaceEthereal, this.inventory, 62, 37, textureGemSlotEthereal));
-        this.addSlotToContainer(new GemSlot(Slots.TimeSpaceGuardian, this.inventory, 80, 44, textureGemSlotGuardian));
-        this.addSlotToContainer(new GemSlot(Slots.TimeSpaceFire, this.inventory, 98, 37, textureGemSlotFire));
+        this.addSlotToContainer(new GemSlot(Slots.TimeSpace, this.inventory, 80, 16));
+        this.addSlotToContainer(new GemSlot(Slots.TimeSpaceEthereal, this.inventory, 62, 37));
+        this.addSlotToContainer(new GemSlot(Slots.TimeSpaceGuardian, this.inventory, 80, 44));
+        this.addSlotToContainer(new GemSlot(Slots.TimeSpaceFire, this.inventory, 98, 37));
         
         //Group three
-        this.addSlotToContainer(new GemSlot(Slots.Pathfinder, this.inventory, 130, 57, textureGemSlotPathfinder));
-        this.addSlotToContainer(new GemSlot(Slots.PathfinderEthereal, this.inventory, 112, 78, textureGemSlotEthereal));
-        this.addSlotToContainer(new GemSlot(Slots.PathfinderGuardian, this.inventory, 130, 83, textureGemSlotGuardian));
-        this.addSlotToContainer(new GemSlot(Slots.PathfinderFire, this.inventory, 148, 78, textureGemSlotFire));
+        this.addSlotToContainer(new GemSlot(Slots.Pathfinder, this.inventory, 130, 57));
+        this.addSlotToContainer(new GemSlot(Slots.PathfinderEthereal, this.inventory, 112, 78));
+        this.addSlotToContainer(new GemSlot(Slots.PathfinderGuardian, this.inventory, 130, 83));
+        this.addSlotToContainer(new GemSlot(Slots.PathfinderFire, this.inventory, 148, 78));
         
         /** Spare Gem Inventory */
         for (int i = 0; i < 9; i++) {
