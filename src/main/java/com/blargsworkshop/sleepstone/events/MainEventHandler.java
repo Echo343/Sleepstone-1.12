@@ -1,17 +1,17 @@
 package com.blargsworkshop.sleepstone.events;
 
 import com.blargsworkshop.sleepstone.Log;
-import com.blargsworkshop.sleepstone.extended_properties.ExtendedPlayer;
+import com.blargsworkshop.sleepstone.ModInfo;
+import com.blargsworkshop.sleepstone.capabilites.SleepstonePlayerPropsProvider;
 import com.blargsworkshop.sleepstone.items.stone.Slots;
 import com.blargsworkshop.sleepstone.utility.Utils;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 /**
@@ -25,6 +25,13 @@ public class MainEventHandler {
 //			ExtendedPlayer.register((EntityPlayer) event.getEntity());
 //		}
 //	}
+	
+	@SubscribeEvent
+	public void attachCapability(AttachCapabilitiesEvent<Entity> event) {
+		if (event.getObject() instanceof EntityPlayer) {
+			event.addCapability(new ResourceLocation(ModInfo.ID, "sleepstone_player_props"), new SleepstonePlayerPropsProvider());
+		}
+	}
 	
 //	@SubscribeEvent
 //	public void onEntityJoinWorld(EntityJoinWorldEvent event) {

@@ -3,6 +3,9 @@ package com.blargsworkshop.sleepstone.proxy;
 import com.blargsworkshop.sleepstone.Log;
 import com.blargsworkshop.sleepstone.ModItems;
 import com.blargsworkshop.sleepstone.SleepstoneMod;
+import com.blargsworkshop.sleepstone.capabilites.ISleepstonePlayerProps;
+import com.blargsworkshop.sleepstone.capabilites.SleepstonePlayerProps;
+import com.blargsworkshop.sleepstone.capabilites.SleepstonePlayerPropsStorage;
 import com.blargsworkshop.sleepstone.events.MainEventHandler;
 import com.blargsworkshop.sleepstone.events.RegisterModComponents;
 import com.blargsworkshop.sleepstone.gui.GuiHandler;
@@ -11,6 +14,7 @@ import com.blargsworkshop.sleepstone.network.PacketDispatcher;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.IThreadListener;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -27,6 +31,8 @@ public class CommonProxy implements IProxy {
     public void init(FMLInitializationEvent e) {
     	RegisterModComponents.initSmeltingRecipes();
 		ModItems.preInitPotions();
+		
+		CapabilityManager.INSTANCE.register(ISleepstonePlayerProps.class, new SleepstonePlayerPropsStorage(), SleepstonePlayerProps.class);
 		
     	// Event Handlers
     	MinecraftForge.EVENT_BUS.register(new MainEventHandler());
