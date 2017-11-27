@@ -39,15 +39,6 @@ public class GuiStoneInventory extends GuiContainer
 	}
 	
 	/**
-	 * Draw loop
-	 */
-	@Override
-	public void drawScreen(int mouseX, int mouseY, float renderParitalTicks)
-	{
-		super.drawScreen(mouseX, mouseY, renderParitalTicks);
-	}
-
-	/**
 	 * Draw the foreground layer for the GuiContainer (everything in front of the items)
 	 */
 	@Override
