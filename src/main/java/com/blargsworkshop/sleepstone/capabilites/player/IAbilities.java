@@ -1,9 +1,13 @@
-package com.blargsworkshop.sleepstone.capabilites;
+package com.blargsworkshop.sleepstone.capabilites.player;
 
 import com.blargsworkshop.sleepstone.items.stone.Slots;
 
-public interface ISleepstonePlayerProps {
+import net.minecraft.entity.player.EntityPlayer;
+
+public interface IAbilities {
 	public static final String BONDED_ID = "BondedStoneId";
+	
+	public void init(EntityPlayer player);
 	
 	public boolean getAbility(Slots gem);
 	public void setAbility(Slots gem, boolean flag);
