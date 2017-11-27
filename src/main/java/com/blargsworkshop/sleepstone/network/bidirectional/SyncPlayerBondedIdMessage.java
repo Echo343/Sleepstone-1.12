@@ -2,7 +2,8 @@ package com.blargsworkshop.sleepstone.network.bidirectional;
 
 import java.io.IOException;
 
-import com.blargsworkshop.sleepstone.extended_properties.ExtendedPlayer;
+import com.blargsworkshop.sleepstone.capabilites.player.AbilityProvider;
+import com.blargsworkshop.sleepstone.capabilites.player.IAbility;
 import com.blargsworkshop.sleepstone.network.AbstractMessage;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -33,8 +34,8 @@ public class SyncPlayerBondedIdMessage extends AbstractMessage<SyncPlayerBondedI
 
 	@Override
 	public void process(EntityPlayer player, Side side) {
-//		ExtendedPlayer extPlayer = ExtendedPlayer.get(player);
-//		extPlayer.setBondedStoneId(bondedId, false);
+		IAbility props = player.getCapability(AbilityProvider.ABILITY_CAPABILITY, null);
+		props.setBondedStoneIdWithoutSync(bondedId);
 	}
 
 }

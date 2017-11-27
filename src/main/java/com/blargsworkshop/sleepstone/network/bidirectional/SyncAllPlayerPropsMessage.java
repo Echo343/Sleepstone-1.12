@@ -2,12 +2,14 @@ package com.blargsworkshop.sleepstone.network.bidirectional;
 
 import java.io.IOException;
 
-import com.blargsworkshop.sleepstone.extended_properties.ExtendedPlayer;
+import com.blargsworkshop.sleepstone.capabilites.player.AbilityProvider;
+import com.blargsworkshop.sleepstone.capabilites.player.IAbility;
 import com.blargsworkshop.sleepstone.network.AbstractMessage;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
+import net.minecraftforge.common.capabilities.Capability.IStorage;
 import net.minecraftforge.fml.relauncher.Side;
 
 public class SyncAllPlayerPropsMessage extends AbstractMessage<SyncAllPlayerPropsMessage> {
@@ -17,8 +19,9 @@ public class SyncAllPlayerPropsMessage extends AbstractMessage<SyncAllPlayerProp
 	public SyncAllPlayerPropsMessage() {}
 	
 	public SyncAllPlayerPropsMessage(EntityPlayer player) {
-		data = new NBTTagCompound();
-//		ExtendedPlayer.get(player).saveNBTData(data);
+		IStorage<IAbility> storage = AbilityProvider.ABILITY_CAPABILITY.getStorage();
+		IAbility abilities = player.getCapability(AbilityProvider.ABILITY_CAPABILITY, null);
+		data = (NBTTagCompound) storage.writeNBT(AbilityProvider.ABILITY_CAPABILITY, abilities, null);
 	}
 
 	@Override
@@ -33,7 +36,9 @@ public class SyncAllPlayerPropsMessage extends AbstractMessage<SyncAllPlayerProp
 
 	@Override
 	public void process(EntityPlayer player, Side side) {
-//		ExtendedPlayer.get(player).loadNBTData(data);
+		IStorage<IAbility> storage = AbilityProvider.ABILITY_CAPABILITY.getStorage();
+		IAbility abilities = player.getCapability(AbilityProvider.ABILITY_CAPABILITY, null);
+		storage.readNBT(AbilityProvider.ABILITY_CAPABILITY, abilities, null, data);
 	}
 
 }

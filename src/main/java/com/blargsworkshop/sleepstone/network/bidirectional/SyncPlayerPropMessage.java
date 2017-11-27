@@ -2,7 +2,8 @@ package com.blargsworkshop.sleepstone.network.bidirectional;
 
 import java.io.IOException;
 
-import com.blargsworkshop.sleepstone.extended_properties.ExtendedPlayer;
+import com.blargsworkshop.sleepstone.capabilites.player.AbilityProvider;
+import com.blargsworkshop.sleepstone.capabilites.player.IAbility;
 import com.blargsworkshop.sleepstone.items.stone.Slots;
 import com.blargsworkshop.sleepstone.network.AbstractMessage;
 
@@ -36,8 +37,8 @@ public class SyncPlayerPropMessage extends AbstractMessage<SyncPlayerPropMessage
 
 	@Override
 	public void process(EntityPlayer player, Side side) {
-//		ExtendedPlayer extPlayer = ExtendedPlayer.get(player);
-//		extPlayer.setAbilityWithoutSync(ability, bool);
+		IAbility props = player.getCapability(AbilityProvider.ABILITY_CAPABILITY, null);
+		props.setAbilityWithoutSync(ability, bool);
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.blargsworkshop.sleepstone.capabilites.player;
 
 import java.util.EnumMap;
+import java.util.Map;
 
 import com.blargsworkshop.sleepstone.Log;
 import com.blargsworkshop.sleepstone.items.stone.Slots;
@@ -13,9 +14,7 @@ import com.blargsworkshop.sleepstone.utility.Utils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 
-public class Abilities implements IAbilities {
-	
-	private static final String BONDED_ID = "bondedstoneid";
+public class Ability implements IAbility {
 	
 	private String bondedStoneId = "";
 	private EntityPlayer player;
@@ -26,6 +25,11 @@ public class Abilities implements IAbilities {
 		for (Slots slot : Slots.values()) {
 			abilities.put(slot, false);
 		}
+	}
+	
+	@Override
+	public Map<Slots, Boolean> getAbilityMap() {
+		return abilities;
 	}
 
 	@Override

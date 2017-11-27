@@ -3,9 +3,9 @@ package com.blargsworkshop.sleepstone.proxy;
 import com.blargsworkshop.sleepstone.Log;
 import com.blargsworkshop.sleepstone.ModItems;
 import com.blargsworkshop.sleepstone.SleepstoneMod;
-import com.blargsworkshop.sleepstone.capabilites.player.IAbilities;
-import com.blargsworkshop.sleepstone.capabilites.player.Abilities;
-import com.blargsworkshop.sleepstone.capabilites.player.AbilitiesStorage;
+import com.blargsworkshop.sleepstone.capabilites.player.IAbility;
+import com.blargsworkshop.sleepstone.capabilites.player.Ability;
+import com.blargsworkshop.sleepstone.capabilites.player.AbilityStorage;
 import com.blargsworkshop.sleepstone.events.MainEventHandler;
 import com.blargsworkshop.sleepstone.events.RegisterModComponents;
 import com.blargsworkshop.sleepstone.gui.GuiHandler;
@@ -32,7 +32,7 @@ public class CommonProxy implements IProxy {
     	RegisterModComponents.initSmeltingRecipes();
 		ModItems.preInitPotions();
 		
-		CapabilityManager.INSTANCE.register(IAbilities.class, new AbilitiesStorage(), Abilities.class);
+		CapabilityManager.INSTANCE.register(IAbility.class, new AbilityStorage(), Ability.class);
 		
     	// Event Handlers
     	MinecraftForge.EVENT_BUS.register(new MainEventHandler());

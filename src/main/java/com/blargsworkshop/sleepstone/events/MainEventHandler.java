@@ -2,7 +2,7 @@ package com.blargsworkshop.sleepstone.events;
 
 import com.blargsworkshop.sleepstone.Log;
 import com.blargsworkshop.sleepstone.ModInfo;
-import com.blargsworkshop.sleepstone.capabilites.player.AbilitiesProvider;
+import com.blargsworkshop.sleepstone.capabilites.player.AbilityProvider;
 import com.blargsworkshop.sleepstone.items.stone.Slots;
 import com.blargsworkshop.sleepstone.utility.Utils;
 
@@ -29,7 +29,8 @@ public class MainEventHandler {
 	@SubscribeEvent
 	public void attachCapability(AttachCapabilitiesEvent<Entity> event) {
 		if (event.getObject() instanceof EntityPlayer) {
-			event.addCapability(new ResourceLocation(ModInfo.ID, "sleepstone_player_props"), new AbilitiesProvider((EntityPlayer) event.getObject()));
+			event.addCapability(new ResourceLocation(ModInfo.ID, "sleepstone_player_props"), new AbilityProvider((EntityPlayer) event.getObject()));
+			Log.detail("Sleepstone Ability capability has been attached.");
 		}
 	}
 	

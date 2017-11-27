@@ -4,9 +4,7 @@ import java.io.IOException;
 
 import org.lwjgl.opengl.GL11;
 
-import com.blargsworkshop.sleepstone.Log;
 import com.blargsworkshop.sleepstone.ModInfo;
-import com.blargsworkshop.sleepstone.extended_properties.ExtendedPlayer;
 import com.blargsworkshop.sleepstone.gui.GuiEnum;
 import com.blargsworkshop.sleepstone.gui.buttons.BasicButton;
 import com.blargsworkshop.sleepstone.gui.buttons.ToggleButton;
@@ -66,12 +64,12 @@ public class GuiStone extends GuiScreen {
 	private static final int btnScrnWidth = BasicButton.defaultWidth * 3 + leftMargin * 2 + horizontalSpacing * 2;
 	private StoneInventory inventory;
 	private EntityPlayer player;
-	private ExtendedPlayer props;
+//	private ExtendedPlayer props;
 	
 	public GuiStone(EntityPlayer player, StoneInventory stoneInventory) {
 		this.inventory = stoneInventory;
 		this.player = player;
-		this.props = ExtendedPlayer.get(player);
+//		this.props = ExtendedPlayer.get(player);
 	}
 	
 	@Override
@@ -81,10 +79,10 @@ public class GuiStone extends GuiScreen {
 	}
 	
 	protected void initButtons() {
-		if (props == null) {
-			Log.error("Error getting props", player);
-			return;
-		}
+//		if (props == null) {
+//			Log.error("Error getting props", player);
+//			return;
+//		}
 		
 		int left = (this.width - xSize) / 2;
 		int btnLeft = (this.width - btnScrnWidth) / 2;
