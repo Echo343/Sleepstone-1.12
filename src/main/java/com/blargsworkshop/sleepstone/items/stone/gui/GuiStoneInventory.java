@@ -3,13 +3,13 @@ package com.blargsworkshop.sleepstone.items.stone.gui;
 import org.lwjgl.opengl.GL11;
 
 import com.blargsworkshop.sleepstone.ModInfo;
-import com.blargsworkshop.sleepstone.gui.GuiContainerPatch;
 import com.blargsworkshop.sleepstone.items.stone.container.StoneContainer;
 import com.blargsworkshop.sleepstone.items.stone.container.StoneInventory;
 
+import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiStoneInventory extends GuiContainerPatch
+public class GuiStoneInventory extends GuiContainer
 {    
 	/** ResourceLocation takes 2 parameters: ModId, path to texture at the location:
 	 * "src/minecraft/assets/modid/"
