@@ -2,6 +2,7 @@ package com.blargsworkshop.sleepstone.potions;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.Potion;
+import net.minecraft.util.ResourceLocation;
 
 public class BlargsPotion extends Potion {
 	
@@ -13,9 +14,9 @@ public class BlargsPotion extends Potion {
 //		Log.detail("Registering BlargsPotion: " + potionId + " for " + messageKey);
 //	}
 	
-	protected BlargsPotion(boolean isBadEffectIn, int liquidColorIn) {
-		super(isBadEffectIn, liquidColorIn);
-		// TODO Auto-generated constructor stub
+	public BlargsPotion(ResourceLocation registryName) {
+		super(false, 0);
+		this.setRegistryName(registryName);
 	}
 
 	/**

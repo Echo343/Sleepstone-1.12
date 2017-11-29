@@ -86,48 +86,4 @@ public class ModItems {
 //		Potions.warpSickness = new BlargsPotion(warpSicknessId, "potion.warpingsickness");
 //		Potions.enderShardWarp = new BlargsPotion(enderShardPotionId, "potion.endershard");
 	}
-
-	public static void initChestLoot() {
-//		// This causes an NPE.  Not worth fixing at the moment.
-//		//Adjust some of the chests to have higher weights
-////		adjustChestWeights(ChestGenHooks.DUNGEON_CHEST, 200);
-////		adjustChestWeights(ChestGenHooks.MINESHAFT_CORRIDOR, 300);
-////		adjustChestWeights(ChestGenHooks.VILLAGE_BLACKSMITH, 100);
-//		
-//		Set<Item> gems = Utils.getUniqueGems();
-//		
-//		// Add gem chance to each type of loot chest.  (Item, meta, min, max, weight)
-//		for (Item gem : gems) {
-//			ChestGenHooks.addItem(ChestGenHooks.DUNGEON_CHEST, new WeightedRandomChestContent(gem, 0, 0, 1, 1));
-//			ChestGenHooks.addItem(ChestGenHooks.MINESHAFT_CORRIDOR, new WeightedRandomChestContent(gem, 0, 0, 1, 1));
-//			ChestGenHooks.addItem(ChestGenHooks.PYRAMID_DESERT_CHEST, new WeightedRandomChestContent(gem, 0, 0, 1, 1));
-//			ChestGenHooks.addItem(ChestGenHooks.PYRAMID_JUNGLE_CHEST, new WeightedRandomChestContent(gem, 0, 0, 1, 1));
-//			ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_LIBRARY, new WeightedRandomChestContent(gem, 0, 0, 1, 1));
-//		}
-//		
-//		//Add stonecraftables & Sleepstone to Village_Blacksmith chest
-//		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(itemStoneCraftable, 1, 3, 8, 15));
-//		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(itemStoneCraftable, 3, 1, 1, 10));
-//		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(itemStoneCraftable, 4, 1, 4, 9));
-//		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(itemStoneCraftable, 5, 1, 1, 7));
-//		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(itemStoneCraftable, 7, 0, 1, 3));
-//		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(itemStoneCraftable, 10, 1, 64, 3));
-//		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(itemStoneCraftable, 12, 1, 3, 2));
-//		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(itemStoneCraftable, 14, 0, 3, 1));
-//		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(itemSleepstone, 0, 1, 1, 5));
-	}
-	
-//	private static void adjustChestWeights(String chestType, int factor) {
-//		WeightedRandomChestContent[] chestItems = ChestGenHooks.getItems(chestType, null);
-//		int totalChestWeight = 0 ;
-//		for (WeightedRandomChestContent item : chestItems) {
-//			totalChestWeight += item.itemWeight;
-//		}
-//		if (totalChestWeight < factor) {
-//			int weightFactor = (factor / totalChestWeight) + 1;
-//			for (WeightedRandomChestContent item : chestItems) {
-//				item.itemWeight *= weightFactor;
-//			}
-//		}
-//	}
 }

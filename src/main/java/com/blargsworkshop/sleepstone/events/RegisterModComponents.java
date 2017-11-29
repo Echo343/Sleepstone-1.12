@@ -2,11 +2,13 @@ package com.blargsworkshop.sleepstone.events;
 
 import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.ModItems;
+import com.blargsworkshop.sleepstone.sound.SoundManager.Sounds;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.SoundEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -17,7 +19,7 @@ public class RegisterModComponents {
 
 	@SubscribeEvent
 	public static void registerItems(RegistryEvent.Register<Item> event) {
-		// TODO change this to reflection
+		// TODO change this to reflection using @interfaces
 		event.getRegistry().registerAll(
 			ModItems.itemSleepstone,
 			ModItems.itemStoneGem,
@@ -30,6 +32,13 @@ public class RegisterModComponents {
 			ModItems.itemStoneCraftable,
 			ModItems.itemPathfinderCraftable,
 			ModItems.itemEnderShard
+		);
+	}
+	
+	public static void registerRecipies(RegistryEvent.Register<SoundEvent> event) {
+		event.getRegistry().registerAll(
+			Sounds.swoosh,
+			Sounds.teleport
 		);
 	}
 	

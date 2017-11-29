@@ -30,7 +30,6 @@ public class CommonProxy implements IProxy {
     @Override
     public void init(FMLInitializationEvent e) {
     	RegisterModComponents.initSmeltingRecipes();
-		ModItems.preInitPotions();
 		
 		CapabilityManager.INSTANCE.register(IAbility.class, new AbilityStorage(), Ability.class);
 		
