@@ -13,10 +13,12 @@ import com.blargsworkshop.sleepstone.items.gems.mats.PathfinderCraftable;
 import com.blargsworkshop.sleepstone.items.gems.mats.StoneCraftable;
 import com.blargsworkshop.sleepstone.items.stone.Sleepstone;
 import com.blargsworkshop.sleepstone.potions.BlargsPotion;
+import com.blargsworkshop.sleepstone.sound.BlargsSoundEvent;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 
 public class ModItems {
 	public static CreativeTabs tabSleepstone = RegisterModComponents.getCreativeTab();
@@ -37,5 +39,10 @@ public class ModItems {
 	public static class Potions {
 		public static BlargsPotion warpSickness = new BlargsPotion(new ResourceLocation(ModInfo.ID, "warpsickness"), "potion.warpingsickness");
 		public static BlargsPotion enderShardWarp = new BlargsPotion(new ResourceLocation(ModInfo.ID, "endershard"), "potion.endershard");
-	}	
+	}
+	
+	public static class Sounds {
+		public static SoundEvent swoosh = new BlargsSoundEvent(new ResourceLocation(ModInfo.ID, "swoosh"));
+		public static SoundEvent teleport = new BlargsSoundEvent(new ResourceLocation(ModInfo.ID, "teleport"));
+	}
 }

@@ -1,10 +1,13 @@
 package com.blargsworkshop.sleepstone.capabilites.player;
 
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 
 import com.blargsworkshop.sleepstone.Log;
+import com.blargsworkshop.sleepstone.ModItems;
 import com.blargsworkshop.sleepstone.items.stone.Slots;
+import com.blargsworkshop.sleepstone.items.stone.container.StoneInventory;
 import com.blargsworkshop.sleepstone.network.PacketDispatcher;
 import com.blargsworkshop.sleepstone.network.bidirectional.SyncAllPlayerPropsMessage;
 import com.blargsworkshop.sleepstone.network.bidirectional.SyncPlayerBondedIdMessage;
@@ -13,6 +16,7 @@ import com.blargsworkshop.sleepstone.utility.Utils;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
 
 public class Ability implements IAbility {
 	
@@ -106,6 +110,44 @@ public class Ability implements IAbility {
 				Log.debug("Setting UUID to " + getBondedStoneId() + " on server", this.player);
 			}
 		}
+	}
+	
+	public boolean isAbilityAvailable(Slots slot) {
+		IAbility props = this;
+		boolean doesPlayer = false;
+		boolean hasStone = false;
+		boolean hasGems = false;
+		
+		doesPlayer = props.getAbility(slot);
+		
+		//TODO search through in priority order
+		List<ItemStack> playerInv = player.inventory.mainInventory;
+		ItemStack backupStone = null;
+		for (ItemStack itemStack : playerInv) {
+			if (itemStack != null && itemStack.isItemEqual(new ItemStack(ModItems.itemSleepstone))) {
+				backupStone = backupStone == null ? itemStack : backupStone;
+				StoneInventory sInv = new StoneInventory(itemStack);
+				if (sInv.getUniqueId().equals(props.getBondedStoneId())) {
+					hasStone = true;
+					hasGems = sInv.hasGemInSlot(slot);
+					break;
+				}
+			}
+		}
+		
+		// Make this the new stone if the old one couldn't be found.
+		if (hasStone == false && backupStone != null) {
+			StoneInventory stoneInv = new StoneInventory(backupStone);
+			props.setBondedStoneId(stoneInv.getUniqueId());
+			hasStone = true;
+			hasGems = stoneInv.hasGemInSlot(slot);
+		}
+		
+		if (!doesPlayer) Log.info(slot.name() + " is turned off by the player", player);
+		if (!hasStone) Log.info("Attuned sleepstone was not found in inventory", player);
+		if (hasStone && !hasGems) Log.info("The sleepstone lacks the neccessary gem(s): " + slot.name(), player);
+    	
+		return doesPlayer && hasStone && hasGems;
 	}
 
 }

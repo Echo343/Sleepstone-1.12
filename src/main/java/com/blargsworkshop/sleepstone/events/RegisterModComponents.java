@@ -3,7 +3,7 @@ package com.blargsworkshop.sleepstone.events;
 import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.ModItems;
 import com.blargsworkshop.sleepstone.ModItems.Potions;
-import com.blargsworkshop.sleepstone.sound.SoundManager.Sounds;
+import com.blargsworkshop.sleepstone.ModItems.Sounds;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
@@ -38,7 +38,7 @@ public class RegisterModComponents {
 	}
 	
 	@SubscribeEvent
-	public static void registerRecipies(RegistryEvent.Register<SoundEvent> event) {
+	public static void registerSoundEvents(RegistryEvent.Register<SoundEvent> event) {
 		event.getRegistry().registerAll(
 			Sounds.swoosh,
 			Sounds.teleport

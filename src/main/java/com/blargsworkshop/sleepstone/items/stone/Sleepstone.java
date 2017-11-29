@@ -5,12 +5,12 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import com.blargsworkshop.sleepstone.Log;
 import com.blargsworkshop.sleepstone.ModItems.Potions;
+import com.blargsworkshop.sleepstone.ModItems.Sounds;
 import com.blargsworkshop.sleepstone.SleepstoneMod;
 import com.blargsworkshop.sleepstone.gui.GuiEnum;
 import com.blargsworkshop.sleepstone.items.BaseItem;
 import com.blargsworkshop.sleepstone.potions.WarpSicknessPotionEffect;
 import com.blargsworkshop.sleepstone.sound.SoundManager;
-import com.blargsworkshop.sleepstone.sound.SoundManager.Sounds;
 import com.blargsworkshop.sleepstone.utility.SimpleTeleporter;
 import com.blargsworkshop.sleepstone.utility.Utils;
 

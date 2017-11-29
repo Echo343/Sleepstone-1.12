@@ -55,9 +55,9 @@ public class MainEventHandler {
 	public void onLivingFallEvent(LivingFallEvent event) {
 		if (Utils.isServer(event.getEntity().getEntityWorld()) && event.getEntity() instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) event.getEntity();
-			if (event.getDistance() > 3.0F && Utils.isAbilityAvailable(player, Slots.Stone)) {
+			if (event.getDistance() > 3.0F && AbilityProvider.getCapability(player).isAbilityAvailable(Slots.Stone)) {
 				event.setDistance(2.0F);
-				Log.debug(player.getDisplayName() + " just fell on the server.", player);				
+				Log.debug(player.getDisplayNameString() + " just fell on the server.", player);				
 			}
 		}
 	}

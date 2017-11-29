@@ -21,4 +21,5 @@ public interface IAbility {
 	
 	public void syncAll();
 
+	public boolean isAbilityAvailable(Slots slot);
 }
