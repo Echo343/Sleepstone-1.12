@@ -1,6 +1,7 @@
 package com.blargsworkshop.sleepstone.potions;
 
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 
 public abstract class BlargsPotionEffect extends PotionEffect {
@@ -10,25 +11,21 @@ public abstract class BlargsPotionEffect extends PotionEffect {
 		init();
 	}
 
-//	public BlargsPotionEffect(int potionId, int duration) {
-//		super(potionId, duration);
-//		init();
-//	}
-//
-//	public BlargsPotionEffect(int potionId, int duration, int amplifier) {
-//		super(potionId, duration, amplifier);
-//		init();
-//	}
-//
-//	public BlargsPotionEffect(int potionId, int duration, int amplifier, boolean isAmbient) {
-//		super(potionId, duration, amplifier, isAmbient);
-//		init();
-//	}
-	
-	public BlargsPotionEffect(BlargsPotion potion, int enderwarpDuration) {
-		super(potion);
+	public BlargsPotionEffect(Potion potion, int duration) {
+		super(potion, duration);
+		init();
 	}
 
+	public BlargsPotionEffect(Potion potion, int duration, int amplifier) {
+		super(potion, duration, amplifier);
+		init();
+	}
+
+	public BlargsPotionEffect(Potion potion, int duration, int amplifier, boolean isAmbient, boolean showParticles) {
+		super(potion, duration, amplifier, isAmbient, showParticles);
+		init();
+	}
+	
 	private void init() {
 		this.getCurativeItems().clear();		
 	}
@@ -37,20 +34,15 @@ public abstract class BlargsPotionEffect extends PotionEffect {
 	public boolean onUpdate(EntityLivingBase entity) {
 		// Potion Effect is about to end.  Do something cool.
 		if (this.getDuration() == 1) {
-//			onFinishedPotionEffect(entity);
+			onFinishedPotionEffect(entity);
 		}
 		return super.onUpdate(entity);
 	}
 
 	/**
+	 * Override this to do something when the PotionEffect ends
 	 * @param entity
 	 */
-//	protected abstract void onFinishedPotionEffect(EntityLivingBase entity);
-//	{
-//		Potion p = Potion.potionTypes[this.getPotionID()];
-//		if (p instanceof BlargsPotion) {
-//			((BlargsPotion) p).onFinishedPotion(entity, this.getDuration(), this.getAmplifier());
-//		}
-//	}
+	protected void onFinishedPotionEffect(EntityLivingBase entity) { }
 
 }

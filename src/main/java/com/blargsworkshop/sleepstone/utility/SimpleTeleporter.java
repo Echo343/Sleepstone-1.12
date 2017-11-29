@@ -49,7 +49,7 @@ public class SimpleTeleporter {
         channel.writeAndFlush(msg).addListener(ChannelFutureListener.FIRE_EXCEPTION_ON_FAILURE);
     }
 	
-	public static void teleportPlayerToDimension(EntityPlayerMP player, Dimension destDimension, BlockPos p) {
+	public static void teleportPlayerToDimension(EntityPlayerMP player, DimensionType destDimension, BlockPos p) {
 //		int newDimension = destDimension.getValue();
 //		//TODO find out how to get the server
 //		MinecraftServer server = MinecraftServer.getMinecraftServer();

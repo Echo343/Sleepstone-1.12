@@ -12,8 +12,8 @@ public class SoundManager {
 
 	//TODO register sounds
 	public static class Sounds {
-		public static final SoundEvent teleport = new SoundEvent(new ResourceLocation(ModInfo.ID, "teleport"));
-		public static final SoundEvent swoosh = new SoundEvent(new ResourceLocation(ModInfo.ID, "swoosh"));
+		public static SoundEvent teleport = new SoundEvent(new ResourceLocation(ModInfo.ID, "teleport"));
+		public static SoundEvent swoosh = new SoundEvent(new ResourceLocation(ModInfo.ID, "swoosh"));
 	}
 	/**
 	 * Plays a sound at the entity's position.

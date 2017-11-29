@@ -1,22 +1,19 @@
 package com.blargsworkshop.sleepstone.potions;
 
+import com.blargsworkshop.sleepstone.Log;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
 
 public class BlargsPotion extends Potion {
-	
-//	public BlargsPotion(int potionId, String messageKey) {
-//		super(potionId, false, 0);
-//		setPotionName(messageKey);
-//		// TODO use custom icon
-//		setIconIndex(5, 1);
-//		Log.detail("Registering BlargsPotion: " + potionId + " for " + messageKey);
-//	}
-	
-	public BlargsPotion(ResourceLocation registryName) {
+		
+	public BlargsPotion(ResourceLocation registryName, String messageKey) {
 		super(false, 0);
 		this.setRegistryName(registryName);
+		this.setPotionName(messageKey);
+		setIconIndex(5, 1);
+		Log.detail("Registering BlargsPotion(" + registryName.toString() + ") for " + messageKey);
 	}
 
 	/**

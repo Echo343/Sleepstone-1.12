@@ -2,12 +2,14 @@ package com.blargsworkshop.sleepstone.events;
 
 import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.ModItems;
+import com.blargsworkshop.sleepstone.ModItems.Potions;
 import com.blargsworkshop.sleepstone.sound.SoundManager.Sounds;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -35,10 +37,19 @@ public class RegisterModComponents {
 		);
 	}
 	
+	@SubscribeEvent
 	public static void registerRecipies(RegistryEvent.Register<SoundEvent> event) {
 		event.getRegistry().registerAll(
 			Sounds.swoosh,
 			Sounds.teleport
+		);
+	}
+	
+	@SubscribeEvent
+	public static void registerPotions(RegistryEvent.Register<Potion> event) {
+		event.getRegistry().registerAll(
+			Potions.enderShardWarp,
+			Potions.warpSickness
 		);
 	}
 	
