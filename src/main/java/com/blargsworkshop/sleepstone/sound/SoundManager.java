@@ -10,7 +10,6 @@ import net.minecraft.util.math.BlockPos;
 
 public class SoundManager {
 
-	//TODO register sounds
 	public static class Sounds {
 		public static SoundEvent teleport = new SoundEvent(new ResourceLocation(ModInfo.ID, "teleport"));
 		public static SoundEvent swoosh = new SoundEvent(new ResourceLocation(ModInfo.ID, "swoosh"));
