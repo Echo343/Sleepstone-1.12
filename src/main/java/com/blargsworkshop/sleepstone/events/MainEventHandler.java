@@ -3,13 +3,15 @@ package com.blargsworkshop.sleepstone.events;
 import com.blargsworkshop.sleepstone.Log;
 import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.capabilites.player.AbilityProvider;
+import com.blargsworkshop.sleepstone.capabilites.player.IAbility;
 import com.blargsworkshop.sleepstone.items.stone.Slots;
 import com.blargsworkshop.sleepstone.utility.Utils;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.capabilities.Capability.IStorage;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
@@ -35,7 +37,7 @@ public class MainEventHandler {
 		if (Utils.isServer(event.getEntity().getEntityWorld())) {
 			if (event.getEntity() instanceof EntityPlayer) {
 				EntityPlayer player = (EntityPlayer) event.getEntity();
-				player.getCapability(AbilityProvider.ABILITY_CAPABILITY, null).syncAll();
+				AbilityProvider.getCapability(player).syncAll();
 			}
 		}
 	}
@@ -43,10 +45,9 @@ public class MainEventHandler {
 	@SubscribeEvent
 	public void onClonePlayer(PlayerEvent.Clone event) {
 		if (event.isWasDeath()) {
-			NBTTagCompound compound = new NBTTagCompound();
-			
-			ExtendedPlayer.get(event.getOriginal()).saveNBTData(compound);
-			ExtendedPlayer.get(event.getEntityPlayer()).loadNBTData(compound);
+			IStorage<IAbility> dataStore = AbilityProvider.ABILITY_CAPABILITY.getStorage();
+			NBTBase data = dataStore.writeNBT(AbilityProvider.ABILITY_CAPABILITY, AbilityProvider.getCapability(event.getOriginal()), null);
+			dataStore.readNBT(AbilityProvider.ABILITY_CAPABILITY, AbilityProvider.getCapability(event.getEntityPlayer()), null, data);
 		}
 	}
 	

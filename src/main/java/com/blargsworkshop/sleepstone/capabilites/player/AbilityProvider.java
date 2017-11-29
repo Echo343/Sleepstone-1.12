@@ -44,4 +44,7 @@ public class AbilityProvider implements ICapabilitySerializable<NBTBase> {
 		ABILITY_CAPABILITY.getStorage().readNBT(ABILITY_CAPABILITY, instance, null, nbt);
 	}
 
+	public static IAbility getCapability(EntityPlayer player) {
+		return player.getCapability(ABILITY_CAPABILITY, null);
+	}
 }
