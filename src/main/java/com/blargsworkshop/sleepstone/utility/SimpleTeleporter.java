@@ -1,5 +1,7 @@
 package com.blargsworkshop.sleepstone.utility;
 
+import com.blargsworkshop.sleepstone.Log;
+
 import io.netty.channel.ChannelFutureListener;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.BlockPos;
@@ -12,33 +14,6 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 
 public class SimpleTeleporter {
-	//TODO use DimensionManager
-	public static enum Dimension {
-		Nether(-1),
-		Overworld(0),
-		End(1);
-		
-		private int id;
-		
-		Dimension(int id) {
-			this.id = id;
-		}
-		
-		public int getValue() {
-			return this.id;
-		}
-		
-		public static Dimension getDimensionFromInt(int dimensionId) {
-			Dimension result = null;
-			for (Dimension dim : Dimension.values()) {
-				if (dim.getValue() == dimensionId) {
-					result = dim;
-					break;
-				}
-			}
-			return result;
-		}
-	}
 
 	private static void sendDimensionRegister(EntityPlayerMP player, int dimensionID) {
 		DimensionType providerID = DimensionManager.getProviderType(dimensionID);
@@ -50,6 +25,7 @@ public class SimpleTeleporter {
     }
 	
 	public static void teleportPlayerToDimension(EntityPlayerMP player, DimensionType destDimension, BlockPos p) {
+		DimensionType oldDimensionType = DimensionType.getById(player.dimension);
 //		int newDimension = destDimension.getValue();
 //		//TODO find out how to get the server
 //		MinecraftServer server = MinecraftServer.getMinecraftServer();
@@ -84,6 +60,8 @@ public class SimpleTeleporter {
 //        }
 //        player.connection.sendPacket(new SPacketSetExperience(player.experience, player.experienceTotal, player.experienceLevel));
 //        FMLCommonHandler.instance().firePlayerChangedDimensionEvent(player, oldDimension, newDimension);
+		String logMessage = player.getDisplayNameString() + "teleported from " + oldDimensionType.getName() + " to " + destDimension.getName() + ".";
+		Log.debug(logMessage, player);
 	}
 	
 	public static void teleportPlayerWithinDimension(EntityPlayerMP player, BlockPos p) {

@@ -4,16 +4,15 @@ import com.blargsworkshop.sleepstone.Log;
 import com.blargsworkshop.sleepstone.Log.LogLevel;
 import com.blargsworkshop.sleepstone.ModItems.Potions;
 import com.blargsworkshop.sleepstone.potions.EnderShardPotionEffect;
-import com.blargsworkshop.sleepstone.utility.SimpleTeleporter.Dimension;
 import com.blargsworkshop.sleepstone.utility.Utils;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 
 public class EnderShard extends BaseItem {
@@ -27,7 +26,7 @@ public class EnderShard extends BaseItem {
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
-		if (!player.isPotionActive(Potions.enderShardWarp) && player.dimension != Dimension.End.getValue()) {
+		if (!player.isPotionActive(Potions.enderShardWarp) && player.dimension != DimensionType.THE_END.getId()) {
 			// Start channeling for ender warp.
 			player.setActiveHand(hand);
 		}
@@ -42,17 +41,16 @@ public class EnderShard extends BaseItem {
 			Log.debug("Ticks until ender warp: " + count, player);
 		}
 		if (count <= 1) {
-			if (Utils.isServer(player.getEntityWorld()) && player instanceof EntityPlayerMP) {
-				warpPlayerToEnd((EntityPlayerMP) player, item);
-			}
+			warpPlayerToEnd(player, item);
 		}
 	}
 	
-	public static void warpPlayerToEnd(EntityPlayerMP player, ItemStack item) {
+	private void warpPlayerToEnd(EntityPlayer player, ItemStack item) {
+		// TODO not sure if this needs to be server only or check for EntityPlayerMP
 //		player.inventory.clearMatchingItems(ModItems.itemEnderShard, -1, 1, null);
 		item.shrink(1);
 		player.addPotionEffect(new EnderShardPotionEffect(player));
-		player.changeDimension(Dimension.End.getValue());
+		player.changeDimension(DimensionType.THE_END.getId());
 	}
 	
 	@Override

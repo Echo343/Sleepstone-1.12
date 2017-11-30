@@ -67,9 +67,7 @@ public class Sleepstone extends BaseItem {
 			Log.debug("Ticks until warp: " + count, player);
 		}
 		if (count <= 1) {
-			if (Utils.isServer(player.getEntityWorld()) && player instanceof EntityPlayerMP) {
-				warpPlayerToBed((EntityPlayerMP) player);
-			}
+			warpPlayerToBed(player);
 			cooldownTimer.startCooldown(player);
 		}
 	}
@@ -85,14 +83,13 @@ public class Sleepstone extends BaseItem {
 		}
 	}
 	
-	public static void warpPlayerToBed(EntityPlayerMP player) {
+	public static void warpPlayerToBed(EntityPlayer player) {
 		World world = player.getEntityWorld();
-		if (Utils.isServer(world)) {
-			
+		if (Utils.isServer(world) && player instanceof EntityPlayerMP) {
 			BlockPos bedPos = EntityPlayer.getBedSpawnLocation(world, player.getBedLocation(player.dimension), false);
 			if (bedPos != null) {
 				SoundManager.playSoundAtEntityFromServer(player, Sounds.swoosh);
-				SimpleTeleporter.teleportPlayerWithinDimension(player, bedPos);
+				SimpleTeleporter.teleportPlayerWithinDimension((EntityPlayerMP) player, bedPos);
 				player.addPotionEffect(new WarpSicknessPotionEffect());
 				SoundManager.playSoundAtEntityFromServer(player, Sounds.teleport);
 				Log.debug("Warping to: " + (bedPos.getX()) + ", " + (bedPos.getY()) + ", " + (bedPos.getZ()), player);
