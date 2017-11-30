@@ -28,6 +28,7 @@ public abstract class TooltipButton extends GuiButton {
 	private int indicatorColor = 0xFFFFFF; // 0x99FFFFFF
 	private int indicatorMouseOverColor = 0xFFFFFF;
 	private boolean shouldDrawTooltip = false;
+	private boolean hasTooltip = false;
 
 	public TooltipButton(int id, int left, int top, int width, int height, String text) {
 		super(id, left, top, width, height, text);
@@ -49,7 +50,14 @@ public abstract class TooltipButton extends GuiButton {
 	 * @param text localized text for the tooltip.
 	 */
 	public void setToolTip(String text) {
-		toolTip = text;
+		if (toolTip != null && !toolTip.trim().equals("")) {
+			toolTip = text;
+			hasTooltip = true;
+		}
+		else {
+			toolTip = "";
+			hasTooltip = false;
+		}
 	}
 	
 	public String getToolTip() {
@@ -57,10 +65,7 @@ public abstract class TooltipButton extends GuiButton {
 	}
 	
 	public boolean hasToolTip() {
-		if (toolTip != null && !toolTip.trim().equals("")) {
-			return true;
-		}
-		return false;
+		return this.hasTooltip;
 	}
 	
 	/**
@@ -68,35 +73,35 @@ public abstract class TooltipButton extends GuiButton {
 	 * @return true if mousedOver, false if disable or not mousedOver.
 	 */
 	protected boolean isButtonMouseOver() {
-//		if (this.getHoverState(this.field_146123_n) == 2) {
-//			return true;
-//		}
+		if (this.getHoverState(this.hovered) == 2) {
+			return true;
+		}
 		return false;
 	}
 	
 //	@Override
-	public void drawButton(Minecraft mc, int mouseX, int mouseY) {
-//		super.drawButton(mc, mouseX, mouseY);
-//		if (hasToolTip()) {
-//			if (isButtonMouseOver()) {
-//				renderTooltipButtonMouseoverEffect(mc.fontRenderer);
-//				systemTime = System.currentTimeMillis();
-//				if (prevSystemTime > 0) {
-//					mouseoverTime += systemTime - prevSystemTime;
-//				}
-//				prevSystemTime = systemTime;
-//			}
-//			else {
-//				renderTooltipButtonEffect(mc.fontRenderer);
-//				mouseoverTime = 0;
-//				prevSystemTime = 0;
-//				shouldDrawTooltip = false;
-//			}
-//			
-//			if (mouseoverTime > getTooltipDelay()) {
-//				shouldDrawTooltip = true;
-//			}
-//		}
+	public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
+		super.drawButton(mc, mouseX, mouseY, partialTicks);
+		if (hasToolTip()) {
+			if (isButtonMouseOver()) {
+				renderTooltipButtonMouseoverEffect(mc.fontRenderer);
+				systemTime = System.currentTimeMillis();
+				if (prevSystemTime > 0) {
+					mouseoverTime += systemTime - prevSystemTime;
+				}
+				prevSystemTime = systemTime;
+			}
+			else {
+				renderTooltipButtonEffect(mc.fontRenderer);
+				mouseoverTime = 0;
+				prevSystemTime = 0;
+				shouldDrawTooltip = false;
+			}
+			
+			if (mouseoverTime > getTooltipDelay()) {
+				shouldDrawTooltip = true;
+			}
+		}
 	}
 	
 	/**
@@ -246,13 +251,11 @@ public abstract class TooltipButton extends GuiButton {
 	}
 
 	protected int getIndicatorYPos() {
-//		return this.yPosition + 1;
-		return 1;
+		return this.y + 1;
 	}
 	
 	protected int getIndicatorXPos() {
-//		return this.xPosition + this.getButtonWidth() - 6;
-		return 6;
+		return this.x + this.getButtonWidth() - 6;
 	}
 
 	public int getIndicatorColor() {
