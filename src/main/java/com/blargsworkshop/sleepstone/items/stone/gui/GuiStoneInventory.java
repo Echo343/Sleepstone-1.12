@@ -5,6 +5,7 @@ import org.lwjgl.opengl.GL11;
 import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.items.stone.container.StoneContainer;
 import com.blargsworkshop.sleepstone.items.stone.container.StoneInventory;
+import com.blargsworkshop.sleepstone.utility.Utils;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.util.ResourceLocation;
@@ -44,10 +45,10 @@ public class GuiStoneInventory extends GuiContainer
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
-//		String strSleepstone = LanguageRegistry.instance().getStringLocalization(this.inventory.getInventoryName());
-//		String strContainer = LanguageRegistry.instance().getStringLocalization("container.inventory");
-//		this.fontRendererObj.drawString(strSleepstone, (this.xSize - this.fontRendererObj.getStringWidth(strSleepstone)) / 2, 5, 4210752);
-//		this.fontRendererObj.drawString(strContainer, 8, this.ySize - 96 + 2, 4210752);
+		String strSleepstone = Utils.localize(this.inventory.getName());
+		String strContainer = Utils.localize("container.inventory");
+		this.fontRenderer.drawString(strSleepstone, (this.xSize - this.fontRenderer.getStringWidth(strSleepstone)) / 2, 5, 4210752);
+		this.fontRenderer.drawString(strContainer, 8, this.ySize - 96 + 2, 4210752);
 	}
 
 	/**

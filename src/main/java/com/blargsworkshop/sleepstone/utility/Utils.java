@@ -10,9 +10,12 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class Utils {
 
+	@SideOnly(Side.CLIENT)
 	public static String localize(String messageKey, Object... parameters) {
 		return I18n.format(messageKey, parameters);
 	}
