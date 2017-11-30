@@ -2,6 +2,11 @@ package com.blargsworkshop.sleepstone.gui.buttons;
 
 import com.blargsworkshop.sleepstone.utility.Utils;
 
+import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+@SideOnly(Side.CLIENT)
 public class ToggleButton extends BasicButton {
 	
 	protected final String on = Utils.localize("text.toggle_button.on");
@@ -54,8 +59,7 @@ public class ToggleButton extends BasicButton {
 	 * Turns the state of the button to On.
 	 */
 	public void turnOn() {
-//		setDisplayString(coreText + ": " + EnumChatFormatting.GREEN + on + EnumChatFormatting.WHITE);
-		setDisplayString(coreText + ": " + on);
+		setDisplayString(coreText + ": " + TextFormatting.GREEN + on + TextFormatting.WHITE);
 		isOn = true;
 	}
 	
@@ -63,8 +67,7 @@ public class ToggleButton extends BasicButton {
 	 * Turns the state of the button to Off.
 	 */
 	public void turnOff() {
-//		setDisplayString(coreText + ": " + EnumChatFormatting.RED + off + EnumChatFormatting.WHITE);
-		setDisplayString(coreText + ": " + off);
+		setDisplayString(coreText + ": " + TextFormatting.RED + off + TextFormatting.WHITE);
 		isOn = false;
 	}
 	

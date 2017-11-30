@@ -5,7 +5,11 @@ import java.util.ArrayList;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
+@SideOnly(Side.CLIENT)
 public abstract class TooltipButton extends GuiButton {
 	private static final String TOOLTIP_CHAR = "?";
 	private final static int LINE_HEIGHT = 11;
@@ -79,7 +83,7 @@ public abstract class TooltipButton extends GuiButton {
 		return false;
 	}
 	
-//	@Override
+	@Override
 	public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
 		super.drawButton(mc, mouseX, mouseY, partialTicks);
 		if (hasToolTip()) {
@@ -164,7 +168,7 @@ public abstract class TooltipButton extends GuiButton {
 	{
 		boolean flag = fontRenderer.getUnicodeFlag();
 		fontRenderer.setUnicodeFlag(true);
-//		fontRenderer.drawString(EnumChatFormatting.AQUA + getIndicatorString(), getIndicatorXPos(), getIndicatorYPos(), getIndicatorColor());
+		fontRenderer.drawString(TextFormatting.AQUA + getIndicatorString(), getIndicatorXPos(), getIndicatorYPos(), getIndicatorColor());
 		fontRenderer.setUnicodeFlag(flag);
 	}
 	
@@ -172,7 +176,7 @@ public abstract class TooltipButton extends GuiButton {
 	{
 		boolean flag = fontRenderer.getUnicodeFlag();
 		fontRenderer.setUnicodeFlag(true);
-//		fontRenderer.drawString(EnumChatFormatting.AQUA + getIndicatorString(), getIndicatorXPos(), getIndicatorYPos(), getIndicatorMouseOverColor());
+		fontRenderer.drawString(TextFormatting.AQUA + getIndicatorString(), getIndicatorXPos(), getIndicatorYPos(), getIndicatorMouseOverColor());
 		fontRenderer.setUnicodeFlag(flag);
 	}
 	

@@ -1,5 +1,9 @@
 package com.blargsworkshop.sleepstone.gui.buttons;
 
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+@SideOnly(Side.CLIENT)
 public class BasicButton extends TooltipButton {
 
 	public final static int defaultWidth = 120;
