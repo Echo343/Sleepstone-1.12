@@ -39,7 +39,7 @@ public class PacketDispatcher {
 	 * Registers an {@link AbstractMessage} to the appropriate side(s)
 	 * @param clazz
 	 */
-	private static final <T extends AbstractMessage<T> & IMessageHandler<T, IMessage>> void registerMessage(Class<T> clazz) {
+	public static final <T extends AbstractMessage<T> & IMessageHandler<T, IMessage>> void registerMessage(Class<T> clazz) {
 		if (AbstractMessage.AbstractClientMessage.class.isAssignableFrom(clazz)) {
 			PacketDispatcher.dispatcher.registerMessage(clazz, clazz, packetId++, Side.CLIENT);
 		}

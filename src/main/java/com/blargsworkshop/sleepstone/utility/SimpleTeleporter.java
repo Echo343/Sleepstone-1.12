@@ -23,18 +23,31 @@ import net.minecraftforge.fml.common.network.FMLOutboundHandler;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 
+/**
+ * Static functions for teleporting a player.
+ * Supports in world teleport and cross-dimension.
+ * <br>
+ * This might make sense to get moved to a player capability.
+ */
 public class SimpleTeleporter {
 
-	private static void sendDimensionRegister(EntityPlayerMP player, int dimensionID) {
-		DimensionType providerID = DimensionManager.getProviderType(dimensionID);
-        ForgeMessage forgeMsg = new ForgeMessage.DimensionRegisterMessage(dimensionID, providerID.toString());
-        FMLEmbeddedChannel channel = NetworkRegistry.INSTANCE.getChannel("FORGE", Side.SERVER);
-        channel.attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.PLAYER);
-        channel.attr(FMLOutboundHandler.FML_MESSAGETARGETARGS).set(player);
-        channel.writeAndFlush(forgeMsg).addListener(ChannelFutureListener.FIRE_EXCEPTION_ON_FAILURE);
-    }
+	/**
+	 * Teleports a player to a new place in the current world.
+	 * @param player - Player to teleport
+	 * @param position - Target destination
+	 */
+	public static void teleportPlayerWithinDimension(EntityPlayerMP player, BlockPos position) {
+		player.setPositionAndUpdate(position.getX(), position.getY(), position.getZ());
+		player.getEntityWorld().updateEntityWithOptionalForce(player, false);
+	}	
 	
-	public static void teleportPlayerToDimension(EntityPlayerMP player, DimensionType destDimension, BlockPos p) {
+	/**
+	 * Teleports a player from their current dimension to another.
+	 * @param player - Player to teleport
+	 * @param destDimension - Destination dimension
+	 * @param position - Target location in destination dimension
+	 */
+	public static void teleportPlayerToDimension(EntityPlayerMP player, DimensionType destDimension, BlockPos position) {
 		DimensionType sourceDimension = DimensionType.getById(player.dimension);
 		MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
         PlayerList scm = server.getPlayerList();
@@ -52,11 +65,11 @@ public class SimpleTeleporter {
             player.interactionManager.getGameType()));
         sourceWorld.removeEntityDangerously(player); // Removes player right now instead of waiting for next tick
         player.isDead = false;
-        player.setLocationAndAngles(p.getX(), p.getY(), p.getZ(), player.rotationYaw, player.rotationPitch);
+        player.setLocationAndAngles(position.getX(), position.getY(), position.getZ(), player.rotationYaw, player.rotationPitch);
         destinationWorld.spawnEntity(player);
         player.setWorld(destinationWorld);
         scm.preparePlayer(player, sourceWorld);
-        player.connection.setPlayerLocation(p.getX(), p.getY(), p.getZ(), player.rotationYaw, player.rotationPitch);
+        player.connection.setPlayerLocation(position.getX(), position.getY(), position.getZ(), player.rotationYaw, player.rotationPitch);
         player.interactionManager.setWorld(destinationWorld);
         scm.updateTimeAndWeatherForPlayer(player, destinationWorld);
         scm.syncPlayerInventory(player);
@@ -71,8 +84,12 @@ public class SimpleTeleporter {
 		Log.debug(logMessage, player);
 	}
 	
-	public static void teleportPlayerWithinDimension(EntityPlayerMP player, BlockPos p) {
-        player.setPositionAndUpdate(p.getX(), p.getY(), p.getZ());
-        player.getEntityWorld().updateEntityWithOptionalForce(player, false);
-    }	
+	private static void sendDimensionRegister(EntityPlayerMP player, int dimensionID) {
+		DimensionType providerID = DimensionManager.getProviderType(dimensionID);
+		ForgeMessage forgeMsg = new ForgeMessage.DimensionRegisterMessage(dimensionID, providerID.toString());
+		FMLEmbeddedChannel channel = NetworkRegistry.INSTANCE.getChannel("FORGE", Side.SERVER);
+		channel.attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.PLAYER);
+		channel.attr(FMLOutboundHandler.FML_MESSAGETARGETARGS).set(player);
+		channel.writeAndFlush(forgeMsg).addListener(ChannelFutureListener.FIRE_EXCEPTION_ON_FAILURE);
+	}
 }

@@ -5,9 +5,6 @@ package com.blargsworkshop.sleepstone;
 
 /**
  * Class that contains all the Mod info
- * 
- * @author Echo343
- *
  */
 public class ModInfo {
 	public static final String ID = "sleepstonemod";

@@ -16,7 +16,7 @@ import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 
 public class EnderShard extends BaseItem {
-	private static final int ENDERWARP_CHANNEL_DURATION = (Log.Level == LogLevel.Debug || Log.Level == LogLevel.Detail) ? 20 * 4 : 20 * 10;
+	private static final int ENDERWARP_CHANNEL_DURATION = Log.compare(LogLevel.DEBUG) ? 20 * 4 : 20 * 10;
 	private static final String UNLOCALIZED_NAME = "endershard";
 	private static final String REGISTRY_NAME = "endershard";
 	

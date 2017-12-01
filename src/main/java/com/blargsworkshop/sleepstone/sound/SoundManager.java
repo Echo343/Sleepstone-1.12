@@ -5,6 +5,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 
+/**
+ * Use the api in this class to pay sounds.
+ */
 public class SoundManager {
 
 	/**
@@ -24,8 +27,6 @@ public class SoundManager {
 	 * This must be called from both the client and the server.
 	 * @param entity
 	 * @param sound
-	 * @param volume relative to 1.0
-	 * @param pitch relative to 1.0
 	 */
 	public static void playSoundAtEntity(Entity entity, SoundEvent sound) {
 		playSoundAtEntity(entity, sound, 1f, 1f);

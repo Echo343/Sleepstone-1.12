@@ -230,7 +230,6 @@ public class GuiStone extends GuiScreen {
 		try {
 			super.keyTyped(c, i);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

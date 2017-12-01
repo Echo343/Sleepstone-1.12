@@ -1,6 +1,7 @@
 package com.blargsworkshop.sleepstone.items.stone.container;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -13,7 +14,6 @@ import com.blargsworkshop.sleepstone.items.gems.PathfinderGem;
 import com.blargsworkshop.sleepstone.items.gems.StoneGem;
 import com.blargsworkshop.sleepstone.items.gems.TimeSpaceGem;
 import com.blargsworkshop.sleepstone.items.stone.Slots;
-import com.blargsworkshop.sleepstone.utility.Utils;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
@@ -24,7 +24,7 @@ public class GemSlot extends Slot {
  
     public static List<ResourceLocation> getSpritesToRegister() {
     	List<ResourceLocation> sprites = new ArrayList<>();
-    	Set<Class<? extends Gem>> uniqueGemTypes = Utils.getUniqueGemTypes();
+    	Set<Class<? extends Gem>> uniqueGemTypes = getUniqueGemTypes();
     	uniqueGemTypes.forEach(gemType -> sprites.add(getResourceLocationFromGemType(gemType)));
     	return sprites;
     }
@@ -88,5 +88,13 @@ public class GemSlot extends Slot {
 			slotTexture = new ResourceLocation(ModInfo.ID, "items/slot-gem-ethereal");
     	}
     	return slotTexture;
-    }    
+    }
+    
+    private static Set<Class<? extends Gem>> getUniqueGemTypes() {
+		Set<Class<? extends Gem>> gemTypeSet = new HashSet<Class<? extends Gem>>(Slots.values().length, 1f);
+		for (Slots gem : Slots.values()) {
+			gemTypeSet.add(gem.getGemType());
+		}
+		return gemTypeSet;
+	}
 }

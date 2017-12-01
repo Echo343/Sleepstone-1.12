@@ -95,7 +95,7 @@ public class StoneContainer extends Container {
     @Override
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int index)
 	{
-    	// TODO Fix
+    	// TODO Fix by implementing IItemHandler Capability
 		ItemStack itemstack = null;
 		Slot slot = (Slot) this.inventorySlots.get(index);
 

@@ -39,11 +39,6 @@ public class ClientProxy extends CommonProxy {
 		return (ctx.side.isClient() ? Minecraft.getMinecraft().player : super.getPlayerEntity(ctx));
     }
     
-    /**
-     * req. 1.8+ only
-     * @param ctx
-     * @return
-     */
     @Override
     public IThreadListener getThreadFromContext(MessageContext ctx) {
         return (ctx.side.isClient() ? Minecraft.getMinecraft() : super.getThreadFromContext(ctx));

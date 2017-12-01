@@ -9,8 +9,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 
 public class WarpSicknessPotionEffect extends BlargsPotionEffect {
-	private static final int WARP_SICKNESS_DURATION = 
-			(Log.Level == LogLevel.Debug || Log.Level == LogLevel.Detail) ? 20 * 10 : 20 * 60 * 12;
+	private static final int WARP_SICKNESS_DURATION = Log.compare(LogLevel.DEBUG) ? 20 * 10 : 20 * 60 * 12;
 
 	public WarpSicknessPotionEffect() {
 		super(Potions.warpSickness, WARP_SICKNESS_DURATION, 0, false, false);

@@ -9,6 +9,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.event.RegistryEvent;
@@ -51,6 +52,11 @@ public class RegisterModComponents {
 			Potions.enderShardWarp,
 			Potions.warpSickness
 		);
+	}
+	
+	@SubscribeEvent
+	public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
+		initSmeltingRecipes();
 	}
 	
 	public static void initSmeltingRecipes() {

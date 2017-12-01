@@ -41,7 +41,7 @@ public abstract class AbstractMessage<T extends AbstractMessage<T>> implements I
 	/**
 	 * Called on whichever side the message is received;
 	 * for bidirectional packets, be sure to check side
-	 * If {@link #requiresMainThread()} returns true, this method is guaranteed
+	 * If the main thread is required, this method is guaranteed
 	 * to be called on the main Minecraft thread for this side.
 	 * @param player
 	 * @param side
@@ -120,6 +120,7 @@ public abstract class AbstractMessage<T extends AbstractMessage<T>> implements I
 	
 	/**
 	 * Messages that can only be sent from the server to the client should use this class
+	 * @param <T> 
 	 */
 	public static abstract class AbstractClientMessage<T extends AbstractMessage<T>> extends AbstractMessage<T> {
 		@Override
@@ -130,6 +131,7 @@ public abstract class AbstractMessage<T extends AbstractMessage<T>> implements I
 	
 	/**
 	 * Messages that can only be sent from the client to the server should use this class
+	 * @param <T> 
 	 */
 	public static abstract class AbstractServerMessage<T extends AbstractMessage<T>> extends AbstractMessage<T> {
 		@Override

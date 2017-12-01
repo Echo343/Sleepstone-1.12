@@ -1,11 +1,5 @@
 package com.blargsworkshop.sleepstone.utility;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import com.blargsworkshop.sleepstone.items.gems.Gem;
-import com.blargsworkshop.sleepstone.items.stone.Slots;
-
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentString;
@@ -14,6 +8,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+/**
+ * General helper functions.  Ideally I would like to get rid of this class.
+ * But I'm not sure where to put the isServer, isClient methods.
+ */
 public class Utils {
 
 	@SideOnly(Side.CLIENT)
@@ -35,13 +33,5 @@ public class Utils {
 	
 	public static boolean isClient(World worldObj) {
 		return !isServer(worldObj);
-	}
-
-	public static Set<Class<? extends Gem>> getUniqueGemTypes() {
-		Set<Class<? extends Gem>> gemTypeSet = new HashSet<Class<? extends Gem>>(Slots.values().length, 1f);
-		for (Slots gem : Slots.values()) {
-			gemTypeSet.add(gem.getGemType());
-		}
-		return gemTypeSet;
 	}
 }

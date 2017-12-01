@@ -20,6 +20,11 @@ import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 
+/**
+ * All the items in the mod.
+ * They must be initialized here since I'm using Mod.EventBusSubscriber(modid = ModInfo.ID) to register the event handler.
+ * A constructor would be too late in the process.
+ */
 public class ModItems {
 	public static CreativeTabs tabSleepstone = RegisterModComponents.getCreativeTab();
 	

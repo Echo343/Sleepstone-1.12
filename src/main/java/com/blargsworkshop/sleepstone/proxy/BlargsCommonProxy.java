@@ -1,47 +1,51 @@
 package com.blargsworkshop.sleepstone.proxy;
 
 import com.blargsworkshop.sleepstone.Log;
-import com.blargsworkshop.sleepstone.SleepstoneMod;
-import com.blargsworkshop.sleepstone.capabilites.player.Ability;
-import com.blargsworkshop.sleepstone.capabilites.player.AbilityStorage;
-import com.blargsworkshop.sleepstone.capabilites.player.IAbility;
-import com.blargsworkshop.sleepstone.events.MainEventHandler;
-import com.blargsworkshop.sleepstone.gui.GuiHandler;
-import com.blargsworkshop.sleepstone.network.PacketDispatcher;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.IThreadListener;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public class CommonProxy implements IProxy {
+public abstract class BlargsCommonProxy implements IProxy {
 
+	public abstract void registerCapabilities();
+	public abstract void registerEventHandlers();
+	public abstract void registerGuiHandlers();
+	public abstract void registerPackets();
+	
+	/**
+	 * Helper method to register a guiHandler.  Call this from registerGuiHandlers
+	 * @param modInstance
+	 * @param guiHandler
+	 */
+	protected void registerGuiHandlerHelper(Object modInstance, IGuiHandler guiHandler) {
+		NetworkRegistry.INSTANCE.registerGuiHandler(modInstance, guiHandler);		
+	}
+	
 	@Override
     public void preInit(FMLPreInitializationEvent e) {
     }
 
     @Override
     public void init(FMLInitializationEvent e) {
-    	//Smelting recipes
-//    	RegisterModComponents.initSmeltingRecipes();
 		
     	//Capabilities
-		CapabilityManager.INSTANCE.register(IAbility.class, new AbilityStorage(), Ability.class);
-		
+    	registerCapabilities();
+    	
     	// Event Handlers
-    	MinecraftForge.EVENT_BUS.register(new MainEventHandler());
-//    	FMLCommonHandler.instance().bus().register(new FMLEventHandler());
+    	registerEventHandlers();
     	
     	// GUI Handler
-    	NetworkRegistry.INSTANCE.registerGuiHandler(SleepstoneMod.instance, new GuiHandler());
+    	registerGuiHandlers();
     	
     	// Network Packets
-		PacketDispatcher.registerPackets();
+    	registerPackets();
+//		PacketDispatcher.registerPackets();
     }
 
     @Override
