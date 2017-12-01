@@ -80,7 +80,7 @@ public class SimpleTeleporter {
         }
         player.connection.sendPacket(new SPacketSetExperience(player.experience, player.experienceTotal, player.experienceLevel));
         FMLCommonHandler.instance().firePlayerChangedDimensionEvent(player, sourceDimension.getId(), destDimension.getId());
-		String logMessage = player.getDisplayNameString() + "teleported from " + sourceDimension.getName() + " to " + destDimension.getName() + ".";
+		String logMessage = player.getDisplayNameString() + " teleported from " + sourceDimension.getName() + " to " + destDimension.getName() + ".";
 		Log.debug(logMessage, player);
 	}
 	

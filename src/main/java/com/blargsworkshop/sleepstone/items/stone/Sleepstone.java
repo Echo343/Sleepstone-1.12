@@ -41,18 +41,20 @@ public class Sleepstone extends BaseItem {
 	
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
-		if (cooldownTimer.isItemReadyToUse(player)) {
-			if (!player.isSneaking()) {
-				player.openGui(SleepstoneMod.instance, GuiEnum.STONE.ordinal(), world, (int) player.posX, (int) player.posY, (int) player.posZ);
-			}
-			else {
-				if (player.isPotionActive(Potions.warpSickness)) {
-					Utils.addChatMessage(player, "text.sleepstone.suffering_effects_of_warping");
-					cooldownTimer.startCooldown(player);
+		if (hand == EnumHand.MAIN_HAND) {
+			if (cooldownTimer.isItemReadyToUse(player)) {
+				if (!player.isSneaking()) {
+					player.openGui(SleepstoneMod.instance, GuiEnum.STONE.ordinal(), world, (int) player.posX, (int) player.posY, (int) player.posZ);
 				}
 				else {
-					// Start channeling for warp.
-					player.setActiveHand(hand);
+					if (player.isPotionActive(Potions.warpSickness)) {
+						Utils.addChatMessage(player, "text.sleepstone.suffering_effects_of_warping");
+						cooldownTimer.startCooldown(player);
+					}
+					else {
+						// Start channeling for warp.
+						player.setActiveHand(hand);
+					}
 				}
 			}
 		}
@@ -86,13 +88,16 @@ public class Sleepstone extends BaseItem {
 	public static void warpPlayerToBed(EntityPlayer player) {
 		World world = player.getEntityWorld();
 		if (Utils.isServer(world) && player instanceof EntityPlayerMP) {
-			BlockPos bedPos = EntityPlayer.getBedSpawnLocation(world, player.getBedLocation(player.dimension), false);
+			BlockPos bedPos = player.getBedLocation(player.dimension);
 			if (bedPos != null) {
-				SoundManager.playSoundAtEntityFromServer(player, Sounds.swoosh);
-				SimpleTeleporter.teleportPlayerWithinDimension((EntityPlayerMP) player, bedPos);
-				player.addPotionEffect(new WarpSicknessPotionEffect());
-				SoundManager.playSoundAtEntityFromServer(player, Sounds.teleport);
-				Log.debug("Warping to: " + (bedPos.getX()) + ", " + (bedPos.getY()) + ", " + (bedPos.getZ()), player);
+				BlockPos bedSpawnPos = EntityPlayer.getBedSpawnLocation(world, bedPos, false);
+				if (bedSpawnPos != null) {
+					SoundManager.playSoundAtEntityFromServer(player, Sounds.swoosh);
+					SimpleTeleporter.teleportPlayerWithinDimension((EntityPlayerMP) player, bedSpawnPos);
+					player.addPotionEffect(new WarpSicknessPotionEffect());
+					SoundManager.playSoundAtEntityFromServer(player, Sounds.teleport);
+					Log.debug("Warping to: " + (bedSpawnPos.getX()) + ", " + (bedSpawnPos.getY()) + ", " + (bedSpawnPos.getZ()), player);
+				}
 			}
 			else {
 				Utils.addChatMessage(player, "text.sleepstone.bed_destroyed");
@@ -109,6 +114,7 @@ public class Sleepstone extends BaseItem {
 
 	@Override
 	public EnumAction getItemUseAction(ItemStack p_77661_1_) {
+		// TODO block does not work. Investigate shield.
 		return EnumAction.BLOCK;
 	}
 	

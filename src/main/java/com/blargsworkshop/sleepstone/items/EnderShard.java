@@ -26,9 +26,11 @@ public class EnderShard extends BaseItem {
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
-		if (!player.isPotionActive(Potions.enderShardWarp) && player.dimension != DimensionType.THE_END.getId()) {
-			// Start channeling for ender warp.
-			player.setActiveHand(hand);
+		if (hand == EnumHand.MAIN_HAND) {
+			if (!player.isPotionActive(Potions.enderShardWarp) && player.dimension != DimensionType.THE_END.getId()) {
+				// Start channeling for ender warp.
+				player.setActiveHand(hand);
+			}
 		}
 		return super.onItemRightClick(world, player, hand);
 	}
