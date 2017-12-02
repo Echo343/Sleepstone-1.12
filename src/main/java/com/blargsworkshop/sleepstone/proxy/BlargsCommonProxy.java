@@ -1,9 +1,12 @@
 package com.blargsworkshop.sleepstone.proxy;
 
+import com.blargsworkshop.sleepstone.IModItems;
 import com.blargsworkshop.sleepstone.Log;
+import com.blargsworkshop.sleepstone.events.RegisterModComponents;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.IThreadListener;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -17,6 +20,7 @@ public abstract class BlargsCommonProxy implements IProxy {
 	public abstract void registerEventHandlers();
 	public abstract void registerGuiHandlers();
 	public abstract void registerPackets();
+	protected abstract Class<? extends IModItems> getModItemClass();
 	
 	/**
 	 * Helper method to register a guiHandler.  Call this from registerGuiHandlers
@@ -29,6 +33,7 @@ public abstract class BlargsCommonProxy implements IProxy {
 	
 	@Override
     public void preInit(FMLPreInitializationEvent e) {
+		MinecraftForge.EVENT_BUS.register(new RegisterModComponents(getModItemClass()));
     }
 
     @Override
@@ -45,7 +50,6 @@ public abstract class BlargsCommonProxy implements IProxy {
     	
     	// Network Packets
     	registerPackets();
-//		PacketDispatcher.registerPackets();
     }
 
     @Override

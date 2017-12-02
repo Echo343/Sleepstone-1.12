@@ -1,6 +1,8 @@
 package com.blargsworkshop.sleepstone.proxy;
 
+import com.blargsworkshop.sleepstone.IModItems;
 import com.blargsworkshop.sleepstone.Log;
+import com.blargsworkshop.sleepstone.ModItems;
 import com.blargsworkshop.sleepstone.SleepstoneMod;
 import com.blargsworkshop.sleepstone.capabilites.player.Ability;
 import com.blargsworkshop.sleepstone.capabilites.player.AbilityStorage;
@@ -10,52 +12,41 @@ import com.blargsworkshop.sleepstone.gui.GuiHandler;
 import com.blargsworkshop.sleepstone.network.PacketDispatcher;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.IThreadListener;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public class CommonProxy implements IProxy {
+public class CommonProxy extends BlargsCommonProxy {
+	
+	@Override
+	public void registerCapabilities() {
+		CapabilityManager.INSTANCE.register(IAbility.class, new AbilityStorage(), Ability.class);
+	}
 
 	@Override
-    public void preInit(FMLPreInitializationEvent e) {
-    }
-
-    @Override
-    public void init(FMLInitializationEvent e) {
-    	//Smelting recipes
-//    	RegisterModComponents.initSmeltingRecipes();
-		
-    	//Capabilities
-		CapabilityManager.INSTANCE.register(IAbility.class, new AbilityStorage(), Ability.class);
-		
-    	// Event Handlers
-    	MinecraftForge.EVENT_BUS.register(new MainEventHandler());
+	public void registerEventHandlers() {
+		MinecraftForge.EVENT_BUS.register(new MainEventHandler());
 //    	FMLCommonHandler.instance().bus().register(new FMLEventHandler());
-    	
-    	// GUI Handler
-    	NetworkRegistry.INSTANCE.registerGuiHandler(SleepstoneMod.instance, new GuiHandler());
-    	
-    	// Network Packets
-		PacketDispatcher.registerPackets();
-    }
+	}
 
-    @Override
-    public void postInit(FMLPostInitializationEvent e) {
-    }
-    
-    @Override
+	@Override
+	public void registerGuiHandlers() {
+		super.registerGuiHandlerHelper(SleepstoneMod.instance, new GuiHandler());
+	}
+
+	@Override
+	public void registerPackets() {
+		PacketDispatcher.registerPackets();
+	}
+	
+	@Override
     public EntityPlayer getPlayerEntity(MessageContext ctx) {
     	Log.detail("Retrieving player from CommonProxy for message on side " + ctx.side);
     	return ctx.getServerHandler().player;
     }
-    
-    @Override
-    public IThreadListener getThreadFromContext(MessageContext ctx) {
-		return ctx.getServerHandler().player.getServerWorld();
+
+	@Override
+	protected Class<? extends IModItems> getModItemClass() {
+		return ModItems.class;
 	}
 }

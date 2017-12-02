@@ -3,56 +3,37 @@ package com.blargsworkshop.sleepstone;
 import com.blargsworkshop.sleepstone.proxy.IProxy;
 
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 /**
  * Main mod class
  */
 @Mod(modid = ModInfo.ID, name = ModInfo.NAME, version = ModInfo.VERSION, acceptedMinecraftVersions = ModInfo.ACCEPTED_MINECRAFT_VERSIONS)
-public class SleepstoneMod {
-
+public class SleepstoneMod extends BlargsMod {
+	
 	@Instance
 	public static SleepstoneMod instance = new SleepstoneMod();
 
-	@SidedProxy(clientSide = ModInfo.CLIENT_PROXY, serverSide = ModInfo.COMMON_PROXY)
-	public static IProxy proxy;
-
-	/**
-	 * Read Config, create blocks, items, etc & register them.
-	 * @param e
-	 */
-	@EventHandler
-	public void preInit(FMLPreInitializationEvent e) {
-		Log.detail("PreInit Start");
-		proxy.preInit(e);
-		Log.detail("PreInit End");
+	@SidedProxy(serverSide = ModInfo.COMMON_PROXY)
+	public static IProxy commonProxy;
+	
+	@SidedProxy(clientSide = ModInfo.CLIENT_PROXY)
+	public static IProxy clientProxy;
+	
+	
+	@Override
+	protected IProxy getCommonProxy() {
+		return commonProxy;
 	}
 
-	/**
-	 * Build up data structures, add Crafting Recipes, and register new handlers.
-	 * @param e
-	 */
-	@EventHandler
-	public void init(FMLInitializationEvent e) {
-		Log.info("Hi! Hello There! ZZZZZZZZZZZZZZZZZ Sleepstone mod!");
-		Log.detail("Init Start");
-		proxy.init(e);
-		Log.detail("Init End");
+	@Override
+	protected IProxy getClientProxy() {
+		return clientProxy;
 	}
 
-	/**
-	 * Communicate with other mods and adjust setup.
-	 * @param e
-	 */
-	@EventHandler
-	public void postInit(FMLPostInitializationEvent e) {
-		Log.detail("PostInit Start");
-		proxy.postInit(e);
-		Log.detail("PostInit End");
-	}
+	
+	
+	
+	
 }

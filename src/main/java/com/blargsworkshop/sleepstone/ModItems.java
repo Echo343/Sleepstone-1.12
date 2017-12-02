@@ -25,8 +25,8 @@ import net.minecraft.util.SoundEvent;
  * They must be initialized here since I'm using Mod.EventBusSubscriber(modid = ModInfo.ID) to register the event handler.
  * A constructor would be too late in the process.
  */
-public class ModItems {
-	public static CreativeTabs tabSleepstone = RegisterModComponents.getCreativeTab();
+public class ModItems implements IModItems{
+	public static CreativeTabs tabSleepstone = RegisterModComponents.getCreativeTab(ModInfo.CREATIVE_TAB_SLEEPSTONE, ModItems.itemSleepstone);
 	
 	public static Item itemSleepstone = new Sleepstone();
 	

@@ -1,5 +1,6 @@
 package com.blargsworkshop.sleepstone.events;
 
+import com.blargsworkshop.sleepstone.IModItems;
 import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.ModItems;
 import com.blargsworkshop.sleepstone.ModItems.Potions;
@@ -13,15 +14,19 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-@Mod.EventBusSubscriber(modid = ModInfo.ID)
 public class RegisterModComponents {
+	
+	protected Class<? extends IModItems> class1;
+	
+	public RegisterModComponents(Class<? extends IModItems> class1) {
+		this.class1 = class1;
+	}
 
 	@SubscribeEvent
-	public static void registerItems(RegistryEvent.Register<Item> event) {
+	public void registerItems(RegistryEvent.Register<Item> event) {
 		// TODO change this to reflection using @interfaces
 		event.getRegistry().registerAll(
 			ModItems.itemSleepstone,
@@ -39,7 +44,7 @@ public class RegisterModComponents {
 	}
 	
 	@SubscribeEvent
-	public static void registerSoundEvents(RegistryEvent.Register<SoundEvent> event) {
+	public void registerSoundEvents(RegistryEvent.Register<SoundEvent> event) {
 		event.getRegistry().registerAll(
 			Sounds.swoosh,
 			Sounds.teleport
@@ -47,7 +52,7 @@ public class RegisterModComponents {
 	}
 	
 	@SubscribeEvent
-	public static void registerPotions(RegistryEvent.Register<Potion> event) {
+	public void registerPotions(RegistryEvent.Register<Potion> event) {
 		event.getRegistry().registerAll(
 			Potions.enderShardWarp,
 			Potions.warpSickness
@@ -55,11 +60,11 @@ public class RegisterModComponents {
 	}
 	
 	@SubscribeEvent
-	public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
+	public void registerRecipes(RegistryEvent.Register<IRecipe> event) {
 		initSmeltingRecipes();
 	}
 	
-	public static void initSmeltingRecipes() {
+	public void initSmeltingRecipes() {
 		/** Stone Gem
 		 * item.stonecraftable_0.name=Hardened Clay Piece
 		 * item.stonecraftable_1.name=Blasted Clay Piece
@@ -88,11 +93,11 @@ public class RegisterModComponents {
 		GameRegistry.addSmelting(new ItemStack(ModItems.itemStoneCraftable, 1, 15), new ItemStack(ModItems.itemStoneGem), 1f);
 	}
 
-	public static CreativeTabs getCreativeTab() {
-		return new CreativeTabs(ModInfo.CREATIVE_TAB_SLEEPSTONE) {
+	public static CreativeTabs getCreativeTab(String creativeTabName, Item item) {
+		return new CreativeTabs(creativeTabName) {
 			@Override
 			public ItemStack getTabIconItem() {
-				return new ItemStack(ModItems.itemSleepstone);
+				return new ItemStack(item);
 			}
 		};
 	}

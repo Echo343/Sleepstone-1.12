@@ -98,7 +98,7 @@ public abstract class AbstractMessage<T extends AbstractMessage<T>> implements I
 			checkThreadAndEnqueue(msg, ctx);
 		}
 		else {
-			msg.process(SleepstoneMod.proxy.getPlayerEntity(ctx), ctx.side);
+			msg.process(SleepstoneMod..getPlayerEntity(ctx), ctx.side);
 		}
 		return null;
 	}
@@ -109,7 +109,7 @@ public abstract class AbstractMessage<T extends AbstractMessage<T>> implements I
 	 * @param ctx
 	 */
 	private static final <T extends AbstractMessage<T>> void checkThreadAndEnqueue(final AbstractMessage<T> msg, final MessageContext ctx) {
-		IThreadListener thread = SleepstoneMod.proxy.getThreadFromContext(ctx);
+		IThreadListener thread = BlargsMod.proxy.getThreadFromContext(ctx);
 		// pretty much copied straight from vanilla code, see {@link PacketThreadUtil#checkThreadAndEnqueue}
 		thread.addScheduledTask(new Runnable() {
 			public void run() {
