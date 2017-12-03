@@ -1,6 +1,6 @@
 package com.blargsworkshop.sleepstone.events;
 
-import com.blargsworkshop.sleepstone.ModInfo;
+import com.blargsworkshop.sleepstone.IModItems;
 import com.blargsworkshop.sleepstone.ModItems;
 import com.blargsworkshop.sleepstone.items.gems.mats.BaseCraftable;
 import com.blargsworkshop.sleepstone.items.stone.container.GemSlot;
@@ -11,15 +11,21 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-@Mod.EventBusSubscriber(modid = ModInfo.ID, value = {Side.CLIENT})
+@SideOnly(Side.CLIENT)
 public class RegisterModels {
+	
+	protected Class<? extends IModItems> class1;
+	
+	public RegisterModels(Class<? extends IModItems> class1) {
+		this.class1 = class1;
+	}
 
 	@SubscribeEvent
-	public static void onModelRegistry(ModelRegistryEvent event) {
+	public void onModelRegistry(ModelRegistryEvent event) {
 		//TODO make reflective and ask for subType to loop
 		registerItemModel(ModItems.itemSleepstone);
 		registerItemModel(ModItems.itemStoneGem);
@@ -35,11 +41,11 @@ public class RegisterModels {
 	}
 	
 	@SubscribeEvent
-	public static void onTextureRegistry(TextureStitchEvent.Pre event) {
+	public void onTextureRegistry(TextureStitchEvent.Pre event) {
 		GemSlot.getSpritesToRegister().forEach((ResourceLocation rl) -> event.getMap().registerSprite(rl));
 	}
 	
-	private static void registerItemModel(Item item) {
+	private void registerItemModel(Item item) {
 		// TODO interface here
 		if (item.getHasSubtypes() && item instanceof BaseCraftable) {
 			BaseCraftable craftable = (BaseCraftable) item;

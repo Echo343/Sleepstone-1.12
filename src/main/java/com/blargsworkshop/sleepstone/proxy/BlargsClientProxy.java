@@ -1,10 +1,13 @@
 package com.blargsworkshop.sleepstone.proxy;
 
+import com.blargsworkshop.sleepstone.IModItems;
 import com.blargsworkshop.sleepstone.Log;
+import com.blargsworkshop.sleepstone.events.RegisterModels;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.IThreadListener;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -15,6 +18,7 @@ public abstract class BlargsClientProxy implements IProxy {
 	private IProxy commonProxy;
 	
 	protected abstract Class<? extends BlargsCommonProxy> getCommonProxyClass();
+	protected abstract Class<? extends IModItems> getModItemClass();
 	
 	protected IProxy getCommonProxy() {
 		if (commonProxy == null) {
@@ -44,6 +48,7 @@ public abstract class BlargsClientProxy implements IProxy {
 	@Override
 	public void preInit(FMLPreInitializationEvent e) {
 		getCommonProxy().preInit(e);
+		MinecraftForge.EVENT_BUS.register(new RegisterModels(getModItemClass()));
 	}
 
 	@Override
