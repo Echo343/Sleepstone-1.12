@@ -10,24 +10,16 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 public abstract class BlargsMod {
 	
 	protected static BlargsMod instance;
-
-	protected abstract IProxy getCommonProxy();
-	protected abstract IProxy getClientProxy();
+	protected abstract IProxy getBlargProxy();
 	
-	public IProxy getProxy() {
-		if (getClientProxy() != null) {
-			return getClientProxy();
-		}
-		return getCommonProxy();
+	public static IProxy getProxy() {
+		return instance.getBlargProxy();
 	}
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent e) {
 		Log.detail("PreInit Start");
-		getCommonProxy().preInit(e);
-		if (getClientProxy() != null) {
-			getClientProxy().preInit(e);
-		}
+		getProxy().preInit(e);
 		Log.detail("PreInit End");
 	}
 
@@ -35,20 +27,14 @@ public abstract class BlargsMod {
 	public void init(FMLInitializationEvent e) {
 		Log.info("Hi! Hello There! ZZZZZZZZZZZZZZZZZ Sleepstone mod!");
 		Log.detail("Init Start");
-		getCommonProxy().init(e);
-		if (getClientProxy() != null) {
-			getClientProxy().init(e);
-		}
+		getProxy().init(e);
 		Log.detail("Init End");
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent e) {
 		Log.detail("PostInit Start");
-		getCommonProxy().postInit(e);
-		if (getClientProxy() != null) {
-			getClientProxy().postInit(e);
-		}
+		getProxy().postInit(e);
 		Log.detail("PostInit End");
 	}
 }

@@ -11,25 +11,20 @@ import net.minecraftforge.fml.common.SidedProxy;
  */
 @Mod(modid = ModInfo.ID, name = ModInfo.NAME, version = ModInfo.VERSION, acceptedMinecraftVersions = ModInfo.ACCEPTED_MINECRAFT_VERSIONS)
 public class SleepstoneMod extends BlargsMod {
+
+	public SleepstoneMod() {
+		BlargsMod.instance = instance;
+	}
 	
 	@Instance
 	public static SleepstoneMod instance = new SleepstoneMod();
 
-	@SidedProxy(serverSide = ModInfo.COMMON_PROXY)
-	public static IProxy commonProxy;
-	
-	@SidedProxy(clientSide = ModInfo.CLIENT_PROXY)
-	public static IProxy clientProxy;
-	
-	
-	@Override
-	protected IProxy getCommonProxy() {
-		return commonProxy;
-	}
+	@SidedProxy(serverSide = ModInfo.COMMON_PROXY, clientSide = ModInfo.CLIENT_PROXY)
+	public static IProxy proxy;
 
 	@Override
-	protected IProxy getClientProxy() {
-		return clientProxy;
+	protected IProxy getBlargProxy() {
+		return proxy;
 	}
 
 	

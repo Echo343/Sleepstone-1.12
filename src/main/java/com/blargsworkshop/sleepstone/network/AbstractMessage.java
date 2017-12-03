@@ -2,7 +2,7 @@ package com.blargsworkshop.sleepstone.network;
 
 import java.io.IOException;
 
-import com.blargsworkshop.sleepstone.SleepstoneMod;
+import com.blargsworkshop.sleepstone.BlargsMod;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
@@ -98,7 +98,7 @@ public abstract class AbstractMessage<T extends AbstractMessage<T>> implements I
 			checkThreadAndEnqueue(msg, ctx);
 		}
 		else {
-			msg.process(SleepstoneMod..getPlayerEntity(ctx), ctx.side);
+			msg.process(BlargsMod.getProxy().getPlayerEntity(ctx), ctx.side);
 		}
 		return null;
 	}
@@ -109,11 +109,11 @@ public abstract class AbstractMessage<T extends AbstractMessage<T>> implements I
 	 * @param ctx
 	 */
 	private static final <T extends AbstractMessage<T>> void checkThreadAndEnqueue(final AbstractMessage<T> msg, final MessageContext ctx) {
-		IThreadListener thread = BlargsMod.proxy.getThreadFromContext(ctx);
+		IThreadListener thread = BlargsMod.getProxy().getThreadFromContext(ctx);
 		// pretty much copied straight from vanilla code, see {@link PacketThreadUtil#checkThreadAndEnqueue}
 		thread.addScheduledTask(new Runnable() {
 			public void run() {
-				msg.process(SleepstoneMod.proxy.getPlayerEntity(ctx), ctx.side);
+				msg.process(BlargsMod.getProxy().getPlayerEntity(ctx), ctx.side);
 			}
 		});
 	}
