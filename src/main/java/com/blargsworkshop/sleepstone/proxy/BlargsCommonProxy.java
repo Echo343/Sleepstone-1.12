@@ -33,11 +33,13 @@ public abstract class BlargsCommonProxy implements IProxy {
 	
 	@Override
     public void preInit(FMLPreInitializationEvent e) {
+		Log.detail("BlargsCommonProxy - PreInit");
 		MinecraftForge.EVENT_BUS.register(new RegisterModComponents(getModItemClass()));
     }
 
     @Override
     public void init(FMLInitializationEvent e) {
+		Log.detail("BlargsCommonProxy - Init");
 		
     	//Capabilities
     	registerCapabilities();
@@ -54,6 +56,7 @@ public abstract class BlargsCommonProxy implements IProxy {
 
     @Override
     public void postInit(FMLPostInitializationEvent e) {
+		Log.detail("BlargsCommonProxy - PostInit");
     }
     
     @Override

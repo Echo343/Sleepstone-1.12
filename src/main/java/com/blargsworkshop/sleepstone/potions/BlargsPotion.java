@@ -1,7 +1,5 @@
 package com.blargsworkshop.sleepstone.potions;
 
-import com.blargsworkshop.sleepstone.Log;
-
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
@@ -12,8 +10,8 @@ public class BlargsPotion extends Potion {
 		super(false, 0);
 		this.setRegistryName(registryName);
 		this.setPotionName(messageKey);
+		// TODO change icon
 		setIconIndex(5, 1);
-		Log.detail("Registering BlargsPotion(" + registryName.toString() + ") for " + messageKey);
 	}
 
 	/**

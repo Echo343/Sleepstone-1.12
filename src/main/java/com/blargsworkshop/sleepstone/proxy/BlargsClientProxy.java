@@ -33,32 +33,23 @@ public abstract class BlargsClientProxy implements IProxy {
 		return commonProxy;
 	}
 
-//	public BlargsClientProxy(Class<? extends BlargsCommonProxy> commonProxyClass) {
-//		try {
-//			commonProxy = commonProxyClass.newInstance();
-//		} catch (InstantiationException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (IllegalAccessException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
-
 	@Override
 	public void preInit(FMLPreInitializationEvent e) {
 		getCommonProxy().preInit(e);
+		Log.detail("BlargsClientProxy - PreInit");
 		MinecraftForge.EVENT_BUS.register(new RegisterModels(getModItemClass()));
 	}
 
 	@Override
 	public void init(FMLInitializationEvent e) {
 		getCommonProxy().init(e);
+		Log.detail("BlargsClientProxy - Init");
 	}
 
 	@Override
 	public void postInit(FMLPostInitializationEvent e) {
 		getCommonProxy().postInit(e);
+		Log.detail("BlargsClientProxy - PostInit");
 	}
 
 	@Override

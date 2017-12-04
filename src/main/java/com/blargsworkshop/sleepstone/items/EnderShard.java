@@ -48,11 +48,11 @@ public class EnderShard extends BaseItem {
 	}
 	
 	private void warpPlayerToEnd(EntityPlayer player, ItemStack item) {
-		// TODO not sure if this needs to be server only or check for EntityPlayerMP
-//		player.inventory.clearMatchingItems(ModItems.itemEnderShard, -1, 1, null);
-		item.shrink(1);
-		player.addPotionEffect(new EnderShardPotionEffect(player));
-		player.changeDimension(DimensionType.THE_END.getId());
+		if (Utils.isServer(player.getEntityWorld())) {
+			item.shrink(1);
+			player.addPotionEffect(new EnderShardPotionEffect(player));
+			player.changeDimension(DimensionType.THE_END.getId());
+		}
 	}
 	
 	@Override

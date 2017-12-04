@@ -1,6 +1,7 @@
 package com.blargsworkshop.sleepstone.events;
 
 import com.blargsworkshop.sleepstone.IModItems;
+import com.blargsworkshop.sleepstone.Log;
 import com.blargsworkshop.sleepstone.ModItems;
 import com.blargsworkshop.sleepstone.items.gems.mats.BaseCraftable;
 import com.blargsworkshop.sleepstone.items.stone.container.GemSlot;
@@ -26,6 +27,7 @@ public class RegisterModels {
 
 	@SubscribeEvent
 	public void onModelRegistry(ModelRegistryEvent event) {
+		Log.detail("RegisterModels - Models");
 		//TODO make reflective and ask for subType to loop
 		registerItemModel(ModItems.itemSleepstone);
 		registerItemModel(ModItems.itemStoneGem);
@@ -42,6 +44,7 @@ public class RegisterModels {
 	
 	@SubscribeEvent
 	public void onTextureRegistry(TextureStitchEvent.Pre event) {
+		Log.detail("RegisterModels - Textures");
 		GemSlot.getSpritesToRegister().forEach((ResourceLocation rl) -> event.getMap().registerSprite(rl));
 	}
 	
