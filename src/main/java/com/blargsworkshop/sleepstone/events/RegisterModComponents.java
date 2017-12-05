@@ -22,6 +22,10 @@ import net.minecraft.util.SoundEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+/**
+ * This class is an event handler for registering all mod components.
+ * It uses reflection on the passing class during creation to work automagically.
+ */
 public class RegisterModComponents {
 	
 	protected List<Item> modItems = new ArrayList<>();
@@ -116,6 +120,16 @@ public class RegisterModComponents {
 		}
 	}
 
+	/**
+	 * Call this method to create and register a creative tab.
+	 * <br><br>
+	 * <b>Example:</b> In your IModItems file at the top...
+	 * <br>
+	 * <i>public static CreativeTabs tabMyModTab = RegisterModComponents.getCreativeTab("mymodtabname", () -> ModItems.itemMyItem);</i>
+	 * @param creativeTabName - Name of the creative tab.
+	 * @param delegate - This is a function that supplies an item which is used as the icon for the tab.
+	 * @return a new CreativeTabs instance is returned.
+	 */
 	public static CreativeTabs getCreativeTab(String creativeTabName, Supplier<Item> delegate) {
 		return new CreativeTabs(creativeTabName) {
 			@Override

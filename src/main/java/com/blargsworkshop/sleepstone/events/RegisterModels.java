@@ -20,6 +20,10 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+/**
+ * This class is used to register all the models and sprites on the client side only.
+ * It uses reflection on your IModItems file to work like magic. =)
+ */
 @SideOnly(Side.CLIENT)
 public class RegisterModels {
 
@@ -61,6 +65,10 @@ public class RegisterModels {
 		}
 	}
 
+	/**
+	 * Registers our models
+	 * @param event
+	 */
 	@SubscribeEvent
 	public void onModelRegistry(ModelRegistryEvent event) {
 		Log.detail("Register Models - Models");
@@ -70,6 +78,10 @@ public class RegisterModels {
 		}
 	}
 	
+	/**
+	 * Registers textures or sprites.
+	 * @param event
+	 */
 	@SubscribeEvent
 	public void onTextureRegistry(TextureStitchEvent.Pre event) {
 		Log.detail("Register Models - Textures");
