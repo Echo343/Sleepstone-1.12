@@ -5,13 +5,14 @@ import java.util.Map;
 
 import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.items.BaseItem;
+import com.blargsworkshop.sleepstone.items.ISubtypable;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 
-public abstract class BaseCraftable extends BaseItem {
+public abstract class BaseCraftable extends BaseItem implements ISubtypable {
 	private final int NUMBER_OF_CRAFTABLES;
 	private final String REGISTRY_NAME;
 	

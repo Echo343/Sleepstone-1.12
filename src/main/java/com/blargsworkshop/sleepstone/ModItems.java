@@ -4,6 +4,7 @@ import com.blargsworkshop.sleepstone.annotations.ModItem;
 import com.blargsworkshop.sleepstone.annotations.ModPotion;
 import com.blargsworkshop.sleepstone.annotations.ModRecipe;
 import com.blargsworkshop.sleepstone.annotations.ModSound;
+import com.blargsworkshop.sleepstone.annotations.ModSprite;
 import com.blargsworkshop.sleepstone.events.RegisterModComponents;
 import com.blargsworkshop.sleepstone.items.EnderShard;
 import com.blargsworkshop.sleepstone.items.gems.EtherealGem;
@@ -28,8 +29,6 @@ import net.minecraft.util.SoundEvent;
 
 /**
  * All the items in the mod.
- * They must be initialized here since I'm using Mod.EventBusSubscriber(modid = ModInfo.ID) to register the event handler.
- * A constructor would be too late in the process.
  */
 public class ModItems implements IModItems{
 	public static CreativeTabs tabSleepstone = RegisterModComponents.getCreativeTab(ModInfo.CREATIVE_TAB_SLEEPSTONE, () -> ModItems.itemSleepstone);
@@ -79,5 +78,15 @@ public class ModItems implements IModItems{
 		public static IBlargRecipe strengthenedDiamondLattice = new SmeltingRecipe(new ItemStack(ModItems.itemStoneCraftable, 1, 11), new ItemStack(ModItems.itemStoneCraftable, 1, 12), 1f);
 		public static IBlargRecipe heatedCrystallineLatticeStructure = new SmeltingRecipe(new ItemStack(ModItems.itemStoneCraftable, 1, 13), new ItemStack(ModItems.itemStoneCraftable, 1, 14), 1f);
 		public static IBlargRecipe stoneGem = new SmeltingRecipe(new ItemStack(ModItems.itemStoneCraftable, 1, 15), new ItemStack(ModItems.itemStoneGem), 1f);
+	}
+	
+	@ModSprite
+	public static class Sprites {
+		public static ResourceLocation stoneSlotBackground = new ResourceLocation(ModInfo.ID, "items/slot-gem-stone");
+		public static ResourceLocation pathfinderSlotBackground = new ResourceLocation(ModInfo.ID, "items/slot-gem-pathfinder");
+		public static ResourceLocation timeSpaceSlotBackground = new ResourceLocation(ModInfo.ID, "items/slot-gem-time-and-space");
+		public static ResourceLocation fireSlotBackground = new ResourceLocation(ModInfo.ID, "items/slot-gem-fire");
+		public static ResourceLocation guardianSlotBackground = new ResourceLocation(ModInfo.ID, "items/slot-gem-guardian");
+		public static ResourceLocation etherealSlotBackground = new ResourceLocation(ModInfo.ID, "items/slot-gem-ethereal");
 	}
 }

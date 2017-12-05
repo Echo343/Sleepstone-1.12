@@ -1,11 +1,6 @@
 package com.blargsworkshop.sleepstone.items.stone.container;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import com.blargsworkshop.sleepstone.ModInfo;
+import com.blargsworkshop.sleepstone.ModItems.Sprites;
 import com.blargsworkshop.sleepstone.items.gems.EtherealGem;
 import com.blargsworkshop.sleepstone.items.gems.FireGem;
 import com.blargsworkshop.sleepstone.items.gems.Gem;
@@ -21,13 +16,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 public class GemSlot extends Slot {
- 
-    public static List<ResourceLocation> getSpritesToRegister() {
-    	List<ResourceLocation> sprites = new ArrayList<>();
-    	Set<Class<? extends Gem>> uniqueGemTypes = getUniqueGemTypes();
-    	uniqueGemTypes.forEach(gemType -> sprites.add(getResourceLocationFromGemType(gemType)));
-    	return sprites;
-    }
 	
 	private Class<? extends Gem> gemType;
 	private final int stackLimit;
@@ -67,34 +55,26 @@ public class GemSlot extends Slot {
     	return gemType;
     }
     
-    private static ResourceLocation getResourceLocationFromGemType(Class<? extends Gem> gemType) {
+    private ResourceLocation getResourceLocationFromGemType(Class<? extends Gem> gemType) {
     	ResourceLocation slotTexture = null;
     	if (gemType.equals(StoneGem.class)) {
-    		slotTexture = new ResourceLocation(ModInfo.ID, "items/slot-gem-stone");
+    		slotTexture = Sprites.stoneSlotBackground;
     	}
     	else if (gemType.equals(PathfinderGem.class)) {
-			slotTexture = new ResourceLocation(ModInfo.ID, "items/slot-gem-pathfinder");
+			slotTexture = Sprites.pathfinderSlotBackground;
     	}
     	else if (gemType.equals(TimeSpaceGem.class)) {
-			slotTexture = new ResourceLocation(ModInfo.ID, "items/slot-gem-time-and-space");
+			slotTexture = Sprites.timeSpaceSlotBackground;
     	}
     	else if (gemType.equals(FireGem.class)) {
-			slotTexture = new ResourceLocation(ModInfo.ID, "items/slot-gem-fire");
+			slotTexture = Sprites.fireSlotBackground;
     	}
     	else if (gemType.equals(GuardianGem.class)) {
-			slotTexture = new ResourceLocation(ModInfo.ID, "items/slot-gem-guardian");
+			slotTexture = Sprites.guardianSlotBackground;
     	}
     	else if (gemType.equals(EtherealGem.class)) {
-			slotTexture = new ResourceLocation(ModInfo.ID, "items/slot-gem-ethereal");
+			slotTexture = Sprites.etherealSlotBackground;
     	}
     	return slotTexture;
     }
-    
-    private static Set<Class<? extends Gem>> getUniqueGemTypes() {
-		Set<Class<? extends Gem>> gemTypeSet = new HashSet<Class<? extends Gem>>(Slots.values().length, 1f);
-		for (Slots gem : Slots.values()) {
-			gemTypeSet.add(gem.getGemType());
-		}
-		return gemTypeSet;
-	}
 }
