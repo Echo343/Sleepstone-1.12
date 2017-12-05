@@ -2,6 +2,7 @@ package com.blargsworkshop.sleepstone;
 
 import com.blargsworkshop.sleepstone.annotations.ModItem;
 import com.blargsworkshop.sleepstone.annotations.ModPotion;
+import com.blargsworkshop.sleepstone.annotations.ModRecipe;
 import com.blargsworkshop.sleepstone.annotations.ModSound;
 import com.blargsworkshop.sleepstone.events.RegisterModComponents;
 import com.blargsworkshop.sleepstone.items.EnderShard;
@@ -19,7 +20,9 @@ import com.blargsworkshop.sleepstone.potions.BlargsPotion;
 import com.blargsworkshop.sleepstone.sound.BlargsSoundEvent;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 
@@ -64,5 +67,17 @@ public class ModItems implements IModItems{
 	public static class Sounds {
 		public static SoundEvent swoosh = new BlargsSoundEvent(new ResourceLocation(ModInfo.ID, "swoosh"));
 		public static SoundEvent teleport = new BlargsSoundEvent(new ResourceLocation(ModInfo.ID, "teleport"));
+	}
+
+	@ModRecipe
+	public static class SmeltingRecipes {
+		public static IBlargRecipe blastedClayPiece = new SmeltingRecipe(new ItemStack(ModItems.itemStoneCraftable, 1, 0), new ItemStack(ModItems.itemStoneCraftable, 1, 1), 0.1f);
+		public static IBlargRecipe blastedCeramicFoundation = new SmeltingRecipe(new ItemStack(ModItems.itemStoneCraftable, 1, 2), new ItemStack(ModItems.itemStoneCraftable, 1, 3), 1f);
+		public static IBlargRecipe hyperInfusedMass = new SmeltingRecipe(new ItemStack(ModItems.itemStoneCraftable, 1, 6), new ItemStack(ModItems.itemStoneCraftable, 1, 7), 1f);
+		public static IBlargRecipe refinedObsidian = new SmeltingRecipe(new ItemStack(Blocks.OBSIDIAN), new ItemStack(ModItems.itemStoneCraftable, 1, 8), 0.4f);
+		public static IBlargRecipe hardenedObsidianClump = new SmeltingRecipe(new ItemStack(ModItems.itemStoneCraftable, 1, 9), new ItemStack(ModItems.itemStoneCraftable, 1, 10), 0.7f);
+		public static IBlargRecipe strengthenedDiamondLattice = new SmeltingRecipe(new ItemStack(ModItems.itemStoneCraftable, 1, 11), new ItemStack(ModItems.itemStoneCraftable, 1, 12), 1f);
+		public static IBlargRecipe heatedCrystallineLatticeStructure = new SmeltingRecipe(new ItemStack(ModItems.itemStoneCraftable, 1, 13), new ItemStack(ModItems.itemStoneCraftable, 1, 14), 1f);
+		public static IBlargRecipe stoneGem = new SmeltingRecipe(new ItemStack(ModItems.itemStoneCraftable, 1, 15), new ItemStack(ModItems.itemStoneGem), 1f);
 	}
 }
