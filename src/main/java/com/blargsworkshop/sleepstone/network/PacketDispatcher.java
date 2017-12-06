@@ -1,10 +1,6 @@
 package com.blargsworkshop.sleepstone.network;
 
 import com.blargsworkshop.sleepstone.ModInfo;
-import com.blargsworkshop.sleepstone.network.bidirectional.SyncAllPlayerPropsMessage;
-import com.blargsworkshop.sleepstone.network.bidirectional.SyncPlayerPropMessage;
-import com.blargsworkshop.sleepstone.network.server.CommandMessage;
-import com.blargsworkshop.sleepstone.network.server.OpenGuiMessage;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -25,16 +21,6 @@ public class PacketDispatcher {
 	private static byte packetId = 0;
 	private static final SimpleNetworkWrapper dispatcher = NetworkRegistry.INSTANCE.newSimpleChannel(ModInfo.ID);
 	
-	public static final void registerPackets() {
-		//Messages handled on the server
-		registerMessage(OpenGuiMessage.class);
-		registerMessage(CommandMessage.class);
-		
-		//Bidirectional Messages
-		registerMessage(SyncAllPlayerPropsMessage.class);
-		registerMessage(SyncPlayerPropMessage.class);
-	}
-
 	/**
 	 * Registers an {@link AbstractMessage} to the appropriate side(s)
 	 * @param clazz

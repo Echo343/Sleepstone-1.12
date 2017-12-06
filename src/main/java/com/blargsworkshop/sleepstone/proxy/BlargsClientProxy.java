@@ -24,9 +24,7 @@ public abstract class BlargsClientProxy implements IProxy {
 		if (commonProxy == null) {
 			try {
 				commonProxy = getCommonProxyClass().newInstance();
-			} catch (InstantiationException e) {
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
+			} catch (InstantiationException |IllegalAccessException e) {
 				e.printStackTrace();
 			}
 		}

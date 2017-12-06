@@ -11,6 +11,10 @@ public abstract class BlargsMod {
 	protected static BlargsMod instance;
 	protected abstract IProxy getBlargProxy();
 	
+	public static BlargsMod getModInstance() {
+		return instance;
+	}
+	
 	public static IProxy getProxy() {
 		return instance.getBlargProxy();
 	}

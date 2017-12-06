@@ -22,7 +22,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 /**
  * EventHandler
  */
-public class MainEventHandler {
+public class MainEventHandler implements IEventHandler {
 	
 	@SubscribeEvent
 	public void attachCapability(AttachCapabilitiesEvent<Entity> event) {
