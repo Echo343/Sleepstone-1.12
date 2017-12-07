@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.blargsworkshop.sleepstone.IModItems;
+import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.ModItems;
 import com.blargsworkshop.sleepstone.capabilites.player.Ability;
 import com.blargsworkshop.sleepstone.capabilites.player.AbilityStorage;
@@ -13,6 +14,7 @@ import com.blargsworkshop.sleepstone.capabilites.player.IAbility;
 import com.blargsworkshop.sleepstone.events.IEventHandler;
 import com.blargsworkshop.sleepstone.events.MainEventHandler;
 import com.blargsworkshop.sleepstone.gui.GuiHandler;
+import com.blargsworkshop.sleepstone.network.NetworkOverlord;
 import com.blargsworkshop.sleepstone.network.PacketDispatcher;
 import com.blargsworkshop.sleepstone.network.bidirectional.SyncAllPlayerPropsMessage;
 import com.blargsworkshop.sleepstone.network.bidirectional.SyncPlayerPropMessage;
@@ -46,13 +48,15 @@ public class CommonProxy extends BlargsCommonProxy {
 
 	@Override
 	public void registerPackets() {
+		PacketDispatcher dispatcher = NetworkOverlord.register(ModInfo.ID);
+		
 		//Messages handled on the server
-		PacketDispatcher.registerMessage(OpenGuiMessage.class);
-		PacketDispatcher.registerMessage(CommandMessage.class);
+		dispatcher.registerMessage(OpenGuiMessage.class);
+		dispatcher.registerMessage(CommandMessage.class);
 		
 		//Bidirectional Messages
-		PacketDispatcher.registerMessage(SyncAllPlayerPropsMessage.class);
-		PacketDispatcher.registerMessage(SyncPlayerPropMessage.class);
+		dispatcher.registerMessage(SyncAllPlayerPropsMessage.class);
+		dispatcher.registerMessage(SyncPlayerPropMessage.class);
 	}
 
 	@Override

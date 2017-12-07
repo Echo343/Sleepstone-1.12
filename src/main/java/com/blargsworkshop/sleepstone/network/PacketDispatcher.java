@@ -1,6 +1,6 @@
 package com.blargsworkshop.sleepstone.network;
 
-import com.blargsworkshop.sleepstone.ModInfo;
+import java.lang.reflect.MalformedParametersException;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -18,12 +18,20 @@ import net.minecraftforge.fml.relauncher.Side;
  */
 public class PacketDispatcher {
 	
-	private String modId;
-	private static byte packetId = 0;
-	private static final SimpleNetworkWrapper dispatcher = NetworkRegistry.INSTANCE.newSimpleChannel(ModInfo.ID);
+	private byte packetId = 0;
+	private final String modId;
+	private final SimpleNetworkWrapper dispatcher;
 	
 	public PacketDispatcher(String modId) {
-		this.modId = modId;
+		if (modId == null) {
+			throw new NullPointerException();
+		}
+		else if (modId.trim().equals("")) {
+			throw new MalformedParametersException("modId can not be empty");
+		}
+		
+		this.modId = modId.trim();
+		dispatcher = NetworkRegistry.INSTANCE.newSimpleChannel(this.modId);
 	}
 	
 	public String getModId() {
@@ -35,16 +43,16 @@ public class PacketDispatcher {
 	 * Registers an {@link AbstractMessage} to the appropriate side(s)
 	 * @param clazz
 	 */
-	public static final <T extends AbstractMessage<T> & IMessageHandler<T, IMessage>> void registerMessage(Class<T> clazz) {
+	public final <T extends AbstractMessage<T> & IMessageHandler<T, IMessage>> void registerMessage(Class<T> clazz) {
 		if (AbstractMessage.AbstractClientMessage.class.isAssignableFrom(clazz)) {
-			PacketDispatcher.dispatcher.registerMessage(clazz, clazz, packetId++, Side.CLIENT);
+			dispatcher.registerMessage(clazz, clazz, packetId++, Side.CLIENT);
 		}
 		else if (AbstractMessage.AbstractServerMessage.class.isAssignableFrom(clazz)) {
-			PacketDispatcher.dispatcher.registerMessage(clazz, clazz, packetId++, Side.SERVER);
+			dispatcher.registerMessage(clazz, clazz, packetId++, Side.SERVER);
 		}
 		else {
-			PacketDispatcher.dispatcher.registerMessage(clazz, clazz, packetId, Side.CLIENT);
-			PacketDispatcher.dispatcher.registerMessage(clazz, clazz, packetId++, Side.SERVER);
+			dispatcher.registerMessage(clazz, clazz, packetId, Side.CLIENT);
+			dispatcher.registerMessage(clazz, clazz, packetId++, Side.SERVER);
 		}
 	}
 	
@@ -56,8 +64,8 @@ public class PacketDispatcher {
 	 * @param player
 	 * @param message
 	 */
-	public static final void sendToPlayer(EntityPlayerMP player, IMessage message) {
-		PacketDispatcher.dispatcher.sendTo(message, player);
+	public final void sendToPlayer(EntityPlayerMP player, IMessage message) {
+		dispatcher.sendTo(message, player);
 	}
 	
 	/**
@@ -66,8 +74,8 @@ public class PacketDispatcher {
 	 * @param player This will auto-downcast EntityPlayer to EntityPlayerMP
 	 * @param message
 	 */
-	public static final void sendToPlayer(EntityPlayer player, IMessage message) {
-		PacketDispatcher.sendToPlayer((EntityPlayerMP) player, message);
+	public final void sendToPlayer(EntityPlayer player, IMessage message) {
+		sendToPlayer((EntityPlayerMP) player, message);
 	}
 	
 	/**
@@ -75,8 +83,8 @@ public class PacketDispatcher {
 	 * See {@link SimpleNetworkWrapper#sendToAll(IMessage)}
 	 * @param message
 	 */
-	public static void sendToAll(IMessage message) {
-		PacketDispatcher.dispatcher.sendToAll(message);
+	public void sendToAll(IMessage message) {
+		dispatcher.sendToAll(message);
 	}
 	
 	/**
@@ -85,8 +93,8 @@ public class PacketDispatcher {
 	 * @param message
 	 * @param point
 	 */
-	public static final void sendToAllAround(IMessage message, NetworkRegistry.TargetPoint point) {
-		PacketDispatcher.dispatcher.sendToAllAround(message, point);
+	public final void sendToAllAround(IMessage message, NetworkRegistry.TargetPoint point) {
+		dispatcher.sendToAllAround(message, point);
 	}
 	
 	/**
@@ -99,8 +107,8 @@ public class PacketDispatcher {
 	 * @param z
 	 * @param range
 	 */
-	public static final void sendToAllAround(IMessage message, int dimension, double x, double y, double z, double range) {
-		PacketDispatcher.dispatcher.sendToAllAround(message, new NetworkRegistry.TargetPoint(dimension, x, y, z, range));
+	public final void sendToAllAround(IMessage message, int dimension, double x, double y, double z, double range) {
+		dispatcher.sendToAllAround(message, new NetworkRegistry.TargetPoint(dimension, x, y, z, range));
 	}
 	
 	/**
@@ -110,8 +118,8 @@ public class PacketDispatcher {
 	 * @param player
 	 * @param range
 	 */
-	public static final void sendToAllAround(IMessage message, EntityPlayer player, double range) {
-		PacketDispatcher.sendToAllAround(message, player.getEntityWorld().provider.getDimension(), player.posX, player.posY, player.posZ, range);
+	public final void sendToAllAround(IMessage message, EntityPlayer player, double range) {
+		sendToAllAround(message, player.getEntityWorld().provider.getDimension(), player.posX, player.posY, player.posZ, range);
 	}
 	
 	/**
@@ -120,8 +128,8 @@ public class PacketDispatcher {
 	 * @param message
 	 * @param dimensionId
 	 */
-	public static final void sendToDimension(IMessage message, int dimensionId) {
-		PacketDispatcher.dispatcher.sendToDimension(message, dimensionId);
+	public final void sendToDimension(IMessage message, int dimensionId) {
+		dispatcher.sendToDimension(message, dimensionId);
 	}
 	
 	/**
@@ -129,8 +137,8 @@ public class PacketDispatcher {
 	 * See {@link SimpleNetworkWrapper#sendToServer(IMessage)}
 	 * @param message
 	 */
-	public static final void sendToServer(IMessage message) {
-		PacketDispatcher.dispatcher.sendToServer(message);
+	public final void sendToServer(IMessage message) {
+		dispatcher.sendToServer(message);
 	}
 	
 	

@@ -14,7 +14,7 @@ import com.blargsworkshop.sleepstone.gui.buttons.ToggleButton;
 import com.blargsworkshop.sleepstone.gui.buttons.TooltipButton;
 import com.blargsworkshop.sleepstone.items.stone.Slots;
 import com.blargsworkshop.sleepstone.items.stone.container.StoneInventory;
-import com.blargsworkshop.sleepstone.network.PacketDispatcher;
+import com.blargsworkshop.sleepstone.network.NetworkOverlord;
 import com.blargsworkshop.sleepstone.network.server.OpenGuiMessage;
 import com.blargsworkshop.sleepstone.utility.Utils;
 
@@ -189,7 +189,7 @@ public class GuiStone extends GuiScreen {
 				
 		switch (btn) {
 		case Inv:
-			PacketDispatcher.sendToServer(new OpenGuiMessage(GuiEnum.STONE_INVENTORY));
+			NetworkOverlord.get(ModInfo.ID).sendToServer(new OpenGuiMessage(GuiEnum.STONE_INVENTORY));
 			break;
 		case NoFallDmg:
 		case StoneEthereal:

@@ -5,9 +5,11 @@ import java.util.List;
 import java.util.Map;
 
 import com.blargsworkshop.sleepstone.Log;
+import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.ModItems;
 import com.blargsworkshop.sleepstone.items.stone.Slots;
 import com.blargsworkshop.sleepstone.items.stone.container.StoneInventory;
+import com.blargsworkshop.sleepstone.network.NetworkOverlord;
 import com.blargsworkshop.sleepstone.network.PacketDispatcher;
 import com.blargsworkshop.sleepstone.network.bidirectional.SyncAllPlayerPropsMessage;
 import com.blargsworkshop.sleepstone.network.bidirectional.SyncPlayerBondedIdMessage;
@@ -20,11 +22,14 @@ import net.minecraft.item.ItemStack;
 
 public class Ability implements IAbility {
 	
+	private PacketDispatcher dispatcher = null;
+	
 	private String bondedStoneId = "";
 	private EntityPlayer player;
 	private EnumMap<Slots, Boolean> abilities = new EnumMap<Slots, Boolean>(Slots.class);
 
 	public void init(EntityPlayer player) {
+		dispatcher = NetworkOverlord.get(ModInfo.ID);
 		this.player = player;
 		for (Slots slot : Slots.values()) {
 			abilities.put(slot, false);
@@ -70,10 +75,10 @@ public class Ability implements IAbility {
 	@Override
 	public void syncAll() {
 		if (Utils.isServer(player.getEntityWorld())) {
-			PacketDispatcher.sendToPlayer(player, new SyncAllPlayerPropsMessage(player));
+			dispatcher.sendToPlayer(player, new SyncAllPlayerPropsMessage(player));
 		}
 		else {
-			PacketDispatcher.sendToServer(new SyncAllPlayerPropsMessage(player));
+			dispatcher.sendToServer(new SyncAllPlayerPropsMessage(player));
 		}
 	}
 	
@@ -84,11 +89,11 @@ public class Ability implements IAbility {
 		abilities.put(gem, value);
 		if (doSync) {
 			if (Utils.isClient(player.getEntityWorld())) {
-				PacketDispatcher.sendToServer(new SyncPlayerPropMessage(gem, value));
+				dispatcher.sendToServer(new SyncPlayerPropMessage(gem, value));
 				Log.debug("Setting " + gem + " to " + value + " on client and syncing to server", this.player);
 			}
 			else {
-				PacketDispatcher.sendToPlayer((EntityPlayerMP) player, new SyncPlayerPropMessage(gem, value));
+				dispatcher.sendToPlayer((EntityPlayerMP) player, new SyncPlayerPropMessage(gem, value));
 				Log.debug("Setting " + gem + " to " + value + " on server and syncing to client", this.player);
 			}
 		}
@@ -102,11 +107,11 @@ public class Ability implements IAbility {
 		this.bondedStoneId = bondId;
 		if (doSync) {
 			if (Utils.isClient(player.getEntityWorld())) {
-				PacketDispatcher.sendToServer(new SyncPlayerBondedIdMessage(bondedStoneId));
+				dispatcher.sendToServer(new SyncPlayerBondedIdMessage(bondedStoneId));
 				Log.debug("Setting UUID to " + getBondedStoneId() + " on client", this.player);
 			}
 			else {
-				PacketDispatcher.sendToPlayer(player, new SyncPlayerBondedIdMessage(bondedStoneId));
+				dispatcher.sendToPlayer(player, new SyncPlayerBondedIdMessage(bondedStoneId));
 				Log.debug("Setting UUID to " + getBondedStoneId() + " on server", this.player);
 			}
 		}

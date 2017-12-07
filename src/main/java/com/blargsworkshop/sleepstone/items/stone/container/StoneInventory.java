@@ -32,7 +32,8 @@ public class StoneInventory implements IInventory {
     private List<ItemStack> inventory = NonNullList.withSize(INV_SIZE, ItemStack.EMPTY);
 
     /**
-     * @param itemstack - the ItemStack to which this inventory belongs
+     * Creates a new StoneInventory
+     * @param stack - the ItemStack to which this inventory belongs
      */
 	public StoneInventory(ItemStack stack) {
         invItem = stack;
@@ -194,6 +195,7 @@ public class StoneInventory implements IInventory {
     
     /**
 	 * A custom method to read our inventory from an ItemStack's NBT compound
+     * @param compound 
 	 */
 	public void readFromNBT(NBTTagCompound compound)
 	{
@@ -219,6 +221,7 @@ public class StoneInventory implements IInventory {
 
 	/**
 	 * A custom method to write our inventory to an ItemStack's NBT compound
+	 * @param tagcompound 
 	 */
 	public void writeToNBT(NBTTagCompound tagcompound)
 	{

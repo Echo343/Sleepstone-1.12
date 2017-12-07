@@ -85,7 +85,7 @@ public class ToggleButton extends BasicButton {
 	
 	/**
 	 * Sets the state of the button on or off.
-	 * @param isOn True = on.  False = off.
+	 * @param state True = on.  False = off.
 	 */
 	public void setState(boolean state) {
 		if (state) {
