@@ -18,8 +18,18 @@ import net.minecraftforge.fml.relauncher.Side;
  */
 public class PacketDispatcher {
 	
+	private String modId;
 	private static byte packetId = 0;
 	private static final SimpleNetworkWrapper dispatcher = NetworkRegistry.INSTANCE.newSimpleChannel(ModInfo.ID);
+	
+	public PacketDispatcher(String modId) {
+		this.modId = modId;
+	}
+	
+	public String getModId() {
+		return this.modId;
+	}
+	
 	
 	/**
 	 * Registers an {@link AbstractMessage} to the appropriate side(s)
