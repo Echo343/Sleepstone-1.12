@@ -1,5 +1,7 @@
 package com.blargsworkshop.sleepstone;
 
+import java.util.function.Supplier;
+
 import com.blargsworkshop.sleepstone.proxy.IProxy;
 
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -8,15 +10,15 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public abstract class BlargsMod {
 	
-	protected static BlargsMod instance;
+	protected static Supplier<BlargsMod> getModInstanceFunction;
 	protected abstract IProxy getBlargProxy();
 	
-	public static BlargsMod getModInstance() {
-		return instance;
+	public static BlargsMod getInstance() {
+		return getModInstanceFunction.get();
 	}
 	
 	public static IProxy getProxy() {
-		return instance.getBlargProxy();
+		return getInstance().getBlargProxy();
 	}
 	
 	public abstract void preInit(FMLPreInitializationEvent e);

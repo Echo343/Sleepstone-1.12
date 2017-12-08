@@ -1,14 +1,16 @@
 package com.blargsworkshop.sleepstone;
 
+import java.util.function.Supplier;
+
 import com.blargsworkshop.sleepstone.proxy.IProxy;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
+import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.SidedProxy;
 
 /**
  * Main mod class
@@ -16,8 +18,12 @@ import net.minecraftforge.fml.common.SidedProxy;
 @Mod(modid = ModInfo.ID, name = ModInfo.NAME, version = ModInfo.VERSION, acceptedMinecraftVersions = ModInfo.ACCEPTED_MINECRAFT_VERSIONS)
 public class SleepstoneMod extends BlargsMod {
 
+	private static Supplier<BlargsMod> getModInstanceFunction() {
+		return () -> SleepstoneMod.instance;
+	}
+	
 	public SleepstoneMod() {
-		BlargsMod.instance = instance;
+		BlargsMod.getModInstanceFunction = getModInstanceFunction();
 	}
 	
 	@Instance
@@ -34,7 +40,7 @@ public class SleepstoneMod extends BlargsMod {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent e) {
 		Log.detail("PreInit Start");
-		getProxy().preInit(e);
+		getBlargProxy().preInit(e);
 		Log.detail("PreInit End");
 	}
 
@@ -42,17 +48,15 @@ public class SleepstoneMod extends BlargsMod {
 	public void init(FMLInitializationEvent e) {
 		Log.info("Hi! Hello There! ZZZZZZZZZZZZZZZZZ Sleepstone mod!");
 		Log.detail("Init Start");
-		getProxy().init(e);
+		getBlargProxy().init(e);
 		Log.detail("Init End");
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent e) {
 		Log.detail("PostInit Start");
-		getProxy().postInit(e);
+		getBlargProxy().postInit(e);
 		Log.detail("PostInit End");
 	}
-	
-	
-	
+
 }

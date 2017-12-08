@@ -95,7 +95,7 @@ public abstract class BlargsCommonProxy implements IProxy {
 
 	protected void registerGuiHandlers() {
 		for (IGuiHandler guiHandler : getGuiHandlers()) {
-			NetworkRegistry.INSTANCE.registerGuiHandler(BlargsMod.getModInstance(), guiHandler);
+			NetworkRegistry.INSTANCE.registerGuiHandler(BlargsMod.getInstance(), guiHandler);
 		}
 	}
 }
