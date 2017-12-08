@@ -2,10 +2,12 @@ package com.blargsworkshop.sleepstone.network.bidirectional;
 
 import java.io.IOException;
 
+import com.blargsworkshop.sleepstone.SleepstoneMod;
 import com.blargsworkshop.sleepstone.capabilites.player.AbilityProvider;
 import com.blargsworkshop.sleepstone.capabilites.player.IAbility;
 import com.blargsworkshop.sleepstone.items.stone.Slots;
 import com.blargsworkshop.sleepstone.network.AbstractMessage;
+import com.blargsworkshop.sleepstone.proxy.IProxy;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
@@ -39,6 +41,11 @@ public class SyncPlayerPropMessage extends AbstractMessage<SyncPlayerPropMessage
 	public void process(EntityPlayer player, Side side) {
 		IAbility props = player.getCapability(AbilityProvider.ABILITY_CAPABILITY, null);
 		props.setAbilityWithoutSync(ability, bool);
+	}
+
+	@Override
+	protected IProxy getProxy() {
+		return SleepstoneMod.getProxy();
 	}
 
 }

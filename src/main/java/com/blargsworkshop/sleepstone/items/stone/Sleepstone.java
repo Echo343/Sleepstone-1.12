@@ -44,7 +44,7 @@ public class Sleepstone extends BaseItem {
 		if (hand == EnumHand.MAIN_HAND) {
 			if (cooldownTimer.isItemReadyToUse(player)) {
 				if (!player.isSneaking()) {
-					player.openGui(SleepstoneMod.instance, GuiEnum.STONE.ordinal(), world, (int) player.posX, (int) player.posY, (int) player.posZ);
+					player.openGui(SleepstoneMod.getInstance(), GuiEnum.STONE.ordinal(), world, (int) player.posX, (int) player.posY, (int) player.posZ);
 				}
 				else {
 					if (player.isPotionActive(Potions.warpSickness)) {

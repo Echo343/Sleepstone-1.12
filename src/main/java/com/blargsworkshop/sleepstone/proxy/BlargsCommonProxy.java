@@ -3,7 +3,6 @@ package com.blargsworkshop.sleepstone.proxy;
 import java.util.List;
 import java.util.Map;
 
-import com.blargsworkshop.sleepstone.BlargsMod;
 import com.blargsworkshop.sleepstone.IModItems;
 import com.blargsworkshop.sleepstone.Log;
 import com.blargsworkshop.sleepstone.events.IEventHandler;
@@ -34,6 +33,7 @@ public abstract class BlargsCommonProxy implements IProxy {
 	public abstract void registerPackets();
 	
 	protected abstract Class<? extends IModItems> getModItemClass();
+	protected abstract Object getModInstance();
 	
 	@Override
     public void preInit(FMLPreInitializationEvent e) {
@@ -95,7 +95,7 @@ public abstract class BlargsCommonProxy implements IProxy {
 
 	protected void registerGuiHandlers() {
 		for (IGuiHandler guiHandler : getGuiHandlers()) {
-			NetworkRegistry.INSTANCE.registerGuiHandler(BlargsMod.getInstance(), guiHandler);
+			NetworkRegistry.INSTANCE.registerGuiHandler(getModInstance(), guiHandler);
 		}
 	}
 }

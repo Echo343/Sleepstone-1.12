@@ -2,9 +2,11 @@ package com.blargsworkshop.sleepstone.network.bidirectional;
 
 import java.io.IOException;
 
+import com.blargsworkshop.sleepstone.SleepstoneMod;
 import com.blargsworkshop.sleepstone.capabilites.player.AbilityProvider;
 import com.blargsworkshop.sleepstone.capabilites.player.IAbility;
 import com.blargsworkshop.sleepstone.network.AbstractMessage;
+import com.blargsworkshop.sleepstone.proxy.IProxy;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -39,6 +41,11 @@ public class SyncAllPlayerPropsMessage extends AbstractMessage<SyncAllPlayerProp
 		IStorage<IAbility> storage = AbilityProvider.ABILITY_CAPABILITY.getStorage();
 		IAbility abilities = player.getCapability(AbilityProvider.ABILITY_CAPABILITY, null);
 		storage.readNBT(AbilityProvider.ABILITY_CAPABILITY, abilities, null, data);
+	}
+
+	@Override
+	protected IProxy getProxy() {
+		return SleepstoneMod.getProxy();
 	}
 
 }

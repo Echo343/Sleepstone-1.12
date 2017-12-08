@@ -5,6 +5,7 @@ import java.io.IOException;
 import com.blargsworkshop.sleepstone.SleepstoneMod;
 import com.blargsworkshop.sleepstone.gui.GuiEnum;
 import com.blargsworkshop.sleepstone.network.AbstractMessage.AbstractServerMessage;
+import com.blargsworkshop.sleepstone.proxy.IProxy;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
@@ -35,7 +36,12 @@ public class OpenGuiMessage extends AbstractServerMessage<OpenGuiMessage> {
 
 	@Override
 	public void process(EntityPlayer player, Side side) {
-		player.openGui(SleepstoneMod.instance, this.guiId, player.getEntityWorld(), (int) player.posX, (int) player.posY, (int) player.posZ);
+		player.openGui(SleepstoneMod.getInstance(), this.guiId, player.getEntityWorld(), (int) player.posX, (int) player.posY, (int) player.posZ);
+	}
+
+	@Override
+	protected IProxy getProxy() {
+		return SleepstoneMod.getProxy();
 	}
 
 }

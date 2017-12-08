@@ -2,9 +2,11 @@ package com.blargsworkshop.sleepstone.network.server;
 
 import java.io.IOException;
 
+import com.blargsworkshop.sleepstone.SleepstoneMod;
 import com.blargsworkshop.sleepstone.ModItems.Potions;
 import com.blargsworkshop.sleepstone.items.stone.Sleepstone;
 import com.blargsworkshop.sleepstone.network.AbstractMessage.AbstractServerMessage;
+import com.blargsworkshop.sleepstone.proxy.IProxy;
 import com.blargsworkshop.sleepstone.utility.Utils;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -54,5 +56,10 @@ public class CommandMessage extends AbstractServerMessage<CommandMessage> {
 		else {
 			Sleepstone.warpPlayerToBed(player);
 		}
+	}
+
+	@Override
+	protected IProxy getProxy() {
+		return SleepstoneMod.getProxy();
 	}
 }

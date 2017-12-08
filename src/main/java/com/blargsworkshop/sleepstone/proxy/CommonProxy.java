@@ -8,6 +8,7 @@ import java.util.Map;
 import com.blargsworkshop.sleepstone.IModItems;
 import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.ModItems;
+import com.blargsworkshop.sleepstone.SleepstoneMod;
 import com.blargsworkshop.sleepstone.capabilites.player.Ability;
 import com.blargsworkshop.sleepstone.capabilites.player.AbilityStorage;
 import com.blargsworkshop.sleepstone.capabilites.player.IAbility;
@@ -62,5 +63,10 @@ public class CommonProxy extends BlargsCommonProxy {
 	@Override
 	protected Class<? extends IModItems> getModItemClass() {
 		return ModItems.class;
+	}
+
+	@Override
+	protected Object getModInstance() {
+		return SleepstoneMod.getInstance();
 	}
 }

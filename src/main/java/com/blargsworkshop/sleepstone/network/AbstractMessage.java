@@ -2,7 +2,7 @@ package com.blargsworkshop.sleepstone.network;
 
 import java.io.IOException;
 
-import com.blargsworkshop.sleepstone.BlargsMod;
+import com.blargsworkshop.sleepstone.proxy.IProxy;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
@@ -47,6 +47,8 @@ public abstract class AbstractMessage<T extends AbstractMessage<T>> implements I
 	 * @param side
 	 */
 	public abstract void process(EntityPlayer player, Side side);
+	
+	protected abstract IProxy getProxy();
 	
 	/**
 	 * If message is sent to the wrong side, an exception will be thrown during handling
@@ -98,7 +100,7 @@ public abstract class AbstractMessage<T extends AbstractMessage<T>> implements I
 			checkThreadAndEnqueue(msg, ctx);
 		}
 		else {
-			msg.process(BlargsMod.getProxy().getPlayerEntity(ctx), ctx.side);
+			msg.process(getProxy().getPlayerEntity(ctx), ctx.side);
 		}
 		return null;
 	}
@@ -108,12 +110,12 @@ public abstract class AbstractMessage<T extends AbstractMessage<T>> implements I
 	 * @param msg
 	 * @param ctx
 	 */
-	private static final <T extends AbstractMessage<T>> void checkThreadAndEnqueue(final AbstractMessage<T> msg, final MessageContext ctx) {
-		IThreadListener thread = BlargsMod.getProxy().getThreadFromContext(ctx);
+	private final <K extends AbstractMessage<T>> void checkThreadAndEnqueue(final AbstractMessage<T> msg, final MessageContext ctx) {
+		IThreadListener thread = getProxy().getThreadFromContext(ctx);
 		// pretty much copied straight from vanilla code, see {@link PacketThreadUtil#checkThreadAndEnqueue}
 		thread.addScheduledTask(new Runnable() {
 			public void run() {
-				msg.process(BlargsMod.getProxy().getPlayerEntity(ctx), ctx.side);
+				msg.process(getProxy().getPlayerEntity(ctx), ctx.side);
 			}
 		});
 	}

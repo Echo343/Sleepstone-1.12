@@ -1,7 +1,5 @@
 package com.blargsworkshop.sleepstone;
 
-import java.util.function.Supplier;
-
 import com.blargsworkshop.sleepstone.proxy.IProxy;
 
 import net.minecraftforge.fml.common.Mod;
@@ -18,29 +16,32 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 @Mod(modid = ModInfo.ID, name = ModInfo.NAME, version = ModInfo.VERSION, acceptedMinecraftVersions = ModInfo.ACCEPTED_MINECRAFT_VERSIONS)
 public class SleepstoneMod extends BlargsMod {
 
-	private static Supplier<BlargsMod> getModInstanceFunction() {
-		return () -> SleepstoneMod.instance;
+//	public static Supplier<BlargsMod> getInstanceFunction() {
+//		return () -> SleepstoneMod.instance;
+//	}
+	
+//	public SleepstoneMod() {
+//		BlargsMod.getModInstanceFunction = getModInstanceFunction();
+//	}
+	
+	public static IProxy getProxy() {
+		return proxy;
 	}
 	
-	public SleepstoneMod() {
-		BlargsMod.getModInstanceFunction = getModInstanceFunction();
+	public static SleepstoneMod getInstance() {
+		return instance;
 	}
 	
 	@Instance
-	public static SleepstoneMod instance = new SleepstoneMod();
+	private static SleepstoneMod instance = new SleepstoneMod();
 
 	@SidedProxy(serverSide = ModInfo.COMMON_PROXY, clientSide = ModInfo.CLIENT_PROXY)
-	public static IProxy proxy;
-
-	@Override
-	protected IProxy getBlargProxy() {
-		return proxy;
-	}
+	private static IProxy proxy;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent e) {
 		Log.detail("PreInit Start");
-		getBlargProxy().preInit(e);
+		getProxy().preInit(e);
 		Log.detail("PreInit End");
 	}
 
@@ -48,14 +49,14 @@ public class SleepstoneMod extends BlargsMod {
 	public void init(FMLInitializationEvent e) {
 		Log.info("Hi! Hello There! ZZZZZZZZZZZZZZZZZ Sleepstone mod!");
 		Log.detail("Init Start");
-		getBlargProxy().init(e);
+		getProxy().init(e);
 		Log.detail("Init End");
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent e) {
 		Log.detail("PostInit Start");
-		getBlargProxy().postInit(e);
+		getProxy().postInit(e);
 		Log.detail("PostInit End");
 	}
 
