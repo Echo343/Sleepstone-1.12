@@ -1,11 +1,12 @@
 package com.blargsworkshop.sleepstone.events;
 
-import com.blargsworkshop.sleepstone.Log;
+import com.blargsworkshop.engine.event.IEventHandler;
+import com.blargsworkshop.engine.logger.Log;
+import com.blargsworkshop.engine.utility.Utils;
 import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.capabilites.player.AbilityProvider;
 import com.blargsworkshop.sleepstone.capabilites.player.IAbility;
 import com.blargsworkshop.sleepstone.items.stone.Slots;
-import com.blargsworkshop.sleepstone.utility.Utils;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;

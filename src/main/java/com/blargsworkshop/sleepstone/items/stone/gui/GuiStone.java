@@ -4,19 +4,19 @@ import java.io.IOException;
 
 import org.lwjgl.opengl.GL11;
 
-import com.blargsworkshop.sleepstone.Log;
+import com.blargsworkshop.engine.gui.buttons.BasicButton;
+import com.blargsworkshop.engine.gui.buttons.ToggleButton;
+import com.blargsworkshop.engine.gui.buttons.TooltipButton;
+import com.blargsworkshop.engine.logger.Log;
+import com.blargsworkshop.engine.network.NetworkOverlord;
+import com.blargsworkshop.engine.utility.Utils;
 import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.capabilites.player.AbilityProvider;
 import com.blargsworkshop.sleepstone.capabilites.player.IAbility;
 import com.blargsworkshop.sleepstone.gui.GuiEnum;
-import com.blargsworkshop.sleepstone.gui.buttons.BasicButton;
-import com.blargsworkshop.sleepstone.gui.buttons.ToggleButton;
-import com.blargsworkshop.sleepstone.gui.buttons.TooltipButton;
 import com.blargsworkshop.sleepstone.items.stone.Slots;
 import com.blargsworkshop.sleepstone.items.stone.container.StoneInventory;
-import com.blargsworkshop.sleepstone.network.NetworkOverlord;
-import com.blargsworkshop.sleepstone.network.server.OpenGuiMessage;
-import com.blargsworkshop.sleepstone.utility.Utils;
+import com.blargsworkshop.sleepstone.network.packets.toserver.OpenGuiMessage;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;

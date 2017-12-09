@@ -4,17 +4,17 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
-import com.blargsworkshop.sleepstone.Log;
+import com.blargsworkshop.engine.logger.Log;
+import com.blargsworkshop.engine.network.NetworkOverlord;
+import com.blargsworkshop.engine.network.PacketDispatcher;
+import com.blargsworkshop.engine.utility.Utils;
 import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.ModItems;
 import com.blargsworkshop.sleepstone.items.stone.Slots;
 import com.blargsworkshop.sleepstone.items.stone.container.StoneInventory;
-import com.blargsworkshop.sleepstone.network.NetworkOverlord;
-import com.blargsworkshop.sleepstone.network.PacketDispatcher;
-import com.blargsworkshop.sleepstone.network.bidirectional.SyncAllPlayerPropsMessage;
-import com.blargsworkshop.sleepstone.network.bidirectional.SyncPlayerBondedIdMessage;
-import com.blargsworkshop.sleepstone.network.bidirectional.SyncPlayerPropMessage;
-import com.blargsworkshop.sleepstone.utility.Utils;
+import com.blargsworkshop.sleepstone.network.packets.bidirectional.SyncAllPlayerPropsMessage;
+import com.blargsworkshop.sleepstone.network.packets.bidirectional.SyncPlayerBondedIdMessage;
+import com.blargsworkshop.sleepstone.network.packets.bidirectional.SyncPlayerPropMessage;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;

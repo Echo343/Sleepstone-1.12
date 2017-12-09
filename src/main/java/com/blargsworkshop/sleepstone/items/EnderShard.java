@@ -1,10 +1,10 @@
 package com.blargsworkshop.sleepstone.items;
 
-import com.blargsworkshop.sleepstone.Log;
-import com.blargsworkshop.sleepstone.Log.LogLevel;
+import com.blargsworkshop.engine.logger.Log;
+import com.blargsworkshop.engine.logger.Log.LogLevel;
+import com.blargsworkshop.engine.utility.Utils;
 import com.blargsworkshop.sleepstone.ModItems.Potions;
-import com.blargsworkshop.sleepstone.potions.EnderShardPotionEffect;
-import com.blargsworkshop.sleepstone.utility.Utils;
+import com.blargsworkshop.sleepstone.potion.EnderShardPotionEffect;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,7 +15,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 
-public class EnderShard extends BaseItem {
+public class EnderShard extends BaseModItem {
 	private static final int ENDERWARP_CHANNEL_DURATION = Log.compare(LogLevel.DEBUG) ? 20 * 4 : 20 * 10;
 	private static final String UNLOCALIZED_NAME = "endershard";
 	private static final String REGISTRY_NAME = "endershard";

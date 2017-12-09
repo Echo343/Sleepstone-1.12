@@ -3,16 +3,16 @@ package com.blargsworkshop.sleepstone.items.stone;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.blargsworkshop.sleepstone.Log;
 import com.blargsworkshop.sleepstone.ModItems.Potions;
 import com.blargsworkshop.sleepstone.ModItems.Sounds;
+import com.blargsworkshop.engine.logger.Log;
+import com.blargsworkshop.engine.sound.SoundManager;
+import com.blargsworkshop.engine.utility.SimpleTeleporter;
+import com.blargsworkshop.engine.utility.Utils;
 import com.blargsworkshop.sleepstone.SleepstoneMod;
 import com.blargsworkshop.sleepstone.gui.GuiEnum;
-import com.blargsworkshop.sleepstone.items.BaseItem;
-import com.blargsworkshop.sleepstone.potions.WarpSicknessPotionEffect;
-import com.blargsworkshop.sleepstone.sound.SoundManager;
-import com.blargsworkshop.sleepstone.utility.SimpleTeleporter;
-import com.blargsworkshop.sleepstone.utility.Utils;
+import com.blargsworkshop.sleepstone.items.BaseModItem;
+import com.blargsworkshop.sleepstone.potion.WarpSicknessPotionEffect;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -25,7 +25,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class Sleepstone extends BaseItem {
+public class Sleepstone extends BaseModItem {
 	
 	private static final int WARP_CHANNEL_DURATION = 20 * 4;
 	private static final String UNLOCALIZED_NAME = "basicsleepstone";

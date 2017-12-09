@@ -3,16 +3,16 @@ package com.blargsworkshop.sleepstone.items.gems.mats;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.blargsworkshop.engine.item.ISubtypable;
 import com.blargsworkshop.sleepstone.ModInfo;
-import com.blargsworkshop.sleepstone.items.BaseItem;
-import com.blargsworkshop.sleepstone.items.ISubtypable;
+import com.blargsworkshop.sleepstone.items.BaseModItem;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 
-public abstract class BaseCraftable extends BaseItem implements ISubtypable {
+public abstract class BaseCraftable extends BaseModItem implements ISubtypable {
 	private final int NUMBER_OF_CRAFTABLES;
 	private final String REGISTRY_NAME;
 	

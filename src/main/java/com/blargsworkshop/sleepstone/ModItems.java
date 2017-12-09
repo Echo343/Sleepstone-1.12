@@ -1,11 +1,16 @@
 package com.blargsworkshop.sleepstone;
 
-import com.blargsworkshop.sleepstone.annotations.ModItem;
-import com.blargsworkshop.sleepstone.annotations.ModPotion;
-import com.blargsworkshop.sleepstone.annotations.ModRecipe;
-import com.blargsworkshop.sleepstone.annotations.ModSound;
-import com.blargsworkshop.sleepstone.annotations.ModSprite;
-import com.blargsworkshop.sleepstone.events.RegisterModComponents;
+import com.blargsworkshop.engine.IModItems;
+import com.blargsworkshop.engine.annotations.ModItem;
+import com.blargsworkshop.engine.annotations.ModPotion;
+import com.blargsworkshop.engine.annotations.ModRecipe;
+import com.blargsworkshop.engine.annotations.ModSound;
+import com.blargsworkshop.engine.annotations.ModSprite;
+import com.blargsworkshop.engine.event.RegisterModComponents;
+import com.blargsworkshop.engine.potion.BlargsPotion;
+import com.blargsworkshop.engine.recipe.IBlargRecipe;
+import com.blargsworkshop.engine.recipe.SmeltingRecipe;
+import com.blargsworkshop.engine.sound.BlargsSoundEvent;
 import com.blargsworkshop.sleepstone.items.EnderShard;
 import com.blargsworkshop.sleepstone.items.gems.EtherealGem;
 import com.blargsworkshop.sleepstone.items.gems.FireGem;
@@ -17,8 +22,6 @@ import com.blargsworkshop.sleepstone.items.gems.TimeSpaceGem;
 import com.blargsworkshop.sleepstone.items.gems.mats.PathfinderCraftable;
 import com.blargsworkshop.sleepstone.items.gems.mats.StoneCraftable;
 import com.blargsworkshop.sleepstone.items.stone.Sleepstone;
-import com.blargsworkshop.sleepstone.potions.BlargsPotion;
-import com.blargsworkshop.sleepstone.sound.BlargsSoundEvent;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;

@@ -2,10 +2,10 @@ package com.blargsworkshop.sleepstone.items.stone.gui;
 
 import org.lwjgl.opengl.GL11;
 
+import com.blargsworkshop.engine.utility.Utils;
 import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.items.stone.container.StoneContainer;
 import com.blargsworkshop.sleepstone.items.stone.container.StoneInventory;
-import com.blargsworkshop.sleepstone.utility.Utils;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.util.ResourceLocation;

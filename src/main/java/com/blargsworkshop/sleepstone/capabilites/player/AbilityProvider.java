@@ -1,6 +1,6 @@
 package com.blargsworkshop.sleepstone.capabilites.player;
 
-import com.blargsworkshop.sleepstone.Log;
+import com.blargsworkshop.engine.logger.Log;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTBase;

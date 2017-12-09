@@ -1,12 +1,12 @@
 package com.blargsworkshop.sleepstone.gui;
 
+import com.blargsworkshop.engine.utility.Utils;
 import com.blargsworkshop.sleepstone.capabilites.player.AbilityProvider;
 import com.blargsworkshop.sleepstone.capabilites.player.IAbility;
 import com.blargsworkshop.sleepstone.items.stone.container.StoneContainer;
 import com.blargsworkshop.sleepstone.items.stone.container.StoneInventory;
 import com.blargsworkshop.sleepstone.items.stone.gui.GuiStone;
 import com.blargsworkshop.sleepstone.items.stone.gui.GuiStoneInventory;
-import com.blargsworkshop.sleepstone.utility.Utils;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;

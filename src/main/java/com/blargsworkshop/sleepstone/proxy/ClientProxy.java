@@ -1,6 +1,8 @@
 package com.blargsworkshop.sleepstone.proxy;
 
-import com.blargsworkshop.sleepstone.IModItems;
+import com.blargsworkshop.engine.IModItems;
+import com.blargsworkshop.engine.proxy.BlargsClientProxy;
+import com.blargsworkshop.engine.proxy.BlargsCommonProxy;
 import com.blargsworkshop.sleepstone.ModItems;
 
 public class ClientProxy extends BlargsClientProxy {
