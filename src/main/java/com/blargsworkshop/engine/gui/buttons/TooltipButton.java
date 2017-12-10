@@ -54,7 +54,7 @@ public abstract class TooltipButton extends GuiButton {
 	 * @param text localized text for the tooltip.
 	 */
 	public void setToolTip(String text) {
-		if (toolTip != null && !toolTip.trim().equals("")) {
+		if (text != null && !text.trim().equals("")) {
 			toolTip = text;
 			hasTooltip = true;
 		}
@@ -116,7 +116,7 @@ public abstract class TooltipButton extends GuiButton {
 	 */
 	public void drawTooltip(Minecraft mc, int mouseX, int mouseY)
 	{
-		if (!shouldDrawTooltip ) {
+		if (!shouldDrawTooltip) {
 			return;
 		}
 		FontRenderer fontRenderer = mc.fontRenderer;
