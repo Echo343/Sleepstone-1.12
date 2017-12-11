@@ -4,33 +4,32 @@ import java.io.IOException;
 
 import com.blargsworkshop.engine.network.AbstractMessage.AbstractServerMessage;
 import com.blargsworkshop.engine.proxy.IProxy;
-import com.blargsworkshop.engine.utility.Utils;
 import com.blargsworkshop.sleepstone.SleepstoneMod;
-import com.blargsworkshop.sleepstone.ModItems.Potions;
-import com.blargsworkshop.sleepstone.items.stone.Sleepstone;
 
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.relauncher.Side;
 
 public class CommandMessage extends AbstractServerMessage<CommandMessage> {
 
-	public static enum Commands {
-		Warp
+	public static enum Command {
+		ROCKWALL
 	}
 	
-	private Commands command;
+	private Command command;
 	
 	public CommandMessage() {}
 	
-	public CommandMessage(Commands commandEnum) {
+	public CommandMessage(Command commandEnum) {
 		this.command = commandEnum;
 	}
 
 	@Override
 	protected void read(PacketBuffer buffer) throws IOException {
-		command = Commands.values()[buffer.readInt()];
+		command = Command.values()[buffer.readInt()];
 	}
 
 	@Override
@@ -41,23 +40,20 @@ public class CommandMessage extends AbstractServerMessage<CommandMessage> {
 	@Override
 	public void process(EntityPlayer player, Side side) {
 		switch (command) {
-		case Warp:
-			warp((EntityPlayerMP) player);
+		case ROCKWALL:
+			yo((EntityPlayerMP) player);
 			break;
 		default:
 			break;
 		}
 	}
 	
-	private void warp(EntityPlayerMP player) {
-		if (player.isPotionActive(Potions.warpSickness)) {
-			Utils.addChatMessage(player, "text.sleepstone.suffering_effects_of_warping");
-		}
-		else {
-			Sleepstone.warpPlayerToBed(player);
+	private static void yo(EntityPlayerMP player) {
+		if (player.getEntityWorld().getBlockState(player.getPosition().north(2)).getMaterial().equals(Material.AIR)) {
+			player.getEntityWorld().setBlockState(player.getPosition().north(2), Blocks.STONE.getDefaultState());
 		}
 	}
-
+	
 	@Override
 	protected IProxy getProxy() {
 		return SleepstoneMod.getProxy();

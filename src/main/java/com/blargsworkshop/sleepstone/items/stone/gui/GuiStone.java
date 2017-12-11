@@ -16,6 +16,8 @@ import com.blargsworkshop.sleepstone.capabilites.player.IAbility;
 import com.blargsworkshop.sleepstone.gui.GuiEnum;
 import com.blargsworkshop.sleepstone.items.stone.Slots;
 import com.blargsworkshop.sleepstone.items.stone.container.StoneInventory;
+import com.blargsworkshop.sleepstone.network.packets.toserver.CommandMessage;
+import com.blargsworkshop.sleepstone.network.packets.toserver.CommandMessage.Command;
 import com.blargsworkshop.sleepstone.network.packets.toserver.OpenGuiMessage;
 
 import net.minecraft.client.gui.GuiButton;
@@ -111,8 +113,8 @@ public class GuiStone extends GuiScreen {
 			this.buttonList.add(button);
 		}
 		if (inventory.hasGemInSlot(Slots.StoneGuardian)) {
-			ToggleButton button = new ToggleButton(Buttons.StoneGuardian, firstColumn, thirdRow, Utils.localize("text.guistone.stone_guardian_button"), Utils.localize("text.guistone.stone_guardian_tooltip"));
-			button.setState(props.getAbility(Buttons.StoneGuardian.getSlot()));
+			BasicButton button = new BasicButton(Buttons.StoneGuardian, firstColumn, thirdRow, Utils.localize("text.guistone.stone_guardian_button"), Utils.localize("text.guistone.stone_guardian_tooltip"));
+//			button.setState(props.getAbility(Buttons.StoneGuardian.getSlot()));
 			this.buttonList.add(button);
 		}
 		if (inventory.hasGemInSlot(Slots.StoneFire)) {
@@ -191,9 +193,12 @@ public class GuiStone extends GuiScreen {
 		case Inv:
 			NetworkOverlord.get(ModInfo.ID).sendToServer(new OpenGuiMessage(GuiEnum.STONE_INVENTORY));
 			break;
+		case StoneGuardian:
+			NetworkOverlord.get(ModInfo.ID).sendToServer(new CommandMessage(Command.ROCKWALL));
+			player.closeScreen();
+			break;
 		case NoFallDmg:
 		case StoneEthereal:
-		case StoneGuardian:
 		case StoneFire:
 		case Pathfinder:
 		case PathfinderEthereal:
