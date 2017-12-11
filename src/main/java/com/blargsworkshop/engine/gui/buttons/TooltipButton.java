@@ -25,7 +25,7 @@ public abstract class TooltipButton extends GuiButton {
 	private int tooltipMaxWidth = 150;
 	
 	/** Putting this string into a tooltip will cause a line break */
-    private String tooltipNewlineDelimeter = "_p"; //"§p";	//the "§" symbol doesn't seem to work
+    private static final String tooltipNewlineDelimeter = "_p"; //"§p";	//the "§" symbol doesn't seem to work
 	
 	private int tooltipXOffset = 0;
 	private int tooltipYOffset = 10;
