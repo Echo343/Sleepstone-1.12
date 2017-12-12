@@ -2,17 +2,20 @@ package com.blargsworkshop.engine.gui.buttons;
 
 import java.util.ArrayList;
 
+import com.blargsworkshop.engine.gui.IDrawable;
+import com.blargsworkshop.engine.gui.buttons.BasicButton.HoverState;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.Gui;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public abstract class TooltipButton extends GuiButton {
+public class Tooltip extends Gui implements IDrawable {
 	private static final String TOOLTIP_CHAR = "?";
-	private final static int LINE_HEIGHT = 11;
+	private static final int LINE_HEIGHT = 11;
 	private long mouseoverTime = 0;
 	private long prevSystemTime = 0;
 	private long systemTime;
@@ -33,20 +36,17 @@ public abstract class TooltipButton extends GuiButton {
 	private int indicatorMouseOverColor = 0xFFFFFF;
 	private boolean shouldDrawTooltip = false;
 	private boolean hasTooltip = false;
+	
+	private BasicButton button;
 
-	public TooltipButton(int id, int left, int top, int width, int height, String text) {
-		super(id, left, top, width, height, text);
+	public Tooltip(BasicButton button, String tooltipText) {
+		this.setButton(button);
+		this.setToolTip(tooltipText);
 	}
-	
-	public TooltipButton(int id, int left, int top, int width, int height, String displayText, String tooltip) {
-		super(id, left, top, width, height, displayText);
-		this.setToolTip(tooltip);
+		
+	public void setButton(BasicButton button) {
+		this.button = button;
 	}
-	
-	public TooltipButton(int id, int left, int top, String text)
-    {
-        super(id, left, top, 200, 20, text);
-    }
 	
 	/**
 	 * Sets a tooltip.  If a tooltip is present the button will automatically
@@ -77,15 +77,20 @@ public abstract class TooltipButton extends GuiButton {
 	 * @return true if mousedOver, false if disable or not mousedOver.
 	 */
 	protected boolean isButtonMouseOver() {
-		if (this.getHoverState(this.hovered) == 2) {
+		if (button.getHoverState() == HoverState.HOVER) {
 			return true;
 		}
 		return false;
 	}
-	
-	@Override
-	public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
-		super.drawButton(mc, mouseX, mouseY, partialTicks);
+		
+	/**
+	 * Renders a tooltip at (x,y).
+	 * @param mc Minecraft object
+	 * @param mouseX
+	 * @param mouseY
+	 */
+	public void draw(Minecraft mc, int mouseX, int mouseY)
+	{
 		if (hasToolTip()) {
 			if (isButtonMouseOver()) {
 				renderTooltipButtonMouseoverEffect(mc.fontRenderer);
@@ -106,16 +111,7 @@ public abstract class TooltipButton extends GuiButton {
 				shouldDrawTooltip = true;
 			}
 		}
-	}
-	
-	/**
-	 * Renders a tooltip at (x,y).
-	 * @param mc Minecraft object
-	 * @param mouseX
-	 * @param mouseY
-	 */
-	public void drawTooltip(Minecraft mc, int mouseX, int mouseY)
-	{
+		
 		if (!shouldDrawTooltip) {
 			return;
 		}
@@ -255,11 +251,11 @@ public abstract class TooltipButton extends GuiButton {
 	}
 
 	protected int getIndicatorYPos() {
-		return this.y + 1;
+		return button.y + 1;
 	}
 	
 	protected int getIndicatorXPos() {
-		return this.x + this.getButtonWidth() - 6;
+		return button.x + button.getButtonWidth() - 6;
 	}
 
 	public int getIndicatorColor() {

@@ -17,14 +17,6 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
  */
 @Mod(modid = ModInfo.ID, name = ModInfo.NAME, version = ModInfo.VERSION, acceptedMinecraftVersions = ModInfo.ACCEPTED_MINECRAFT_VERSIONS)
 public class SleepstoneMod implements IBlargsMod {
-
-//	public static Supplier<BlargsMod> getInstanceFunction() {
-//		return () -> SleepstoneMod.instance;
-//	}
-	
-//	public SleepstoneMod() {
-//		BlargsMod.getModInstanceFunction = getModInstanceFunction();
-//	}
 	
 	public static IProxy getProxy() {
 		return proxy;
