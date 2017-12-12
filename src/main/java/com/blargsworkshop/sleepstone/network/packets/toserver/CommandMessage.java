@@ -5,11 +5,10 @@ import java.io.IOException;
 import com.blargsworkshop.engine.network.AbstractMessage.AbstractServerMessage;
 import com.blargsworkshop.engine.proxy.IProxy;
 import com.blargsworkshop.sleepstone.SleepstoneMod;
+import com.blargsworkshop.sleepstone.abilities.RockWall;
 
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.relauncher.Side;
 
@@ -41,19 +40,14 @@ public class CommandMessage extends AbstractServerMessage<CommandMessage> {
 	public void process(EntityPlayer player, Side side) {
 		switch (command) {
 		case ROCKWALL:
-			yo((EntityPlayerMP) player);
+			RockWall rockwall = new RockWall();
+			rockwall.generate((EntityPlayerMP) player);
 			break;
 		default:
 			break;
 		}
 	}
-	
-	private static void yo(EntityPlayerMP player) {
-		if (player.getEntityWorld().getBlockState(player.getPosition().north(2)).getMaterial().equals(Material.AIR)) {
-			player.getEntityWorld().setBlockState(player.getPosition().north(2), Blocks.STONE.getDefaultState());
-		}
-	}
-	
+		
 	@Override
 	protected IProxy getProxy() {
 		return SleepstoneMod.getProxy();
