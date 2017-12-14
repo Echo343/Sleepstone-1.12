@@ -18,15 +18,13 @@ public class FMLEventHandler implements IEventHandler {
 
 	@SubscribeEvent
 	public void onPlayerTickEvent(PlayerTickEvent e) {
-		if (tick.addAndGet(1) % 50 != 0) {
+		if (e.phase != Phase.END || tick.addAndGet(1) % 50 != 0) {
 			return;
 		}
 		
 		tick.set(0);
-		if (e.phase == Phase.END) {
-			if (e.player.getCapability(AbilityProvider.ABILITY_CAPABILITY, null).isAbilityAvailable(Slots.Pathfinder)) {
-				e.player.addPotionEffect(new BlargsPotionEffect(Potions.foodSaturation, 3*20));
-			}
+		if (e.player.getCapability(AbilityProvider.ABILITY_CAPABILITY, null).isAbilityAvailable(Slots.Pathfinder)) {
+			e.player.addPotionEffect(new BlargsPotionEffect(Potions.foodSaturation, 3 * 20));
 		}
 	}
 }

@@ -1,7 +1,5 @@
 package com.blargsworkshop.sleepstone.potion.potions;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 import com.blargsworkshop.engine.logger.Log;
 import com.blargsworkshop.engine.potion.BlargsPotion;
 
@@ -12,9 +10,9 @@ import net.minecraft.util.ResourceLocation;
 
 public class FoodSaturationPotion extends BlargsPotion {
 
-	private static final float foodSaturationModifier = 0.01f;
+	private static final float foodSaturationModifier = 0.15f;
 	private static final int updateDuration = 20 * 10;
-	private static AtomicInteger tick = new AtomicInteger();
+	private int tick = 0;
 
 	public FoodSaturationPotion(ResourceLocation registryName, String messageKey) {
 		super(registryName, messageKey);
@@ -34,8 +32,8 @@ public class FoodSaturationPotion extends BlargsPotion {
 	
 	@Override
 	public boolean isReady(int duration, int amplifier) {
-		if (tick.addAndGet(1) % updateDuration == 0) {
-			tick.set(0);
+		if (++tick % updateDuration == 0) {
+			tick = 0;
 			return true;
 		}
 		return false;
