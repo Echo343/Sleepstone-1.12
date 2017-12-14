@@ -20,7 +20,7 @@ public class RockWall {
 			for (BlockPos shapeFragment : shape) {
 				BlockPos p = playerPosition.add(shapeFragment.getX(), y, shapeFragment.getZ());
 				if (world.getBlockState(p).getMaterial().equals(Material.AIR)) {
-					world.setBlockState(p, Blocks.COBBLESTONE.getDefaultState());
+					world.setBlockState(p, Blocks.DIRT.getDefaultState());
 				}
 			}
 		}
