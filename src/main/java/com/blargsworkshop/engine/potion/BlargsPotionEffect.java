@@ -4,7 +4,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 
-public abstract class BlargsPotionEffect extends PotionEffect {
+public class BlargsPotionEffect extends PotionEffect {
 
 	public BlargsPotionEffect(PotionEffect potionEffect) {
 		super(potionEffect);

@@ -83,7 +83,6 @@ public abstract class BlargsCommonProxy implements IProxy {
 				MinecraftForge.EVENT_BUS.register(handler);
 				break;
 			case FML:
-				// Untested
 		    	FMLCommonHandler.instance().bus().register(handler);
 				break;
 			default:

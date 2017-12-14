@@ -16,6 +16,7 @@ import com.blargsworkshop.sleepstone.SleepstoneMod;
 import com.blargsworkshop.sleepstone.capabilites.player.Ability;
 import com.blargsworkshop.sleepstone.capabilites.player.AbilityStorage;
 import com.blargsworkshop.sleepstone.capabilites.player.IAbility;
+import com.blargsworkshop.sleepstone.events.FMLEventHandler;
 import com.blargsworkshop.sleepstone.events.MainEventHandler;
 import com.blargsworkshop.sleepstone.gui.GuiHandler;
 import com.blargsworkshop.sleepstone.network.packets.bidirectional.SyncAllPlayerPropsMessage;
@@ -37,7 +38,7 @@ public class CommonProxy extends BlargsCommonProxy {
 	public Map<EventHandlerType, IEventHandler> getEventHandlers() {
 		Map<EventHandlerType, IEventHandler> handlers = new HashMap<>();
 		handlers.put(EventHandlerType.FORGE, new MainEventHandler());
-//		handlers.put(EventHandlerType.FML, new FMLEventHandler());
+		handlers.put(EventHandlerType.FML, new FMLEventHandler());
 		return handlers;
 	}
 	

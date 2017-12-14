@@ -1,4 +1,4 @@
-package com.blargsworkshop.sleepstone.potion;
+package com.blargsworkshop.sleepstone.potion.potioneffects;
 
 import com.blargsworkshop.engine.logger.Log;
 import com.blargsworkshop.engine.potion.BlargsPotionEffect;

@@ -12,7 +12,7 @@ import com.blargsworkshop.engine.utility.Utils;
 import com.blargsworkshop.sleepstone.SleepstoneMod;
 import com.blargsworkshop.sleepstone.gui.GuiEnum;
 import com.blargsworkshop.sleepstone.items.BaseModItem;
-import com.blargsworkshop.sleepstone.potion.WarpSicknessPotionEffect;
+import com.blargsworkshop.sleepstone.potion.potioneffects.WarpSicknessPotionEffect;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;

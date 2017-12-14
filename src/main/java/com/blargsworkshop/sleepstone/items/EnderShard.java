@@ -4,7 +4,7 @@ import com.blargsworkshop.engine.logger.Log;
 import com.blargsworkshop.engine.logger.Log.LogLevel;
 import com.blargsworkshop.engine.utility.Utils;
 import com.blargsworkshop.sleepstone.ModItems.Potions;
-import com.blargsworkshop.sleepstone.potion.EnderShardPotionEffect;
+import com.blargsworkshop.sleepstone.potion.potioneffects.EnderShardPotionEffect;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
