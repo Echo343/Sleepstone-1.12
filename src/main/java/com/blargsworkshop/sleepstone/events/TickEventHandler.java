@@ -1,7 +1,5 @@
 package com.blargsworkshop.sleepstone.events;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 import com.blargsworkshop.engine.event.IEventHandler;
 import com.blargsworkshop.engine.potion.BlargsPotionEffect;
 import com.blargsworkshop.sleepstone.ModItems.Potions;
@@ -12,19 +10,19 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 
-public class FMLEventHandler implements IEventHandler {
+public class TickEventHandler implements IEventHandler {
 	
-	private static AtomicInteger tick = new AtomicInteger();
-
+	private static final int CHECK_RATE = 50;
+	private static final int REFRESH_DURATION = CHECK_RATE + 30;
+	
 	@SubscribeEvent
 	public void onPlayerTickEvent(PlayerTickEvent e) {
-		if (e.phase != Phase.END || tick.addAndGet(1) % 50 != 0) {
+		if (e.phase != Phase.END || e.player.ticksExisted % CHECK_RATE != 0) {
 			return;
 		}
 		
-		tick.set(0);
 		if (e.player.getCapability(AbilityProvider.ABILITY_CAPABILITY, null).isAbilityAvailable(Slots.Pathfinder)) {
-			e.player.addPotionEffect(new BlargsPotionEffect(Potions.foodSaturation, 3 * 20));
+			e.player.addPotionEffect(new BlargsPotionEffect(Potions.foodSaturation, REFRESH_DURATION, 0, true, true));
 		}
 	}
 }

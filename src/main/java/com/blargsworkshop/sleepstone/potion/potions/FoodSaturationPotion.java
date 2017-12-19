@@ -12,7 +12,6 @@ public class FoodSaturationPotion extends BlargsPotion {
 
 	private static final float foodSaturationModifier = 0.15f;
 	private static final int updateDuration = 20 * 10;
-	private int tick = 0;
 
 	public FoodSaturationPotion(ResourceLocation registryName, String messageKey) {
 		super(registryName, messageKey);
@@ -20,7 +19,8 @@ public class FoodSaturationPotion extends BlargsPotion {
 	
 	@Override
 	public void performEffect(EntityLivingBase entity, int amplifier) {
-		if (entity instanceof EntityPlayer) {
+		// ticksExisted is used bc this potion is applied at infinite duration.
+		if (entity instanceof EntityPlayer && entity.ticksExisted % updateDuration == 0) {
 			if (amplifier == 0) {
 				amplifier = 1;
 			}
@@ -32,11 +32,7 @@ public class FoodSaturationPotion extends BlargsPotion {
 	
 	@Override
 	public boolean isReady(int duration, int amplifier) {
-		if (++tick % updateDuration == 0) {
-			tick = 0;
-			return true;
-		}
-		return false;
+		return true;
 	}
 
 }
