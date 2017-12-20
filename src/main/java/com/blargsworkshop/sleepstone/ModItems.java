@@ -22,6 +22,7 @@ import com.blargsworkshop.sleepstone.items.gems.TimeSpaceGem;
 import com.blargsworkshop.sleepstone.items.gems.mats.PathfinderCraftable;
 import com.blargsworkshop.sleepstone.items.gems.mats.StoneCraftable;
 import com.blargsworkshop.sleepstone.items.stone.Sleepstone;
+import com.blargsworkshop.sleepstone.potion.potions.ChronowalkPotion;
 import com.blargsworkshop.sleepstone.potion.potions.FoodSaturationPotion;
 
 import net.minecraft.creativetab.CreativeTabs;
@@ -65,6 +66,7 @@ public class ModItems implements IModItems{
 		public static BlargsPotion warpSickness = new BlargsPotion(new ResourceLocation(ModInfo.ID, "warpsickness"), "potion.warpingsickness");
 		public static BlargsPotion enderShardWarp = new BlargsPotion(new ResourceLocation(ModInfo.ID, "endershard"), "potion.endershard");
 		public static BlargsPotion foodSaturation = new FoodSaturationPotion(new ResourceLocation(ModInfo.ID, "foodsaturation"), "potion.foodsaturation");
+		public static BlargsPotion chronowalker = new ChronowalkPotion(new ResourceLocation(ModInfo.ID, "chronowalker"), "potion.chronowalker");
 	}
 	
 	@ModSound

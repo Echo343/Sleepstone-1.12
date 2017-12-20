@@ -5,6 +5,7 @@ import com.blargsworkshop.engine.potion.BlargsPotionEffect;
 import com.blargsworkshop.sleepstone.ModItems.Potions;
 import com.blargsworkshop.sleepstone.capabilites.player.AbilityProvider;
 import com.blargsworkshop.sleepstone.items.stone.Slots;
+import com.blargsworkshop.sleepstone.potion.potioneffects.ChronowalkPotionEffect;
 
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
@@ -21,8 +22,14 @@ public class TickEventHandler implements IEventHandler {
 			return;
 		}
 		
+		// Pathfinder
 		if (e.player.getCapability(AbilityProvider.ABILITY_CAPABILITY, null).isAbilityAvailable(Slots.Pathfinder)) {
 			e.player.addPotionEffect(new BlargsPotionEffect(Potions.foodSaturation, REFRESH_DURATION, 0, true, true));
+		}
+		
+		// Time & Space
+		if (e.player.getCapability(AbilityProvider.ABILITY_CAPABILITY, null).isAbilityAvailable(Slots.TimeSpace)) {
+			e.player.addPotionEffect(new ChronowalkPotionEffect(REFRESH_DURATION));
 		}
 	}
 }

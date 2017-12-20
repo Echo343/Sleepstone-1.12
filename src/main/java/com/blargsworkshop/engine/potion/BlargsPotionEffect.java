@@ -32,11 +32,12 @@ public class BlargsPotionEffect extends PotionEffect {
 	
 	@Override
 	public boolean onUpdate(EntityLivingBase entity) {
+		boolean isStillGoing = super.onUpdate(entity);
 		// Potion Effect is about to end.  Do something cool.
-		if (this.getDuration() == 1) {
+		if (!isStillGoing) {
 			onFinishedPotionEffect(entity);
 		}
-		return super.onUpdate(entity);
+		return isStillGoing;
 	}
 
 	/**
