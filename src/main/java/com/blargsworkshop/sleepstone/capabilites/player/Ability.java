@@ -148,9 +148,9 @@ public class Ability implements IAbility {
 			hasGems = stoneInv.hasGemInSlot(slot);
 		}
 		
-		if (!doesPlayer) Log.info(slot.name() + " is turned off by the player", player);
-		if (!hasStone) Log.info("Attuned sleepstone was not found in inventory", player);
-		if (hasStone && !hasGems) Log.info("The sleepstone lacks the neccessary gem(s): " + slot.name(), player);
+//		if (!doesPlayer) Log.info(slot.name() + " is turned off by the player", player);
+//		if (!hasStone) Log.info("Attuned sleepstone was not found in inventory", player);
+//		if (hasStone && !hasGems) Log.info("The sleepstone lacks the neccessary gem(s): " + slot.name(), player);
     	
 		return doesPlayer && hasStone && hasGems;
 	}

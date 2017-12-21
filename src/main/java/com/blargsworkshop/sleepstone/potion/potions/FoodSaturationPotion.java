@@ -2,6 +2,7 @@ package com.blargsworkshop.sleepstone.potion.potions;
 
 import com.blargsworkshop.engine.logger.Log;
 import com.blargsworkshop.engine.potion.BlargsPotion;
+import com.blargsworkshop.engine.utility.Utils;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,7 +28,9 @@ public class FoodSaturationPotion extends BlargsPotion {
 			}
 			FoodStats foodStats = ((EntityPlayer) entity).getFoodStats();
 			foodStats.setFoodSaturationLevel(Math.min(foodStats.getSaturationLevel() + foodSaturationModifier * amplifier, (float) foodStats.getFoodLevel()));
-			Log.detail("Food Saturation: " + foodStats.getSaturationLevel(), (EntityPlayer) entity);
+			if (Utils.isServer(entity.getEntityWorld())) {
+				Log.detail("Food Saturation: " + foodStats.getSaturationLevel(), (EntityPlayer) entity);
+			}
 		}
 	}
 	

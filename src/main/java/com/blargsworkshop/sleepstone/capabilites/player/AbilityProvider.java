@@ -1,7 +1,5 @@
 package com.blargsworkshop.sleepstone.capabilites.player;
 
-import com.blargsworkshop.engine.logger.Log;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;
@@ -28,9 +26,6 @@ public class AbilityProvider implements ICapabilitySerializable<NBTBase> {
 
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
-		if (capability == ABILITY_CAPABILITY) {
-			Log.detail("getCapability - Sleepstone Ability");
-		}
 		return capability == ABILITY_CAPABILITY ? ABILITY_CAPABILITY.<T> cast(this.instance) : null;
 	}
 

@@ -15,8 +15,8 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 
 public class TickEventHandler implements IEventHandler {
 	
-	private static final int CHECK_RATE = 50;
-	private static final int REFRESH_DURATION = CHECK_RATE + 30;
+	private static final int CHECK_RATE = 5;
+	private static final int REFRESH_DURATION = CHECK_RATE + 1;
 	
 	@SubscribeEvent
 	public void onPlayerTickEvent(PlayerTickEvent e) {
