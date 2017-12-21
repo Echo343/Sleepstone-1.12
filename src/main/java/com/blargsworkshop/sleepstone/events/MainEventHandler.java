@@ -7,6 +7,7 @@ import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.capabilites.player.AbilityProvider;
 import com.blargsworkshop.sleepstone.capabilites.player.IAbility;
 import com.blargsworkshop.sleepstone.items.stone.Slots;
+import com.blargsworkshop.sleepstone.powers.HorseSpirit;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,6 +15,7 @@ import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
@@ -30,6 +32,14 @@ public class MainEventHandler implements IEventHandler {
 		if (event.getObject() instanceof EntityPlayer) {
 			event.addCapability(new ResourceLocation(ModInfo.ID, "sleepstone_player_props"), new AbilityProvider((EntityPlayer) event.getObject()));
 			Log.detail("Sleepstone Ability capability has been attached.");
+		}
+	}
+	
+	@SubscribeEvent
+	public void onEntityContructing(EntityConstructing event) {
+		if (event.getEntity() instanceof EntityPlayer) {
+			EntityPlayer player = (EntityPlayer) event.getEntity();
+			player.getAttributeMap().registerAttribute(HorseSpirit.STEP_HEIGHT);
 		}
 	}
 	

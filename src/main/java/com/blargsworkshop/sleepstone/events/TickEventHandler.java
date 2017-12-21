@@ -2,11 +2,13 @@ package com.blargsworkshop.sleepstone.events;
 
 import com.blargsworkshop.engine.event.IEventHandler;
 import com.blargsworkshop.engine.potion.BlargsPotionEffect;
+import com.blargsworkshop.engine.utility.Utils;
 import com.blargsworkshop.sleepstone.ModItems.Potions;
 import com.blargsworkshop.sleepstone.capabilites.player.AbilityProvider;
 import com.blargsworkshop.sleepstone.items.stone.Slots;
-import com.blargsworkshop.sleepstone.potion.potioneffects.ChronowalkPotionEffect;
+import com.blargsworkshop.sleepstone.powers.HorseSpirit;
 
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
@@ -18,18 +20,27 @@ public class TickEventHandler implements IEventHandler {
 	
 	@SubscribeEvent
 	public void onPlayerTickEvent(PlayerTickEvent e) {
-		if (e.phase != Phase.END || e.player.ticksExisted % CHECK_RATE != 0) {
+		if (e.phase != Phase.END) {
 			return;
 		}
 		
-		// Pathfinder
-		if (e.player.getCapability(AbilityProvider.ABILITY_CAPABILITY, null).isAbilityAvailable(Slots.Pathfinder)) {
-			e.player.addPotionEffect(new BlargsPotionEffect(Potions.foodSaturation, REFRESH_DURATION, 0, true, true));
+		if (Utils.isClient(e.player.getEntityWorld())) {
+			IAttributeInstance stepHeightAttribute = e.player.getEntityAttribute(HorseSpirit.STEP_HEIGHT);
+			if (stepHeightAttribute != null && e.player.stepHeight != stepHeightAttribute.getAttributeValue()) {
+				e.player.stepHeight = (float) stepHeightAttribute.getAttributeValue();
+			}
 		}
 		
-		// Time & Space
-		if (e.player.getCapability(AbilityProvider.ABILITY_CAPABILITY, null).isAbilityAvailable(Slots.TimeSpace)) {
-			e.player.addPotionEffect(new ChronowalkPotionEffect(REFRESH_DURATION));
+		if (Utils.isServer(e.player.getEntityWorld()) && e.player.ticksExisted % CHECK_RATE == 0) {
+			// Pathfinder
+			if (e.player.getCapability(AbilityProvider.ABILITY_CAPABILITY, null).isAbilityAvailable(Slots.Pathfinder)) {
+				e.player.addPotionEffect(new BlargsPotionEffect(Potions.foodSaturation, REFRESH_DURATION, 0, true, true));
+			}
+			
+			// Time & Space
+			if (e.player.getCapability(AbilityProvider.ABILITY_CAPABILITY, null).isAbilityAvailable(Slots.PathfinderEthereal)) {
+				e.player.addPotionEffect(new BlargsPotionEffect(Potions.horseSpirit, REFRESH_DURATION, 0, true, true));
+			}
 		}
 	}
 }

@@ -15,6 +15,7 @@ public class FoodSaturationPotion extends BlargsPotion {
 
 	public FoodSaturationPotion(ResourceLocation registryName, String messageKey) {
 		super(registryName, messageKey);
+		setBeneficial();
 	}
 	
 	@Override
