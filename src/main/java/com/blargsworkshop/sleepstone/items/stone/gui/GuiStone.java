@@ -1,15 +1,13 @@
 package com.blargsworkshop.sleepstone.items.stone.gui;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
-import com.blargsworkshop.engine.gui.IDrawable;
 import com.blargsworkshop.engine.gui.buttons.BasicButton;
 import com.blargsworkshop.engine.gui.buttons.ToggleButton;
 import com.blargsworkshop.engine.gui.buttons.Tooltip;
+import com.blargsworkshop.engine.gui.buttons.TooltipContainer;
 import com.blargsworkshop.engine.logger.Log;
 import com.blargsworkshop.engine.network.NetworkOverlord;
 import com.blargsworkshop.engine.utility.Utils;
@@ -74,7 +72,7 @@ public class GuiStone extends GuiScreen {
 	private EntityPlayer player;
 	private IAbility props;
 	
-	private List<IDrawable> buttonTooltips = new ArrayList<>();
+	private TooltipContainer buttonTooltips = new TooltipContainer();
 	
 	public GuiStone(EntityPlayer player, StoneInventory stoneInventory) {
 		this.inventory = stoneInventory;
@@ -206,9 +204,7 @@ public class GuiStone extends GuiScreen {
 		super.drawScreen(mouseX, mouseY, renderPartialTicks);
 		
 		//Draw Tooltips last so they are on top.
-		for (IDrawable tooltip : buttonTooltips) {
-			tooltip.draw(this.mc, mouseX, mouseY);
-		}
+		buttonTooltips.draw(mc, mouseX, mouseY);
 	}
 	
 	@Override

@@ -2,7 +2,6 @@ package com.blargsworkshop.engine.gui.buttons;
 
 import java.util.ArrayList;
 
-import com.blargsworkshop.engine.gui.IDrawable;
 import com.blargsworkshop.engine.gui.buttons.BasicButton.HoverState;
 
 import net.minecraft.client.Minecraft;
@@ -13,7 +12,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class Tooltip extends Gui implements IDrawable {
+public class Tooltip extends Gui implements ITooltip {
 	private static final String TOOLTIP_CHAR = "?";
 	private static final int LINE_HEIGHT = 11;
 	private long mouseoverTime = 0;
@@ -88,8 +87,9 @@ public class Tooltip extends Gui implements IDrawable {
 	 * @param mc Minecraft object
 	 * @param mouseX
 	 * @param mouseY
+	 * @return Returns this if the tooltip is ready to draw, null if not.
 	 */
-	public void draw(Minecraft mc, int mouseX, int mouseY)
+	public Tooltip drawIndicatorsAndDetect(Minecraft mc, int mouseX, int mouseY)
 	{
 		if (hasToolTip()) {
 			if (isButtonMouseOver()) {
@@ -112,9 +112,15 @@ public class Tooltip extends Gui implements IDrawable {
 			}
 		}
 		
-		if (!shouldDrawTooltip) {
-			return;
+		if (shouldDrawTooltip) {
+			return this;
 		}
+		else {
+			return null;
+		}
+	}
+	
+	public void draw(Minecraft mc, int mouseX, int mouseY) {
 		FontRenderer fontRenderer = mc.fontRenderer;
 		String[] tooltipArray = parseTooltipArray(fontRenderer);
 
