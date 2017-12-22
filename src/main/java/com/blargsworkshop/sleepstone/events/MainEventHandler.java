@@ -84,12 +84,12 @@ public class MainEventHandler implements IEventHandler {
 				Potion poison = Potion.getPotionFromResourceLocation("poison");
 				Potion wither = Potion.getPotionFromResourceLocation("wither");
 				if (event.getSource().equals(DamageSource.MAGIC) && player.isPotionActive(poison)) {
-					player.removeActivePotionEffect(poison);
+					player.removePotionEffect(poison);
 					event.setCanceled(true);
 					Log.debug("Removed poison from " + player.getDisplayNameString(), player);
 				}
 				else if (event.getSource().equals(DamageSource.WITHER) && player.isPotionActive(wither)) {
-					player.removeActivePotionEffect(wither);
+					player.removePotionEffect(wither);
 					event.setCanceled(true);
 					Log.debug("Removed wither from " + player.getDisplayNameString(), player);
 				}
