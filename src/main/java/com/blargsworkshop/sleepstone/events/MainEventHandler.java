@@ -12,11 +12,14 @@ import com.blargsworkshop.sleepstone.powers.HorseSpirit;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTBase;
+import net.minecraft.potion.Potion;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -69,6 +72,27 @@ public class MainEventHandler implements IEventHandler {
 			if (event.getDistance() > 3.0F && AbilityProvider.getCapability(player).isAbilityAvailable(Slots.Stone)) {
 				event.setDistance(2.0F);
 				Log.debug(player.getDisplayNameString() + " just fell on the server.", player);				
+			}
+		}
+	}
+	
+	@SubscribeEvent
+	public void onLivingAttacked(LivingAttackEvent event) {
+		if (event.getEntityLiving() instanceof EntityPlayer && Utils.isServer(event.getEntity().getEntityWorld())) {
+			EntityPlayer player = (EntityPlayer) event.getEntityLiving();
+			if (AbilityProvider.getCapability(player).isAbilityAvailable(Slots.PathfinderGuardian)) {
+				Potion poison = Potion.getPotionFromResourceLocation("poison");
+				Potion wither = Potion.getPotionFromResourceLocation("wither");
+				if (event.getSource().equals(DamageSource.MAGIC) && player.isPotionActive(poison)) {
+					player.removeActivePotionEffect(poison);
+					event.setCanceled(true);
+					Log.debug("Removed poison from " + player.getDisplayNameString(), player);
+				}
+				else if (event.getSource().equals(DamageSource.WITHER) && player.isPotionActive(wither)) {
+					player.removeActivePotionEffect(wither);
+					event.setCanceled(true);
+					Log.debug("Removed wither from " + player.getDisplayNameString(), player);
+				}
 			}
 		}
 	}
