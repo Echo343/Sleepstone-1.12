@@ -1,7 +1,6 @@
 package com.blargsworkshop.sleepstone.events;
 
 import com.blargsworkshop.engine.event.IEventHandler;
-import com.blargsworkshop.engine.logger.Log;
 import com.blargsworkshop.engine.potion.BlargsPotionEffect;
 import com.blargsworkshop.engine.utility.Utils;
 import com.blargsworkshop.sleepstone.ModItems.Potions;
@@ -9,7 +8,6 @@ import com.blargsworkshop.sleepstone.capabilites.player.AbilityProvider;
 import com.blargsworkshop.sleepstone.items.stone.Slots;
 import com.blargsworkshop.sleepstone.powers.HorseSpirit;
 
-import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
@@ -31,7 +29,6 @@ public class TickEventHandler implements IEventHandler {
 			if (stepHeightAttribute != null && e.player.stepHeight != stepHeightAttribute.getAttributeValue()) {
 				e.player.stepHeight = (float) stepHeightAttribute.getAttributeValue();
 			}
-//			Log.debug("Movement Speed " + e.player.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue());
 		}
 		
 		if (Utils.isServer(e.player.getEntityWorld()) && e.player.ticksExisted % CHECK_RATE == 0) {
