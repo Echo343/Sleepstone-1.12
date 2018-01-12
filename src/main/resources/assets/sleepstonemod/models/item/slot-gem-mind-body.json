@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "sleepstonemod:items/gem-stone"
+        "layer0": "sleepstonemod:items/slot-gem-mind-body"
     }
 }

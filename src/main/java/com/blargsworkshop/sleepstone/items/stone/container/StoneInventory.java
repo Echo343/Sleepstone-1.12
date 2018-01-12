@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.blargsworkshop.sleepstone.items.stone.Slots;
+import com.blargsworkshop.sleepstone.powers.Power;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -62,10 +63,10 @@ public class StoneInventory implements IInventory {
     private boolean checkGems(Slots mainSlot, Slots augmentSlot) {
     	boolean hasGems = false;
     	ItemStack mainStack = getStackInSlot(mainSlot.ordinal());
-    	if (mainStack != null && mainStack.getItem() == mainSlot.getItem()) {
+    	if (mainStack != null && mainStack.getItem() == mainSlot.getGemItem()) {
 			if (augmentSlot != null) {
 				ItemStack augmentStack = getStackInSlot(augmentSlot.ordinal());
-				if (augmentStack != null && augmentStack.getItem() == augmentSlot.getItem()) {
+				if (augmentStack != null && augmentStack.getItem() == augmentSlot.getGemItem()) {
 					hasGems = true;
 				}
 			}
@@ -76,31 +77,8 @@ public class StoneInventory implements IInventory {
     	return hasGems;
     }
     
-    public boolean hasGemInSlot(Slots slot) {
-    	boolean hasGems = false;
-    	switch (slot) {
-    	case Stone:
-    	case TimeSpace:
-    	case Pathfinder:
-    		hasGems = checkGems(slot, null);
-    		break;
-    	case StoneEthereal:
-    	case StoneGuardian:
-    	case StoneFire:
-    		hasGems = checkGems(Slots.Stone, slot);
-			break;
-		case TimeSpaceEthereal:
-		case TimeSpaceGuardian:
-		case TimeSpaceFire:
-			hasGems = checkGems(Slots.TimeSpace, slot);
-			break;
-		case PathfinderEthereal:
-		case PathfinderGuardian:
-		case PathfinderFire:
-			hasGems = checkGems(Slots.Pathfinder, slot);
-			break;
-    	}
-    	return hasGems;
+    public boolean hasGemInSlot(Power power) {
+    	return checkGems(power.getFirstGemSlot(), power.getSecondGemSlot());
     }
 
     @Override

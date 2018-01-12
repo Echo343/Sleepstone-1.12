@@ -27,7 +27,7 @@ public class MobDrops {
 			if (dropChance <= 0.005) {
 				// Pick a random gem
 				int gemIndex = (int) (Math.random() * Slots.values().length);
-				ItemStack loot = new ItemStack(Slots.values()[gemIndex].getItem());
+				ItemStack loot = new ItemStack(Slots.values()[gemIndex].getGemItem());
 				event.getDrops().add(new EntityItem(mob.getEntityWorld(), mob.posX, mob.posY, mob.posZ, loot));
 			}
 		}
@@ -43,7 +43,7 @@ public class MobDrops {
 			double dropChance = Math.random();
 			// 3% drop chance
 			if (dropChance <= 0.03) {
-				ItemStack fireGem = new ItemStack(ModItems.itemFireGem);
+				ItemStack fireGem = new ItemStack(ModItems.itemElementalGem);
 				event.getDrops().add(new EntityItem(mob.getEntityWorld(), mob.posX, mob.posY, mob.posZ, fireGem));
 			}
 		}

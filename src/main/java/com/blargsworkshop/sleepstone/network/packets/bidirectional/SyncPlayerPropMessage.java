@@ -7,7 +7,7 @@ import com.blargsworkshop.engine.proxy.IProxy;
 import com.blargsworkshop.sleepstone.SleepstoneMod;
 import com.blargsworkshop.sleepstone.capabilites.player.AbilityProvider;
 import com.blargsworkshop.sleepstone.capabilites.player.IAbility;
-import com.blargsworkshop.sleepstone.items.stone.Slots;
+import com.blargsworkshop.sleepstone.powers.Power;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
@@ -15,19 +15,19 @@ import net.minecraftforge.fml.relauncher.Side;
 
 public class SyncPlayerPropMessage extends AbstractMessage<SyncPlayerPropMessage> {
 	
-	private Slots ability;
+	private Power ability;
 	private boolean bool;
 	
 	public SyncPlayerPropMessage() {}
 	
-	public SyncPlayerPropMessage(Slots ability, boolean value) {
+	public SyncPlayerPropMessage(Power ability, boolean value) {
 		this.ability = ability;
 		this.bool = value;
 	}
 	
 	@Override
 	protected void read(PacketBuffer buffer) throws IOException {
-		ability = Slots.values()[buffer.readInt()];
+		ability = Power.values()[buffer.readInt()];
 		bool = buffer.readBoolean();
 	}
 

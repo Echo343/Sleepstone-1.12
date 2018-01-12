@@ -5,8 +5,8 @@ import com.blargsworkshop.engine.potion.BlargsPotionEffect;
 import com.blargsworkshop.engine.utility.Utils;
 import com.blargsworkshop.sleepstone.ModItems.Potions;
 import com.blargsworkshop.sleepstone.capabilites.player.AbilityProvider;
-import com.blargsworkshop.sleepstone.items.stone.Slots;
 import com.blargsworkshop.sleepstone.powers.HorseSpirit;
+import com.blargsworkshop.sleepstone.powers.Power;
 
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -33,12 +33,12 @@ public class TickEventHandler implements IEventHandler {
 		
 		if (Utils.isServer(e.player.getEntityWorld()) && e.player.ticksExisted % CHECK_RATE == 0) {
 			// Pathfinder
-			if (e.player.getCapability(AbilityProvider.ABILITY_CAPABILITY, null).isAbilityAvailable(Slots.Pathfinder)) {
+			if (e.player.getCapability(AbilityProvider.ABILITY_CAPABILITY, null).isAbilityAvailable(Power.IRON_STOMACH)) {
 				e.player.addPotionEffect(new BlargsPotionEffect(Potions.foodSaturation, REFRESH_DURATION, 0, true, true));
 			}
 			
 			// Time & Space
-			if (e.player.getCapability(AbilityProvider.ABILITY_CAPABILITY, null).isAbilityAvailable(Slots.PathfinderEthereal)) {
+			if (e.player.getCapability(AbilityProvider.ABILITY_CAPABILITY, null).isAbilityAvailable(Power.WINDWALKER)) {
 				e.player.addPotionEffect(new BlargsPotionEffect(Potions.horseSpirit, REFRESH_DURATION, 0, true, true));
 			}
 		}

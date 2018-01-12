@@ -4,32 +4,32 @@ import com.blargsworkshop.sleepstone.ModItems;
 import com.blargsworkshop.sleepstone.items.gems.Gem;
 
 public enum Slots {
-	Stone(ModItems.itemStoneGem),
-	StoneEthereal(ModItems.itemEtherealGem),
-	StoneGuardian(ModItems.itemGuardianGem),
-	StoneFire(ModItems.itemFireGem),
-	TimeSpace(ModItems.itemTimeSpaceGem),
-	TimeSpaceEthereal(ModItems.itemEtherealGem),
-	TimeSpaceGuardian(ModItems.itemGuardianGem),
-	TimeSpaceFire(ModItems.itemFireGem),
-	Pathfinder(ModItems.itemPathfinderGem),
-	PathfinderEthereal(ModItems.itemEtherealGem),
-	PathfinderGuardian(ModItems.itemGuardianGem),
-	PathfinderFire(ModItems.itemFireGem);
+	MONK_1(ModItems.itemMindBodyGem),
+	MONK_2(ModItems.itemMindBodyGem),
+	MONK_3(ModItems.itemMindBodyGem),
+	TIMESPACE_1(ModItems.itemTimeSpaceGem),
+	TIMESPACE_2(ModItems.itemTimeSpaceGem),
+	TIMESPACE_3(ModItems.itemTimeSpaceGem),
+	PATHFINDER_1(ModItems.itemPathfinderGem),
+	PATHFINDER_2(ModItems.itemPathfinderGem),
+	PATHFINDER_3(ModItems.itemPathfinderGem),
+	ETHEREAL_1(ModItems.itemEtherealGem),
+	ETHEREAL_2(ModItems.itemEtherealGem),
+	ETHEREAL_3(ModItems.itemEtherealGem),
+	GUARDIAN_1(ModItems.itemGuardianGem),
+	GUARDIAN_2(ModItems.itemGuardianGem),
+	GUARDIAN_3(ModItems.itemGuardianGem),
+	ELEMENTAL_1(ModItems.itemElementalGem),
+	ELEMENTAL_2(ModItems.itemElementalGem),
+	ELEMENTAL_3(ModItems.itemElementalGem);
 	
 	private Gem gem;
-	private Class<? extends Gem> type;
 	
 	Slots(Gem item) {
 		this.gem = item;
-		this.type = gem.getClass();
 	}
 	
-	public Gem getItem() {
+	public Gem getGemItem() {
 		return gem;
-	}
-	
-	public Class<? extends Gem> getGemType() {
-		return type;
 	}
 }

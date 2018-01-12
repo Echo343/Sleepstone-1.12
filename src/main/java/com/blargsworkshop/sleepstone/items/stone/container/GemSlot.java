@@ -2,11 +2,11 @@ package com.blargsworkshop.sleepstone.items.stone.container;
 
 import com.blargsworkshop.sleepstone.ModItems.Sprites;
 import com.blargsworkshop.sleepstone.items.gems.EtherealGem;
-import com.blargsworkshop.sleepstone.items.gems.FireGem;
+import com.blargsworkshop.sleepstone.items.gems.ElementalGem;
 import com.blargsworkshop.sleepstone.items.gems.Gem;
 import com.blargsworkshop.sleepstone.items.gems.GuardianGem;
 import com.blargsworkshop.sleepstone.items.gems.PathfinderGem;
-import com.blargsworkshop.sleepstone.items.gems.StoneGem;
+import com.blargsworkshop.sleepstone.items.gems.MindBodyGem;
 import com.blargsworkshop.sleepstone.items.gems.TimeSpaceGem;
 import com.blargsworkshop.sleepstone.items.stone.Slots;
 
@@ -28,9 +28,9 @@ public class GemSlot extends Slot {
     
     public GemSlot(Slots gemSlot, IInventory inv, int xPos, int yPos) {
     	super(inv, gemSlot.ordinal(), xPos, yPos);
-    	this.gemType = gemSlot.getGemType();
+    	this.gemType = gemSlot.getGemItem().getClass();
     	this.stackLimit = 1;
-    	this.setBackgroundName(getResourceLocationFromGemType(gemSlot.getGemType()).toString());
+    	this.setBackgroundName(getResourceLocationFromGemType(gemSlot.getGemItem().getClass()).toString());
     }
 
     // This is the only method we need to override so that
@@ -57,8 +57,8 @@ public class GemSlot extends Slot {
     
     private ResourceLocation getResourceLocationFromGemType(Class<? extends Gem> gemType) {
     	ResourceLocation slotTexture = null;
-    	if (gemType.equals(StoneGem.class)) {
-    		slotTexture = Sprites.stoneSlotBackground;
+    	if (gemType.equals(MindBodyGem.class)) {
+    		slotTexture = Sprites.mindBodySlotBackground;
     	}
     	else if (gemType.equals(PathfinderGem.class)) {
 			slotTexture = Sprites.pathfinderSlotBackground;
@@ -66,8 +66,8 @@ public class GemSlot extends Slot {
     	else if (gemType.equals(TimeSpaceGem.class)) {
 			slotTexture = Sprites.timeSpaceSlotBackground;
     	}
-    	else if (gemType.equals(FireGem.class)) {
-			slotTexture = Sprites.fireSlotBackground;
+    	else if (gemType.equals(ElementalGem.class)) {
+			slotTexture = Sprites.redSlotBackground;
     	}
     	else if (gemType.equals(GuardianGem.class)) {
 			slotTexture = Sprites.guardianSlotBackground;

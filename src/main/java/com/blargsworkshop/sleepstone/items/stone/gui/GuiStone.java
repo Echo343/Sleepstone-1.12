@@ -15,11 +15,11 @@ import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.capabilites.player.AbilityProvider;
 import com.blargsworkshop.sleepstone.capabilites.player.IAbility;
 import com.blargsworkshop.sleepstone.gui.GuiEnum;
-import com.blargsworkshop.sleepstone.items.stone.Slots;
 import com.blargsworkshop.sleepstone.items.stone.container.StoneInventory;
 import com.blargsworkshop.sleepstone.network.packets.toserver.CommandMessage;
 import com.blargsworkshop.sleepstone.network.packets.toserver.CommandMessage.Command;
 import com.blargsworkshop.sleepstone.network.packets.toserver.OpenGuiMessage;
+import com.blargsworkshop.sleepstone.powers.Power;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -30,31 +30,28 @@ import net.minecraft.util.ResourceLocation;
 public class GuiStone extends GuiScreen {
 	
 	protected static enum Buttons {
-		NoFallDmg(Slots.Stone),
-		TimeSpace(Slots.TimeSpace),
-		Pathfinder(Slots.Pathfinder),
-		StoneEthereal(Slots.StoneEthereal),
-		StoneGuardian(Slots.StoneGuardian),
-		StoneFire(Slots.StoneFire),
-		TimeSpaceEthereal(Slots.TimeSpaceEthereal),
-		TimeSpaceGuardian(Slots.TimeSpaceGuardian),
-		TimeSpaceFire(Slots.TimeSpaceFire),
-		PathfinderEthereal(Slots.PathfinderEthereal),
-		PathfinderGuardian(Slots.PathfinderGuardian),
-		PathfinderFire(Slots.PathfinderFire),
-		Inv;
+		VENOM_IMMUNITY(Power.VENOM_IMMUNITY),
+		ETHEREAL_FEET(Power.ETHEREAL_FEET),
+		ROCK_BARRIER(Power.ROCK_BARRIER),
+		PRECOGNITION(Power.PRECOGNITION),
+		TEMPORAL_AID(Power.TEMPORAL_AID),
+		HELLJUMPER(Power.HELLJUMPER),
+		IRON_STOMACH(Power.IRON_STOMACH),
+		PHANTOM_TORCH(Power.PHANTOM_TORCH),
+		WINDWALKER(Power.WINDWALKER),
+		INV;
 		
-		private Slots slot = null;
+		private Power ability = null;
 		
 		Buttons() {
 		}
 		
-		Buttons(Slots slot) {
-			this.slot = slot;
+		Buttons(Power ability) {
+			this.ability = ability;
 		}
 		
-		public Slots getSlot() {
-			return slot;
+		public Power getAbility() {
+			return ability;
 		}
 	}
 	
@@ -105,91 +102,70 @@ public class GuiStone extends GuiScreen {
 		int thirdRow = secondRow + BasicButton.defaultHeight + verticalSpacing;
 		int fourthRow = thirdRow + BasicButton.defaultHeight + verticalSpacing;
 		
-		if (inventory.hasGemInSlot(Slots.Stone)) {
-			ToggleButton button = new ToggleButton(Buttons.NoFallDmg, firstColumn, firstRow, Utils.localize("text.guistone.stone_button"));
-			button.setState(props.getAbility(Buttons.NoFallDmg.getSlot()));
+		if (inventory.hasGemInSlot(Buttons.VENOM_IMMUNITY.getAbility())) {
+			ToggleButton button = new ToggleButton(Buttons.VENOM_IMMUNITY, firstColumn, firstRow, Utils.localize("text.guistone.stone_button"));
+			button.setState(props.getAbility(Buttons.VENOM_IMMUNITY.getAbility()));
 			Tooltip tooltip = new Tooltip(button, Utils.localize("text.guistone.stone_tooltip"));
 			buttonTooltips.add(tooltip);
 			buttonList.add(button);
 		}
-		if (inventory.hasGemInSlot(Slots.StoneEthereal)) {
-			ToggleButton button = new ToggleButton(Buttons.StoneEthereal, firstColumn, secondRow, Utils.localize("text.guistone.stone_ethereal_button"));
-			button.setState(props.getAbility(Buttons.StoneEthereal.getSlot()));
+		if (inventory.hasGemInSlot(Buttons.ETHEREAL_FEET.getAbility())) {
+			ToggleButton button = new ToggleButton(Buttons.ETHEREAL_FEET, firstColumn, secondRow, Utils.localize("text.guistone.stone_ethereal_button"));
+			button.setState(props.getAbility(Buttons.ETHEREAL_FEET.getAbility()));
 			Tooltip tooltip = new Tooltip(button, Utils.localize("text.guistone.stone_ethereal_tooltip"));
 			buttonTooltips.add(tooltip);
 			buttonList.add(button);
 		}
-		if (inventory.hasGemInSlot(Slots.StoneGuardian)) {
-			BasicButton button = new BasicButton(Buttons.StoneGuardian, firstColumn, thirdRow, Utils.localize("text.guistone.stone_guardian_button"));
+		if (inventory.hasGemInSlot(Buttons.ROCK_BARRIER.getAbility())) {
+			BasicButton button = new BasicButton(Buttons.ROCK_BARRIER, firstColumn, thirdRow, Utils.localize("text.guistone.stone_guardian_button"));
 			Tooltip tooltip = new Tooltip(button, Utils.localize("text.guistone.stone_guardian_tooltip"));
 			buttonTooltips.add(tooltip);
 			buttonList.add(button);
 		}
-		if (inventory.hasGemInSlot(Slots.StoneFire)) {
-			ToggleButton button = new ToggleButton(Buttons.StoneFire, firstColumn, fourthRow, Utils.localize("text.guistone.stone_fire_button"));
-			button.setState(props.getAbility(Buttons.StoneFire.getSlot()));
+		if (inventory.hasGemInSlot(Buttons.PRECOGNITION.getAbility())) {
+			ToggleButton button = new ToggleButton(Buttons.PRECOGNITION, firstColumn, fourthRow, Utils.localize("text.guistone.stone_fire_button"));
+			button.setState(props.getAbility(Buttons.PRECOGNITION.getAbility()));
 			Tooltip tooltip = new Tooltip(button, Utils.localize("text.guistone.stone_fire_tooltip"));
 			buttonTooltips.add(tooltip);
 			buttonList.add(button);
 		}
-		if (inventory.hasGemInSlot(Slots.TimeSpace)) {
-			ToggleButton button = new ToggleButton(Buttons.TimeSpace, secondColumn, firstRow, Utils.localize("text.guistone.timespace_button"));
-			button.setState(props.getAbility(Buttons.TimeSpace.getSlot()));
+		if (inventory.hasGemInSlot(Buttons.TEMPORAL_AID.getAbility())) {
+			ToggleButton button = new ToggleButton(Buttons.TEMPORAL_AID, secondColumn, firstRow, Utils.localize("text.guistone.timespace_button"));
+			button.setState(props.getAbility(Buttons.TEMPORAL_AID.getAbility()));
 			Tooltip tooltip = new Tooltip(button, Utils.localize("text.guistone.timespace_tooltip"));
 			buttonTooltips.add(tooltip);
 			buttonList.add(button);
 		}
-		if (inventory.hasGemInSlot(Slots.TimeSpaceEthereal)) {
-			ToggleButton button = new ToggleButton(Buttons.TimeSpaceEthereal, secondColumn, secondRow, Utils.localize("text.guistone.timespace_ethereal_button"));
-			button.setState(props.getAbility(Buttons.TimeSpaceEthereal.getSlot()));
+		if (inventory.hasGemInSlot(Buttons.HELLJUMPER.getAbility())) {
+			ToggleButton button = new ToggleButton(Buttons.HELLJUMPER, secondColumn, secondRow, Utils.localize("text.guistone.timespace_ethereal_button"));
+			button.setState(props.getAbility(Buttons.HELLJUMPER.getAbility()));
 			Tooltip tooltip = new Tooltip(button, Utils.localize("text.guistone.timespace_ethereal_tooltip"));
 			buttonTooltips.add(tooltip);
 			buttonList.add(button);
 		}
-		if (inventory.hasGemInSlot(Slots.TimeSpaceGuardian)) {
-			ToggleButton button = new ToggleButton(Buttons.TimeSpaceGuardian, secondColumn, thirdRow, Utils.localize("text.guistone.timespace_guardian_button"));
-			button.setState(props.getAbility(Buttons.TimeSpaceGuardian.getSlot()));
+		if (inventory.hasGemInSlot(Buttons.IRON_STOMACH.getAbility())) {
+			ToggleButton button = new ToggleButton(Buttons.IRON_STOMACH, secondColumn, thirdRow, Utils.localize("text.guistone.timespace_guardian_button"));
+			button.setState(props.getAbility(Buttons.IRON_STOMACH.getAbility()));
 			Tooltip tooltip = new Tooltip(button, Utils.localize("text.guistone.timespace_guardian_tooltip"));
 			buttonTooltips.add(tooltip);
 			buttonList.add(button);
 		}
-		if (inventory.hasGemInSlot(Slots.TimeSpaceFire)) {
-			ToggleButton button = new ToggleButton(Buttons.TimeSpaceFire, secondColumn, fourthRow, Utils.localize("text.guistone.timespace_fire_button"));
-			button.setState(props.getAbility(Buttons.TimeSpaceFire.getSlot()));
+		if (inventory.hasGemInSlot(Buttons.PHANTOM_TORCH.getAbility())) {
+			ToggleButton button = new ToggleButton(Buttons.PHANTOM_TORCH, secondColumn, fourthRow, Utils.localize("text.guistone.timespace_fire_button"));
+			button.setState(props.getAbility(Buttons.PHANTOM_TORCH.getAbility()));
 			Tooltip tooltip = new Tooltip(button, Utils.localize("text.guistone.timespace_fire_tooltip"));
 			buttonTooltips.add(tooltip);
 			buttonList.add(button);
 		}
-		if (inventory.hasGemInSlot(Slots.Pathfinder)) {
-			ToggleButton button = new ToggleButton(Buttons.Pathfinder, thirdColumn, firstRow, Utils.localize("text.guistone.pathfinder_button"));
-			button.setState(props.getAbility(Buttons.Pathfinder.getSlot()));
+		if (inventory.hasGemInSlot(Buttons.WINDWALKER.getAbility())) {
+			ToggleButton button = new ToggleButton(Buttons.WINDWALKER, thirdColumn, firstRow, Utils.localize("text.guistone.pathfinder_button"));
+			button.setState(props.getAbility(Buttons.WINDWALKER.getAbility()));
 			Tooltip tooltip = new Tooltip(button, Utils.localize("text.guistone.pathfinder_tooltip"));
 			buttonTooltips.add(tooltip);
 			buttonList.add(button);
 		}
-		if (inventory.hasGemInSlot(Slots.PathfinderEthereal)) {
-			ToggleButton button = new ToggleButton(Buttons.PathfinderEthereal, thirdColumn, secondRow, Utils.localize("text.guistone.pathfinder_ethereal_button"));
-			button.setState(props.getAbility(Buttons.PathfinderEthereal.getSlot()));
-			Tooltip tooltip = new Tooltip(button, Utils.localize("text.guistone.pathfinder_ethereal_tooltip"));
-			buttonTooltips.add(tooltip);
-			buttonList.add(button);
-		}
-		if (inventory.hasGemInSlot(Slots.PathfinderGuardian)) {
-			ToggleButton button = new ToggleButton(Buttons.PathfinderGuardian, thirdColumn, thirdRow, Utils.localize("text.guistone.pathfinder_guardian_button"));
-			button.setState(props.getAbility(Buttons.PathfinderGuardian.getSlot()));
-			Tooltip tooltip = new Tooltip(button, Utils.localize("text.guistone.pathfinder_guardian_tooltip"));
-			buttonTooltips.add(tooltip);
-			buttonList.add(button);
-		}
-		if (inventory.hasGemInSlot(Slots.PathfinderFire)) {
-			ToggleButton button = new ToggleButton(Buttons.PathfinderFire, thirdColumn, fourthRow, Utils.localize("text.guistone.pathfinder_fire_button"));
-			button.setState(props.getAbility(Buttons.PathfinderFire.getSlot()));
-			Tooltip tooltip = new Tooltip(button, Utils.localize("text.guistone.pathfinder_fire_tooltip"));
-			buttonTooltips.add(tooltip);
-			buttonList.add(button);
-		}
 		
-		GuiButton invButton = new BasicButton(Buttons.Inv, left + xSize - 40, top + ySize - 30, 20, Utils.localize("text.guistone.inv"));
+		GuiButton invButton = new BasicButton(Buttons.INV, left + xSize - 40, top + ySize - 30, 20, Utils.localize("text.guistone.inv"));
 		this.buttonList.add(invButton); // TODO Use an icon of some sort.
 	}
 	
@@ -212,26 +188,23 @@ public class GuiStone extends GuiScreen {
 		Buttons btn = (Buttons)((BasicButton)button).getButtonType();
 				
 		switch (btn) {
-		case Inv:
+		case INV:
 			NetworkOverlord.get(ModInfo.ID).sendToServer(new OpenGuiMessage(GuiEnum.STONE_INVENTORY));
 			break;
-		case StoneGuardian:
+		case ROCK_BARRIER:
 			NetworkOverlord.get(ModInfo.ID).sendToServer(new CommandMessage(Command.ROCKWALL));
 			player.closeScreen();
 			break;
-		case NoFallDmg:
-		case StoneEthereal:
-		case StoneFire:
-		case Pathfinder:
-		case PathfinderEthereal:
-		case PathfinderGuardian:
-		case PathfinderFire:
-		case TimeSpace:
-		case TimeSpaceEthereal:
-		case TimeSpaceGuardian:
-		case TimeSpaceFire:
+		case ETHEREAL_FEET:
+		case HELLJUMPER:
+		case IRON_STOMACH:
+		case PHANTOM_TORCH:
+		case PRECOGNITION:
+		case TEMPORAL_AID:
+		case VENOM_IMMUNITY:
+		case WINDWALKER:
 			toggleButton(button);
-			props.setAbility(btn.getSlot(), ((ToggleButton) button).isOn());
+			props.setAbility(btn.getAbility(), ((ToggleButton) button).isOn());
 			break;
 		default:
 			break;

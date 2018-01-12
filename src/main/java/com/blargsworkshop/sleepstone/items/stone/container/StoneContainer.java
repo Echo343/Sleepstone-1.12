@@ -36,22 +36,22 @@ public class StoneContainer extends Container {
         
         /** Gem Slots */
         //Group one
-        this.addSlotToContainer(new GemSlot(Slots.Stone, this.inventory, 29, 57));
-        this.addSlotToContainer(new GemSlot(Slots.StoneEthereal, this.inventory, 11, 78));
-        this.addSlotToContainer(new GemSlot(Slots.StoneGuardian, this.inventory, 29, 83));
-        this.addSlotToContainer(new GemSlot(Slots.StoneFire, this.inventory, 47, 78));
+        this.addSlotToContainer(new GemSlot(Slots.MONK_1, this.inventory, 29, 57));
+        this.addSlotToContainer(new GemSlot(Slots.ETHEREAL_1, this.inventory, 11, 78));
+        this.addSlotToContainer(new GemSlot(Slots.GUARDIAN_1, this.inventory, 29, 83));
+        this.addSlotToContainer(new GemSlot(Slots.ELEMENTAL_1, this.inventory, 47, 78));
         
         //Group two
-        this.addSlotToContainer(new GemSlot(Slots.TimeSpace, this.inventory, 80, 16));
-        this.addSlotToContainer(new GemSlot(Slots.TimeSpaceEthereal, this.inventory, 62, 37));
-        this.addSlotToContainer(new GemSlot(Slots.TimeSpaceGuardian, this.inventory, 80, 44));
-        this.addSlotToContainer(new GemSlot(Slots.TimeSpaceFire, this.inventory, 98, 37));
+        this.addSlotToContainer(new GemSlot(Slots.TIMESPACE_1, this.inventory, 80, 16));
+        this.addSlotToContainer(new GemSlot(Slots.ETHEREAL_2, this.inventory, 62, 37));
+        this.addSlotToContainer(new GemSlot(Slots.GUARDIAN_2, this.inventory, 80, 44));
+        this.addSlotToContainer(new GemSlot(Slots.ELEMENTAL_2, this.inventory, 98, 37));
         
         //Group three
-        this.addSlotToContainer(new GemSlot(Slots.Pathfinder, this.inventory, 130, 57));
-        this.addSlotToContainer(new GemSlot(Slots.PathfinderEthereal, this.inventory, 112, 78));
-        this.addSlotToContainer(new GemSlot(Slots.PathfinderGuardian, this.inventory, 130, 83));
-        this.addSlotToContainer(new GemSlot(Slots.PathfinderFire, this.inventory, 148, 78));
+        this.addSlotToContainer(new GemSlot(Slots.PATHFINDER_1, this.inventory, 130, 57));
+        this.addSlotToContainer(new GemSlot(Slots.ETHEREAL_3, this.inventory, 112, 78));
+        this.addSlotToContainer(new GemSlot(Slots.GUARDIAN_3, this.inventory, 130, 83));
+        this.addSlotToContainer(new GemSlot(Slots.ELEMENTAL_3, this.inventory, 148, 78));
         
         /** Spare Gem Inventory */
         for (int i = 0; i < 9; i++) {

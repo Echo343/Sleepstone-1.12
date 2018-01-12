@@ -6,8 +6,8 @@ import com.blargsworkshop.engine.utility.Utils;
 import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.capabilites.player.AbilityProvider;
 import com.blargsworkshop.sleepstone.capabilites.player.IAbility;
-import com.blargsworkshop.sleepstone.items.stone.Slots;
 import com.blargsworkshop.sleepstone.powers.HorseSpirit;
+import com.blargsworkshop.sleepstone.powers.Power;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -69,7 +69,7 @@ public class MainEventHandler implements IEventHandler {
 	public void onLivingFallEvent(LivingFallEvent event) {
 		if (Utils.isServer(event.getEntity().getEntityWorld()) && event.getEntity() instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) event.getEntity();
-			if (event.getDistance() > 3.0F && AbilityProvider.getCapability(player).isAbilityAvailable(Slots.Stone)) {
+			if (event.getDistance() > 3.0F && AbilityProvider.getCapability(player).isAbilityAvailable(Power.ETHEREAL_FEET)) {
 				event.setDistance(2.0F);
 				Log.debug(player.getDisplayNameString() + " just fell on the server.", player);				
 			}
@@ -80,7 +80,7 @@ public class MainEventHandler implements IEventHandler {
 	public void onLivingAttacked(LivingAttackEvent event) {
 		if (event.getEntityLiving() instanceof EntityPlayer && Utils.isServer(event.getEntity().getEntityWorld())) {
 			EntityPlayer player = (EntityPlayer) event.getEntityLiving();
-			if (AbilityProvider.getCapability(player).isAbilityAvailable(Slots.PathfinderGuardian)) {
+			if (AbilityProvider.getCapability(player).isAbilityAvailable(Power.VENOM_IMMUNITY)) {
 				Potion poison = Potion.getPotionFromResourceLocation("poison");
 				Potion wither = Potion.getPotionFromResourceLocation("wither");
 				if (event.getSource().equals(DamageSource.MAGIC) && player.isPotionActive(poison)) {

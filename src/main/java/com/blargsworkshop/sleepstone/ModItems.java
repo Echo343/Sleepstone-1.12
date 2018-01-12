@@ -13,11 +13,11 @@ import com.blargsworkshop.engine.recipe.SmeltingRecipe;
 import com.blargsworkshop.engine.sound.BlargsSoundEvent;
 import com.blargsworkshop.sleepstone.items.EnderShard;
 import com.blargsworkshop.sleepstone.items.gems.EtherealGem;
-import com.blargsworkshop.sleepstone.items.gems.FireGem;
+import com.blargsworkshop.sleepstone.items.gems.ElementalGem;
 import com.blargsworkshop.sleepstone.items.gems.Gem;
 import com.blargsworkshop.sleepstone.items.gems.GuardianGem;
 import com.blargsworkshop.sleepstone.items.gems.PathfinderGem;
-import com.blargsworkshop.sleepstone.items.gems.StoneGem;
+import com.blargsworkshop.sleepstone.items.gems.MindBodyGem;
 import com.blargsworkshop.sleepstone.items.gems.TimeSpaceGem;
 import com.blargsworkshop.sleepstone.items.gems.mats.PathfinderCraftable;
 import com.blargsworkshop.sleepstone.items.gems.mats.StoneCraftable;
@@ -42,7 +42,7 @@ public class ModItems implements IModItems{
 	public static Item itemSleepstone = new Sleepstone();
 	
 	@ModItem
-	public static Gem itemStoneGem = new StoneGem();
+	public static Gem itemMindBodyGem = new MindBodyGem();
 	@ModItem
 	public static Gem itemTimeSpaceGem = new TimeSpaceGem();
 	@ModItem
@@ -52,7 +52,7 @@ public class ModItems implements IModItems{
 	@ModItem
 	public static Gem itemGuardianGem = new GuardianGem();
 	@ModItem
-	public static Gem itemFireGem = new FireGem();
+	public static Gem itemElementalGem = new ElementalGem();
 	
 	@ModItem
 	public static Item itemStoneCraftable = new StoneCraftable();
@@ -84,15 +84,15 @@ public class ModItems implements IModItems{
 		public static IBlargRecipe hardenedObsidianClump = new SmeltingRecipe(new ItemStack(ModItems.itemStoneCraftable, 1, 9), new ItemStack(ModItems.itemStoneCraftable, 1, 10), 0.7f);
 		public static IBlargRecipe strengthenedDiamondLattice = new SmeltingRecipe(new ItemStack(ModItems.itemStoneCraftable, 1, 11), new ItemStack(ModItems.itemStoneCraftable, 1, 12), 1f);
 		public static IBlargRecipe heatedCrystallineLatticeStructure = new SmeltingRecipe(new ItemStack(ModItems.itemStoneCraftable, 1, 13), new ItemStack(ModItems.itemStoneCraftable, 1, 14), 1f);
-		public static IBlargRecipe stoneGem = new SmeltingRecipe(new ItemStack(ModItems.itemStoneCraftable, 1, 15), new ItemStack(ModItems.itemStoneGem), 1f);
+		public static IBlargRecipe stoneGem = new SmeltingRecipe(new ItemStack(ModItems.itemStoneCraftable, 1, 15), new ItemStack(ModItems.itemMindBodyGem), 1f);
 	}
 	
 	@ModSprite
 	public static class Sprites {
-		public static ResourceLocation stoneSlotBackground = new ResourceLocation(ModInfo.ID, "items/slot-gem-stone");
+		public static ResourceLocation mindBodySlotBackground = new ResourceLocation(ModInfo.ID, "items/slot-gem-mind-body");
 		public static ResourceLocation pathfinderSlotBackground = new ResourceLocation(ModInfo.ID, "items/slot-gem-pathfinder");
 		public static ResourceLocation timeSpaceSlotBackground = new ResourceLocation(ModInfo.ID, "items/slot-gem-time-and-space");
-		public static ResourceLocation fireSlotBackground = new ResourceLocation(ModInfo.ID, "items/slot-gem-fire");
+		public static ResourceLocation redSlotBackground = new ResourceLocation(ModInfo.ID, "items/slot-gem-fire");
 		public static ResourceLocation guardianSlotBackground = new ResourceLocation(ModInfo.ID, "items/slot-gem-guardian");
 		public static ResourceLocation etherealSlotBackground = new ResourceLocation(ModInfo.ID, "items/slot-gem-ethereal");
 	}

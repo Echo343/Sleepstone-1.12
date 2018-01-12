@@ -10,11 +10,11 @@ import com.blargsworkshop.engine.network.PacketDispatcher;
 import com.blargsworkshop.engine.utility.Utils;
 import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.ModItems;
-import com.blargsworkshop.sleepstone.items.stone.Slots;
 import com.blargsworkshop.sleepstone.items.stone.container.StoneInventory;
 import com.blargsworkshop.sleepstone.network.packets.bidirectional.SyncAllPlayerPropsMessage;
 import com.blargsworkshop.sleepstone.network.packets.bidirectional.SyncPlayerBondedIdMessage;
 import com.blargsworkshop.sleepstone.network.packets.bidirectional.SyncPlayerPropMessage;
+import com.blargsworkshop.sleepstone.powers.Power;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -26,35 +26,35 @@ public class Ability implements IAbility {
 	
 	private String bondedStoneId = "";
 	private EntityPlayer player;
-	private EnumMap<Slots, Boolean> abilities = new EnumMap<Slots, Boolean>(Slots.class);
+	private EnumMap<Power, Boolean> abilities = new EnumMap<Power, Boolean>(Power.class);
 
 	public void init(EntityPlayer player) {
 		dispatcher = NetworkOverlord.get(ModInfo.ID);
 		this.player = player;
-		for (Slots slot : Slots.values()) {
-			abilities.put(slot, false);
+		for (Power ability : Power.values()) {
+			abilities.put(ability, false);
 		}
 	}
 	
 	@Override
-	public Map<Slots, Boolean> getAbilityMap() {
+	public Map<Power, Boolean> getAbilityMap() {
 		return abilities;
 	}
 
 	@Override
-	public boolean getAbility(Slots gem) {
-		Boolean bool = abilities.get(gem);
+	public boolean getAbility(Power ability) {
+		Boolean bool = abilities.get(ability);
 		return bool != null ? bool : false;
 	}
 
 	@Override
-	public void setAbility(Slots gem, boolean value) {
-		setAbility(gem, value, true);
+	public void setAbility(Power ability, boolean value) {
+		setAbility(ability, value, true);
 	}
 
 	@Override
-	public void setAbilityWithoutSync(Slots gem, boolean value) {
-		setAbility(gem, value, false);
+	public void setAbilityWithoutSync(Power ability, boolean value) {
+		setAbility(ability, value, false);
 	}
 
 	@Override
@@ -82,19 +82,19 @@ public class Ability implements IAbility {
 		}
 	}
 	
-	protected void setAbility(Slots gem, boolean value, boolean doSync) {
-		if (Boolean.valueOf(value).equals(abilities.get(gem))) {
+	protected void setAbility(Power ability, boolean value, boolean doSync) {
+		if (Boolean.valueOf(value).equals(abilities.get(ability))) {
 			return;
 		}
-		abilities.put(gem, value);
+		abilities.put(ability, value);
 		if (doSync) {
 			if (Utils.isClient(player.getEntityWorld())) {
-				dispatcher.sendToServer(new SyncPlayerPropMessage(gem, value));
-				Log.debug("Setting " + gem + " to " + value + " on client and syncing to server", this.player);
+				dispatcher.sendToServer(new SyncPlayerPropMessage(ability, value));
+				Log.debug("Setting " + ability + " to " + value + " on client and syncing to server", this.player);
 			}
 			else {
-				dispatcher.sendToPlayer((EntityPlayerMP) player, new SyncPlayerPropMessage(gem, value));
-				Log.debug("Setting " + gem + " to " + value + " on server and syncing to client", this.player);
+				dispatcher.sendToPlayer((EntityPlayerMP) player, new SyncPlayerPropMessage(ability, value));
+				Log.debug("Setting " + ability + " to " + value + " on server and syncing to client", this.player);
 			}
 		}
 	}
@@ -117,13 +117,13 @@ public class Ability implements IAbility {
 		}
 	}
 	
-	public boolean isAbilityAvailable(Slots slot) {
+	public boolean isAbilityAvailable(Power ability) {
 		IAbility props = this;
 		boolean doesPlayer = false;
 		boolean hasStone = false;
 		boolean hasGems = false;
 		
-		doesPlayer = props.getAbility(slot);
+		doesPlayer = props.getAbility(ability);
 		
 		//TODO search through in priority order
 		List<ItemStack> playerInv = player.inventory.mainInventory;
@@ -134,7 +134,7 @@ public class Ability implements IAbility {
 				StoneInventory sInv = new StoneInventory(itemStack);
 				if (sInv.getUniqueId().equals(props.getBondedStoneId())) {
 					hasStone = true;
-					hasGems = sInv.hasGemInSlot(slot);
+					hasGems = sInv.hasGemInSlot(ability);
 					break;
 				}
 			}
@@ -145,7 +145,7 @@ public class Ability implements IAbility {
 			StoneInventory stoneInv = new StoneInventory(backupStone);
 			props.setBondedStoneId(stoneInv.getUniqueId());
 			hasStone = true;
-			hasGems = stoneInv.hasGemInSlot(slot);
+			hasGems = stoneInv.hasGemInSlot(ability);
 		}
 		
 //		if (!doesPlayer) Log.info(slot.name() + " is turned off by the player", player);

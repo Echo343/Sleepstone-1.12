@@ -1,6 +1,6 @@
 package com.blargsworkshop.sleepstone.capabilites.player;
 
-import com.blargsworkshop.sleepstone.items.stone.Slots;
+import com.blargsworkshop.sleepstone.powers.Power;
 
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
@@ -16,7 +16,7 @@ public class AbilityStorage implements IStorage<IAbility> {
 	public NBTBase writeNBT(Capability<IAbility> capability, IAbility instance,	EnumFacing side) {
 		NBTTagCompound properties = new NBTTagCompound();
 		properties.setString(BONDED_ID, instance.getBondedStoneId());
-		instance.getAbilityMap().forEach((Slots ability, Boolean value) -> {
+		instance.getAbilityMap().forEach((Power ability, Boolean value) -> {
 			properties.setBoolean(ability.name(), value);
 		});
 		return properties;
@@ -26,7 +26,7 @@ public class AbilityStorage implements IStorage<IAbility> {
 	public void readNBT(Capability<IAbility> capability, IAbility instance, EnumFacing side, NBTBase nbt) {
 		NBTTagCompound properties = (NBTTagCompound) nbt;
 		instance.setBondedStoneIdWithoutSync(properties.getString(BONDED_ID));
-		instance.getAbilityMap().forEach((Slots ability, Boolean value) -> {
+		instance.getAbilityMap().forEach((Power ability, Boolean value) -> {
 			instance.getAbilityMap().put(ability, properties.getBoolean(ability.name()));
 		});
 	}
