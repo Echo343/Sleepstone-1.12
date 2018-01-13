@@ -1,4 +1,4 @@
-package com.blargsworkshop.sleepstone.powers;
+package com.blargsworkshop.sleepstone.abilities;
 
 import java.util.ArrayList;
 import java.util.List;

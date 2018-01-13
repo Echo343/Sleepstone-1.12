@@ -5,9 +5,9 @@ import java.io.IOException;
 import com.blargsworkshop.engine.network.AbstractMessage;
 import com.blargsworkshop.engine.proxy.IProxy;
 import com.blargsworkshop.sleepstone.SleepstoneMod;
-import com.blargsworkshop.sleepstone.capabilites.player.AbilityProvider;
-import com.blargsworkshop.sleepstone.capabilites.player.IAbility;
-import com.blargsworkshop.sleepstone.powers.Power;
+import com.blargsworkshop.sleepstone.abilities.Ability;
+import com.blargsworkshop.sleepstone.capabilites.player.AbilityStatusProvider;
+import com.blargsworkshop.sleepstone.capabilites.player.IAbilityStatus;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
@@ -15,19 +15,19 @@ import net.minecraftforge.fml.relauncher.Side;
 
 public class SyncPlayerPropMessage extends AbstractMessage<SyncPlayerPropMessage> {
 	
-	private Power ability;
+	private Ability ability;
 	private boolean bool;
 	
 	public SyncPlayerPropMessage() {}
 	
-	public SyncPlayerPropMessage(Power ability, boolean value) {
+	public SyncPlayerPropMessage(Ability ability, boolean value) {
 		this.ability = ability;
 		this.bool = value;
 	}
 	
 	@Override
 	protected void read(PacketBuffer buffer) throws IOException {
-		ability = Power.values()[buffer.readInt()];
+		ability = Ability.values()[buffer.readInt()];
 		bool = buffer.readBoolean();
 	}
 
@@ -39,7 +39,7 @@ public class SyncPlayerPropMessage extends AbstractMessage<SyncPlayerPropMessage
 
 	@Override
 	public void process(EntityPlayer player, Side side) {
-		IAbility props = player.getCapability(AbilityProvider.ABILITY_CAPABILITY, null);
+		IAbilityStatus props = player.getCapability(AbilityStatusProvider.ABILITY_STATUS_CAPABILITY, null);
 		props.setAbilityWithoutSync(ability, bool);
 	}
 

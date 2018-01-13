@@ -1,7 +1,7 @@
 package com.blargsworkshop.sleepstone.events;
 
 import com.blargsworkshop.sleepstone.ModItems;
-import com.blargsworkshop.sleepstone.items.stone.Slots;
+import com.blargsworkshop.sleepstone.items.stone.GemSlot;
 
 import net.minecraft.entity.EntityFlying;
 import net.minecraft.entity.EntityLivingBase;
@@ -26,8 +26,8 @@ public class MobDrops {
 			// 0.5% drop chance
 			if (dropChance <= 0.005) {
 				// Pick a random gem
-				int gemIndex = (int) (Math.random() * Slots.values().length);
-				ItemStack loot = new ItemStack(Slots.values()[gemIndex].getGemItem());
+				int gemIndex = (int) (Math.random() * GemSlot.values().length);
+				ItemStack loot = new ItemStack(GemSlot.values()[gemIndex].getGemItem());
 				event.getDrops().add(new EntityItem(mob.getEntityWorld(), mob.posX, mob.posY, mob.posZ, loot));
 			}
 		}

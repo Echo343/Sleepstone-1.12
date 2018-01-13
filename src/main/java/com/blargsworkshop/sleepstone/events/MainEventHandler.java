@@ -4,10 +4,10 @@ import com.blargsworkshop.engine.event.IEventHandler;
 import com.blargsworkshop.engine.logger.Log;
 import com.blargsworkshop.engine.utility.Utils;
 import com.blargsworkshop.sleepstone.ModInfo;
-import com.blargsworkshop.sleepstone.capabilites.player.AbilityProvider;
-import com.blargsworkshop.sleepstone.capabilites.player.IAbility;
-import com.blargsworkshop.sleepstone.powers.HorseSpirit;
-import com.blargsworkshop.sleepstone.powers.Power;
+import com.blargsworkshop.sleepstone.abilities.Ability;
+import com.blargsworkshop.sleepstone.abilities.Windwalker;
+import com.blargsworkshop.sleepstone.capabilites.player.AbilityStatusProvider;
+import com.blargsworkshop.sleepstone.capabilites.player.IAbilityStatus;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -33,7 +33,7 @@ public class MainEventHandler implements IEventHandler {
 	@SubscribeEvent
 	public void attachCapability(AttachCapabilitiesEvent<Entity> event) {
 		if (event.getObject() instanceof EntityPlayer) {
-			event.addCapability(new ResourceLocation(ModInfo.ID, "sleepstone_player_props"), new AbilityProvider((EntityPlayer) event.getObject()));
+			event.addCapability(new ResourceLocation(ModInfo.ID, "sleepstone_player_props"), new AbilityStatusProvider((EntityPlayer) event.getObject()));
 			Log.detail("Sleepstone Ability capability has been attached.");
 		}
 	}
@@ -42,7 +42,7 @@ public class MainEventHandler implements IEventHandler {
 	public void onEntityContructing(EntityConstructing event) {
 		if (event.getEntity() instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) event.getEntity();
-			player.getAttributeMap().registerAttribute(HorseSpirit.STEP_HEIGHT);
+			player.getAttributeMap().registerAttribute(Windwalker.STEP_HEIGHT);
 		}
 	}
 	
@@ -51,7 +51,7 @@ public class MainEventHandler implements IEventHandler {
 		if (Utils.isServer(event.getEntity().getEntityWorld())) {
 			if (event.getEntity() instanceof EntityPlayer) {
 				EntityPlayer player = (EntityPlayer) event.getEntity();
-				AbilityProvider.getCapability(player).syncAll();
+				AbilityStatusProvider.getCapability(player).syncAll();
 			}
 		}
 	}
@@ -59,9 +59,9 @@ public class MainEventHandler implements IEventHandler {
 	@SubscribeEvent
 	public void onClonePlayer(PlayerEvent.Clone event) {
 		if (event.isWasDeath()) {
-			IStorage<IAbility> dataStore = AbilityProvider.ABILITY_CAPABILITY.getStorage();
-			NBTBase data = dataStore.writeNBT(AbilityProvider.ABILITY_CAPABILITY, AbilityProvider.getCapability(event.getOriginal()), null);
-			dataStore.readNBT(AbilityProvider.ABILITY_CAPABILITY, AbilityProvider.getCapability(event.getEntityPlayer()), null, data);
+			IStorage<IAbilityStatus> dataStore = AbilityStatusProvider.ABILITY_STATUS_CAPABILITY.getStorage();
+			NBTBase data = dataStore.writeNBT(AbilityStatusProvider.ABILITY_STATUS_CAPABILITY, AbilityStatusProvider.getCapability(event.getOriginal()), null);
+			dataStore.readNBT(AbilityStatusProvider.ABILITY_STATUS_CAPABILITY, AbilityStatusProvider.getCapability(event.getEntityPlayer()), null, data);
 		}
 	}
 	
@@ -69,7 +69,7 @@ public class MainEventHandler implements IEventHandler {
 	public void onLivingFallEvent(LivingFallEvent event) {
 		if (Utils.isServer(event.getEntity().getEntityWorld()) && event.getEntity() instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) event.getEntity();
-			if (event.getDistance() > 3.0F && AbilityProvider.getCapability(player).isAbilityAvailable(Power.ETHEREAL_FEET)) {
+			if (event.getDistance() > 3.0F && AbilityStatusProvider.getCapability(player).isAbilityAvailable(Ability.ETHEREAL_FEET)) {
 				event.setDistance(2.0F);
 				Log.debug(player.getDisplayNameString() + " just fell on the server.", player);				
 			}
@@ -80,7 +80,7 @@ public class MainEventHandler implements IEventHandler {
 	public void onLivingAttacked(LivingAttackEvent event) {
 		if (event.getEntityLiving() instanceof EntityPlayer && Utils.isServer(event.getEntity().getEntityWorld())) {
 			EntityPlayer player = (EntityPlayer) event.getEntityLiving();
-			if (AbilityProvider.getCapability(player).isAbilityAvailable(Power.VENOM_IMMUNITY)) {
+			if (AbilityStatusProvider.getCapability(player).isAbilityAvailable(Ability.VENOM_IMMUNITY)) {
 				Potion poison = Potion.getPotionFromResourceLocation("poison");
 				Potion wither = Potion.getPotionFromResourceLocation("wither");
 				if (event.getSource().equals(DamageSource.MAGIC) && player.isPotionActive(poison)) {

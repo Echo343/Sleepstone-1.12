@@ -13,9 +13,9 @@ import com.blargsworkshop.engine.proxy.BlargsCommonProxy;
 import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.ModItems;
 import com.blargsworkshop.sleepstone.SleepstoneMod;
-import com.blargsworkshop.sleepstone.capabilites.player.Ability;
-import com.blargsworkshop.sleepstone.capabilites.player.AbilityStorage;
-import com.blargsworkshop.sleepstone.capabilites.player.IAbility;
+import com.blargsworkshop.sleepstone.capabilites.player.AbilityStatus;
+import com.blargsworkshop.sleepstone.capabilites.player.AbilityStatusStorage;
+import com.blargsworkshop.sleepstone.capabilites.player.IAbilityStatus;
 import com.blargsworkshop.sleepstone.events.TickEventHandler;
 import com.blargsworkshop.sleepstone.events.MainEventHandler;
 import com.blargsworkshop.sleepstone.gui.GuiHandler;
@@ -31,7 +31,7 @@ public class CommonProxy extends BlargsCommonProxy {
 	
 	@Override
 	public void registerCapabilities() {
-		CapabilityManager.INSTANCE.register(IAbility.class, new AbilityStorage(), Ability.class);
+		CapabilityManager.INSTANCE.register(IAbilityStatus.class, new AbilityStatusStorage(), AbilityStatus.class);
 	}
 
 	@Override

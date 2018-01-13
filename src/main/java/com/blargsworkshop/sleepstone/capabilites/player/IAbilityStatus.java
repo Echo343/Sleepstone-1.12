@@ -2,18 +2,18 @@ package com.blargsworkshop.sleepstone.capabilites.player;
 
 import java.util.Map;
 
-import com.blargsworkshop.sleepstone.powers.Power;
+import com.blargsworkshop.sleepstone.abilities.Ability;
 
 import net.minecraft.entity.player.EntityPlayer;
 
-public interface IAbility {
+public interface IAbilityStatus {
 	
 	public void init(EntityPlayer player);
 	
-	public Map<Power, Boolean> getAbilityMap();
-	public boolean getAbility(Power ability);
-	public void setAbility(Power ability, boolean flag);
-	public void setAbilityWithoutSync(Power ability, boolean flag);
+	public Map<Ability, Boolean> getAbilityMap();
+	public boolean getAbility(Ability ability);
+	public void setAbility(Ability ability, boolean flag);
+	public void setAbilityWithoutSync(Ability ability, boolean flag);
 	
 	public String getBondedStoneId();
 	public void setBondedStoneId(String bondedStoneId);
@@ -21,5 +21,5 @@ public interface IAbility {
 	
 	public void syncAll();
 
-	public boolean isAbilityAvailable(Power ability);
+	public boolean isAbilityAvailable(Ability ability);
 }

@@ -1,6 +1,6 @@
 package com.blargsworkshop.sleepstone.items.stone.container;
 
-import com.blargsworkshop.sleepstone.items.stone.Slots;
+import com.blargsworkshop.sleepstone.items.stone.GemSlot;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -36,26 +36,26 @@ public class StoneContainer extends Container {
         
         /** Gem Slots */
         //Group one
-        this.addSlotToContainer(new GemSlot(Slots.MONK_1, this.inventory, 29, 57));
-        this.addSlotToContainer(new GemSlot(Slots.ETHEREAL_1, this.inventory, 11, 78));
-        this.addSlotToContainer(new GemSlot(Slots.GUARDIAN_1, this.inventory, 29, 83));
-        this.addSlotToContainer(new GemSlot(Slots.ELEMENTAL_1, this.inventory, 47, 78));
+        this.addSlotToContainer(new GemUISlot(GemSlot.MONK_1, this.inventory, 29, 57));
+        this.addSlotToContainer(new GemUISlot(GemSlot.ETHEREAL_1, this.inventory, 11, 78));
+        this.addSlotToContainer(new GemUISlot(GemSlot.GUARDIAN_1, this.inventory, 29, 83));
+        this.addSlotToContainer(new GemUISlot(GemSlot.ELEMENTAL_1, this.inventory, 47, 78));
         
         //Group two
-        this.addSlotToContainer(new GemSlot(Slots.TIMESPACE_1, this.inventory, 80, 16));
-        this.addSlotToContainer(new GemSlot(Slots.ETHEREAL_2, this.inventory, 62, 37));
-        this.addSlotToContainer(new GemSlot(Slots.GUARDIAN_2, this.inventory, 80, 44));
-        this.addSlotToContainer(new GemSlot(Slots.ELEMENTAL_2, this.inventory, 98, 37));
+        this.addSlotToContainer(new GemUISlot(GemSlot.TIMESPACE_1, this.inventory, 80, 16));
+        this.addSlotToContainer(new GemUISlot(GemSlot.ETHEREAL_2, this.inventory, 62, 37));
+        this.addSlotToContainer(new GemUISlot(GemSlot.GUARDIAN_2, this.inventory, 80, 44));
+        this.addSlotToContainer(new GemUISlot(GemSlot.ELEMENTAL_2, this.inventory, 98, 37));
         
         //Group three
-        this.addSlotToContainer(new GemSlot(Slots.PATHFINDER_1, this.inventory, 130, 57));
-        this.addSlotToContainer(new GemSlot(Slots.ETHEREAL_3, this.inventory, 112, 78));
-        this.addSlotToContainer(new GemSlot(Slots.GUARDIAN_3, this.inventory, 130, 83));
-        this.addSlotToContainer(new GemSlot(Slots.ELEMENTAL_3, this.inventory, 148, 78));
+        this.addSlotToContainer(new GemUISlot(GemSlot.PATHFINDER_1, this.inventory, 130, 57));
+        this.addSlotToContainer(new GemUISlot(GemSlot.ETHEREAL_3, this.inventory, 112, 78));
+        this.addSlotToContainer(new GemUISlot(GemSlot.GUARDIAN_3, this.inventory, 130, 83));
+        this.addSlotToContainer(new GemUISlot(GemSlot.ELEMENTAL_3, this.inventory, 148, 78));
         
         /** Spare Gem Inventory */
         for (int i = 0; i < 9; i++) {
-        	this.addSlotToContainer(new GemSlot(this.inventory, i + Slots.values().length, 8 + i * 18, 108));
+        	this.addSlotToContainer(new GemUISlot(this.inventory, i + GemSlot.values().length, 8 + i * 18, 108));
         }
 
         // If you want, you can add ARMOR SLOTS here as well, but you need to

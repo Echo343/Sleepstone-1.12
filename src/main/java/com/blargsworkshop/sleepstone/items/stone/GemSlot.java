@@ -3,7 +3,7 @@ package com.blargsworkshop.sleepstone.items.stone;
 import com.blargsworkshop.sleepstone.ModItems;
 import com.blargsworkshop.sleepstone.items.gems.Gem;
 
-public enum Slots {
+public enum GemSlot {
 	MONK_1(ModItems.itemMindBodyGem),
 	MONK_2(ModItems.itemMindBodyGem),
 	MONK_3(ModItems.itemMindBodyGem),
@@ -25,7 +25,7 @@ public enum Slots {
 	
 	private Gem gem;
 	
-	Slots(Gem item) {
+	GemSlot(Gem item) {
 		this.gem = item;
 	}
 	

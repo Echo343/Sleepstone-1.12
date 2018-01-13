@@ -5,7 +5,7 @@ import java.io.IOException;
 import com.blargsworkshop.engine.network.AbstractMessage.AbstractServerMessage;
 import com.blargsworkshop.engine.proxy.IProxy;
 import com.blargsworkshop.sleepstone.SleepstoneMod;
-import com.blargsworkshop.sleepstone.powers.RockWall;
+import com.blargsworkshop.sleepstone.abilities.RockWall;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;

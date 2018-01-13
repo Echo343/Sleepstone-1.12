@@ -8,25 +8,25 @@ import com.blargsworkshop.sleepstone.items.gems.GuardianGem;
 import com.blargsworkshop.sleepstone.items.gems.PathfinderGem;
 import com.blargsworkshop.sleepstone.items.gems.MindBodyGem;
 import com.blargsworkshop.sleepstone.items.gems.TimeSpaceGem;
-import com.blargsworkshop.sleepstone.items.stone.Slots;
+import com.blargsworkshop.sleepstone.items.stone.GemSlot;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-public class GemSlot extends Slot {
+public class GemUISlot extends Slot {
 	
 	private Class<? extends Gem> gemType;
 	private final int stackLimit;
 	
-    public GemSlot(IInventory inv, int index, int xPos, int yPos) {
+    public GemUISlot(IInventory inv, int index, int xPos, int yPos) {
         super(inv, index, xPos, yPos);
         this.gemType = Gem.class;
         this.stackLimit = super.getSlotStackLimit();
     }
     
-    public GemSlot(Slots gemSlot, IInventory inv, int xPos, int yPos) {
+    public GemUISlot(GemSlot gemSlot, IInventory inv, int xPos, int yPos) {
     	super(inv, gemSlot.ordinal(), xPos, yPos);
     	this.gemType = gemSlot.getGemItem().getClass();
     	this.stackLimit = 1;

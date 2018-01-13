@@ -10,50 +10,50 @@ import com.blargsworkshop.engine.network.PacketDispatcher;
 import com.blargsworkshop.engine.utility.Utils;
 import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.ModItems;
+import com.blargsworkshop.sleepstone.abilities.Ability;
 import com.blargsworkshop.sleepstone.items.stone.container.StoneInventory;
 import com.blargsworkshop.sleepstone.network.packets.bidirectional.SyncAllPlayerPropsMessage;
 import com.blargsworkshop.sleepstone.network.packets.bidirectional.SyncPlayerBondedIdMessage;
 import com.blargsworkshop.sleepstone.network.packets.bidirectional.SyncPlayerPropMessage;
-import com.blargsworkshop.sleepstone.powers.Power;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 
-public class Ability implements IAbility {
+public class AbilityStatus implements IAbilityStatus {
 	
 	private PacketDispatcher dispatcher = null;
 	
 	private String bondedStoneId = "";
 	private EntityPlayer player;
-	private EnumMap<Power, Boolean> abilities = new EnumMap<Power, Boolean>(Power.class);
+	private EnumMap<Ability, Boolean> abilities = new EnumMap<Ability, Boolean>(Ability.class);
 
 	public void init(EntityPlayer player) {
 		dispatcher = NetworkOverlord.get(ModInfo.ID);
 		this.player = player;
-		for (Power ability : Power.values()) {
+		for (Ability ability : Ability.values()) {
 			abilities.put(ability, false);
 		}
 	}
 	
 	@Override
-	public Map<Power, Boolean> getAbilityMap() {
+	public Map<Ability, Boolean> getAbilityMap() {
 		return abilities;
 	}
 
 	@Override
-	public boolean getAbility(Power ability) {
+	public boolean getAbility(Ability ability) {
 		Boolean bool = abilities.get(ability);
 		return bool != null ? bool : false;
 	}
 
 	@Override
-	public void setAbility(Power ability, boolean value) {
+	public void setAbility(Ability ability, boolean value) {
 		setAbility(ability, value, true);
 	}
 
 	@Override
-	public void setAbilityWithoutSync(Power ability, boolean value) {
+	public void setAbilityWithoutSync(Ability ability, boolean value) {
 		setAbility(ability, value, false);
 	}
 
@@ -82,7 +82,7 @@ public class Ability implements IAbility {
 		}
 	}
 	
-	protected void setAbility(Power ability, boolean value, boolean doSync) {
+	protected void setAbility(Ability ability, boolean value, boolean doSync) {
 		if (Boolean.valueOf(value).equals(abilities.get(ability))) {
 			return;
 		}
@@ -117,8 +117,8 @@ public class Ability implements IAbility {
 		}
 	}
 	
-	public boolean isAbilityAvailable(Power ability) {
-		IAbility props = this;
+	public boolean isAbilityAvailable(Ability ability) {
+		IAbilityStatus props = this;
 		boolean doesPlayer = false;
 		boolean hasStone = false;
 		boolean hasGems = false;

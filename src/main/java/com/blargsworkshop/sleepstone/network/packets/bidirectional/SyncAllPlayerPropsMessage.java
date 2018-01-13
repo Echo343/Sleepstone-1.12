@@ -5,8 +5,8 @@ import java.io.IOException;
 import com.blargsworkshop.engine.network.AbstractMessage;
 import com.blargsworkshop.engine.proxy.IProxy;
 import com.blargsworkshop.sleepstone.SleepstoneMod;
-import com.blargsworkshop.sleepstone.capabilites.player.AbilityProvider;
-import com.blargsworkshop.sleepstone.capabilites.player.IAbility;
+import com.blargsworkshop.sleepstone.capabilites.player.AbilityStatusProvider;
+import com.blargsworkshop.sleepstone.capabilites.player.IAbilityStatus;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -21,9 +21,9 @@ public class SyncAllPlayerPropsMessage extends AbstractMessage<SyncAllPlayerProp
 	public SyncAllPlayerPropsMessage() {}
 	
 	public SyncAllPlayerPropsMessage(EntityPlayer player) {
-		IStorage<IAbility> storage = AbilityProvider.ABILITY_CAPABILITY.getStorage();
-		IAbility abilities = player.getCapability(AbilityProvider.ABILITY_CAPABILITY, null);
-		data = (NBTTagCompound) storage.writeNBT(AbilityProvider.ABILITY_CAPABILITY, abilities, null);
+		IStorage<IAbilityStatus> storage = AbilityStatusProvider.ABILITY_STATUS_CAPABILITY.getStorage();
+		IAbilityStatus abilityStatus = player.getCapability(AbilityStatusProvider.ABILITY_STATUS_CAPABILITY, null);
+		data = (NBTTagCompound) storage.writeNBT(AbilityStatusProvider.ABILITY_STATUS_CAPABILITY, abilityStatus, null);
 	}
 
 	@Override
@@ -38,9 +38,9 @@ public class SyncAllPlayerPropsMessage extends AbstractMessage<SyncAllPlayerProp
 
 	@Override
 	public void process(EntityPlayer player, Side side) {
-		IStorage<IAbility> storage = AbilityProvider.ABILITY_CAPABILITY.getStorage();
-		IAbility abilities = player.getCapability(AbilityProvider.ABILITY_CAPABILITY, null);
-		storage.readNBT(AbilityProvider.ABILITY_CAPABILITY, abilities, null, data);
+		IStorage<IAbilityStatus> storage = AbilityStatusProvider.ABILITY_STATUS_CAPABILITY.getStorage();
+		IAbilityStatus abilityStatus = player.getCapability(AbilityStatusProvider.ABILITY_STATUS_CAPABILITY, null);
+		storage.readNBT(AbilityStatusProvider.ABILITY_STATUS_CAPABILITY, abilityStatus, null, data);
 	}
 
 	@Override

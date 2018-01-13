@@ -1,8 +1,8 @@
 package com.blargsworkshop.sleepstone.gui;
 
 import com.blargsworkshop.engine.utility.Utils;
-import com.blargsworkshop.sleepstone.capabilites.player.AbilityProvider;
-import com.blargsworkshop.sleepstone.capabilites.player.IAbility;
+import com.blargsworkshop.sleepstone.capabilites.player.AbilityStatusProvider;
+import com.blargsworkshop.sleepstone.capabilites.player.IAbilityStatus;
 import com.blargsworkshop.sleepstone.items.stone.container.StoneContainer;
 import com.blargsworkshop.sleepstone.items.stone.container.StoneInventory;
 import com.blargsworkshop.sleepstone.items.stone.gui.GuiStone;
@@ -18,7 +18,7 @@ public class GuiHandler implements IGuiHandler {
 	public Object getServerGuiElement(int guiId, EntityPlayer player, World world,	int x, int y, int z) {
 		if (guiId == GuiEnum.STONE.ordinal()) {
 			StoneInventory sInv = new StoneInventory(player.getHeldItemMainhand());
-			IAbility props = player.getCapability(AbilityProvider.ABILITY_CAPABILITY, null);
+			IAbilityStatus props = player.getCapability(AbilityStatusProvider.ABILITY_STATUS_CAPABILITY, null);
 			if (!sInv.getUniqueId().equals(props.getBondedStoneId())) {
 				props.setBondedStoneId(sInv.getUniqueId());
 				Utils.addChatMessage(player, "text.guistone.sleepstone_attunes_to_you");

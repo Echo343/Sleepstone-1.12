@@ -4,9 +4,9 @@ import com.blargsworkshop.engine.event.IEventHandler;
 import com.blargsworkshop.engine.potion.BlargsPotionEffect;
 import com.blargsworkshop.engine.utility.Utils;
 import com.blargsworkshop.sleepstone.ModItems.Potions;
-import com.blargsworkshop.sleepstone.capabilites.player.AbilityProvider;
-import com.blargsworkshop.sleepstone.powers.HorseSpirit;
-import com.blargsworkshop.sleepstone.powers.Power;
+import com.blargsworkshop.sleepstone.abilities.Ability;
+import com.blargsworkshop.sleepstone.abilities.Windwalker;
+import com.blargsworkshop.sleepstone.capabilites.player.AbilityStatusProvider;
 
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -25,7 +25,7 @@ public class TickEventHandler implements IEventHandler {
 		}
 		
 		if (Utils.isClient(e.player.getEntityWorld())) {
-			IAttributeInstance stepHeightAttribute = e.player.getEntityAttribute(HorseSpirit.STEP_HEIGHT);
+			IAttributeInstance stepHeightAttribute = e.player.getEntityAttribute(Windwalker.STEP_HEIGHT);
 			if (stepHeightAttribute != null && e.player.stepHeight != stepHeightAttribute.getAttributeValue()) {
 				e.player.stepHeight = (float) stepHeightAttribute.getAttributeValue();
 			}
@@ -33,13 +33,13 @@ public class TickEventHandler implements IEventHandler {
 		
 		if (Utils.isServer(e.player.getEntityWorld()) && e.player.ticksExisted % CHECK_RATE == 0) {
 			// Pathfinder
-			if (e.player.getCapability(AbilityProvider.ABILITY_CAPABILITY, null).isAbilityAvailable(Power.IRON_STOMACH)) {
+			if (e.player.getCapability(AbilityStatusProvider.ABILITY_STATUS_CAPABILITY, null).isAbilityAvailable(Ability.IRON_STOMACH)) {
 				e.player.addPotionEffect(new BlargsPotionEffect(Potions.foodSaturation, REFRESH_DURATION, 0, true, true));
 			}
 			
 			// Time & Space
-			if (e.player.getCapability(AbilityProvider.ABILITY_CAPABILITY, null).isAbilityAvailable(Power.WINDWALKER)) {
-				e.player.addPotionEffect(new BlargsPotionEffect(Potions.horseSpirit, REFRESH_DURATION, 0, true, true));
+			if (e.player.getCapability(AbilityStatusProvider.ABILITY_STATUS_CAPABILITY, null).isAbilityAvailable(Ability.WINDWALKER)) {
+				e.player.addPotionEffect(new BlargsPotionEffect(Potions.windwalker, REFRESH_DURATION, 0, true, true));
 			}
 		}
 	}

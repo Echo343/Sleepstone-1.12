@@ -3,8 +3,8 @@ package com.blargsworkshop.sleepstone.items.stone.container;
 import java.util.List;
 import java.util.UUID;
 
-import com.blargsworkshop.sleepstone.items.stone.Slots;
-import com.blargsworkshop.sleepstone.powers.Power;
+import com.blargsworkshop.sleepstone.abilities.Ability;
+import com.blargsworkshop.sleepstone.items.stone.GemSlot;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -60,7 +60,7 @@ public class StoneInventory implements IInventory {
         return inventory.get(slot);
     }
     
-    private boolean checkGems(Slots mainSlot, Slots augmentSlot) {
+    private boolean checkGems(GemSlot mainSlot, GemSlot augmentSlot) {
     	boolean hasGems = false;
     	ItemStack mainStack = getStackInSlot(mainSlot.ordinal());
     	if (mainStack != null && mainStack.getItem() == mainSlot.getGemItem()) {
@@ -77,8 +77,8 @@ public class StoneInventory implements IInventory {
     	return hasGems;
     }
     
-    public boolean hasGemInSlot(Power power) {
-    	return checkGems(power.getFirstGemSlot(), power.getSecondGemSlot());
+    public boolean hasGemInSlot(Ability ability) {
+    	return checkGems(ability.getFirstGemSlot(), ability.getSecondGemSlot());
     }
 
     @Override
