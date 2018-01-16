@@ -66,7 +66,7 @@ public class ModItems implements IModItems{
 		public static BlargsPotion warpSickness = new BlargsPotion(new ResourceLocation(ModInfo.ID, "warpsickness"), "potion.warpingsickness");
 		public static BlargsPotion enderShardWarp = new BlargsPotion(new ResourceLocation(ModInfo.ID, "endershard"), "potion.endershard");
 		public static BlargsPotion foodSaturation = new FoodSaturationPotion(new ResourceLocation(ModInfo.ID, "foodsaturation"), "potion.foodsaturation");
-		public static BlargsPotion windwalker = new WindwalkerPotion(new ResourceLocation(ModInfo.ID, "windwalker"), "potion.horsespirit");
+		public static BlargsPotion windwalker = new WindwalkerPotion(new ResourceLocation(ModInfo.ID, "windwalker"), "potion.windwalker");
 	}
 	
 	@ModSound
@@ -89,11 +89,11 @@ public class ModItems implements IModItems{
 	
 	@ModSprite
 	public static class Sprites {
-		public static ResourceLocation mindBodySlotBackground = new ResourceLocation(ModInfo.ID, "items/slot-gem-mind-body");
-		public static ResourceLocation pathfinderSlotBackground = new ResourceLocation(ModInfo.ID, "items/slot-gem-pathfinder");
-		public static ResourceLocation timeSpaceSlotBackground = new ResourceLocation(ModInfo.ID, "items/slot-gem-time-and-space");
-		public static ResourceLocation redSlotBackground = new ResourceLocation(ModInfo.ID, "items/slot-gem-fire");
-		public static ResourceLocation guardianSlotBackground = new ResourceLocation(ModInfo.ID, "items/slot-gem-guardian");
-		public static ResourceLocation etherealSlotBackground = new ResourceLocation(ModInfo.ID, "items/slot-gem-ethereal");
+		public static ResourceLocation monkSlotBackground = new ResourceLocation(ModInfo.ID, "items/slotbackground-gem-monk");
+		public static ResourceLocation pathfinderSlotBackground = new ResourceLocation(ModInfo.ID, "items/slotbackground-gem-pathfinder");
+		public static ResourceLocation timeSpaceSlotBackground = new ResourceLocation(ModInfo.ID, "items/slotbackground-gem-time_space");
+		public static ResourceLocation elementalSlotBackground = new ResourceLocation(ModInfo.ID, "items/slotbackground-gem-elemental");
+		public static ResourceLocation guardianSlotBackground = new ResourceLocation(ModInfo.ID, "items/slotbackground-gem-guardian");
+		public static ResourceLocation etherealSlotBackground = new ResourceLocation(ModInfo.ID, "items/slotbackground-gem-ethereal");
 	}
 }

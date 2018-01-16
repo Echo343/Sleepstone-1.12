@@ -1,12 +1,12 @@
 package com.blargsworkshop.sleepstone.items.stone.container;
 
 import com.blargsworkshop.sleepstone.ModItems.Sprites;
-import com.blargsworkshop.sleepstone.items.gems.EtherealGem;
 import com.blargsworkshop.sleepstone.items.gems.ElementalGem;
+import com.blargsworkshop.sleepstone.items.gems.EtherealGem;
 import com.blargsworkshop.sleepstone.items.gems.Gem;
 import com.blargsworkshop.sleepstone.items.gems.GuardianGem;
-import com.blargsworkshop.sleepstone.items.gems.PathfinderGem;
 import com.blargsworkshop.sleepstone.items.gems.MindBodyGem;
+import com.blargsworkshop.sleepstone.items.gems.PathfinderGem;
 import com.blargsworkshop.sleepstone.items.gems.TimeSpaceGem;
 import com.blargsworkshop.sleepstone.items.stone.GemSlot;
 
@@ -58,7 +58,7 @@ public class GemUISlot extends Slot {
     private ResourceLocation getResourceLocationFromGemType(Class<? extends Gem> gemType) {
     	ResourceLocation slotTexture = null;
     	if (gemType.equals(MindBodyGem.class)) {
-    		slotTexture = Sprites.mindBodySlotBackground;
+    		slotTexture = Sprites.monkSlotBackground;
     	}
     	else if (gemType.equals(PathfinderGem.class)) {
 			slotTexture = Sprites.pathfinderSlotBackground;
@@ -67,7 +67,7 @@ public class GemUISlot extends Slot {
 			slotTexture = Sprites.timeSpaceSlotBackground;
     	}
     	else if (gemType.equals(ElementalGem.class)) {
-			slotTexture = Sprites.redSlotBackground;
+			slotTexture = Sprites.elementalSlotBackground;
     	}
     	else if (gemType.equals(GuardianGem.class)) {
 			slotTexture = Sprites.guardianSlotBackground;

@@ -10,7 +10,6 @@ import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.monster.EntityEndermite;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySlime;
-import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.world.DimensionType;
@@ -33,6 +32,7 @@ public class MobDrops {
 		}
 	}
 
+	// TODO change to elemental gem
 	public static void handleFireGemDropRates(LivingDropsEvent event) {
 		EntityLivingBase mob = event.getEntityLiving();
 		// Mobs in the nether only
@@ -51,7 +51,7 @@ public class MobDrops {
 
 	public static void handleEtherealGemDropRates(LivingDropsEvent event) {
 		EntityLivingBase mob = event.getEntityLiving();
-		if (mob instanceof EntitySpider && mob.isPotionActive(Potion.getPotionFromResourceLocation("minecraft:invisibility"))) {		
+		if (mob instanceof EntityMob && mob.isPotionActive(Potion.getPotionFromResourceLocation("minecraft:invisibility"))) {		
 			ItemStack etherealGem = new ItemStack(ModItems.itemEtherealGem);		
 			event.getDrops().add(new EntityItem(mob.getEntityWorld(), mob.posX, mob.posY, mob.posZ, etherealGem));
 		}

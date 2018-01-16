@@ -32,12 +32,10 @@ public class TickEventHandler implements IEventHandler {
 		}
 		
 		if (Utils.isServer(e.player.getEntityWorld()) && e.player.ticksExisted % CHECK_RATE == 0) {
-			// Pathfinder
 			if (e.player.getCapability(AbilityStatusProvider.ABILITY_STATUS_CAPABILITY, null).isAbilityAvailable(Ability.IRON_STOMACH)) {
 				e.player.addPotionEffect(new BlargsPotionEffect(Potions.foodSaturation, REFRESH_DURATION, 0, true, true));
 			}
 			
-			// Time & Space
 			if (e.player.getCapability(AbilityStatusProvider.ABILITY_STATUS_CAPABILITY, null).isAbilityAvailable(Ability.WINDWALKER)) {
 				e.player.addPotionEffect(new BlargsPotionEffect(Potions.windwalker, REFRESH_DURATION, 0, true, true));
 			}
