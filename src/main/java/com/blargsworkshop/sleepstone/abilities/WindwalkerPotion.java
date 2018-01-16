@@ -1,7 +1,6 @@
-package com.blargsworkshop.sleepstone.potion.potions;
+package com.blargsworkshop.sleepstone.abilities;
 
 import com.blargsworkshop.engine.potion.BlargsPotion;
-import com.blargsworkshop.sleepstone.abilities.Windwalker;
 
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.util.ResourceLocation;

@@ -1,10 +1,10 @@
-package com.blargsworkshop.sleepstone.items;
+package com.blargsworkshop.sleepstone.items.endershard;
 
 import com.blargsworkshop.engine.logger.Log;
 import com.blargsworkshop.engine.logger.Log.LogLevel;
 import com.blargsworkshop.engine.utility.Utils;
 import com.blargsworkshop.sleepstone.ModItems.Potions;
-import com.blargsworkshop.sleepstone.potion.potioneffects.EnderShardPotionEffect;
+import com.blargsworkshop.sleepstone.items.BaseModItem;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
