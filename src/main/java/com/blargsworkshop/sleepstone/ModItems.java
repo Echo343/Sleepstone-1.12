@@ -22,7 +22,7 @@ import com.blargsworkshop.sleepstone.items.gems.PathfinderGem;
 import com.blargsworkshop.sleepstone.items.gems.MindBodyGem;
 import com.blargsworkshop.sleepstone.items.gems.TimeSpaceGem;
 import com.blargsworkshop.sleepstone.items.gems.mats.PathfinderCraftable;
-import com.blargsworkshop.sleepstone.items.gems.mats.StoneCraftable;
+import com.blargsworkshop.sleepstone.items.gems.mats.MonkCraftable;
 import com.blargsworkshop.sleepstone.items.stone.Sleepstone;
 
 import net.minecraft.creativetab.CreativeTabs;
@@ -55,7 +55,7 @@ public class ModItems implements IModItems{
 	public static Gem itemElementalGem = new ElementalGem();
 	
 	@ModItem
-	public static Item itemStoneCraftable = new StoneCraftable();
+	public static Item itemMonkCraftable = new MonkCraftable();
 	@ModItem
 	public static Item itemPathfinderCraftable = new PathfinderCraftable();
 	@ModItem
@@ -77,14 +77,14 @@ public class ModItems implements IModItems{
 
 	@ModRecipe
 	public static class SmeltingRecipes {
-		public static IBlargRecipe blastedClayPiece = new SmeltingRecipe(new ItemStack(ModItems.itemStoneCraftable, 1, 0), new ItemStack(ModItems.itemStoneCraftable, 1, 1), 0.1f);
-		public static IBlargRecipe blastedCeramicFoundation = new SmeltingRecipe(new ItemStack(ModItems.itemStoneCraftable, 1, 2), new ItemStack(ModItems.itemStoneCraftable, 1, 3), 1f);
-		public static IBlargRecipe hyperInfusedMass = new SmeltingRecipe(new ItemStack(ModItems.itemStoneCraftable, 1, 6), new ItemStack(ModItems.itemStoneCraftable, 1, 7), 1f);
-		public static IBlargRecipe refinedObsidian = new SmeltingRecipe(new ItemStack(Blocks.OBSIDIAN), new ItemStack(ModItems.itemStoneCraftable, 1, 8), 0.4f);
-		public static IBlargRecipe hardenedObsidianClump = new SmeltingRecipe(new ItemStack(ModItems.itemStoneCraftable, 1, 9), new ItemStack(ModItems.itemStoneCraftable, 1, 10), 0.7f);
-		public static IBlargRecipe strengthenedDiamondLattice = new SmeltingRecipe(new ItemStack(ModItems.itemStoneCraftable, 1, 11), new ItemStack(ModItems.itemStoneCraftable, 1, 12), 1f);
-		public static IBlargRecipe heatedCrystallineLatticeStructure = new SmeltingRecipe(new ItemStack(ModItems.itemStoneCraftable, 1, 13), new ItemStack(ModItems.itemStoneCraftable, 1, 14), 1f);
-		public static IBlargRecipe stoneGem = new SmeltingRecipe(new ItemStack(ModItems.itemStoneCraftable, 1, 15), new ItemStack(ModItems.itemMindBodyGem), 1f);
+		public static IBlargRecipe blastedClayPiece = new SmeltingRecipe(new ItemStack(ModItems.itemMonkCraftable, 1, 0), new ItemStack(ModItems.itemMonkCraftable, 1, 1), 0.1f);
+		public static IBlargRecipe blastedCeramicFoundation = new SmeltingRecipe(new ItemStack(ModItems.itemMonkCraftable, 1, 2), new ItemStack(ModItems.itemMonkCraftable, 1, 3), 1f);
+		public static IBlargRecipe hyperInfusedMass = new SmeltingRecipe(new ItemStack(ModItems.itemMonkCraftable, 1, 6), new ItemStack(ModItems.itemMonkCraftable, 1, 7), 1f);
+		public static IBlargRecipe refinedObsidian = new SmeltingRecipe(new ItemStack(Blocks.OBSIDIAN), new ItemStack(ModItems.itemMonkCraftable, 1, 8), 0.4f);
+		public static IBlargRecipe hardenedObsidianClump = new SmeltingRecipe(new ItemStack(ModItems.itemMonkCraftable, 1, 9), new ItemStack(ModItems.itemMonkCraftable, 1, 10), 0.7f);
+		public static IBlargRecipe strengthenedDiamondLattice = new SmeltingRecipe(new ItemStack(ModItems.itemMonkCraftable, 1, 11), new ItemStack(ModItems.itemMonkCraftable, 1, 12), 1f);
+		public static IBlargRecipe heatedCrystallineLatticeStructure = new SmeltingRecipe(new ItemStack(ModItems.itemMonkCraftable, 1, 13), new ItemStack(ModItems.itemMonkCraftable, 1, 14), 1f);
+		public static IBlargRecipe stoneGem = new SmeltingRecipe(new ItemStack(ModItems.itemMonkCraftable, 1, 15), new ItemStack(ModItems.itemMindBodyGem), 1f);
 	}
 	
 	@ModSprite
