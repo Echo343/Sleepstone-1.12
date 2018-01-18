@@ -12,7 +12,7 @@ package com.blargsworkshop.sleepstone.items.gems;
 public class TimeSpaceGem extends Gem {
 
 	private static final String UNLOCALIZED_NAME = "timespacegem";
-	private static final String REGISTRY_NAME = "gem_timeandspace";
+	private static final String REGISTRY_NAME = "gem_timespace";
 	
 	public TimeSpaceGem() {
 		super(UNLOCALIZED_NAME, REGISTRY_NAME);

@@ -10,12 +10,12 @@
             "item": "minecraft:gold_block"
         },
         "R": {
-            "item": "sleepstonemod:craftablestone",
+            "item": "sleepstonemod:craftable_monk",
             "data": 4
         }
     },
     "result": {
-        "item": "sleepstonemod:craftablestone",
+        "item": "sleepstonemod:craftable_monk",
         "data": 5
     }
 }

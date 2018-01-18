@@ -8,8 +8,8 @@ package com.blargsworkshop.sleepstone.items.gems.mats;
  */
 public class PathfinderCraftable extends BaseCraftable {
 
-	private static final String UNLOCALIZED_NAME = "craftablepathfinder";
-	private static final String REGISTRY_NAME = "craftablepathfinder";
+	private static final String UNLOCALIZED_NAME = "craftable_pathfinder";
+	private static final String REGISTRY_NAME = "craftable_pathfinder";
 	private static final int NUMBER_OF_CRAFTABLES = 1;
 
 	public PathfinderCraftable() {

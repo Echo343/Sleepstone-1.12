@@ -19,7 +19,7 @@ import com.blargsworkshop.sleepstone.items.gems.ElementalGem;
 import com.blargsworkshop.sleepstone.items.gems.Gem;
 import com.blargsworkshop.sleepstone.items.gems.GuardianGem;
 import com.blargsworkshop.sleepstone.items.gems.PathfinderGem;
-import com.blargsworkshop.sleepstone.items.gems.MindBodyGem;
+import com.blargsworkshop.sleepstone.items.gems.MonkGem;
 import com.blargsworkshop.sleepstone.items.gems.TimeSpaceGem;
 import com.blargsworkshop.sleepstone.items.gems.mats.PathfinderCraftable;
 import com.blargsworkshop.sleepstone.items.gems.mats.MonkCraftable;
@@ -42,7 +42,7 @@ public class ModItems implements IModItems{
 	public static Item itemSleepstone = new Sleepstone();
 	
 	@ModItem
-	public static Gem itemMindBodyGem = new MindBodyGem();
+	public static Gem itemMonkGem = new MonkGem();
 	@ModItem
 	public static Gem itemTimeSpaceGem = new TimeSpaceGem();
 	@ModItem
@@ -84,7 +84,7 @@ public class ModItems implements IModItems{
 		public static IBlargRecipe hardenedObsidianClump = new SmeltingRecipe(new ItemStack(ModItems.itemMonkCraftable, 1, 9), new ItemStack(ModItems.itemMonkCraftable, 1, 10), 0.7f);
 		public static IBlargRecipe strengthenedDiamondLattice = new SmeltingRecipe(new ItemStack(ModItems.itemMonkCraftable, 1, 11), new ItemStack(ModItems.itemMonkCraftable, 1, 12), 1f);
 		public static IBlargRecipe heatedCrystallineLatticeStructure = new SmeltingRecipe(new ItemStack(ModItems.itemMonkCraftable, 1, 13), new ItemStack(ModItems.itemMonkCraftable, 1, 14), 1f);
-		public static IBlargRecipe stoneGem = new SmeltingRecipe(new ItemStack(ModItems.itemMonkCraftable, 1, 15), new ItemStack(ModItems.itemMindBodyGem), 1f);
+		public static IBlargRecipe monkGem = new SmeltingRecipe(new ItemStack(ModItems.itemMonkCraftable, 1, 15), new ItemStack(ModItems.itemMonkGem), 1f);
 	}
 	
 	@ModSprite

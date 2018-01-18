@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "sleepstonemod:items/gem-mindbody"
+        "layer0": "sleepstonemod:items/craftable-monk_5"
     }
 }

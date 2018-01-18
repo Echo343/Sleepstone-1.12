@@ -4,9 +4,9 @@ import com.blargsworkshop.sleepstone.ModItems;
 import com.blargsworkshop.sleepstone.items.gems.Gem;
 
 public enum GemSlot {
-	MONK_1(ModItems.itemMindBodyGem),
-	MONK_2(ModItems.itemMindBodyGem),
-	MONK_3(ModItems.itemMindBodyGem),
+	MONK_1(ModItems.itemMonkGem),
+	MONK_2(ModItems.itemMonkGem),
+	MONK_3(ModItems.itemMonkGem),
 	TIMESPACE_1(ModItems.itemTimeSpaceGem),
 	TIMESPACE_2(ModItems.itemTimeSpaceGem),
 	TIMESPACE_3(ModItems.itemTimeSpaceGem),

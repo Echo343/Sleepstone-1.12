@@ -5,12 +5,12 @@ package com.blargsworkshop.sleepstone.items.gems;
  * @author Echo343
  *
  */
-public class MindBodyGem extends Gem {
+public class MonkGem extends Gem {
 
-	private static final String UNLOCALIZED_NAME = "stonegem";
-	private static final String REGISTRY_NAME = "gem_stone";
+	private static final String UNLOCALIZED_NAME = "monkgem";
+	private static final String REGISTRY_NAME = "gem_monk";
 	
-	public MindBodyGem() {
+	public MonkGem() {
 		super(UNLOCALIZED_NAME, REGISTRY_NAME);
 	}
 

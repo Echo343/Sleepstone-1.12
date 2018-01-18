@@ -7,15 +7,15 @@
     ],
     "key": {
         "#": {
-            "item": "sleepstonemod:craftablestone",
-            "data": 8
+            "item": "minecraft:hardened_clay"
         },
         "X": {
-            "item": "minecraft:diamond"
+            "item": "minecraft:sandstone",
+            "data": 0
         }
     },
     "result": {
-        "item": "sleepstonemod:craftablestone",
-        "data": 9
+        "item": "sleepstonemod:craftable_monk",
+        "data": 0
     }
 }

@@ -11,7 +11,7 @@
         }
     },
     "result": {
-        "item": "sleepstonemod:craftablestone",
+        "item": "sleepstonemod:craftable_monk",
         "data": 4
     }
 }

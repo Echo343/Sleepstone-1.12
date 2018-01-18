@@ -7,16 +7,16 @@
     ],
     "key": {
         "#": {
-            "item": "sleepstonemod:craftablestone",
+            "item": "sleepstonemod:craftable_monk",
             "data": 14
         },
         "X": {
-            "item": "sleepstonemod:craftablestone",
+            "item": "sleepstonemod:craftable_monk",
             "data": 7
         }
     },
     "result": {
-        "item": "sleepstonemod:craftablestone",
+        "item": "sleepstonemod:craftable_monk",
         "data": 15
     }
 }
