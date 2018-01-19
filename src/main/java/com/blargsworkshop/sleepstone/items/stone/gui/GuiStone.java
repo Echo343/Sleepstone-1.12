@@ -130,6 +130,7 @@ public class GuiStone extends GuiScreen {
 			if (shouldShowButton(btn)) {
 				int rowPosition = firstRow + rowIndex * EFFECTIVE_BUTTON_HEIGHT;
 				int columnPosition = firstColumn + columnIndex * EFFECTIVE_BUTTON_WIDTH;
+				
 				if (btn.getType().equals(ToggleButton.class)) {
 					button = new ToggleButton(btn, columnPosition, rowPosition, Utils.localize(btn.getMessageKey()));
 					((ToggleButton) button).setState(props.getAbility(btn.getAbility()));
@@ -137,9 +138,11 @@ public class GuiStone extends GuiScreen {
 				else if (btn.getType().equals(BasicButton.class)) {
 					button = new BasicButton(btn, columnPosition, rowPosition, Utils.localize(btn.getMessageKey()));
 				}
+				
 				tooltip = new Tooltip(button, Utils.localize(btn.getTooltipMessageKey()));
 				buttonTooltips.add(tooltip);
 				buttonList.add(button);
+				
 				if (++rowIndex >= 3) {
 					rowIndex = 0;
 					++columnIndex;
