@@ -30,41 +30,58 @@ import net.minecraft.util.ResourceLocation;
 public class GuiStone extends GuiScreen {
 	
 	protected static enum Button {
-		VENOM_IMMUNITY(Ability.VENOM_IMMUNITY),
-		ETHEREAL_FEET(Ability.ETHEREAL_FEET),
-		ROCK_BARRIER(Ability.ROCK_BARRIER),
-		PRECOGNITION(Ability.PRECOGNITION),
-		TEMPORAL_AID(Ability.TEMPORAL_AID),
-		HELLJUMPER(Ability.HELLJUMPER),
-		IRON_STOMACH(Ability.IRON_STOMACH),
-		PHANTOM_TORCH(Ability.PHANTOM_TORCH),
-		WINDWALKER(Ability.WINDWALKER),
+		VENOM_IMMUNITY(Ability.VENOM_IMMUNITY, ToggleButton.class),
+		ETHEREAL_FEET(Ability.ETHEREAL_FEET, ToggleButton.class),
+		ROCK_BARRIER(Ability.ROCK_BARRIER, BasicButton.class),
+		PRECOGNITION(Ability.PRECOGNITION, ToggleButton.class),
+		TEMPORAL_AID(Ability.TEMPORAL_AID, BasicButton.class),
+		HELLJUMPER(Ability.HELLJUMPER, BasicButton.class),
+		IRON_STOMACH(Ability.IRON_STOMACH, ToggleButton.class),
+		PHANTOM_TORCH(Ability.PHANTOM_TORCH, BasicButton.class),
+		WINDWALKER(Ability.WINDWALKER, ToggleButton.class),
 		INV;
 		
+		private static final String MESSAGE_KEY_PREFIX = "text.guistone.";
 		private Ability ability = null;
+		private Class<? extends BasicButton> type = null;
 		
 		Button() {
 		}
 		
-		Button(Ability ability) {
+		Button(Ability ability, Class<? extends BasicButton> buttonType) {
 			this.ability = ability;
+			this.type = buttonType;
 		}
 		
 		public Ability getAbility() {
 			return ability;
 		}
+		
+		public Class<? extends BasicButton> getType() {
+			return type;
+		}
+		
+		public String getMessageKey() {
+			return MESSAGE_KEY_PREFIX + this.name().toLowerCase() + "_button";
+		}
+		
+		public String getTooltipMessageKey() {
+			return MESSAGE_KEY_PREFIX + this.name().toLowerCase() + "_tooltip";
+		}
 	}
 	
 	private static final ResourceLocation backgroundImage = new ResourceLocation(ModInfo.ID, "textures/gui/guistone.png");
 	
-	private static final int xSize = 248;
+	private static final int X_SIZE = 248;
 //	private static final int xSize = 376;
-	private static final int ySize = 166;
-	private static final int leftMargin = 4;
-	private static final int topMargin = 4;
-	private static final int horizontalSpacing = 4;
-	private static final int verticalSpacing = -1;
-	private static final int btnScrnWidth = BasicButton.defaultWidth * 3 + leftMargin * 2 + horizontalSpacing * 2;
+	private static final int Y_SIZE = 166;
+	private static final int LEFT_MARGIN = 4;
+	private static final int TOP_MARGIN = 4;
+	private static final int HORIZONTAL_SPACING = 4;
+	private static final int VERTICAL_SPACING = -1;
+	private static final int BUTTON_SCREEN_WIDTH = BasicButton.DEFAULT_WIDTH * 3 + LEFT_MARGIN * 2 + HORIZONTAL_SPACING * 2;
+	private static final int EFFECTIVE_BUTTON_WIDTH = BasicButton.DEFAULT_WIDTH + HORIZONTAL_SPACING;
+	private static final int EFFECTIVE_BUTTON_HEIGHT = BasicButton.DEFAULT_HEIGHT + VERTICAL_SPACING;
 	private StoneInventory inventory;
 	private EntityPlayer player;
 	private IAbilityStatus props;
@@ -80,6 +97,10 @@ public class GuiStone extends GuiScreen {
 	@Override
 	public void initGui() {
 		super.initGui();
+		if (props == null) {
+			Log.error("Error getting props", player);
+			return;			
+		}
 		initButtons();
 	}
 	
@@ -88,88 +109,45 @@ public class GuiStone extends GuiScreen {
 	}
 	
 	protected void initButtons() {
-		if (props == null) {
-			Log.error("Error getting props", player);
-			return;
+		int left = (this.width - X_SIZE) / 2;
+		int btnLeft = (this.width - BUTTON_SCREEN_WIDTH) / 2;
+		int top = (this.height - Y_SIZE) / 2;
+		
+		int firstRow = top + TOP_MARGIN;
+		int firstColumn = btnLeft + LEFT_MARGIN;
+		
+		BasicButton button = null;
+		Tooltip tooltip = null;
+		int rowIndex = 0;
+		int columnIndex = 0;
+		
+		for (Button btn : Button.values()) {
+			// Inv button is handled separately
+			if (btn.equals(Button.INV)) {
+				continue;
+			}
+			
+			if (shouldShowButton(btn)) {
+				int rowPosition = firstRow + rowIndex * EFFECTIVE_BUTTON_HEIGHT;
+				int columnPosition = firstColumn + columnIndex * EFFECTIVE_BUTTON_WIDTH;
+				if (btn.getType().equals(ToggleButton.class)) {
+					button = new ToggleButton(btn, columnPosition, rowPosition, Utils.localize(btn.getMessageKey()));
+					((ToggleButton) button).setState(props.getAbility(btn.getAbility()));
+				}
+				else if (btn.getType().equals(BasicButton.class)) {
+					button = new BasicButton(btn, columnPosition, rowPosition, Utils.localize(btn.getMessageKey()));
+				}
+				tooltip = new Tooltip(button, Utils.localize(btn.getTooltipMessageKey()));
+				buttonTooltips.add(tooltip);
+				buttonList.add(button);
+				if (++rowIndex >= 3) {
+					rowIndex = 0;
+					++columnIndex;
+				}
+			}
 		}
 		
-		int left = (this.width - xSize) / 2;
-		int btnLeft = (this.width - btnScrnWidth) / 2;
-		int top = (this.height - ySize) / 2;
-		
-		int firstColumn = btnLeft + leftMargin;
-		int secondColumn = firstColumn + BasicButton.defaultWidth + horizontalSpacing;
-		int thirdColumn = secondColumn + BasicButton.defaultWidth + horizontalSpacing;
-		
-		int firstRow = top + topMargin;
-		int secondRow = firstRow + BasicButton.defaultHeight + verticalSpacing;
-		int thirdRow = secondRow + BasicButton.defaultHeight + verticalSpacing;
-		int fourthRow = thirdRow + BasicButton.defaultHeight + verticalSpacing;
-		
-		if (shouldShowButton(Button.VENOM_IMMUNITY)) {
-			ToggleButton button = new ToggleButton(Button.VENOM_IMMUNITY, firstColumn, firstRow, Utils.localize("text.guistone.stone_button"));
-			button.setState(props.getAbility(Button.VENOM_IMMUNITY.getAbility()));
-			Tooltip tooltip = new Tooltip(button, Utils.localize("text.guistone.stone_tooltip"));
-			buttonTooltips.add(tooltip);
-			buttonList.add(button);
-		}
-		if (shouldShowButton(Button.ETHEREAL_FEET)) {
-			ToggleButton button = new ToggleButton(Button.ETHEREAL_FEET, firstColumn, secondRow, Utils.localize("text.guistone.stone_ethereal_button"));
-			button.setState(props.getAbility(Button.ETHEREAL_FEET.getAbility()));
-			Tooltip tooltip = new Tooltip(button, Utils.localize("text.guistone.stone_ethereal_tooltip"));
-			buttonTooltips.add(tooltip);
-			buttonList.add(button);
-		}
-		if (shouldShowButton(Button.ROCK_BARRIER)) {
-			BasicButton button = new BasicButton(Button.ROCK_BARRIER, firstColumn, thirdRow, Utils.localize("text.guistone.stone_guardian_button"));
-			Tooltip tooltip = new Tooltip(button, Utils.localize("text.guistone.stone_guardian_tooltip"));
-			buttonTooltips.add(tooltip);
-			buttonList.add(button);
-		}
-		if (shouldShowButton(Button.PRECOGNITION)) {
-			ToggleButton button = new ToggleButton(Button.PRECOGNITION, firstColumn, fourthRow, Utils.localize("text.guistone.stone_fire_button"));
-			button.setState(props.getAbility(Button.PRECOGNITION.getAbility()));
-			Tooltip tooltip = new Tooltip(button, Utils.localize("text.guistone.stone_fire_tooltip"));
-			buttonTooltips.add(tooltip);
-			buttonList.add(button);
-		}
-		if (shouldShowButton(Button.TEMPORAL_AID)) {
-			ToggleButton button = new ToggleButton(Button.TEMPORAL_AID, secondColumn, firstRow, Utils.localize("text.guistone.timespace_button"));
-			button.setState(props.getAbility(Button.TEMPORAL_AID.getAbility()));
-			Tooltip tooltip = new Tooltip(button, Utils.localize("text.guistone.timespace_tooltip"));
-			buttonTooltips.add(tooltip);
-			buttonList.add(button);
-		}
-		if (shouldShowButton(Button.HELLJUMPER)) {
-			ToggleButton button = new ToggleButton(Button.HELLJUMPER, secondColumn, secondRow, Utils.localize("text.guistone.timespace_ethereal_button"));
-			button.setState(props.getAbility(Button.HELLJUMPER.getAbility()));
-			Tooltip tooltip = new Tooltip(button, Utils.localize("text.guistone.timespace_ethereal_tooltip"));
-			buttonTooltips.add(tooltip);
-			buttonList.add(button);
-		}
-		if (shouldShowButton(Button.IRON_STOMACH)) {
-			ToggleButton button = new ToggleButton(Button.IRON_STOMACH, secondColumn, thirdRow, Utils.localize("text.guistone.timespace_guardian_button"));
-			button.setState(props.getAbility(Button.IRON_STOMACH.getAbility()));
-			Tooltip tooltip = new Tooltip(button, Utils.localize("text.guistone.timespace_guardian_tooltip"));
-			buttonTooltips.add(tooltip);
-			buttonList.add(button);
-		}
-		if (shouldShowButton(Button.PHANTOM_TORCH)) {
-			ToggleButton button = new ToggleButton(Button.PHANTOM_TORCH, secondColumn, fourthRow, Utils.localize("text.guistone.timespace_fire_button"));
-			button.setState(props.getAbility(Button.PHANTOM_TORCH.getAbility()));
-			Tooltip tooltip = new Tooltip(button, Utils.localize("text.guistone.timespace_fire_tooltip"));
-			buttonTooltips.add(tooltip);
-			buttonList.add(button);
-		}
-		if (shouldShowButton(Button.WINDWALKER)) {
-			ToggleButton button = new ToggleButton(Button.WINDWALKER, thirdColumn, firstRow, Utils.localize("text.guistone.pathfinder_button"));
-			button.setState(props.getAbility(Button.WINDWALKER.getAbility()));
-			Tooltip tooltip = new Tooltip(button, Utils.localize("text.guistone.pathfinder_tooltip"));
-			buttonTooltips.add(tooltip);
-			buttonList.add(button);
-		}
-		
-		GuiButton invButton = new BasicButton(Button.INV, left + xSize - 40, top + ySize - 30, 20, Utils.localize("text.guistone.inv"));
+		GuiButton invButton = new BasicButton(Button.INV, left + X_SIZE - 40, top + Y_SIZE - 30, 20, Utils.localize(Button.INV.getMessageKey()));
 		this.buttonList.add(invButton); // TODO Use an icon of some sort.
 	}
 	
@@ -177,10 +155,10 @@ public class GuiStone extends GuiScreen {
 	public void drawScreen(int mouseX, int mouseY, float renderPartialTicks) {
 		super.drawDefaultBackground();
 		this.mc.getTextureManager().bindTexture(backgroundImage);
-		int x = (this.width - xSize) / 2;
-		int y = (this.height - ySize) / 2;
+		int x = (this.width - X_SIZE) / 2;
+		int y = (this.height - Y_SIZE) / 2;
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
+		drawTexturedModalRect(x, y, 0, 0, X_SIZE, Y_SIZE);
 		super.drawScreen(mouseX, mouseY, renderPartialTicks);
 		
 		//Draw Tooltips last so they are on top.

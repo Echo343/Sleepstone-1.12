@@ -13,8 +13,8 @@ public class BasicButton extends GuiButton {
 		NOT
 	};
 
-	public final static int defaultWidth = 120;
-	public final static int defaultHeight = 20;
+	public final static int DEFAULT_WIDTH = 120;
+	public final static int DEFAULT_HEIGHT = 20;
 	
 	protected final Enum<?> buttonType;
 	
@@ -41,7 +41,7 @@ public class BasicButton extends GuiButton {
 	 * @param text Text that appears on the button.
 	 */
 	public BasicButton(Enum<?> type, int left, int top, int width, String text) {
-		this(type, left, top, width, defaultHeight, text);
+		this(type, left, top, width, DEFAULT_HEIGHT, text);
 	}
 	
 	/**
@@ -52,7 +52,7 @@ public class BasicButton extends GuiButton {
 	 * @param text Text that appears on the button.
 	 */
 	public BasicButton(Enum<?> type, int left, int top, String text) {
-		this(type, left, top, defaultWidth, defaultHeight, text);
+		this(type, left, top, DEFAULT_WIDTH, DEFAULT_HEIGHT, text);
 	}
 	
 	public Enum<?> getButtonType() {

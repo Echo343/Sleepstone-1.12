@@ -1,30 +1,30 @@
 item.basicsleepstone.name=Sleepstone
 
-item.stonegem.name=Stone Gem
+item.monkgem.name=Mind and Body Gem
 item.timespacegem.name=Time and Space Gem
 item.pathfindergem.name=Pathfinder Gem
 item.etherealgem.name=Ethereal Gem
 item.guardiangem.name=Guardian Gem
 item.firegem.name=Fire Gem
 
-item.craftablepathfinder_0.name=Mob Essence
+item.craftable_pathfinder_0.name=Mob Essence
 
-item.craftablestone_0.name=Hardened Clay Piece
-item.craftablestone_1.name=Blasted Clay Piece
-item.craftablestone_2.name=Ceramic Foundation
-item.craftablestone_3.name=Blasted Ceramic Foundation
-item.craftablestone_4.name=Condensed Redstone Block
-item.craftablestone_5.name=Hyper Lattice Redstone Block
-item.craftablestone_6.name=Hyper Lattice Redstone Mass
-item.craftablestone_7.name=Hyper Infused Mass
-item.craftablestone_8.name=Refined Obsidian
-item.craftablestone_9.name=Refined Obsidian Clump
-item.craftablestone_10.name=Hardened Obsidian Clump
-item.craftablestone_11.name=Brittle Diamond Lattice
-item.craftablestone_12.name=Strengthened Diamond Lattice
-item.craftablestone_13.name=Crystalline Lattice Structure
-item.craftablestone_14.name=Heated Crystalline Lattice Structure
-item.craftablestone_15.name=Radial Empowered Orb
+item.craftable_monk_0.name=Hardened Clay Piece
+item.craftable_monk_1.name=Blasted Clay Piece
+item.craftable_monk_2.name=Ceramic Foundation
+item.craftable_monk_3.name=Blasted Ceramic Foundation
+item.craftable_monk_4.name=Condensed Redstone Block
+item.craftable_monk_5.name=Hyper Lattice Redstone Block
+item.craftable_monk_6.name=Hyper Lattice Redstone Mass
+item.craftable_monk_7.name=Hyper Infused Mass
+item.craftable_monk_8.name=Refined Obsidian
+item.craftable_monk_9.name=Refined Obsidian Clump
+item.craftable_monk_10.name=Hardened Obsidian Clump
+item.craftable_monk_11.name=Brittle Diamond Lattice
+item.craftable_monk_12.name=Strengthened Diamond Lattice
+item.craftable_monk_13.name=Crystalline Lattice Structure
+item.craftable_monk_14.name=Heated Crystalline Lattice Structure
+item.craftable_monk_15.name=Radial Empowered Orb
 
 item.endershard.name=Ender Shard
 
@@ -36,7 +36,7 @@ text.sleepstone.suffering_effects_of_warping=You are still suffering the effects
 potion.warpingsickness=Warp Sickness
 potion.endershard=Unstable Warp
 potion.foodsaturation=Pathfinder
-potion.horsespirit=Horse Spirit
+potion.windwalker=Windwalker
 
 text.toggle_button.off=Off
 text.toggle_button.on=On
