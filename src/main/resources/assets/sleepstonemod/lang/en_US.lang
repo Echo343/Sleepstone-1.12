@@ -1,6 +1,6 @@
 item.basicsleepstone.name=Sleepstone
 
-item.monkgem.name=Mind and Body Gem
+item.monkgem.name="Monk" Gem
 item.timespacegem.name=Time and Space Gem
 item.pathfindergem.name=Pathfinder Gem
 item.etherealgem.name=Ethereal Gem
@@ -48,22 +48,22 @@ text.guistone.sleepstone_attunes_to_you=The Sleepstone glows brightly as it attu
 text.guistone.inv_button=Inv
 
 text.guistone.venom_immunity_button=Venom Immunity
-text.guistone.venom_immunity_tooltip=The Guardian gem strives for survival, and the Pathfinder gem seeks adventure.  Combined the two give the power to mine the deep caves of the spiders, and face off against the withered ones.
+text.guistone.venom_immunity_tooltip=With the knowledge of the monks and the thirst for adventure, you have found a way to become immune to the spider's poison and the touch of the withered ones.  This ability will serve you well on your travels.
 text.guistone.ethereal_feet_button=Ethereal Feet
-text.guistone.ethereal_feet_tooltip=When the player falls too hard, the Stone Gem near instantly transforms the player's feet and most of their skeletal structure to rock, hard, stone - allowing the player to fall unhindered from great heights.
+text.guistone.ethereal_feet_tooltip=By using the power of Ethereal realm you have found a way to avoid damage from falling.  The locals call this ability, Ethereal Feet for the small bright light that eminates from the feet when hitting the ground.  Make sure to land on your feet though.  One zealous teenager thought he would try a swan dive into the local quarry.  Let's just say his head was not bright.
 text.guistone.rock_barrier_button=Rock Barrier
-text.guistone.rock_barrier_tooltip=In a pinch, the player can summon the earth beneath their feet to surround themselves and their allies in a protective earthen barrier.  The last mage to use this gem lost his finger by being too close to wall as it formed.  
+text.guistone.rock_barrier_tooltip=In a pinch, you can summon the earth beneath your feet to surround yourself and your allies in a protective earthen barrier.  The last mage to use this power lost his hand by being too close to the wall as it formed.  Unfortunately, it was the hand holding the sleepstone.
 text.guistone.precognition_button=Precognition
-text.guistone.precognition_tooltip=The Fire Gem allows the powers of the Lavawalkers of old.  Using this gem, a player can walk across the very lava that would burn them.  Oddly, this gem does not grant fire resistance.
+text.guistone.precognition_tooltip=The power of the monks combined with the ability to slow time ever so slightly gives the wielder lightning quick reflexes.  Locals witnessing the use of this ability have described seeing the weilder dodge about half of the attacks with a grace-like effort almost as if they had a limited precognitive ability.  Perhaps if they were trained with the monks, they would be truly untouchable.
 text.guistone.temporal_aid_button=Temporal Aid
-text.guistone.temporal_aid_tooltip=The fastest way to aid your allies is to jump through time & space to stand (or fall) by their side.  However, at such a risk to oneself, the Guardian gem locks onto the chroniton signature of the friend you are thinking about, and allows you to send a care package to their location, keeping yourself safe and your friend happy.
+text.guistone.temporal_aid_tooltip=The fastest way to aid your allies is to jump through time & space to stand (or fall) by their side.  However, at such a risk to oneself, using the power of time and space to open a small hole in the ethereal network, you are able to send a care package to their location, keeping yourself safe and your friend happy.
 text.guistone.helljumper_button=Helljump
-text.guistone.helljumper_tooltip=This gem puts the player in the ranks of all those known as Helljumpers.  With the power of Helljumping, the player can instantly navigate to and from the Nether in the blink of an eye.  Be wary, many helljumpers have lost their lives jumping into a pit of lava.
+text.guistone.helljumper_tooltip=This ability puts the wielder in the ranks of all those known as Helljumpers.  With the power of Helljumping, the wielder can instantly navigate to and from the Nether in the blink of an eye.  Be wary, many helljumpers have lost their lives jumping into a pit of lava.
 text.guistone.iron_stomach_button=Iron Stomach
-text.guistone.iron_stomach_tooltip=Those holding the power of the Pathfinder Gem, find themselves becoming true Pathfinder being able to travel farther without tiring or falling to hunger as often.
+text.guistone.iron_stomach_tooltip=Those holding the power of the pathfinder combined with the power of the monks, find themselves becoming a true pathfinder, being able to travel farther without tiring or falling to hunger as often.  Blarg the Stout claims to have been able to travel three months without eatting.
 text.guistone.phantom_torch_button=Phantom Torch
-text.guistone.phantom_torch_tooltip=Forge in the magical heat of a Fire gem, Lenirium is a catalyst for a source of great light.
+text.guistone.phantom_torch_tooltip=By "borrowing" a torch from the ethereal realm, you find you have an unlimited supply.  This type of torch is known as a phantom torch because upon breaking it fades back into the ethereal realm.  Pathfinders equiped with a sleepstone often use this ability on their expeditions.  Unfortunately, many have discovered only one with the phantom torch ability can properly anchor it to the physical world.
 text.guistone.windwalker_button=Windwalker
-text.guistone.windwalker_tooltip=With access to the Ethereal realm, a Pathfinder can use this power to channel the spirit of the horse, granting them great speed and grace.  Carrots now taste better as well.
+text.guistone.windwalker_tooltip=By using the power of the elements, air to be exact, a pathfinder can travel much, much faster than normal.  This ability seems to also grant some protection from litterally stubbing your toe on a rock or even a chicken.
 
 text.guistone.warp=Warp
