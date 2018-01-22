@@ -27,7 +27,7 @@ public class StoneInventory implements IInventory {
     private String uniqueId = "";
 
     /** Defining your inventory size this way is handy */
-    public static final int INV_SIZE = 21;
+    public static final int INV_SIZE = 27;
 
     /** Inventory's size must be the same as number of slots you add to the Container class */
     private List<ItemStack> inventory = NonNullList.withSize(INV_SIZE, ItemStack.EMPTY);
