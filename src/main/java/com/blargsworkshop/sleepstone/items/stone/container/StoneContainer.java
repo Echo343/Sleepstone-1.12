@@ -36,22 +36,31 @@ public class StoneContainer extends Container {
         
         /** Gem Slots */
         //Group one
-        this.addSlotToContainer(new GemUISlot(GemSlot.MONK_1, this.inventory, 29, 57));
-        this.addSlotToContainer(new GemUISlot(GemSlot.ETHEREAL_1, this.inventory, 11, 78));
-        this.addSlotToContainer(new GemUISlot(GemSlot.GUARDIAN_1, this.inventory, 29, 83));
-        this.addSlotToContainer(new GemUISlot(GemSlot.ELEMENTAL_1, this.inventory, 47, 78));
+        this.addSlotToContainer(new GemUISlot(GemSlot.GUARDIAN_1, this.inventory, 22, 28));
+        this.addSlotToContainer(new GemUISlot(GemSlot.GUARDIAN_2, this.inventory, 22, 48));
+        this.addSlotToContainer(new GemUISlot(GemSlot.GUARDIAN_3, this.inventory, 22, 68));
+        
+        this.addSlotToContainer(new GemUISlot(GemSlot.MONK_1, this.inventory, 40, 28));
+        this.addSlotToContainer(new GemUISlot(GemSlot.ETHEREAL_1, this.inventory, 40, 48));
+        this.addSlotToContainer(new GemUISlot(GemSlot.ELEMENTAL_1, this.inventory, 40, 68));
         
         //Group two
-        this.addSlotToContainer(new GemUISlot(GemSlot.TIMESPACE_1, this.inventory, 80, 16));
-        this.addSlotToContainer(new GemUISlot(GemSlot.ETHEREAL_2, this.inventory, 62, 37));
-        this.addSlotToContainer(new GemUISlot(GemSlot.GUARDIAN_2, this.inventory, 80, 44));
-        this.addSlotToContainer(new GemUISlot(GemSlot.ELEMENTAL_2, this.inventory, 98, 37));
+        this.addSlotToContainer(new GemUISlot(GemSlot.TIMESPACE_1, this.inventory, 71, 28));
+        this.addSlotToContainer(new GemUISlot(GemSlot.TIMESPACE_2, this.inventory, 71, 48));
+        this.addSlotToContainer(new GemUISlot(GemSlot.TIMESPACE_3, this.inventory, 71, 68));
+                
+        this.addSlotToContainer(new GemUISlot(GemSlot.MONK_2, this.inventory, 89, 28));
+        this.addSlotToContainer(new GemUISlot(GemSlot.ETHEREAL_2, this.inventory, 89, 48));
+        this.addSlotToContainer(new GemUISlot(GemSlot.ELEMENTAL_2, this.inventory, 89, 68));
         
         //Group three
-        this.addSlotToContainer(new GemUISlot(GemSlot.PATHFINDER_1, this.inventory, 130, 57));
-        this.addSlotToContainer(new GemUISlot(GemSlot.ETHEREAL_3, this.inventory, 112, 78));
-        this.addSlotToContainer(new GemUISlot(GemSlot.GUARDIAN_3, this.inventory, 130, 83));
-        this.addSlotToContainer(new GemUISlot(GemSlot.ELEMENTAL_3, this.inventory, 148, 78));
+        this.addSlotToContainer(new GemUISlot(GemSlot.PATHFINDER_1, this.inventory, 120, 28));
+        this.addSlotToContainer(new GemUISlot(GemSlot.PATHFINDER_2, this.inventory, 120, 48));
+        this.addSlotToContainer(new GemUISlot(GemSlot.PATHFINDER_3, this.inventory, 120, 68));
+        
+        this.addSlotToContainer(new GemUISlot(GemSlot.MONK_3, this.inventory, 138, 28));
+        this.addSlotToContainer(new GemUISlot(GemSlot.ETHEREAL_3, this.inventory, 138, 48));
+        this.addSlotToContainer(new GemUISlot(GemSlot.ELEMENTAL_3, this.inventory, 138, 68));
         
         /** Spare Gem Inventory */
         for (int i = 0; i < 9; i++) {
