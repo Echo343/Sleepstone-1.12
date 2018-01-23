@@ -30,27 +30,30 @@ import net.minecraft.util.ResourceLocation;
 public class GuiStone extends GuiScreen {
 	
 	protected static enum Button {
-		VENOM_IMMUNITY(Ability.VENOM_IMMUNITY, ToggleButton.class),
-		ETHEREAL_FEET(Ability.ETHEREAL_FEET, ToggleButton.class),
-		ROCK_BARRIER(Ability.ROCK_BARRIER, BasicButton.class),
-		PRECOGNITION(Ability.PRECOGNITION, ToggleButton.class),
-		TEMPORAL_AID(Ability.TEMPORAL_AID, BasicButton.class),
-		HELLJUMPER(Ability.HELLJUMPER, BasicButton.class),
-		IRON_STOMACH(Ability.IRON_STOMACH, ToggleButton.class),
-		PHANTOM_TORCH(Ability.PHANTOM_TORCH, BasicButton.class),
-		WINDWALKER(Ability.WINDWALKER, ToggleButton.class),
+		VENOM_IMMUNITY(Ability.VENOM_IMMUNITY, ToggleButton.class, 0, 0),
+		ETHEREAL_FEET(Ability.ETHEREAL_FEET, ToggleButton.class, 0, 1),
+		ROCK_BARRIER(Ability.ROCK_BARRIER, BasicButton.class, 0, 2),
+		PRECOGNITION(Ability.PRECOGNITION, ToggleButton.class, 1, 0),
+		TEMPORAL_AID(Ability.TEMPORAL_AID, BasicButton.class, 1, 1),
+		HELLJUMPER(Ability.HELLJUMPER, BasicButton.class, 1, 2),
+		IRON_STOMACH(Ability.IRON_STOMACH, ToggleButton.class, 2, 0),
+		PHANTOM_TORCH(Ability.PHANTOM_TORCH, BasicButton.class, 2, 1),
+		WINDWALKER(Ability.WINDWALKER, ToggleButton.class, 2, 2),
 		INV;
 		
 		private static final String MESSAGE_KEY_PREFIX = "text.guistone.";
 		private Ability ability = null;
 		private Class<? extends BasicButton> type = null;
+		private int column = 0;
+		private int row = 0;
 		
-		Button() {
-		}
+		Button() {}
 		
-		Button(Ability ability, Class<? extends BasicButton> buttonType) {
+		Button(Ability ability, Class<? extends BasicButton> buttonType, int col, int row) {
 			this.ability = ability;
 			this.type = buttonType;
+			this.column = col;
+			this.row = row;
 		}
 		
 		public Ability getAbility() {
@@ -59,6 +62,14 @@ public class GuiStone extends GuiScreen {
 		
 		public Class<? extends BasicButton> getType() {
 			return type;
+		}
+		
+		public int getColumn() {
+			return column;
+		}
+		
+		public int getRow() {
+			return row;
 		}
 		
 		public String getMessageKey() {
@@ -118,8 +129,6 @@ public class GuiStone extends GuiScreen {
 		
 		BasicButton button = null;
 		Tooltip tooltip = null;
-		int rowIndex = 0;
-		int columnIndex = 0;
 		
 		for (Button btn : Button.values()) {
 			// Inv button is handled separately
@@ -128,8 +137,8 @@ public class GuiStone extends GuiScreen {
 			}
 			
 			if (shouldShowButton(btn)) {
-				int rowPosition = firstRow + rowIndex * EFFECTIVE_BUTTON_HEIGHT;
-				int columnPosition = firstColumn + columnIndex * EFFECTIVE_BUTTON_WIDTH;
+				int rowPosition = firstRow + btn.getRow() * EFFECTIVE_BUTTON_HEIGHT;
+				int columnPosition = firstColumn + btn.getColumn() * EFFECTIVE_BUTTON_WIDTH;
 				
 				if (btn.getType().equals(ToggleButton.class)) {
 					button = new ToggleButton(btn, columnPosition, rowPosition, Utils.localize(btn.getMessageKey()));
@@ -142,11 +151,6 @@ public class GuiStone extends GuiScreen {
 				tooltip = new Tooltip(button, Utils.localize(btn.getTooltipMessageKey()));
 				buttonTooltips.add(tooltip);
 				buttonList.add(button);
-				
-				if (++rowIndex >= 3) {
-					rowIndex = 0;
-					++columnIndex;
-				}
 			}
 		}
 		
@@ -181,15 +185,16 @@ public class GuiStone extends GuiScreen {
 			player.closeScreen();
 			break;
 		case ETHEREAL_FEET:
-		case HELLJUMPER:
 		case IRON_STOMACH:
-		case PHANTOM_TORCH:
 		case PRECOGNITION:
-		case TEMPORAL_AID:
 		case VENOM_IMMUNITY:
 		case WINDWALKER:
 			toggleButton(button);
 			props.setAbility(btn.getAbility(), ((ToggleButton) button).isOn());
+			break;
+		case HELLJUMPER:
+		case PHANTOM_TORCH:
+		case TEMPORAL_AID:
 			break;
 		default:
 			break;

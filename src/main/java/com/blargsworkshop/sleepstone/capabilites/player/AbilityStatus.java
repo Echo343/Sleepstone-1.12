@@ -125,27 +125,29 @@ public class AbilityStatus implements IAbilityStatus {
 		
 		doesPlayer = props.getAbility(ability);
 		
-		//TODO search through in priority order
-		List<ItemStack> playerInv = player.inventory.mainInventory;
-		ItemStack backupStone = null;
-		for (ItemStack itemStack : playerInv) {
-			if (itemStack != null && itemStack.isItemEqual(new ItemStack(ModItems.itemSleepstone))) {
-				backupStone = backupStone == null ? itemStack : backupStone;
-				StoneInventory sInv = new StoneInventory(itemStack);
-				if (sInv.getUniqueId().equals(props.getBondedStoneId())) {
-					hasStone = true;
-					hasGems = sInv.hasGemInSlot(ability);
-					break;
+		if (doesPlayer) {
+			//TODO search through in priority order
+			List<ItemStack> playerInv = player.inventory.mainInventory;
+			ItemStack backupStone = null;
+			for (ItemStack itemStack : playerInv) {
+				if (itemStack != null && itemStack.isItemEqual(new ItemStack(ModItems.itemSleepstone))) {
+					backupStone = backupStone == null ? itemStack : backupStone;
+					StoneInventory sInv = new StoneInventory(itemStack);
+					if (sInv.getUniqueId().equals(props.getBondedStoneId())) {
+						hasStone = true;
+						hasGems = sInv.hasGemInSlot(ability);
+						break;
+					}
 				}
 			}
-		}
-		
-		// Make this the new stone if the old one couldn't be found.
-		if (hasStone == false && backupStone != null) {
-			StoneInventory stoneInv = new StoneInventory(backupStone);
-			props.setBondedStoneId(stoneInv.getUniqueId());
-			hasStone = true;
-			hasGems = stoneInv.hasGemInSlot(ability);
+			
+			// Make this the new stone if the old one couldn't be found.
+			if (hasStone == false && backupStone != null) {
+				StoneInventory stoneInv = new StoneInventory(backupStone);
+				props.setBondedStoneId(stoneInv.getUniqueId());
+				hasStone = true;
+				hasGems = stoneInv.hasGemInSlot(ability);
+			}
 		}
 		
 //		if (!doesPlayer) Log.info(slot.name() + " is turned off by the player", player);
