@@ -1,0 +1,11 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+      {
+        "item": "sleepstonemod:fireseed"
+      }
+    ],
+    "result": {
+      "item": "sleepstonemod:gem_elemental"
+    }
+  }

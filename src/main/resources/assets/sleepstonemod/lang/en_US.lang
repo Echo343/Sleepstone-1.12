@@ -26,6 +26,8 @@ item.craftable_monk_13.name=Crystalline Lattice Structure
 item.craftable_monk_14.name=Heated Crystalline Lattice Structure
 item.craftable_monk_15.name=Radial Empowered Orb
 
+item.fireseed.name=Fire Seed
+
 item.endershard.name=Ender Shard
 
 itemGroup.sleepstoneCreativeTab=Sleepstone

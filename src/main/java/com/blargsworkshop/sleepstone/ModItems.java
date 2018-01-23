@@ -11,18 +11,19 @@ import com.blargsworkshop.engine.potion.BlargsPotion;
 import com.blargsworkshop.engine.recipe.IBlargRecipe;
 import com.blargsworkshop.engine.recipe.SmeltingRecipe;
 import com.blargsworkshop.engine.sound.BlargsSoundEvent;
-import com.blargsworkshop.sleepstone.items.gems.EtherealGem;
 import com.blargsworkshop.sleepstone.abilities.FoodSaturationPotion;
 import com.blargsworkshop.sleepstone.abilities.WindwalkerPotion;
 import com.blargsworkshop.sleepstone.items.endershard.EnderShard;
 import com.blargsworkshop.sleepstone.items.gems.ElementalGem;
+import com.blargsworkshop.sleepstone.items.gems.EtherealGem;
 import com.blargsworkshop.sleepstone.items.gems.Gem;
 import com.blargsworkshop.sleepstone.items.gems.GuardianGem;
-import com.blargsworkshop.sleepstone.items.gems.PathfinderGem;
 import com.blargsworkshop.sleepstone.items.gems.MonkGem;
+import com.blargsworkshop.sleepstone.items.gems.PathfinderGem;
 import com.blargsworkshop.sleepstone.items.gems.TimeSpaceGem;
-import com.blargsworkshop.sleepstone.items.gems.mats.PathfinderCraftable;
+import com.blargsworkshop.sleepstone.items.gems.mats.FireSeed;
 import com.blargsworkshop.sleepstone.items.gems.mats.MonkCraftable;
+import com.blargsworkshop.sleepstone.items.gems.mats.PathfinderCraftable;
 import com.blargsworkshop.sleepstone.items.stone.Sleepstone;
 
 import net.minecraft.creativetab.CreativeTabs;
@@ -58,6 +59,8 @@ public class ModItems implements IModItems{
 	public static Item itemMonkCraftable = new MonkCraftable();
 	@ModItem
 	public static Item itemPathfinderCraftable = new PathfinderCraftable();
+	@ModItem
+	public static Item itemFireSeed = new FireSeed();
 	@ModItem
 	public static Item itemEnderShard = new EnderShard();
 	

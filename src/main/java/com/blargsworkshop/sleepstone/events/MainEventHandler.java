@@ -101,7 +101,7 @@ public class MainEventHandler implements IEventHandler {
 	public void onLivingEntityDrops(LivingDropsEvent event) {
 		if (!Utils.isServer(event.getEntity().getEntityWorld())) { return; }
 		MobDrops.handleGlobalGemDropRates(event);
-		MobDrops.handleFireGemDropRates(event);
+		MobDrops.handleFireSeedDropRates(event);
 		MobDrops.handleEtherealGemDropRates(event);
 		MobDrops.handleEnderShardDropRates(event);
 	}

@@ -32,8 +32,7 @@ public class MobDrops {
 		}
 	}
 
-	// TODO change to elemental gem
-	public static void handleFireGemDropRates(LivingDropsEvent event) {
+	public static void handleFireSeedDropRates(LivingDropsEvent event) {
 		EntityLivingBase mob = event.getEntityLiving();
 		// Mobs in the nether only
 		if (mob.dimension == DimensionType.NETHER.getId() &&
@@ -43,8 +42,8 @@ public class MobDrops {
 			double dropChance = Math.random();
 			// 3% drop chance
 			if (dropChance <= 0.03) {
-				ItemStack fireGem = new ItemStack(ModItems.itemElementalGem);
-				event.getDrops().add(new EntityItem(mob.getEntityWorld(), mob.posX, mob.posY, mob.posZ, fireGem));
+				ItemStack fireSeed = new ItemStack(ModItems.itemFireSeed);
+				event.getDrops().add(new EntityItem(mob.getEntityWorld(), mob.posX, mob.posY, mob.posZ, fireSeed));
 			}
 		}
 	}
