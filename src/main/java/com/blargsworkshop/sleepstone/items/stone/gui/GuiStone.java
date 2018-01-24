@@ -188,9 +188,13 @@ public class GuiStone extends GuiScreen {
 		case IRON_STOMACH:
 		case PRECOGNITION:
 		case VENOM_IMMUNITY:
+			toggleButton(button);
+			props.setAbility(btn.getAbility(), ((ToggleButton) button).isOn());
+			break;
 		case WINDWALKER:
 			toggleButton(button);
 			props.setAbility(btn.getAbility(), ((ToggleButton) button).isOn());
+			player.closeScreen();
 			break;
 		case HELLJUMPER:
 		case PHANTOM_TORCH:
