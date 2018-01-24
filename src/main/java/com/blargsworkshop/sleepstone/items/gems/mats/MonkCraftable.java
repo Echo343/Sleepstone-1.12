@@ -10,13 +10,14 @@ package com.blargsworkshop.sleepstone.items.gems.mats;
  * item.stonecraftable_6.name=Hyper Lattice Redstone Mass
  * item.stonecraftable_7.name=Hyper Infused Mass
  * item.stonecraftable_8.name=Refined Obsidian
- * item.stonecraftable_9.name=Refined Obsidian Clump
- * item.stonecraftable_10.name=Hardened Obsidian Clump
- * item.stonecraftable_11.name=Brittle Diamond Lattice
- * item.stonecraftable_12.name=Strengthened Diamond Lattice
- * item.stonecraftable_13.name=Crystalline Lattice Structure
- * item.stonecraftable_14.name=Heated Crystalline Lattice Structure
- * item.stonecraftable_15.name=Radial Empowered Orb
+ * item.stonecraftable_9.name=Refined Obsidian Mass
+ * item.stonecraftable_10.name=Refined Obsidian Clump
+ * item.stonecraftable_11.name=Hardened Obsidian Clump
+ * item.stonecraftable_12.name=Brittle Diamond Lattice
+ * item.stonecraftable_13.name=Strengthened Diamond Lattice
+ * item.stonecraftable_14.name=Crystalline Lattice Structure
+ * item.stonecraftable_15.name=Heated Crystalline Lattice Structure
+ * item.stonecraftable_16.name=Radial Empowered Orb
  * 
  * @author Echo343
  *
@@ -25,7 +26,7 @@ public class MonkCraftable extends BaseCraftable {
 	
 	private static final String UNLOCALIZED_NAME = "craftable_monk";
 	private static final String REGISTRY_NAME = "craftable_monk";
-	private static final int NUMBER_OF_CRAFTABLES = 16;
+	private static final int NUMBER_OF_CRAFTABLES = 17;
 
 	public MonkCraftable() {
 		super(UNLOCALIZED_NAME, REGISTRY_NAME, NUMBER_OF_CRAFTABLES);

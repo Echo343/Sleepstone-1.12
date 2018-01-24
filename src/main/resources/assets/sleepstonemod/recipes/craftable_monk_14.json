@@ -1,22 +1,22 @@
 {
     "type": "minecraft:crafting_shaped",
     "pattern": [
-        "###",
-        "#X#",
-        "###"
+        "# #",
+        " X ",
+        "# #"
     ],
     "key": {
         "#": {
             "item": "sleepstonemod:craftable_monk",
-            "data": 14
+            "data": 11
         },
         "X": {
             "item": "sleepstonemod:craftable_monk",
-            "data": 7
+            "data": 13
         }
     },
     "result": {
         "item": "sleepstonemod:craftable_monk",
-        "data": 15
+        "data": 14
     }
 }

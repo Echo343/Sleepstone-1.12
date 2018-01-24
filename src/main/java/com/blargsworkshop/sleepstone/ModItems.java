@@ -84,10 +84,10 @@ public class ModItems implements IModItems{
 		public static IBlargRecipe blastedCeramicFoundation = new SmeltingRecipe(new ItemStack(ModItems.itemMonkCraftable, 1, 2), new ItemStack(ModItems.itemMonkCraftable, 1, 3), 1f);
 		public static IBlargRecipe hyperInfusedMass = new SmeltingRecipe(new ItemStack(ModItems.itemMonkCraftable, 1, 6), new ItemStack(ModItems.itemMonkCraftable, 1, 7), 1f);
 		public static IBlargRecipe refinedObsidian = new SmeltingRecipe(new ItemStack(Blocks.OBSIDIAN), new ItemStack(ModItems.itemMonkCraftable, 1, 8), 0.4f);
-		public static IBlargRecipe hardenedObsidianClump = new SmeltingRecipe(new ItemStack(ModItems.itemMonkCraftable, 1, 9), new ItemStack(ModItems.itemMonkCraftable, 1, 10), 0.7f);
-		public static IBlargRecipe strengthenedDiamondLattice = new SmeltingRecipe(new ItemStack(ModItems.itemMonkCraftable, 1, 11), new ItemStack(ModItems.itemMonkCraftable, 1, 12), 1f);
-		public static IBlargRecipe heatedCrystallineLatticeStructure = new SmeltingRecipe(new ItemStack(ModItems.itemMonkCraftable, 1, 13), new ItemStack(ModItems.itemMonkCraftable, 1, 14), 1f);
-		public static IBlargRecipe monkGem = new SmeltingRecipe(new ItemStack(ModItems.itemMonkCraftable, 1, 15), new ItemStack(ModItems.itemMonkGem), 1f);
+		public static IBlargRecipe hardenedObsidianClump = new SmeltingRecipe(new ItemStack(ModItems.itemMonkCraftable, 1, 10), new ItemStack(ModItems.itemMonkCraftable, 1, 11), 0.7f);
+		public static IBlargRecipe strengthenedDiamondLattice = new SmeltingRecipe(new ItemStack(ModItems.itemMonkCraftable, 1, 12), new ItemStack(ModItems.itemMonkCraftable, 1, 13), 1f);
+		public static IBlargRecipe heatedCrystallineLatticeStructure = new SmeltingRecipe(new ItemStack(ModItems.itemMonkCraftable, 1, 14), new ItemStack(ModItems.itemMonkCraftable, 1, 15), 1f);
+		public static IBlargRecipe monkGem = new SmeltingRecipe(new ItemStack(ModItems.itemMonkCraftable, 1, 16), new ItemStack(ModItems.itemMonkGem), 1f);
 	}
 	
 	@ModSprite
