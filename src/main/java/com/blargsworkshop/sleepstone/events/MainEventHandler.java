@@ -76,10 +76,26 @@ public class MainEventHandler implements IEventHandler {
 		}
 	}
 	
+	private boolean isDodgeableAttack(DamageSource damage) {
+		if (damage.getDamageType().equalsIgnoreCase("mob") || damage.isProjectile()) {
+			return true;			
+		}
+		return false;
+	}
+	
 	@SubscribeEvent
 	public void onLivingAttacked(LivingAttackEvent event) {
 		if (event.getEntityLiving() instanceof EntityPlayer && Utils.isServer(event.getEntity().getEntityWorld())) {
 			EntityPlayer player = (EntityPlayer) event.getEntityLiving();
+			if (AbilityStatusProvider.getCapability(player).isAbilityAvailable(Ability.PRECOGNITION)) {
+				if (isDodgeableAttack(event.getSource())) {
+					double dodgeChance = Math.random();
+					if (dodgeChance < 0.5) {
+						event.setCanceled(true);
+						Log.debug("Dodged the " + event.getSource().getDamageType(), player);
+					}
+				}
+			}
 			if (AbilityStatusProvider.getCapability(player).isAbilityAvailable(Ability.VENOM_IMMUNITY)) {
 				Potion poison = Potion.getPotionFromResourceLocation("poison");
 				Potion wither = Potion.getPotionFromResourceLocation("wither");
