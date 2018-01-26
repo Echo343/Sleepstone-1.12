@@ -92,6 +92,7 @@ public class MainEventHandler implements IEventHandler {
 					double dodgeChance = Math.random();
 					if (dodgeChance < 0.5) {
 						event.setCanceled(true);
+						// TODO change to actual message
 						Log.debug("Dodged the " + event.getSource().getDamageType(), player);
 					}
 				}
