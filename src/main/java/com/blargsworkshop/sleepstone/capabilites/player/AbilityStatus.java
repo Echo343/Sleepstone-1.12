@@ -28,7 +28,7 @@ public class AbilityStatus implements IAbilityStatus {
 	private EntityPlayer player;
 	private EnumMap<Ability, Boolean> abilities = new EnumMap<Ability, Boolean>(Ability.class);
 
-	public void init(EntityPlayer player) {
+	public AbilityStatus(EntityPlayer player) {
 		dispatcher = NetworkOverlord.get(ModInfo.ID);
 		this.player = player;
 		for (Ability ability : Ability.values()) {

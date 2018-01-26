@@ -15,8 +15,7 @@ public class AbilityStatusProvider implements ICapabilitySerializable<NBTBase> {
 	private IAbilityStatus instance;
 
 	public AbilityStatusProvider(EntityPlayer player) {
-		instance = ABILITY_STATUS_CAPABILITY.getDefaultInstance();
-		instance.init(player);
+		instance = new AbilityStatus(player);
 	}
 
 	@Override
