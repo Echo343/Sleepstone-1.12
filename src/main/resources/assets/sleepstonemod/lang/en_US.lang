@@ -44,7 +44,7 @@ potion.windwalker=Windwalker
 text.toggle_button.off=Off
 text.toggle_button.on=On
 
-text.stoneinventory.sleepstone=Sleepstone
+text.guistoneinventory.sleepstone=Sleepstone
 text.guistoneinventory.inventory=Inventory
 text.guistone.sleepstone_attunes_to_you=The Sleepstone glows brightly as it attunes to you.
 

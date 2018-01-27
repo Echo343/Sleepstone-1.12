@@ -5,7 +5,6 @@ import org.lwjgl.opengl.GL11;
 import com.blargsworkshop.engine.utility.Utils;
 import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.items.stone.container.StoneContainer;
-import com.blargsworkshop.sleepstone.items.stone.container.StoneInventory;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.util.ResourceLocation;
@@ -20,13 +19,9 @@ public class GuiStoneInventory extends GuiContainer
 	 */
 	private static final ResourceLocation backgroundImage = new ResourceLocation(ModInfo.ID, "textures/gui/GuiInventoryStone.png");
 	
-	/** The inventory to render on screen */
-	private final StoneInventory inventory;
-
 	public GuiStoneInventory(StoneContainer containerItem)
 	{
 		super(containerItem);
-		this.inventory = containerItem.getInventoryItem();
 		this.xSize = 175;
 		this.ySize = 222;
 		this.guiLeft = (this.width - this.xSize) / 2;
@@ -36,7 +31,6 @@ public class GuiStoneInventory extends GuiContainer
 	@Override
 	public void initGui() {
 		super.initGui();
-		//Add buttons here
 	}
 	
 	/**
@@ -45,7 +39,7 @@ public class GuiStoneInventory extends GuiContainer
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
-		String strSleepstone = Utils.localize(this.inventory.getName());
+		String strSleepstone = Utils.localize("text.guistoneinventory.sleepstone");
 		String strContainer = Utils.localize("container.inventory");
 		this.fontRenderer.drawString(strSleepstone, (this.xSize - this.fontRenderer.getStringWidth(strSleepstone)) / 2, 5, 4210752);
 		this.fontRenderer.drawString(strContainer, 8, this.ySize - 96 + 2, 4210752);

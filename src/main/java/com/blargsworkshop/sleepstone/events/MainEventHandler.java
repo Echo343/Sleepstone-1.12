@@ -6,11 +6,14 @@ import com.blargsworkshop.engine.utility.Utils;
 import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.abilities.Ability;
 import com.blargsworkshop.sleepstone.abilities.Windwalker;
+import com.blargsworkshop.sleepstone.capabilites.itemstack.StoneInventoryProvider;
 import com.blargsworkshop.sleepstone.capabilites.player.AbilityStatusProvider;
 import com.blargsworkshop.sleepstone.capabilites.player.IAbilityStatus;
+import com.blargsworkshop.sleepstone.items.stone.Sleepstone;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.DamageSource;
@@ -31,10 +34,18 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class MainEventHandler implements IEventHandler {
 	
 	@SubscribeEvent
-	public void attachCapability(AttachCapabilitiesEvent<Entity> event) {
+	public void attachCapabilityToEntity(AttachCapabilitiesEvent<Entity> event) {
 		if (event.getObject() instanceof EntityPlayer) {
-			event.addCapability(new ResourceLocation(ModInfo.ID, "sleepstone_player_props"), new AbilityStatusProvider((EntityPlayer) event.getObject()));
+			event.addCapability(new ResourceLocation(ModInfo.ID, "player_props"), new AbilityStatusProvider((EntityPlayer) event.getObject()));
 			Log.detail("Sleepstone Ability capability has been attached.");
+		}
+	}
+	
+	@SubscribeEvent
+	public void attachCapabilityToItemStack(AttachCapabilitiesEvent<ItemStack> event) {
+		if (event.getObject().getItem() instanceof Sleepstone) {
+			event.addCapability(new ResourceLocation(ModInfo.ID, "sleepstone_inventory"), new StoneInventoryProvider());
+			Log.detail("Sleepstone Inventory capability has been attached.");
 		}
 	}
 	

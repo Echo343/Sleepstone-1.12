@@ -1,5 +1,6 @@
 package com.blargsworkshop.sleepstone.items.stone.container;
 
+import com.blargsworkshop.sleepstone.capabilites.itemstack.StoneInventoryProvider;
 import com.blargsworkshop.sleepstone.items.stone.GemSlot;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,12 +28,12 @@ public class StoneContainer extends Container {
 	// ARMOR_START = InventoryItem.INV_SIZE, ARMOR_END = ARMOR_START+3,
 	// INV_START = ARMOR_END+1, and then carry on like above.
 	
-	public StoneInventory getInventoryItem() {
-		return this.inventory;
-	}
+//	public StoneInventory getInventoryItem() {
+//		return this.inventory;
+//	}
 	
-    public StoneContainer(World world, EntityPlayer par1Player, InventoryPlayer inventoryPlayer, StoneInventory stoneInventory) {
-        this.inventory = stoneInventory;
+    public StoneContainer(World world, EntityPlayer par1Player, InventoryPlayer inventoryPlayer, ItemStack stone) {
+        this.inventory = StoneInventoryProvider.getStoneInventory(stone);
         
         /** Gem Slots */
         //Group one
@@ -93,9 +94,7 @@ public class StoneContainer extends Container {
 
     @Override
     public boolean canInteractWith(EntityPlayer player) {
-        // be sure to return the inventory's isUseableByPlayer method
-		// if you defined special behavior there:
-        return inventory.isUsableByPlayer(player);
+    	return !player.isDead;
     }
 
     /**
@@ -104,9 +103,8 @@ public class StoneContainer extends Container {
     @Override
 	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int index)
 	{
-    	// TODO Fix by implementing IItemHandler Capability
-		ItemStack itemstack = null;
-		Slot slot = (Slot) this.inventorySlots.get(index);
+		ItemStack itemstack = ItemStack.EMPTY;
+		Slot slot = this.inventorySlots.get(index);
 
 		if (slot != null && slot.getHasStack())
 		{
@@ -117,12 +115,12 @@ public class StoneContainer extends Container {
 			if (index < INV_START)
 			{
 				// try to place in player inventory / action bar
-				if (!this.mergeItemStack(itemstack1, INV_START, HOTBAR_END+1, false))
+				if (!this.mergeItemStack(itemstack1, INV_START, HOTBAR_END + 1, false))
 				{
-					return null;
+					return ItemStack.EMPTY;
 				}
 
-				slot.onSlotChange(itemstack1, itemstack);
+//				slot.onSlotChange(itemstack1, itemstack);
 			}
 			// Item is in inventory / hotbar, try to place in custom inventory or armor slots
 			else
@@ -166,7 +164,7 @@ public class StoneContainer extends Container {
 					// place in custom inventory
 					if (!this.mergeItemStack(itemstack1, 0, INV_START, false))
 					{
-						return null;
+						return ItemStack.EMPTY;
 					}
 				}
 				
@@ -192,9 +190,9 @@ public class StoneContainer extends Container {
 				// }
 			}
 
-			if (itemstack1.getCount() == 0)
+			if (itemstack1.isEmpty())
 			{
-				slot.putStack((ItemStack) null);
+				slot.putStack(ItemStack.EMPTY);
 			}
 			else
 			{
@@ -203,10 +201,10 @@ public class StoneContainer extends Container {
 
 			if (itemstack1.getCount() == itemstack.getCount())
 			{
-				return null;
+				return ItemStack.EMPTY;
 			}
 
-			slot.onTake(par1EntityPlayer, itemstack1);
+//			slot.onTake(par1EntityPlayer, itemstack1);
 		}
 		return itemstack;
     }
@@ -220,90 +218,8 @@ public class StoneContainer extends Container {
 	public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player) {
 		// this will prevent the player from interacting with the item that opened the inventory:
 		if (slotId >= 0 && getSlot(slotId) != null && getSlot(slotId).getStack() == player.getHeldItemMainhand()) {
-			return null;
+			return ItemStack.EMPTY;
 		}
 		return super.slotClick(slotId, dragType, clickTypeIn, player);
     }
-    
-	/*
-	 Special note: If your custom inventory's stack limit is 1 and you allow shift-clicking itemstacks into it,
-	 you will need to override mergeStackInSlot to avoid losing all the items but one in a stack when you shift-click.
-	 */
-	/**
-	 * Vanilla mergeItemStack method doesn't correctly handle inventories whose
-	 * max stack size is 1 when you shift-click into the inventory.
-	 * This is a modified method I wrote to handle such cases.
-	 * Note you only need it if your slot / inventory's max stack size is 1
-	 */
-	@Override
-	protected boolean mergeItemStack(ItemStack stack, int start, int end, boolean backwards) {
-		boolean flag1 = false;
-		int k = (backwards ? end - 1 : start);
-		Slot slot;
-		ItemStack itemstack1;
-
-		if (stack.isStackable()) {
-			while (stack.getCount() > 0 && (!backwards && k < end || backwards && k >= start)) {
-				slot = (Slot) inventorySlots.get(k);
-				itemstack1 = slot.getStack();
-
-				if (!slot.isItemValid(stack)) {
-					k += (backwards ? -1 : 1);
-					continue;
-				}
-
-				if (itemstack1 != null && itemstack1.getItem() == stack.getItem()
-						&& (!stack.getHasSubtypes() || stack.getItemDamage() == itemstack1.getItemDamage())
-						&& ItemStack.areItemStackTagsEqual(stack, itemstack1)) {
-					int l = itemstack1.getCount() + stack.getCount();
-
-					if (l <= stack.getMaxStackSize() && l <= slot.getSlotStackLimit()) {
-						stack.setCount(0);
-						itemstack1.setCount(l);
-						inventory.markDirty();
-						flag1 = true;
-					} else if (itemstack1.getCount() < stack.getMaxStackSize() && l < slot.getSlotStackLimit()) {
-						stack.setCount(stack.getCount() - stack.getMaxStackSize() - itemstack1.getCount());
-						itemstack1.setCount(stack.getMaxStackSize());
-						inventory.markDirty();
-						flag1 = true;
-					}
-				}
-
-				k += (backwards ? -1 : 1);
-			}
-		}
-		if (stack.getCount() > 0) {
-			k = (backwards ? end - 1 : start);
-			while (!backwards && k < end || backwards && k >= start) {
-				slot = (Slot) inventorySlots.get(k);
-				itemstack1 = slot.getStack();
-
-				if (!slot.isItemValid(stack)) {
-					k += (backwards ? -1 : 1);
-					continue;
-				}
-
-				if (itemstack1 == null) {
-					int l = stack.getCount();
-					if (l <= slot.getSlotStackLimit()) {
-						slot.putStack(stack.copy());
-						stack.setCount(0);
-						inventory.markDirty();
-						flag1 = true;
-						break;
-					} else {
-						putStackInSlot(k,
-								new ItemStack(stack.getItem(), slot.getSlotStackLimit(), stack.getItemDamage()));
-						stack.setCount(stack.getCount() - slot.getSlotStackLimit());
-						inventory.markDirty();
-						flag1 = true;
-					}
-				}
-
-				k += (backwards ? -1 : 1);
-			}
-		}
-		return flag1;
-	}
 }

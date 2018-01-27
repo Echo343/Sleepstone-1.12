@@ -13,6 +13,7 @@ import com.blargsworkshop.engine.network.NetworkOverlord;
 import com.blargsworkshop.engine.utility.Utils;
 import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.abilities.Ability;
+import com.blargsworkshop.sleepstone.capabilites.itemstack.StoneInventoryProvider;
 import com.blargsworkshop.sleepstone.capabilites.player.AbilityStatusProvider;
 import com.blargsworkshop.sleepstone.capabilites.player.IAbilityStatus;
 import com.blargsworkshop.sleepstone.gui.GuiEnum;
@@ -24,6 +25,7 @@ import com.blargsworkshop.sleepstone.network.packets.toserver.OpenGuiMessage;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 
@@ -99,10 +101,10 @@ public class GuiStone extends GuiScreen {
 	
 	private TooltipContainer buttonTooltips = new TooltipContainer();
 	
-	public GuiStone(EntityPlayer player, StoneInventory stoneInventory) {
-		this.inventory = stoneInventory;
+	public GuiStone(EntityPlayer player, ItemStack stone) {
+		this.inventory = StoneInventoryProvider.getStoneInventory(stone);
 		this.player = player;
-		this.props = player.getCapability(AbilityStatusProvider.ABILITY_STATUS_CAPABILITY, null);
+		this.props = AbilityStatusProvider.getCapability(player);
 	}
 	
 	@Override
