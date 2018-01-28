@@ -33,10 +33,10 @@ public class TickEventHandler implements IEventHandler {
 			}
 		}
 		
-		if (e.player.ticksExisted % CHECK_RATE == 0) {
-			String side = Utils.isServer(e.player.getEntityWorld()) ? "(Server) " : "(Client) ";
-			Log.debug(side + "Windwalker: " + StoneInventoryProvider.getStoneInventory(e.player.getHeldItemMainhand()).hasGemInSlot(Ability.WINDWALKER), e.player);
-		}
+//		if (e.player.ticksExisted % CHECK_RATE == 0) {
+//			String side = Utils.isServer(e.player.getEntityWorld()) ? "(Server) " : "(Client) ";
+//			Log.debug(side + "Windwalker: " + StoneInventoryProvider.getStoneInventory(e.player.getHeldItemMainhand()).hasGemInSlot(Ability.WINDWALKER), e.player);
+//		}
 		
 		if (Utils.isServer(e.player.getEntityWorld()) && e.player.ticksExisted % CHECK_RATE == 0) {
 			if (e.player.getCapability(AbilityStatusProvider.ABILITY_STATUS_CAPABILITY, null).isAbilityAvailable(Ability.IRON_STOMACH)) {

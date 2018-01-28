@@ -32,7 +32,7 @@ public class StoneContainer extends Container {
 //		return this.inventory;
 //	}
 	
-    public StoneContainer(World world, EntityPlayer par1Player, InventoryPlayer inventoryPlayer, ItemStack stone) {
+    public StoneContainer(World world, EntityPlayer player, InventoryPlayer inventoryPlayer, ItemStack stone) {
         inventory = StoneInventoryProvider.getStoneInventory(stone);
         
         /** Gem Slots */

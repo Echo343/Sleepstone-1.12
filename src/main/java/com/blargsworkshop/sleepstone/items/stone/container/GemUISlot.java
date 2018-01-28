@@ -1,9 +1,6 @@
 package com.blargsworkshop.sleepstone.items.stone.container;
 
-import javax.annotation.Nonnull;
-
 import com.blargsworkshop.sleepstone.ModItems.Sprites;
-import com.blargsworkshop.sleepstone.capabilites.itemstack.StoneInventoryProvider;
 import com.blargsworkshop.sleepstone.items.gems.ElementalGem;
 import com.blargsworkshop.sleepstone.items.gems.EtherealGem;
 import com.blargsworkshop.sleepstone.items.gems.Gem;
