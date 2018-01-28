@@ -1,6 +1,9 @@
 package com.blargsworkshop.sleepstone.items.stone.container;
 
+import javax.annotation.Nonnull;
+
 import com.blargsworkshop.sleepstone.ModItems.Sprites;
+import com.blargsworkshop.sleepstone.capabilites.itemstack.StoneInventoryProvider;
 import com.blargsworkshop.sleepstone.items.gems.ElementalGem;
 import com.blargsworkshop.sleepstone.items.gems.EtherealGem;
 import com.blargsworkshop.sleepstone.items.gems.Gem;
@@ -77,4 +80,10 @@ public class GemUISlot extends SlotItemHandler {
     	}
     	return slotTexture;
     }
+    
+//    @Override
+//    public void onSlotChange(@Nonnull ItemStack p_75220_1_, @Nonnull ItemStack p_75220_2_)
+//    {
+//    	StoneInventoryProvider.STONE_INVENTORY_CAPABILITY.readNBT(getItemHandler(), null, StoneInventoryProvider.STONE_INVENTORY_CAPABILITY.writeNBT(getItemHandler(), null));
+//    }
 }

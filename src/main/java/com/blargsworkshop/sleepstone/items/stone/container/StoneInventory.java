@@ -7,12 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class StoneInventory extends ItemStackHandler {
-
-    /** Provides NBT Tag Compound to reference */
-//    private final ItemStack invItem;
     
-//    private String uniqueId = "";
-
 	/** Inventory's size must be the same as number of slots you add to the Container class */
     /** Defining your inventory size this way is handy */
     public static final int INV_SIZE = 27;
@@ -134,9 +129,5 @@ public class StoneInventory extends ItemStackHandler {
 //		tagcompound.setString("uniqueId", this.uniqueId);
 //		// Add the TagList to the ItemStack's Tag Compound with the name "ItemInventory"
 //		tagcompound.setTag("ItemInventory", items);
-//	}
-//
-//	public String getUniqueId() {
-//		return uniqueId;
 //	}
 }

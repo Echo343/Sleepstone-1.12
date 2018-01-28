@@ -46,14 +46,15 @@ public class Sleepstone extends BaseModItem {
 					player.openGui(SleepstoneMod.getInstance(), GuiEnum.STONE.ordinal(), world, (int) player.posX, (int) player.posY, (int) player.posZ);
 				}
 				else {
-					if (player.isPotionActive(Potions.warpSickness)) {
-						Utils.addChatMessage(player, "text.sleepstone.suffering_effects_of_warping");
-						cooldownTimer.startCooldown(player);
-					}
-					else {
-						// Start channeling for warp.
-						player.setActiveHand(hand);
-					}
+					player.openGui(SleepstoneMod.getInstance(), GuiEnum.STONE_INVENTORY.ordinal(), world, (int) player.posX, (int) player.posY, (int) player.posZ);
+//					if (player.isPotionActive(Potions.warpSickness)) {
+//						Utils.addChatMessage(player, "text.sleepstone.suffering_effects_of_warping");
+//						cooldownTimer.startCooldown(player);
+//					}
+//					else {
+//						// Start channeling for warp.
+//						player.setActiveHand(hand);
+//					}
 				}
 			}
 		}

@@ -6,6 +6,7 @@ import com.blargsworkshop.engine.utility.Utils;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.FoodStats;
 import net.minecraft.util.ResourceLocation;
 
@@ -38,5 +39,11 @@ public class FoodSaturationPotion extends BlargsPotion {
 	public boolean isReady(int duration, int amplifier) {
 		return true;
 	}
+	
+	@Override
+	public boolean shouldRenderHUD(PotionEffect effect) { return false; }
+	
+	@Override
+	public boolean shouldRender(PotionEffect effect) { return false; }
 
 }

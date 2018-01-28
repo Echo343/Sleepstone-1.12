@@ -11,6 +11,9 @@ import com.blargsworkshop.engine.utility.Utils;
 import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.ModItems;
 import com.blargsworkshop.sleepstone.abilities.Ability;
+import com.blargsworkshop.sleepstone.capabilites.itemstack.IStoneProperties;
+import com.blargsworkshop.sleepstone.capabilites.itemstack.StoneInventoryProvider;
+import com.blargsworkshop.sleepstone.capabilites.itemstack.StonePropertiesProvider;
 import com.blargsworkshop.sleepstone.items.stone.container.StoneInventory;
 import com.blargsworkshop.sleepstone.network.packets.bidirectional.SyncAllPlayerPropsMessage;
 import com.blargsworkshop.sleepstone.network.packets.bidirectional.SyncPlayerBondedIdMessage;
@@ -118,12 +121,11 @@ public class AbilityStatus implements IAbilityStatus {
 	}
 	
 	public boolean isAbilityAvailable(Ability ability) {
-		IAbilityStatus props = this;
 		boolean doesPlayer = false;
 		boolean hasStone = false;
 		boolean hasGems = false;
 		
-		doesPlayer = props.getAbility(ability);
+		doesPlayer = getAbility(ability);
 		
 		if (doesPlayer) {
 			//TODO search through in priority order
@@ -132,10 +134,11 @@ public class AbilityStatus implements IAbilityStatus {
 			for (ItemStack itemStack : playerInv) {
 				if (itemStack != null && itemStack.isItemEqual(new ItemStack(ModItems.itemSleepstone))) {
 					backupStone = backupStone == null ? itemStack : backupStone;
-					StoneInventory sInv = new StoneInventory(itemStack);
-					if (sInv.getUniqueId().equals(props.getBondedStoneId())) {
+					IStoneProperties stoneProps = StonePropertiesProvider.getProperties(itemStack);
+					StoneInventory inventory = StoneInventoryProvider.getStoneInventory(itemStack);
+					if (stoneProps.getUniqueId().equals(getBondedStoneId())) {
 						hasStone = true;
-						hasGems = sInv.hasGemInSlot(ability);
+						hasGems = inventory.hasGemInSlot(ability);
 						break;
 					}
 				}
@@ -143,10 +146,11 @@ public class AbilityStatus implements IAbilityStatus {
 			
 			// Make this the new stone if the old one couldn't be found.
 			if (hasStone == false && backupStone != null) {
-				StoneInventory stoneInv = new StoneInventory(backupStone);
-				props.setBondedStoneId(stoneInv.getUniqueId());
+				IStoneProperties stoneProps = StonePropertiesProvider.getProperties(backupStone);
+				StoneInventory stoneInventory = StoneInventoryProvider.getStoneInventory(backupStone);
+				setBondedStoneId(stoneProps.getUniqueId());
 				hasStone = true;
-				hasGems = stoneInv.hasGemInSlot(ability);
+				hasGems = stoneInventory.hasGemInSlot(ability);
 			}
 		}
 		

@@ -7,6 +7,7 @@ import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.abilities.Ability;
 import com.blargsworkshop.sleepstone.abilities.Windwalker;
 import com.blargsworkshop.sleepstone.capabilites.itemstack.StoneInventoryProvider;
+import com.blargsworkshop.sleepstone.capabilites.itemstack.StonePropertiesProvider;
 import com.blargsworkshop.sleepstone.capabilites.player.AbilityStatusProvider;
 import com.blargsworkshop.sleepstone.capabilites.player.IAbilityStatus;
 import com.blargsworkshop.sleepstone.items.stone.Sleepstone;
@@ -37,7 +38,6 @@ public class MainEventHandler implements IEventHandler {
 	public void attachCapabilityToEntity(AttachCapabilitiesEvent<Entity> event) {
 		if (event.getObject() instanceof EntityPlayer) {
 			event.addCapability(new ResourceLocation(ModInfo.ID, "player_props"), new AbilityStatusProvider((EntityPlayer) event.getObject()));
-			Log.detail("Sleepstone Ability capability has been attached.");
 		}
 	}
 	
@@ -45,7 +45,7 @@ public class MainEventHandler implements IEventHandler {
 	public void attachCapabilityToItemStack(AttachCapabilitiesEvent<ItemStack> event) {
 		if (event.getObject().getItem() instanceof Sleepstone) {
 			event.addCapability(new ResourceLocation(ModInfo.ID, "sleepstone_inventory"), new StoneInventoryProvider());
-			Log.detail("Sleepstone Inventory capability has been attached.");
+			event.addCapability(new ResourceLocation(ModInfo.ID, "sleepstone_properties"), new StonePropertiesProvider());
 		}
 	}
 	
