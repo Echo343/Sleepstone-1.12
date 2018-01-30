@@ -44,7 +44,7 @@ public class MainEventHandler implements IEventHandler {
 	@SubscribeEvent
 	public void attachCapabilityToItemStack(AttachCapabilitiesEvent<ItemStack> event) {
 		if (event.getObject().getItem() instanceof Sleepstone) {
-			event.addCapability(new ResourceLocation(ModInfo.ID, "sleepstone_inventory"), new StoneInventoryProvider());
+			event.addCapability(new ResourceLocation(ModInfo.ID, "sleepstone_inventory"), new StoneInventoryProvider(event.getObject()));
 			event.addCapability(new ResourceLocation(ModInfo.ID, "sleepstone_properties"), new StonePropertiesProvider());
 		}
 	}

@@ -77,10 +77,4 @@ public class GemUISlot extends SlotItemHandler {
     	}
     	return slotTexture;
     }
-    
-//    @Override
-//    public void onSlotChange(@Nonnull ItemStack p_75220_1_, @Nonnull ItemStack p_75220_2_)
-//    {
-//    	StoneInventoryProvider.STONE_INVENTORY_CAPABILITY.readNBT(getItemHandler(), null, StoneInventoryProvider.STONE_INVENTORY_CAPABILITY.writeNBT(getItemHandler(), null));
-//    }
 }

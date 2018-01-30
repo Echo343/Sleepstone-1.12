@@ -27,11 +27,7 @@ public class StoneContainer extends Container {
     // If you're planning to add armor slots, put those first like this:
 	// ARMOR_START = InventoryItem.INV_SIZE, ARMOR_END = ARMOR_START+3,
 	// INV_START = ARMOR_END+1, and then carry on like above.
-	
-//	public StoneInventory getInventoryItem() {
-//		return this.inventory;
-//	}
-	
+		
     public StoneContainer(World world, EntityPlayer player, InventoryPlayer inventoryPlayer, ItemStack stone) {
         inventory = StoneInventoryProvider.getStoneInventory(stone);
         

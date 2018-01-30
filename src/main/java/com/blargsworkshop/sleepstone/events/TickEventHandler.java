@@ -1,13 +1,11 @@
 package com.blargsworkshop.sleepstone.events;
 
 import com.blargsworkshop.engine.event.IEventHandler;
-import com.blargsworkshop.engine.logger.Log;
 import com.blargsworkshop.engine.potion.BlargsPotionEffect;
 import com.blargsworkshop.engine.utility.Utils;
 import com.blargsworkshop.sleepstone.ModItems.Potions;
 import com.blargsworkshop.sleepstone.abilities.Ability;
 import com.blargsworkshop.sleepstone.abilities.Windwalker;
-import com.blargsworkshop.sleepstone.capabilites.itemstack.StoneInventoryProvider;
 import com.blargsworkshop.sleepstone.capabilites.player.AbilityStatusProvider;
 
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
@@ -32,12 +30,7 @@ public class TickEventHandler implements IEventHandler {
 				e.player.stepHeight = (float) stepHeightAttribute.getAttributeValue();
 			}
 		}
-		
-//		if (e.player.ticksExisted % CHECK_RATE == 0) {
-//			String side = Utils.isServer(e.player.getEntityWorld()) ? "(Server) " : "(Client) ";
-//			Log.debug(side + "Windwalker: " + StoneInventoryProvider.getStoneInventory(e.player.getHeldItemMainhand()).hasGemInSlot(Ability.WINDWALKER), e.player);
-//		}
-		
+				
 		if (Utils.isServer(e.player.getEntityWorld()) && e.player.ticksExisted % CHECK_RATE == 0) {
 			if (e.player.getCapability(AbilityStatusProvider.ABILITY_STATUS_CAPABILITY, null).isAbilityAvailable(Ability.IRON_STOMACH)) {
 				e.player.addPotionEffect(new BlargsPotionEffect(Potions.foodSaturation, REFRESH_DURATION, 0, true, true));

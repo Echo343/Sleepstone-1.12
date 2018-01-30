@@ -12,14 +12,14 @@ import net.minecraftforge.items.IItemHandler;
 
 public class StoneInventoryProvider implements ICapabilitySerializable<NBTBase> {
 	
-	// TODO make private and test Same with other one?
+	// TODO make private and test Same with other one?  It works as private
 	@CapabilityInject(IItemHandler.class)
 	public static final Capability<IItemHandler> STONE_INVENTORY_CAPABILITY = null;
 	
-	private IItemHandler inventory;
+	private StoneInventory inventory;
 
-	public StoneInventoryProvider() {
-		inventory = new StoneInventory();
+	public StoneInventoryProvider(ItemStack stack) {
+		inventory = new StoneInventory(stack);
 	}
 
 	@Override
@@ -29,7 +29,11 @@ public class StoneInventoryProvider implements ICapabilitySerializable<NBTBase> 
 
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
-		return capability == STONE_INVENTORY_CAPABILITY ? STONE_INVENTORY_CAPABILITY.<T> cast(inventory) : null;
+		if (capability == STONE_INVENTORY_CAPABILITY) {
+			inventory.deserializeNBT(inventory.getStone().getTagCompound());
+			return STONE_INVENTORY_CAPABILITY.<T> cast(inventory);
+		}
+		return null;
 	}
 
 	@Override

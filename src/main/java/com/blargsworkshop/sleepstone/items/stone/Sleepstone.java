@@ -3,12 +3,12 @@ package com.blargsworkshop.sleepstone.items.stone;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.blargsworkshop.sleepstone.ModItems.Potions;
-import com.blargsworkshop.sleepstone.ModItems.Sounds;
 import com.blargsworkshop.engine.logger.Log;
 import com.blargsworkshop.engine.sound.SoundManager;
 import com.blargsworkshop.engine.utility.SimpleTeleporter;
 import com.blargsworkshop.engine.utility.Utils;
+import com.blargsworkshop.sleepstone.ModItems.Potions;
+import com.blargsworkshop.sleepstone.ModItems.Sounds;
 import com.blargsworkshop.sleepstone.SleepstoneMod;
 import com.blargsworkshop.sleepstone.gui.GuiEnum;
 import com.blargsworkshop.sleepstone.items.BaseModItem;
@@ -46,15 +46,15 @@ public class Sleepstone extends BaseModItem {
 					player.openGui(SleepstoneMod.getInstance(), GuiEnum.STONE.ordinal(), world, (int) player.posX, (int) player.posY, (int) player.posZ);
 				}
 				else {
-					player.openGui(SleepstoneMod.getInstance(), GuiEnum.STONE_INVENTORY.ordinal(), world, (int) player.posX, (int) player.posY, (int) player.posZ);
-//					if (player.isPotionActive(Potions.warpSickness)) {
-//						Utils.addChatMessage(player, "text.sleepstone.suffering_effects_of_warping");
-//						cooldownTimer.startCooldown(player);
-//					}
-//					else {
-//						// Start channeling for warp.
-//						player.setActiveHand(hand);
-//					}
+//					player.openGui(SleepstoneMod.getInstance(), GuiEnum.STONE_INVENTORY.ordinal(), world, (int) player.posX, (int) player.posY, (int) player.posZ);
+					if (player.isPotionActive(Potions.warpSickness)) {
+						Utils.addChatMessage(player, "text.sleepstone.suffering_effects_of_warping");
+						cooldownTimer.startCooldown(player);
+					}
+					else {
+						// Start channeling for warp.
+						player.setActiveHand(hand);
+					}
 				}
 			}
 		}
