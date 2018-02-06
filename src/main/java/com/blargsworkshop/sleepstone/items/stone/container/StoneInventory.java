@@ -4,21 +4,30 @@ import com.blargsworkshop.sleepstone.abilities.Ability;
 import com.blargsworkshop.sleepstone.items.stone.GemSlot;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class StoneInventory extends ItemStackHandler {
     
+	private static final String INVENTORY_TAG = "gem_inventory";
+	private ItemStack stone = null;
+
 	/** Inventory's size must be the same as number of slots you add to the Container class */
     /** Defining your inventory size this way is handy */
     public static final int INV_SIZE = 27;
-    private ItemStack stone = null;
     
     public StoneInventory(ItemStack stack) {
     	super(INV_SIZE);
     	stone = stack;
     	if (!stack.hasTagCompound()) {
-			stack.setTagCompound(this.serializeNBT());
+    		NBTTagCompound tagComp = new NBTTagCompound();
+			tagComp.setTag(INVENTORY_TAG, this.serializeNBT());
+    		stack.setTagCompound(tagComp);			
 		}
+    	// TODO test the else path
+    	else {
+    		onContentsChanged(0);
+    	}
     }
     
     public ItemStack getStone() {
@@ -27,7 +36,7 @@ public class StoneInventory extends ItemStackHandler {
     
     @Override
     protected void onContentsChanged(int slot) {
-    	stone.setTagCompound(this.serializeNBT());
+    	stone.getTagCompound().setTag(INVENTORY_TAG, this.serializeNBT());
     }
 
     private boolean checkGems(GemSlot mainSlot, GemSlot augmentSlot) {
