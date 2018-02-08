@@ -24,7 +24,6 @@ public class StoneInventory extends ItemStackHandler {
 			tagComp.setTag(INVENTORY_TAG, this.serializeNBT());
     		stack.setTagCompound(tagComp);			
 		}
-    	// TODO test the else path
     	else {
     		onContentsChanged(0);
     	}

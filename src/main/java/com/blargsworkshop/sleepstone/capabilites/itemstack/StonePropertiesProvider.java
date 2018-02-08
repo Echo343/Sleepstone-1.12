@@ -15,8 +15,8 @@ public class StonePropertiesProvider implements ICapabilitySerializable<NBTBase>
 	
 	private IStoneProperties properties;
 
-	public StonePropertiesProvider() {
-		properties = STONE_PROPERTY_CAPABILITY.getDefaultInstance();
+	public StonePropertiesProvider(ItemStack stone) {
+		properties = new StoneProperties(stone);
 	}
 
 	@Override
