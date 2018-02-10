@@ -11,15 +11,9 @@ public class StoneProperties implements IStoneProperties {
 	private ItemStack stone = null;
 	
 	public StoneProperties(ItemStack stone) {
+		this.stone = stone;
 		String uniqueId = UUID.randomUUID().toString();
-		if (!stone.hasTagCompound()) {
-    		NBTTagCompound tagComp = new NBTTagCompound();
-			tagComp.setString(UNIQUE_ID, uniqueId);
-			stone.setTagCompound(tagComp);			
-		}
-		else {
-			stone.getTagCompound().setString(UNIQUE_ID, uniqueId);
-		}
+		setUniqueId(uniqueId);
 	}
 
 	@Override
@@ -28,8 +22,15 @@ public class StoneProperties implements IStoneProperties {
 	}
 	
 	@Override
-	public void setUniqueId(String uuid) {
-		stone.getTagCompound().setString(UNIQUE_ID, uuid);
+	public void setUniqueId(String uniqueId) {
+		if (!stone.hasTagCompound()) {
+    		NBTTagCompound tagComp = new NBTTagCompound();
+			tagComp.setString(UNIQUE_ID, uniqueId);
+			stone.setTagCompound(tagComp);			
+		}
+		else {
+			stone.getTagCompound().setString(UNIQUE_ID, uniqueId);
+		}
 	}
 
 }

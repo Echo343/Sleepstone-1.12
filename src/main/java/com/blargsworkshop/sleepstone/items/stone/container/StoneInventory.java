@@ -19,14 +19,7 @@ public class StoneInventory extends ItemStackHandler {
     public StoneInventory(ItemStack stack) {
     	super(INV_SIZE);
     	stone = stack;
-    	if (!stack.hasTagCompound()) {
-    		NBTTagCompound tagComp = new NBTTagCompound();
-			tagComp.setTag(INVENTORY_TAG, this.serializeNBT());
-    		stack.setTagCompound(tagComp);			
-		}
-    	else {
-    		onContentsChanged(0);
-    	}
+    	onContentsChanged(0);    	
     }
     
     public ItemStack getStone() {
@@ -35,7 +28,22 @@ public class StoneInventory extends ItemStackHandler {
     
     @Override
     protected void onContentsChanged(int slot) {
-    	stone.getTagCompound().setTag(INVENTORY_TAG, this.serializeNBT());
+    	if (!stone.hasTagCompound()) {
+    		NBTTagCompound tagComp = new NBTTagCompound();
+			tagComp.setTag(INVENTORY_TAG, this.serializeNBT());
+    		stone.setTagCompound(tagComp);			
+		}
+    	else {
+    		setTagCompound(this.serializeNBT());
+    	}
+    }
+    
+    public NBTTagCompound getTagCompound() {
+    	return stone.getTagCompound().getCompoundTag(INVENTORY_TAG);
+    }
+    
+    public void setTagCompound(NBTTagCompound nbt) {
+    	stone.getTagCompound().setTag(INVENTORY_TAG, nbt);
     }
 
     private boolean checkGems(GemSlot mainSlot, GemSlot augmentSlot) {

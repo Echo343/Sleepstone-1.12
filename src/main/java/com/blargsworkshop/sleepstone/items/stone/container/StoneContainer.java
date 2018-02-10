@@ -106,8 +106,7 @@ public class StoneContainer extends Container {
 		ItemStack itemStackCopy = ItemStack.EMPTY;
 		Slot slot = this.inventorySlots.get(index);
 
-		if (slot != null && slot.getHasStack())
-		{
+		if (slot != null && slot.getHasStack())	{
 			ItemStack itemStack = slot.getStack();
 			itemStackCopy = itemStack.copy();
 

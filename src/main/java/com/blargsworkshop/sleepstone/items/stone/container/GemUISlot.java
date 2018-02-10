@@ -32,6 +32,12 @@ public class GemUISlot extends SlotItemHandler {
     	this.stackLimit = 1;
     	this.setBackgroundName(getResourceLocationFromGemType(gemSlot.getGemItem().getClass()).toString());
     }
+    
+//    @Override
+//    public void onSlotChange(@Nonnull ItemStack p_75220_1_, @Nonnull ItemStack p_75220_2_)
+//    {
+//    	this.getItemHandler().
+//    }
 
     // This is the only method we need to override so that
     // we can't place our inventory-storing Item within

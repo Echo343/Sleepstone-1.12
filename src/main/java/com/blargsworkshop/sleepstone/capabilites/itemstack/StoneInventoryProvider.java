@@ -30,7 +30,7 @@ public class StoneInventoryProvider implements ICapabilitySerializable<NBTBase> 
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
 		if (capability == STONE_INVENTORY_CAPABILITY) {
-			inventory.deserializeNBT(inventory.getStone().serializeNBT());
+			inventory.deserializeNBT(inventory.getTagCompound());
 			return STONE_INVENTORY_CAPABILITY.<T> cast(inventory);
 		}
 		return null;
