@@ -1,5 +1,7 @@
 package com.blargsworkshop.sleepstone.items.stone.container;
 
+import javax.annotation.Nonnull;
+
 import com.blargsworkshop.sleepstone.abilities.Ability;
 import com.blargsworkshop.sleepstone.items.stone.GemSlot;
 
@@ -36,6 +38,14 @@ public class StoneInventory extends ItemStackHandler {
     	else {
     		setTagCompound(this.serializeNBT());
     	}
+    }
+    
+    @Override
+    public void setStackInSlot(int slot, @Nonnull ItemStack stack)
+    {
+        validateSlotIndex(slot);
+        this.stacks.set(slot, stack);
+        onContentsChanged(slot);
     }
     
     public NBTTagCompound getTagCompound() {

@@ -130,17 +130,14 @@ public class StoneContainer extends Container {
 				}
 			}
 			
-			if (itemStack.isEmpty())
-			{
+			if (itemStack.isEmpty()) {
 				slot.putStack(ItemStack.EMPTY);
 			}
-			else
-			{
+			else {
 				slot.onSlotChanged();
 			}
 
-			if (itemStack.getCount() == itemStackCopy.getCount())
-			{
+			if (itemStack.getCount() == itemStackCopy.getCount()) {
 				return ItemStack.EMPTY;
 			}
 		}
