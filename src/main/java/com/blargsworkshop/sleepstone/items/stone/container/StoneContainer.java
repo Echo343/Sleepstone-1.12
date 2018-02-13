@@ -109,6 +109,7 @@ public class StoneContainer extends Container {
 		if (slot != null && slot.getHasStack())	{
 			ItemStack itemStack = slot.getStack();
 			itemStackCopy = itemStack.copy();
+			boolean gemsMoved = false;
 
 			if (index >= GEM_SLOTS_START && index <= GEM_SLOTS_END) {
 				if (!this.mergeItemStack(itemStack, GEM_STORAGE_START, HOTBAR_END + 1, false)) {
@@ -116,10 +117,11 @@ public class StoneContainer extends Container {
 				}
 			}
 			else if (index >= GEM_STORAGE_START && index <= GEM_STORAGE_END) {
-				if (!this.mergeItemStack(itemStack, GEM_SLOTS_START, GEM_SLOTS_END + 1, false)) {
-					if (!this.mergeItemStack(itemStack, INV_START, HOTBAR_END + 1, false)) {					
-						return ItemStack.EMPTY;
-					}
+				while (this.mergeItemStack(itemStack, GEM_SLOTS_START, GEM_SLOTS_END + 1, false)) {
+					gemsMoved = true;
+				};
+				if (!gemsMoved && !this.mergeItemStack(itemStack, INV_START, HOTBAR_END + 1, false)) {					
+					return ItemStack.EMPTY;
 				}
 			}
 			else {
@@ -135,6 +137,9 @@ public class StoneContainer extends Container {
 			}
 			else {
 				slot.onSlotChanged();
+				if (gemsMoved) {
+					return ItemStack.EMPTY;
+				}
 			}
 
 			if (itemStack.getCount() == itemStackCopy.getCount()) {
