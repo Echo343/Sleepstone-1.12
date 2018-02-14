@@ -1,4 +1,4 @@
-package com.blargsworkshop.sleepstone.items.stone.container;
+package com.blargsworkshop.sleepstone.items.stone.inventory.gui;
 
 import com.blargsworkshop.sleepstone.ModItems.Sprites;
 import com.blargsworkshop.sleepstone.items.gems.ElementalGem;
@@ -8,7 +8,6 @@ import com.blargsworkshop.sleepstone.items.gems.GuardianGem;
 import com.blargsworkshop.sleepstone.items.gems.MonkGem;
 import com.blargsworkshop.sleepstone.items.gems.PathfinderGem;
 import com.blargsworkshop.sleepstone.items.gems.TimeSpaceGem;
-import com.blargsworkshop.sleepstone.items.stone.GemSlot;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -32,12 +31,6 @@ public class GemUISlot extends SlotItemHandler {
     	this.stackLimit = 1;
     	this.setBackgroundName(getResourceLocationFromGemType(gemSlot.getGemItem().getClass()).toString());
     }
-    
-//    @Override
-//    public void onSlotChange(@Nonnull ItemStack p_75220_1_, @Nonnull ItemStack p_75220_2_)
-//    {
-//    	this.getItemHandler().
-//    }
 
     // This is the only method we need to override so that
     // we can't place our inventory-storing Item within

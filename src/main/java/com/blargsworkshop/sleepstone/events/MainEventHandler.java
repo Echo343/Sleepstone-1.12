@@ -6,11 +6,11 @@ import com.blargsworkshop.engine.utility.Utils;
 import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.abilities.Ability;
 import com.blargsworkshop.sleepstone.abilities.Windwalker;
-import com.blargsworkshop.sleepstone.capabilites.itemstack.StoneInventoryProvider;
-import com.blargsworkshop.sleepstone.capabilites.itemstack.StonePropertiesProvider;
-import com.blargsworkshop.sleepstone.capabilites.player.AbilityStatusProvider;
-import com.blargsworkshop.sleepstone.capabilites.player.IAbilityStatus;
 import com.blargsworkshop.sleepstone.items.stone.Sleepstone;
+import com.blargsworkshop.sleepstone.items.stone.inventory.StoneInventoryProvider;
+import com.blargsworkshop.sleepstone.items.stone.properties.StonePropertiesProvider;
+import com.blargsworkshop.sleepstone.player.AbilityStatusProvider;
+import com.blargsworkshop.sleepstone.player.IAbilityStatus;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;

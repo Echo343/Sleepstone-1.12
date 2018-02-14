@@ -5,8 +5,8 @@ import java.io.IOException;
 import com.blargsworkshop.engine.network.AbstractMessage;
 import com.blargsworkshop.engine.proxy.IProxy;
 import com.blargsworkshop.sleepstone.SleepstoneMod;
-import com.blargsworkshop.sleepstone.capabilites.player.AbilityStatusProvider;
-import com.blargsworkshop.sleepstone.capabilites.player.IAbilityStatus;
+import com.blargsworkshop.sleepstone.player.AbilityStatusProvider;
+import com.blargsworkshop.sleepstone.player.IAbilityStatus;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;

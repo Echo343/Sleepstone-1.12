@@ -1,9 +1,9 @@
-package com.blargsworkshop.sleepstone.items.stone.container;
+package com.blargsworkshop.sleepstone.items.stone.inventory;
 
 import javax.annotation.Nonnull;
 
 import com.blargsworkshop.sleepstone.abilities.Ability;
-import com.blargsworkshop.sleepstone.items.stone.GemSlot;
+import com.blargsworkshop.sleepstone.items.stone.inventory.gui.GemSlot;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

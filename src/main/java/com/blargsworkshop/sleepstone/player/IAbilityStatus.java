@@ -1,4 +1,4 @@
-package com.blargsworkshop.sleepstone.capabilites.player;
+package com.blargsworkshop.sleepstone.player;
 
 import java.util.Map;
 

@@ -1,6 +1,6 @@
 package com.blargsworkshop.sleepstone.abilities;
 
-import com.blargsworkshop.sleepstone.items.stone.GemSlot;
+import com.blargsworkshop.sleepstone.items.stone.inventory.gui.GemSlot;
 
 public enum Ability {
 	VENOM_IMMUNITY(GemSlot.GUARDIAN_1, GemSlot.MONK_1),

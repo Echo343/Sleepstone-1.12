@@ -1,4 +1,4 @@
-package com.blargsworkshop.sleepstone.capabilites.player;
+package com.blargsworkshop.sleepstone.player;
 
 import java.util.EnumMap;
 import java.util.List;
@@ -11,10 +11,10 @@ import com.blargsworkshop.engine.utility.Utils;
 import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.ModItems;
 import com.blargsworkshop.sleepstone.abilities.Ability;
-import com.blargsworkshop.sleepstone.capabilites.itemstack.IStoneProperties;
-import com.blargsworkshop.sleepstone.capabilites.itemstack.StoneInventoryProvider;
-import com.blargsworkshop.sleepstone.capabilites.itemstack.StonePropertiesProvider;
-import com.blargsworkshop.sleepstone.items.stone.container.StoneInventory;
+import com.blargsworkshop.sleepstone.items.stone.inventory.StoneInventory;
+import com.blargsworkshop.sleepstone.items.stone.inventory.StoneInventoryProvider;
+import com.blargsworkshop.sleepstone.items.stone.properties.IStoneProperties;
+import com.blargsworkshop.sleepstone.items.stone.properties.StonePropertiesProvider;
 import com.blargsworkshop.sleepstone.network.packets.bidirectional.SyncAllPlayerPropsMessage;
 import com.blargsworkshop.sleepstone.network.packets.bidirectional.SyncPlayerBondedIdMessage;
 import com.blargsworkshop.sleepstone.network.packets.bidirectional.SyncPlayerPropMessage;

@@ -1,4 +1,4 @@
-package com.blargsworkshop.sleepstone.capabilites.player;
+package com.blargsworkshop.sleepstone.player;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTBase;

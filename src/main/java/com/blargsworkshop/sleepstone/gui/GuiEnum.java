@@ -1,6 +1,6 @@
 package com.blargsworkshop.sleepstone.gui;
 
 public enum GuiEnum {
-	STONE,
+	ABILITY,
 	STONE_INVENTORY
 }

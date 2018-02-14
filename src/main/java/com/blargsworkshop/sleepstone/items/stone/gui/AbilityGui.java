@@ -13,13 +13,13 @@ import com.blargsworkshop.engine.network.NetworkOverlord;
 import com.blargsworkshop.engine.utility.Utils;
 import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.abilities.Ability;
-import com.blargsworkshop.sleepstone.capabilites.itemstack.StoneInventoryProvider;
-import com.blargsworkshop.sleepstone.capabilites.player.AbilityStatusProvider;
-import com.blargsworkshop.sleepstone.capabilites.player.IAbilityStatus;
 import com.blargsworkshop.sleepstone.gui.GuiEnum;
-import com.blargsworkshop.sleepstone.items.stone.container.StoneInventory;
+import com.blargsworkshop.sleepstone.items.stone.inventory.StoneInventory;
+import com.blargsworkshop.sleepstone.items.stone.inventory.StoneInventoryProvider;
 import com.blargsworkshop.sleepstone.network.packets.toserver.CommandMessage;
 import com.blargsworkshop.sleepstone.network.packets.toserver.CommandMessage.Command;
+import com.blargsworkshop.sleepstone.player.AbilityStatusProvider;
+import com.blargsworkshop.sleepstone.player.IAbilityStatus;
 import com.blargsworkshop.sleepstone.network.packets.toserver.OpenGuiMessage;
 
 import net.minecraft.client.gui.GuiButton;
@@ -29,7 +29,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 
-public class GuiStone extends GuiScreen {
+public class AbilityGui extends GuiScreen {
 	
 	protected static enum Button {
 		VENOM_IMMUNITY(Ability.VENOM_IMMUNITY, ToggleButton.class, 0, 0),
@@ -101,7 +101,7 @@ public class GuiStone extends GuiScreen {
 	
 	private TooltipContainer buttonTooltips = new TooltipContainer();
 	
-	public GuiStone(EntityPlayer player, ItemStack stone) {
+	public AbilityGui(EntityPlayer player, ItemStack stone) {
 		this.inventory = StoneInventoryProvider.getStoneInventory(stone);
 		this.player = player;
 		this.props = AbilityStatusProvider.getCapability(player);

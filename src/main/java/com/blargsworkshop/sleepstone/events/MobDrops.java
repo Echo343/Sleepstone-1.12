@@ -1,7 +1,7 @@
 package com.blargsworkshop.sleepstone.events;
 
 import com.blargsworkshop.sleepstone.ModItems;
-import com.blargsworkshop.sleepstone.items.stone.GemSlot;
+import com.blargsworkshop.sleepstone.items.stone.inventory.gui.GemSlot;
 
 import net.minecraft.entity.EntityFlying;
 import net.minecraft.entity.EntityLivingBase;

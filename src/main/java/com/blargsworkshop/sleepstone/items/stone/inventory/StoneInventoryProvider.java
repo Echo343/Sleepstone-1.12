@@ -1,6 +1,4 @@
-package com.blargsworkshop.sleepstone.capabilites.itemstack;
-
-import com.blargsworkshop.sleepstone.items.stone.container.StoneInventory;
+package com.blargsworkshop.sleepstone.items.stone.inventory;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;

@@ -1,7 +1,7 @@
-package com.blargsworkshop.sleepstone.items.stone.container;
+package com.blargsworkshop.sleepstone.items.stone.inventory.gui;
 
-import com.blargsworkshop.sleepstone.capabilites.itemstack.StoneInventoryProvider;
-import com.blargsworkshop.sleepstone.items.stone.GemSlot;
+import com.blargsworkshop.sleepstone.items.stone.inventory.StoneInventory;
+import com.blargsworkshop.sleepstone.items.stone.inventory.StoneInventoryProvider;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

@@ -1,13 +1,13 @@
 package com.blargsworkshop.sleepstone.gui;
 
 import com.blargsworkshop.engine.utility.Utils;
-import com.blargsworkshop.sleepstone.capabilites.itemstack.IStoneProperties;
-import com.blargsworkshop.sleepstone.capabilites.itemstack.StonePropertiesProvider;
-import com.blargsworkshop.sleepstone.capabilites.player.AbilityStatusProvider;
-import com.blargsworkshop.sleepstone.capabilites.player.IAbilityStatus;
-import com.blargsworkshop.sleepstone.items.stone.container.StoneContainer;
-import com.blargsworkshop.sleepstone.items.stone.gui.GuiStone;
-import com.blargsworkshop.sleepstone.items.stone.gui.GuiStoneInventory;
+import com.blargsworkshop.sleepstone.items.stone.gui.AbilityGui;
+import com.blargsworkshop.sleepstone.items.stone.inventory.gui.GuiStoneInventory;
+import com.blargsworkshop.sleepstone.items.stone.inventory.gui.StoneContainer;
+import com.blargsworkshop.sleepstone.items.stone.properties.IStoneProperties;
+import com.blargsworkshop.sleepstone.items.stone.properties.StonePropertiesProvider;
+import com.blargsworkshop.sleepstone.player.AbilityStatusProvider;
+import com.blargsworkshop.sleepstone.player.IAbilityStatus;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
@@ -17,7 +17,7 @@ public class GuiHandler implements IGuiHandler {
 
 	@Override
 	public Object getServerGuiElement(int guiId, EntityPlayer player, World world,	int x, int y, int z) {
-		if (guiId == GuiEnum.STONE.ordinal()) {
+		if (guiId == GuiEnum.ABILITY.ordinal()) {
 			IStoneProperties stoneProps = StonePropertiesProvider.getProperties(player.getHeldItemMainhand());
 			IAbilityStatus props = AbilityStatusProvider.getCapability(player);
 			if (!stoneProps.getUniqueId().equals(props.getBondedStoneId())) {
@@ -36,8 +36,8 @@ public class GuiHandler implements IGuiHandler {
 
 	@Override
 	public Object getClientGuiElement(int guiId, EntityPlayer player, World world,	int x, int y, int z) {
-		if (guiId == GuiEnum.STONE.ordinal()) {
-			return new GuiStone(player, player.getHeldItemMainhand());
+		if (guiId == GuiEnum.ABILITY.ordinal()) {
+			return new AbilityGui(player, player.getHeldItemMainhand());
 		}
 		else if (guiId == GuiEnum.STONE_INVENTORY.ordinal()) {
 			return new GuiStoneInventory(new StoneContainer(world, player, player.inventory, player.getHeldItemMainhand()));

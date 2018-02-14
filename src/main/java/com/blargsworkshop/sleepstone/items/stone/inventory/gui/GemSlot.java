@@ -1,4 +1,4 @@
-package com.blargsworkshop.sleepstone.items.stone;
+package com.blargsworkshop.sleepstone.items.stone.inventory.gui;
 
 import com.blargsworkshop.sleepstone.ModItems;
 import com.blargsworkshop.sleepstone.items.gems.Gem;

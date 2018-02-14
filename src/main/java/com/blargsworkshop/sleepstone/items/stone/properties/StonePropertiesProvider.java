@@ -1,4 +1,4 @@
-package com.blargsworkshop.sleepstone.capabilites.itemstack;
+package com.blargsworkshop.sleepstone.items.stone.properties;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
