@@ -1,5 +1,7 @@
 package com.blargsworkshop.sleepstone.abilities;
 
+import java.lang.reflect.Field;
+
 import com.blargsworkshop.engine.logger.Log;
 import com.blargsworkshop.engine.potion.BlargsPotion;
 import com.blargsworkshop.engine.utility.Utils;
@@ -14,10 +16,22 @@ public class FoodSaturationPotion extends BlargsPotion {
 
 	private static final float foodSaturationModifier = 0.15f;
 	private static final int updateDuration = 20 * 10;
+	private static Field foodSaturationLevel = null;
+	private static boolean hasError = false;
 
 	public FoodSaturationPotion(ResourceLocation registryName, String messageKey) {
 		super(registryName, messageKey);
 		setBeneficial();
+		if (foodSaturationLevel == null) {
+			try {
+				foodSaturationLevel = FoodStats.class.getDeclaredField("foodSaturationLevel");
+				foodSaturationLevel.setAccessible(true);
+			} catch (NoSuchFieldException | SecurityException | NullPointerException e) {
+				hasError = true;
+				Log.error("FoodSaturationLevel Reflection has failed.  Iron Stomach ability will not work.");
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	@Override
@@ -28,16 +42,23 @@ public class FoodSaturationPotion extends BlargsPotion {
 				amplifier = 1;
 			}
 			FoodStats foodStats = ((EntityPlayer) entity).getFoodStats();
-			foodStats.setFoodSaturationLevel(Math.min(foodStats.getSaturationLevel() + foodSaturationModifier * amplifier, (float) foodStats.getFoodLevel()));
-			if (Utils.isServer(entity.getEntityWorld())) {
-				Log.detail("Food Saturation: " + foodStats.getSaturationLevel(), (EntityPlayer) entity);
+			float level = Math.min(foodStats.getSaturationLevel() + foodSaturationModifier * amplifier, (float) foodStats.getFoodLevel());
+			try {
+				foodSaturationLevel.setFloat(foodStats, level);
+				if (Utils.isServer(entity.getEntityWorld())) {
+					Log.detail("Food Saturation: " + foodStats.getSaturationLevel(), (EntityPlayer) entity);
+				}
+			} catch (IllegalArgumentException | IllegalAccessException | NullPointerException e) {
+				hasError = true;
+				Log.error("FoodSaturationLevel Reflection has failed.  Iron Stomach ability will not work.", (EntityPlayer) entity);
+				e.printStackTrace();
 			}
 		}
 	}
 	
 	@Override
 	public boolean isReady(int duration, int amplifier) {
-		return true;
+		return hasError ? false : true;
 	}
 	
 	@Override
