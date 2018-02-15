@@ -54,6 +54,7 @@ public class MainEventHandler implements IEventHandler {
 		if (event.getEntity() instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) event.getEntity();
 			player.getAttributeMap().registerAttribute(Windwalker.STEP_HEIGHT);
+			player.getAttributeMap().registerAttribute(Windwalker.JUMP_MOVEMENT_FACTOR);
 		}
 	}
 	

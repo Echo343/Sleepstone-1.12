@@ -30,6 +30,10 @@ public class TickEventHandler implements IEventHandler {
 				e.player.stepHeight = (float) stepHeightAttribute.getAttributeValue();
 			}
 		}
+		IAttributeInstance jumpMovementFactorAttribute = e.player.getEntityAttribute(Windwalker.JUMP_MOVEMENT_FACTOR);
+		if (jumpMovementFactorAttribute != null && e.player.jumpMovementFactor != jumpMovementFactorAttribute.getAttributeValue()) {
+			e.player.jumpMovementFactor = (float) jumpMovementFactorAttribute.getAttributeValue();
+		}
 				
 		if (Utils.isServer(e.player.getEntityWorld()) && e.player.ticksExisted % CHECK_RATE == 0) {
 			if (e.player.getCapability(AbilityStatusProvider.ABILITY_STATUS_CAPABILITY, null).isAbilityAvailable(Ability.IRON_STOMACH)) {
