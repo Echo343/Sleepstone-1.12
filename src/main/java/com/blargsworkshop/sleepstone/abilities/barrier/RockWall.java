@@ -1,4 +1,4 @@
-package com.blargsworkshop.sleepstone.abilities;
+package com.blargsworkshop.sleepstone.abilities.barrier;
 
 import java.util.ArrayList;
 import java.util.List;

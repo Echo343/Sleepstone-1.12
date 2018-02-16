@@ -11,7 +11,7 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class StoneContainer extends Container {
+public class StoneInventoryContainer extends Container {
     private StoneInventory inventory;
 
     /** Using these will make transferStackInSlot easier to understand and implement
@@ -32,7 +32,7 @@ public class StoneContainer extends Container {
 	// ARMOR_START = InventoryItem.INV_SIZE, ARMOR_END = ARMOR_START+3,
 	// INV_START = ARMOR_END+1, and then carry on like above.
 		
-    public StoneContainer(World world, EntityPlayer player, InventoryPlayer inventoryPlayer, ItemStack stone) {
+    public StoneInventoryContainer(World world, EntityPlayer player, InventoryPlayer inventoryPlayer, ItemStack stone) {
         inventory = StoneInventoryProvider.getStoneInventory(stone);
         
         /** Gem Slots */

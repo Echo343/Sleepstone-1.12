@@ -12,6 +12,7 @@ import com.blargsworkshop.engine.logger.Log;
 import com.blargsworkshop.engine.network.NetworkOverlord;
 import com.blargsworkshop.engine.utility.Utils;
 import com.blargsworkshop.sleepstone.ModInfo;
+import com.blargsworkshop.sleepstone.SleepstoneMod;
 import com.blargsworkshop.sleepstone.abilities.Ability;
 import com.blargsworkshop.sleepstone.gui.GuiEnum;
 import com.blargsworkshop.sleepstone.items.stone.inventory.StoneInventory;
@@ -200,7 +201,9 @@ public class AbilityGui extends GuiScreen {
 			break;
 		case HELLJUMPER:
 		case PHANTOM_TORCH:
+			break;
 		case TEMPORAL_AID:
+			player.openGui(SleepstoneMod.getInstance(), GuiEnum.TEMPORAL_AID_PLAYER_SELECTION.ordinal(), player.getEntityWorld(), (int) player.posX, (int) player.posY, (int) player.posZ);
 			break;
 		default:
 			break;

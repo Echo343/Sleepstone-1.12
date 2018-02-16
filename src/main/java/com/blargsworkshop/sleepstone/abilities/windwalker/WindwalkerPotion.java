@@ -1,4 +1,4 @@
-package com.blargsworkshop.sleepstone.abilities;
+package com.blargsworkshop.sleepstone.abilities.windwalker;
 
 import com.blargsworkshop.engine.potion.BlargsPotion;
 

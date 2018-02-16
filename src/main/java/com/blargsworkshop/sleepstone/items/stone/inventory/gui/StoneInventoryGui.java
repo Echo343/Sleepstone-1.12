@@ -8,7 +8,7 @@ import com.blargsworkshop.sleepstone.ModInfo;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiStoneInventory extends GuiContainer
+public class StoneInventoryGui extends GuiContainer
 {    
 	/** ResourceLocation takes 2 parameters: ModId, path to texture at the location:
 	 * "src/minecraft/assets/modid/"
@@ -18,7 +18,7 @@ public class GuiStoneInventory extends GuiContainer
 	 */
 	private static final ResourceLocation backgroundImage = new ResourceLocation(ModInfo.ID, "textures/gui/GuiInventoryStone.png");
 	
-	public GuiStoneInventory(StoneContainer containerItem)
+	public StoneInventoryGui(StoneInventoryContainer containerItem)
 	{
 		super(containerItem);
 		this.xSize = 175;

@@ -1,4 +1,4 @@
-package com.blargsworkshop.sleepstone.abilities;
+package com.blargsworkshop.sleepstone.abilities.windwalker;
 
 import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.ai.attributes.RangedAttribute;

@@ -1,9 +1,10 @@
 package com.blargsworkshop.sleepstone.gui;
 
 import com.blargsworkshop.engine.utility.Utils;
+import com.blargsworkshop.sleepstone.abilities.temporal_aid.PlayerSelectionGui;
 import com.blargsworkshop.sleepstone.items.stone.gui.AbilityGui;
-import com.blargsworkshop.sleepstone.items.stone.inventory.gui.GuiStoneInventory;
-import com.blargsworkshop.sleepstone.items.stone.inventory.gui.StoneContainer;
+import com.blargsworkshop.sleepstone.items.stone.inventory.gui.StoneInventoryGui;
+import com.blargsworkshop.sleepstone.items.stone.inventory.gui.StoneInventoryContainer;
 import com.blargsworkshop.sleepstone.items.stone.properties.IStoneProperties;
 import com.blargsworkshop.sleepstone.items.stone.properties.StonePropertiesProvider;
 import com.blargsworkshop.sleepstone.player.AbilityStatusProvider;
@@ -27,7 +28,7 @@ public class GuiHandler implements IGuiHandler {
 			return null;
 		}
 		if (guiId == GuiEnum.STONE_INVENTORY.ordinal()) {
-			return new StoneContainer(world, player, player.inventory, player.getHeldItemMainhand());
+			return new StoneInventoryContainer(world, player, player.inventory, player.getHeldItemMainhand());
 		}
 		else {
 			return null;
@@ -40,7 +41,10 @@ public class GuiHandler implements IGuiHandler {
 			return new AbilityGui(player, player.getHeldItemMainhand());
 		}
 		else if (guiId == GuiEnum.STONE_INVENTORY.ordinal()) {
-			return new GuiStoneInventory(new StoneContainer(world, player, player.inventory, player.getHeldItemMainhand()));
+			return new StoneInventoryGui(new StoneInventoryContainer(world, player, player.inventory, player.getHeldItemMainhand()));
+		}
+		else if (guiId == GuiEnum.TEMPORAL_AID_PLAYER_SELECTION.ordinal()) {
+			return new PlayerSelectionGui(player);
 		}
 		else {
 			return null;

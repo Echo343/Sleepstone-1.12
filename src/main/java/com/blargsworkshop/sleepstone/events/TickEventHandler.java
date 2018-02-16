@@ -5,7 +5,7 @@ import com.blargsworkshop.engine.potion.BlargsPotionEffect;
 import com.blargsworkshop.engine.utility.Utils;
 import com.blargsworkshop.sleepstone.ModItems.Potions;
 import com.blargsworkshop.sleepstone.abilities.Ability;
-import com.blargsworkshop.sleepstone.abilities.Windwalker;
+import com.blargsworkshop.sleepstone.abilities.windwalker.Windwalker;
 import com.blargsworkshop.sleepstone.player.AbilityStatusProvider;
 
 import net.minecraft.entity.ai.attributes.IAttributeInstance;

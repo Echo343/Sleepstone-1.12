@@ -1,4 +1,4 @@
-package com.blargsworkshop.sleepstone.abilities;
+package com.blargsworkshop.sleepstone.abilities.iron_stomach;
 
 import java.lang.reflect.Field;
 
