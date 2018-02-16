@@ -20,7 +20,7 @@ public class StoneContainer extends Container {
 	 * Notice how we don't have to remember how many slots we made? We can just use
 	 * InventoryItem.INV_SIZE and if we ever change it, the Container updates automatically. */
     private static final int GEM_SLOTS_START = 0;
-    private static final int GEM_SLOTS_END = GemSlot.values().length - 1;
+    private static final int GEM_SLOTS_END = StoneSlotType.values().length - 1;
     private static final int GEM_STORAGE_START = GEM_SLOTS_END + 1;
     private static final int GEM_STORAGE_END = StoneInventory.INV_SIZE - 1;
     private static final int INV_START = GEM_STORAGE_END + 1;
@@ -37,35 +37,35 @@ public class StoneContainer extends Container {
         
         /** Gem Slots */
         //Group one
-        this.addSlotToContainer(new GemUISlot(GemSlot.GUARDIAN_1, inventory, 22, 28));
-        this.addSlotToContainer(new GemUISlot(GemSlot.GUARDIAN_2, inventory, 22, 48));
-        this.addSlotToContainer(new GemUISlot(GemSlot.GUARDIAN_3, inventory, 22, 68));
+        this.addSlotToContainer(new GemSlot(StoneSlotType.GUARDIAN_1, inventory, 22, 28));
+        this.addSlotToContainer(new GemSlot(StoneSlotType.GUARDIAN_2, inventory, 22, 48));
+        this.addSlotToContainer(new GemSlot(StoneSlotType.GUARDIAN_3, inventory, 22, 68));
         
-        this.addSlotToContainer(new GemUISlot(GemSlot.MONK_1, inventory, 40, 28));
-        this.addSlotToContainer(new GemUISlot(GemSlot.ETHEREAL_1, inventory, 40, 48));
-        this.addSlotToContainer(new GemUISlot(GemSlot.ELEMENTAL_1, inventory, 40, 68));
+        this.addSlotToContainer(new GemSlot(StoneSlotType.MONK_1, inventory, 40, 28));
+        this.addSlotToContainer(new GemSlot(StoneSlotType.ETHEREAL_1, inventory, 40, 48));
+        this.addSlotToContainer(new GemSlot(StoneSlotType.ELEMENTAL_1, inventory, 40, 68));
         
         //Group two
-        this.addSlotToContainer(new GemUISlot(GemSlot.TIMESPACE_1, inventory, 71, 28));
-        this.addSlotToContainer(new GemUISlot(GemSlot.TIMESPACE_2, inventory, 71, 48));
-        this.addSlotToContainer(new GemUISlot(GemSlot.TIMESPACE_3, inventory, 71, 68));
+        this.addSlotToContainer(new GemSlot(StoneSlotType.TIMESPACE_1, inventory, 71, 28));
+        this.addSlotToContainer(new GemSlot(StoneSlotType.TIMESPACE_2, inventory, 71, 48));
+        this.addSlotToContainer(new GemSlot(StoneSlotType.TIMESPACE_3, inventory, 71, 68));
                 
-        this.addSlotToContainer(new GemUISlot(GemSlot.MONK_2, inventory, 89, 28));
-        this.addSlotToContainer(new GemUISlot(GemSlot.ETHEREAL_2, inventory, 89, 48));
-        this.addSlotToContainer(new GemUISlot(GemSlot.ELEMENTAL_2, inventory, 89, 68));
+        this.addSlotToContainer(new GemSlot(StoneSlotType.MONK_2, inventory, 89, 28));
+        this.addSlotToContainer(new GemSlot(StoneSlotType.ETHEREAL_2, inventory, 89, 48));
+        this.addSlotToContainer(new GemSlot(StoneSlotType.ELEMENTAL_2, inventory, 89, 68));
         
         //Group three
-        this.addSlotToContainer(new GemUISlot(GemSlot.PATHFINDER_1, inventory, 120, 28));
-        this.addSlotToContainer(new GemUISlot(GemSlot.PATHFINDER_2, inventory, 120, 48));
-        this.addSlotToContainer(new GemUISlot(GemSlot.PATHFINDER_3, inventory, 120, 68));
+        this.addSlotToContainer(new GemSlot(StoneSlotType.PATHFINDER_1, inventory, 120, 28));
+        this.addSlotToContainer(new GemSlot(StoneSlotType.PATHFINDER_2, inventory, 120, 48));
+        this.addSlotToContainer(new GemSlot(StoneSlotType.PATHFINDER_3, inventory, 120, 68));
         
-        this.addSlotToContainer(new GemUISlot(GemSlot.MONK_3, inventory, 138, 28));
-        this.addSlotToContainer(new GemUISlot(GemSlot.ETHEREAL_3, inventory, 138, 48));
-        this.addSlotToContainer(new GemUISlot(GemSlot.ELEMENTAL_3, inventory, 138, 68));
+        this.addSlotToContainer(new GemSlot(StoneSlotType.MONK_3, inventory, 138, 28));
+        this.addSlotToContainer(new GemSlot(StoneSlotType.ETHEREAL_3, inventory, 138, 48));
+        this.addSlotToContainer(new GemSlot(StoneSlotType.ELEMENTAL_3, inventory, 138, 68));
         
         /** Spare Gem Inventory */
         for (int i = 0; i < 9; i++) {
-        	this.addSlotToContainer(new GemUISlot(inventory, i + GemSlot.values().length, 8 + i * 18, 108));
+        	this.addSlotToContainer(new GemSlot(inventory, i + StoneSlotType.values().length, 8 + i * 18, 108));
         }
 
         // If you want, you can add ARMOR SLOTS here as well, but you need to

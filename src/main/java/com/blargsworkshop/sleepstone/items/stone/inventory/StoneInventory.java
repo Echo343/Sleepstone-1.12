@@ -3,7 +3,7 @@ package com.blargsworkshop.sleepstone.items.stone.inventory;
 import javax.annotation.Nonnull;
 
 import com.blargsworkshop.sleepstone.abilities.Ability;
-import com.blargsworkshop.sleepstone.items.stone.inventory.gui.GemSlot;
+import com.blargsworkshop.sleepstone.items.stone.inventory.gui.StoneSlotType;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -56,7 +56,7 @@ public class StoneInventory extends ItemStackHandler {
     	stone.getTagCompound().setTag(INVENTORY_TAG, nbt);
     }
 
-    private boolean checkGems(GemSlot mainSlot, GemSlot augmentSlot) {
+    private boolean checkGems(StoneSlotType mainSlot, StoneSlotType augmentSlot) {
     	boolean hasGems = false;
     	ItemStack mainStack = getStackInSlot(mainSlot.ordinal());
     	if (mainStack != null && mainStack.getItem() == mainSlot.getGemItem()) {
