@@ -55,7 +55,7 @@ public class PlayerSelectionGui extends GuiScreen {
 		Collection<NetworkPlayerInfo> players = Minecraft.getMinecraft().getConnection().getPlayerInfoMap();
 		Iterator<NetworkPlayerInfo> playerInfo = players.iterator();
 		while (playerInfo.hasNext()) {
-			GuiButton button = new GuiButton(i, firstColumn, firstRow * (i + EFFECTIVE_BUTTON_HEIGHT), playerInfo.next().getDisplayName().getFormattedText());
+			GuiButton button = new GuiButton(i, firstColumn, firstRow + (i * EFFECTIVE_BUTTON_HEIGHT), playerInfo.next().getGameProfile().getName());
 			this.addButton(button);
 			i++;
 		};
