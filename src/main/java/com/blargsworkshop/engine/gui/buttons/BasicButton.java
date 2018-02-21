@@ -71,6 +71,10 @@ public class BasicButton extends GuiButton {
 		return buttonType;
 	}
 	
+	public int getId() {
+		return super.id;
+	}
+	
 	public void setDisplayString(String text) {
 		this.displayString = text;
 	}

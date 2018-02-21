@@ -9,6 +9,8 @@ import com.blargsworkshop.engine.logger.Log;
 import com.blargsworkshop.engine.network.AbstractMessage.AbstractServerMessage;
 import com.blargsworkshop.engine.proxy.IProxy;
 import com.blargsworkshop.sleepstone.SleepstoneMod;
+import com.blargsworkshop.sleepstone.abilities.temporal_aid.capabilities.ITemporalAidTarget;
+import com.blargsworkshop.sleepstone.abilities.temporal_aid.capabilities.TemporalAidProvider;
 import com.blargsworkshop.sleepstone.gui.GuiEnum;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -47,6 +49,8 @@ public class OpenAidGuiMessage extends AbstractServerMessage<OpenAidGuiMessage> 
 			}
 			PlayerList players = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList();
 			EntityPlayer destPlayer = players.getPlayerByUUID(destinationPlayerUUID);
+			ITemporalAidTarget targetCapability = TemporalAidProvider.getCapability(player);
+			targetCapability.setTarget(destPlayer);
 			player.openGui(SleepstoneMod.getInstance(), GuiEnum.TEMPORAL_AID_INVENTORY.ordinal(), player.getEntityWorld(), (int) player.posX, (int) player.posY, (int) player.posZ);
 		}
 	}

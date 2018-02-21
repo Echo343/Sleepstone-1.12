@@ -1,4 +1,4 @@
-package com.blargsworkshop.sleepstone.abilities.temporal_aid;
+package com.blargsworkshop.sleepstone.abilities.temporal_aid.capabilities;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumFacing;
@@ -6,15 +6,15 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 
-public class TemporalAidTargetProvider implements ICapabilityProvider {
+public class TemporalAidProvider implements ICapabilityProvider {
 	
 	@CapabilityInject(ITemporalAidTarget.class)
 	private static final Capability<ITemporalAidTarget> TEMPORAL_AID_CAPABILITY = null;
 	
 	private ITemporalAidTarget instance;
 
-	public TemporalAidTargetProvider(EntityPlayer player) {
-//		instance = new AbilityStatus(player);
+	public TemporalAidProvider() {
+		instance = new TemporalAidTarget();
 	}
 
 	@Override

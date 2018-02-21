@@ -1,7 +1,7 @@
 package com.blargsworkshop.sleepstone.gui;
 
 import com.blargsworkshop.engine.utility.Utils;
-import com.blargsworkshop.sleepstone.abilities.temporal_aid.PlayerSelectionGui;
+import com.blargsworkshop.sleepstone.abilities.temporal_aid.gui.PlayerSelectionGui;
 import com.blargsworkshop.sleepstone.items.stone.gui.AbilityGui;
 import com.blargsworkshop.sleepstone.items.stone.inventory.gui.StoneInventoryGui;
 import com.blargsworkshop.sleepstone.items.stone.inventory.gui.StoneInventoryContainer;

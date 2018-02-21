@@ -1,4 +1,4 @@
-package com.blargsworkshop.sleepstone.abilities.temporal_aid;
+package com.blargsworkshop.sleepstone.abilities.temporal_aid.gui;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -12,6 +12,7 @@ import org.lwjgl.opengl.GL11;
 import com.blargsworkshop.engine.gui.buttons.BasicButton;
 import com.blargsworkshop.engine.network.NetworkOverlord;
 import com.blargsworkshop.sleepstone.ModInfo;
+import com.blargsworkshop.sleepstone.abilities.temporal_aid.OpenAidGuiMessage;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
@@ -79,7 +80,7 @@ public class PlayerSelectionGui extends GuiScreen {
 	protected void actionPerformed(GuiButton button) {
 		BasicButton btn = button instanceof BasicButton ? (BasicButton) button : null;
 		if (btn != null) {
-			NetworkOverlord.get(ModInfo.ID).sendToServer(null);
+			NetworkOverlord.get(ModInfo.ID).sendToServer(new OpenAidGuiMessage(buttonMap.get(btn.getId())));
 		}
 	}
 		

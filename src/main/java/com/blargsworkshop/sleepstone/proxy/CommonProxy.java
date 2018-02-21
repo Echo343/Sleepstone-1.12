@@ -13,6 +13,9 @@ import com.blargsworkshop.engine.proxy.BlargsCommonProxy;
 import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.ModItems;
 import com.blargsworkshop.sleepstone.SleepstoneMod;
+import com.blargsworkshop.sleepstone.abilities.temporal_aid.capabilities.ITemporalAidTarget;
+import com.blargsworkshop.sleepstone.abilities.temporal_aid.capabilities.TemporalAidTarget;
+import com.blargsworkshop.sleepstone.abilities.temporal_aid.capabilities.TemporalAidTargetStorage;
 import com.blargsworkshop.sleepstone.events.MainEventHandler;
 import com.blargsworkshop.sleepstone.events.TickEventHandler;
 import com.blargsworkshop.sleepstone.gui.GuiHandler;
@@ -36,6 +39,7 @@ public class CommonProxy extends BlargsCommonProxy {
 	public void registerCapabilities() {
 		CapabilityManager.INSTANCE.register(IAbilityStatus.class, new AbilityStatusStorage(), AbilityStatus.class);
 		CapabilityManager.INSTANCE.register(IStoneProperties.class, new StonePropertiesStorage(), StoneProperties.class);
+		CapabilityManager.INSTANCE.register(ITemporalAidTarget.class, new TemporalAidTargetStorage(), TemporalAidTarget.class);
 	}
 
 	@Override
