@@ -19,7 +19,7 @@ public class BasicButton extends GuiButton {
 	protected final Enum<?> buttonType;
 	
 	/**
-	 * Creates a button to be used on the Sleepstone Gui
+	 * Creates a button to be used on a Gui
 	 * @param type Enum that matches the button.  Used in actionPerformed(button).
 	 * @param left Left edge of the button on the whole screen.
 	 * @param top Top edge of the button on the whole screen.
@@ -33,7 +33,7 @@ public class BasicButton extends GuiButton {
 	}
 	
 	/**
-	 * Creates a button to be used on the Sleepstone Gui
+	 * Creates a button to be used on a Gui
 	 * @param type Enum that matches the button.  Used in actionPerformed(button).
 	 * @param left Left edge of the button on the whole screen.
 	 * @param top Top edge of the button on the whole screen.
@@ -45,7 +45,7 @@ public class BasicButton extends GuiButton {
 	}
 	
 	/**
-	 * Creates a button to be used on the Sleepstone Gui
+	 * Creates a button to be used on a Gui
 	 * @param type Enum that matches the button.  Used in actionPerformed(button).
 	 * @param left Left edge of the button on the whole screen.
 	 * @param top Top edge of the button on the whole screen.
@@ -53,6 +53,18 @@ public class BasicButton extends GuiButton {
 	 */
 	public BasicButton(Enum<?> type, int left, int top, String text) {
 		this(type, left, top, DEFAULT_WIDTH, DEFAULT_HEIGHT, text);
+	}
+	
+	/**
+	 * Creates a button to be used on a Gui
+	 * @param id int that defines the id of the button.  Referenced in actionPerformed(button)
+	 * @param left Left edge of the button on the whole screen.
+	 * @param top Top edge of the button on the whole screen.
+	 * @param text Text that appears on the button.
+	 */
+	public BasicButton(int id, int left, int top, String text) {
+		super(id, left, top, DEFAULT_WIDTH, DEFAULT_HEIGHT, text);
+		buttonType = null;
 	}
 	
 	public Enum<?> getButtonType() {

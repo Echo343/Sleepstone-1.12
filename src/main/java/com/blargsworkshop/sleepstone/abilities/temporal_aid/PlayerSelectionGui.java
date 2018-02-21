@@ -2,11 +2,15 @@ package com.blargsworkshop.sleepstone.abilities.temporal_aid;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
+import java.util.UUID;
 
 import org.lwjgl.opengl.GL11;
 
 import com.blargsworkshop.engine.gui.buttons.BasicButton;
+import com.blargsworkshop.engine.network.NetworkOverlord;
 import com.blargsworkshop.sleepstone.ModInfo;
 
 import net.minecraft.client.Minecraft;
@@ -21,20 +25,18 @@ public class PlayerSelectionGui extends GuiScreen {
 	private static final ResourceLocation backgroundImage = new ResourceLocation(ModInfo.ID, "textures/gui/guistone.png");
 	
 	private static final int X_SIZE = 248;
-//	private static final int xSize = 376;
 	private static final int Y_SIZE = 166;
-	private static final int LEFT_MARGIN = 4;
-	private static final int TOP_MARGIN = 4;
-	private static final int HORIZONTAL_SPACING = 4;
+	private static final int TOP_MARGIN = 0;
 	private static final int VERTICAL_SPACING = 4;
 	private static final int BUTTON_SCREEN_WIDTH = BasicButton.DEFAULT_WIDTH;
-	private static final int EFFECTIVE_BUTTON_WIDTH = BasicButton.DEFAULT_WIDTH + HORIZONTAL_SPACING;
 	private static final int EFFECTIVE_BUTTON_HEIGHT = BasicButton.DEFAULT_HEIGHT + VERTICAL_SPACING;
-	private EntityPlayer player;
+//	private EntityPlayer player;
+	
+	private Map<Integer, UUID> buttonMap = new HashMap<>();
 	
 	
 	public PlayerSelectionGui(EntityPlayer player) {
-		this.player = player;
+//		this.player = player;
 	}
 	
 	@Override
@@ -45,18 +47,19 @@ public class PlayerSelectionGui extends GuiScreen {
 		
 	protected void initButtons() {
 		int i = 0;
-		int left = (this.width - X_SIZE) / 2;
 		int btnLeft = (this.width - BUTTON_SCREEN_WIDTH) / 2;
 		int top = (this.height - Y_SIZE) / 2;
 		
 		int firstRow = top + TOP_MARGIN;
-		int firstColumn = btnLeft + LEFT_MARGIN;
+		int firstColumn = btnLeft;
 		
 		Collection<NetworkPlayerInfo> players = Minecraft.getMinecraft().getConnection().getPlayerInfoMap();
-		Iterator<NetworkPlayerInfo> playerInfo = players.iterator();
-		while (playerInfo.hasNext()) {
-			GuiButton button = new GuiButton(i, firstColumn, firstRow + (i * EFFECTIVE_BUTTON_HEIGHT), playerInfo.next().getGameProfile().getName());
+		Iterator<NetworkPlayerInfo> iter = players.iterator();
+		while (iter.hasNext()) {
+			NetworkPlayerInfo playerInfo = iter.next();
+			BasicButton button = new BasicButton(i, firstColumn, firstRow + (i * EFFECTIVE_BUTTON_HEIGHT), playerInfo.getGameProfile().getName());
 			this.addButton(button);
+			buttonMap.put(i, playerInfo.getGameProfile().getId());
 			i++;
 		};
 	}
@@ -74,7 +77,10 @@ public class PlayerSelectionGui extends GuiScreen {
 	
 	@Override
 	protected void actionPerformed(GuiButton button) {
-//		Button btn = (Button)((BasicButton)button).getButtonType();
+		BasicButton btn = button instanceof BasicButton ? (BasicButton) button : null;
+		if (btn != null) {
+			NetworkOverlord.get(ModInfo.ID).sendToServer(null);
+		}
 	}
 		
 	@Override
