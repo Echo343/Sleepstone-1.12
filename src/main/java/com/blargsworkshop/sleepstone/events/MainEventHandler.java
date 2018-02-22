@@ -39,7 +39,7 @@ public class MainEventHandler implements IEventHandler {
 	public void attachCapabilityToEntity(AttachCapabilitiesEvent<Entity> event) {
 		if (event.getObject() instanceof EntityPlayer) {
 			event.addCapability(new ResourceLocation(ModInfo.ID, "player_props"), new AbilityStatusProvider((EntityPlayer) event.getObject()));
-			event.addCapability(new ResourceLocation(ModInfo.ID, "temporalaid_target"), new TemporalAidProvider());
+			event.addCapability(new ResourceLocation(ModInfo.ID, "temporal_aid_target"), new TemporalAidProvider());
 		}
 	}
 	
@@ -48,6 +48,7 @@ public class MainEventHandler implements IEventHandler {
 		if (event.getObject().getItem() instanceof Sleepstone) {
 			event.addCapability(new ResourceLocation(ModInfo.ID, "sleepstone_inventory"), new StoneInventoryProvider(event.getObject()));
 			event.addCapability(new ResourceLocation(ModInfo.ID, "sleepstone_properties"), new StonePropertiesProvider(event.getObject()));
+			event.addCapability(new ResourceLocation(ModInfo.ID, "temporal_aid_inventory"), new TemporalAidProvider(event.getObject()));
 		}
 	}
 	
