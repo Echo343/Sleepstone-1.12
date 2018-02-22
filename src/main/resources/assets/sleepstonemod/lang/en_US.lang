@@ -70,3 +70,5 @@ text.guistone.windwalker_button=Windwalker
 text.guistone.windwalker_tooltip=By using the power of the elements, air to be exact, a pathfinder can travel much, much faster than normal.  This ability seems to also grant some protection from litterally stubbing your toe on a rock or even a chicken.
 
 text.guistone.warp=Warp
+
+text.temporal_aid.__is_getting_ready_to_send_some_items=%s is getting ready to send some items to you.

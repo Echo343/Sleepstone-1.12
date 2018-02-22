@@ -8,6 +8,7 @@ import javax.annotation.Nonnull;
 import com.blargsworkshop.engine.logger.Log;
 import com.blargsworkshop.engine.network.AbstractMessage.AbstractServerMessage;
 import com.blargsworkshop.engine.proxy.IProxy;
+import com.blargsworkshop.engine.utility.Utils;
 import com.blargsworkshop.sleepstone.SleepstoneMod;
 import com.blargsworkshop.sleepstone.abilities.temporal_aid.capabilities.ITemporalAidTarget;
 import com.blargsworkshop.sleepstone.abilities.temporal_aid.capabilities.TemporalAidProvider;
@@ -21,6 +22,7 @@ import net.minecraftforge.fml.relauncher.Side;
 
 public class OpenAidGuiMessage extends AbstractServerMessage<OpenAidGuiMessage> {
 
+	private static final String __IS_GETTING_READY_TO_SEND_SOME_ITEMS = "text.temporal_aid.__is_getting_ready_to_send_some_items";
 	private UUID destinationPlayerUUID = null;
 	
 	public OpenAidGuiMessage() {}
@@ -52,6 +54,7 @@ public class OpenAidGuiMessage extends AbstractServerMessage<OpenAidGuiMessage> 
 			ITemporalAidTarget targetCapability = TemporalAidProvider.getCapability(player);
 			targetCapability.setTarget(destPlayer);
 			player.openGui(SleepstoneMod.getInstance(), GuiEnum.TEMPORAL_AID_INVENTORY.ordinal(), player.getEntityWorld(), (int) player.posX, (int) player.posY, (int) player.posZ);
+			Utils.addChatMessage(destPlayer, __IS_GETTING_READY_TO_SEND_SOME_ITEMS, player.getDisplayNameString());
 		}
 	}
 		
