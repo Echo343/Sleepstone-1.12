@@ -14,6 +14,7 @@ import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.ModItems;
 import com.blargsworkshop.sleepstone.SleepstoneMod;
 import com.blargsworkshop.sleepstone.abilities.temporal_aid.AidInventory;
+import com.blargsworkshop.sleepstone.abilities.temporal_aid.OpenAidGuiMessage;
 import com.blargsworkshop.sleepstone.abilities.temporal_aid.TemporalAidTarget;
 import com.blargsworkshop.sleepstone.abilities.temporal_aid.capabilities.AidInventoryStorage;
 import com.blargsworkshop.sleepstone.abilities.temporal_aid.capabilities.IAidInventory;
@@ -68,6 +69,7 @@ public class CommonProxy extends BlargsCommonProxy {
 		//Messages handled on the server
 		dispatcher.registerMessage(OpenGuiMessage.class);
 		dispatcher.registerMessage(CommandMessage.class);
+		dispatcher.registerMessage(OpenAidGuiMessage.class);
 		
 		//Bidirectional Messages
 		dispatcher.registerMessage(SyncAllPlayerPropsMessage.class);

@@ -1,8 +1,8 @@
 package com.blargsworkshop.sleepstone.abilities.temporal_aid.gui;
 
+import com.blargsworkshop.sleepstone.abilities.temporal_aid.AidInventory;
 import com.blargsworkshop.sleepstone.abilities.temporal_aid.capabilities.IAidInventory;
 import com.blargsworkshop.sleepstone.abilities.temporal_aid.capabilities.TemporalAidProvider;
-import com.blargsworkshop.sleepstone.items.stone.inventory.StoneInventory;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -22,7 +22,7 @@ public class AidInventoryContainer extends Container {
 	 * Notice how we don't have to remember how many slots we made? We can just use
 	 * InventoryItem.INV_SIZE and if we ever change it, the Container updates automatically. */
     private static final int SLOT_START = 0;
-    private static final int SLOT_END = StoneInventory.INV_SIZE - 1;
+    private static final int SLOT_END = AidInventory.INV_SIZE - 1;
     private static final int INV_START = SLOT_END + 1;
     private static final int INV_END = INV_START + 26;
     private static final int HOTBAR_START = INV_END + 1;
