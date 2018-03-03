@@ -1,7 +1,9 @@
-package com.blargsworkshop.sleepstone.abilities.temporal_aid.capabilities;
+package com.blargsworkshop.sleepstone.abilities.temporal_aid;
 
-import com.blargsworkshop.sleepstone.abilities.temporal_aid.AidInventory;
-import com.blargsworkshop.sleepstone.abilities.temporal_aid.TemporalAidTarget;
+import com.blargsworkshop.sleepstone.abilities.temporal_aid.inventory.AidInventory;
+import com.blargsworkshop.sleepstone.abilities.temporal_aid.inventory.IAidInventory;
+import com.blargsworkshop.sleepstone.abilities.temporal_aid.target.ITemporalAidTarget;
+import com.blargsworkshop.sleepstone.abilities.temporal_aid.target.TemporalAidTarget;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

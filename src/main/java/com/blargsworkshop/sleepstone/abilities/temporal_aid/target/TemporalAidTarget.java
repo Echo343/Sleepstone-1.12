@@ -1,8 +1,6 @@
-package com.blargsworkshop.sleepstone.abilities.temporal_aid;
+package com.blargsworkshop.sleepstone.abilities.temporal_aid.target;
 
 import javax.annotation.Nonnull;
-
-import com.blargsworkshop.sleepstone.abilities.temporal_aid.capabilities.ITemporalAidTarget;
 
 import net.minecraft.entity.player.EntityPlayer;
 

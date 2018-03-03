@@ -1,4 +1,4 @@
-package com.blargsworkshop.sleepstone.abilities.temporal_aid.capabilities;
+package com.blargsworkshop.sleepstone.abilities.temporal_aid.inventory;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

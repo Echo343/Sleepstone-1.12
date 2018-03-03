@@ -1,4 +1,4 @@
-package com.blargsworkshop.sleepstone.abilities.temporal_aid.capabilities;
+package com.blargsworkshop.sleepstone.abilities.temporal_aid.target;
 
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;

@@ -1,4 +1,4 @@
-package com.blargsworkshop.sleepstone.abilities.temporal_aid.gui;
+package com.blargsworkshop.sleepstone.abilities.temporal_aid.target;
 
 import java.io.IOException;
 import java.util.Collection;

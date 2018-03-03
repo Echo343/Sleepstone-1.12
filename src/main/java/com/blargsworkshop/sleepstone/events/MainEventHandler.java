@@ -5,7 +5,7 @@ import com.blargsworkshop.engine.logger.Log;
 import com.blargsworkshop.engine.utility.Utils;
 import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.abilities.Ability;
-import com.blargsworkshop.sleepstone.abilities.temporal_aid.capabilities.TemporalAidProvider;
+import com.blargsworkshop.sleepstone.abilities.temporal_aid.TemporalAidProvider;
 import com.blargsworkshop.sleepstone.abilities.windwalker.Windwalker;
 import com.blargsworkshop.sleepstone.items.stone.Sleepstone;
 import com.blargsworkshop.sleepstone.items.stone.inventory.StoneInventoryProvider;

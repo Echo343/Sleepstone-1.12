@@ -1,9 +1,9 @@
 package com.blargsworkshop.sleepstone.gui;
 
 import com.blargsworkshop.engine.utility.Utils;
-import com.blargsworkshop.sleepstone.abilities.temporal_aid.gui.AidInventoryContainer;
-import com.blargsworkshop.sleepstone.abilities.temporal_aid.gui.AidInventoryGui;
-import com.blargsworkshop.sleepstone.abilities.temporal_aid.gui.PlayerSelectionGui;
+import com.blargsworkshop.sleepstone.abilities.temporal_aid.inventory.AidInventoryContainer;
+import com.blargsworkshop.sleepstone.abilities.temporal_aid.inventory.AidInventoryGui;
+import com.blargsworkshop.sleepstone.abilities.temporal_aid.target.PlayerSelectionGui;
 import com.blargsworkshop.sleepstone.items.stone.gui.AbilityGui;
 import com.blargsworkshop.sleepstone.items.stone.inventory.gui.StoneInventoryContainer;
 import com.blargsworkshop.sleepstone.items.stone.inventory.gui.StoneInventoryGui;

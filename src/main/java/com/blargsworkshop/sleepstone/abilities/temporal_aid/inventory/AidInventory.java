@@ -1,8 +1,6 @@
-package com.blargsworkshop.sleepstone.abilities.temporal_aid;
+package com.blargsworkshop.sleepstone.abilities.temporal_aid.inventory;
 
 import javax.annotation.Nonnull;
-
-import com.blargsworkshop.sleepstone.abilities.temporal_aid.capabilities.IAidInventory;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

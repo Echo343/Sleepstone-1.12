@@ -1,4 +1,4 @@
-package com.blargsworkshop.sleepstone.abilities.temporal_aid.gui;
+package com.blargsworkshop.sleepstone.abilities.temporal_aid.inventory;
 
 import org.lwjgl.opengl.GL11;
 

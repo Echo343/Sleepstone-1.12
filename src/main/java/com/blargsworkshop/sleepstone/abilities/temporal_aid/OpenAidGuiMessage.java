@@ -10,8 +10,7 @@ import com.blargsworkshop.engine.network.AbstractMessage.AbstractServerMessage;
 import com.blargsworkshop.engine.proxy.IProxy;
 import com.blargsworkshop.engine.utility.Utils;
 import com.blargsworkshop.sleepstone.SleepstoneMod;
-import com.blargsworkshop.sleepstone.abilities.temporal_aid.capabilities.ITemporalAidTarget;
-import com.blargsworkshop.sleepstone.abilities.temporal_aid.capabilities.TemporalAidProvider;
+import com.blargsworkshop.sleepstone.abilities.temporal_aid.target.ITemporalAidTarget;
 import com.blargsworkshop.sleepstone.gui.GuiEnum;
 
 import net.minecraft.entity.player.EntityPlayer;
