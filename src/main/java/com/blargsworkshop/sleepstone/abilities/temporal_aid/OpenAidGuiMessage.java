@@ -50,7 +50,7 @@ public class OpenAidGuiMessage extends AbstractServerMessage<OpenAidGuiMessage> 
 			}
 			PlayerList players = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList();
 			EntityPlayer destPlayer = players.getPlayerByUUID(destinationPlayerUUID);
-			ITemporalAidTarget targetCapability = TemporalAidProvider.getCapability(player);
+			ITemporalAidTarget targetCapability = TemporalAidProvider.getTarget(player);
 			targetCapability.setTarget(destPlayer);
 			player.openGui(SleepstoneMod.getInstance(), GuiEnum.TEMPORAL_AID_INVENTORY.ordinal(), player.getEntityWorld(), (int) player.posX, (int) player.posY, (int) player.posZ);
 			Utils.addChatMessage(destPlayer, __IS_GETTING_READY_TO_SEND_SOME_ITEMS, player.getDisplayNameString());
