@@ -10,9 +10,8 @@ import net.minecraftforge.items.IItemHandler;
 
 public class StoneInventoryProvider implements ICapabilitySerializable<NBTBase> {
 	
-	// TODO make private and test Same with other one?  It works as private
 	@CapabilityInject(IItemHandler.class)
-	public static final Capability<IItemHandler> STONE_INVENTORY_CAPABILITY = null;
+	private static final Capability<IItemHandler> STONE_INVENTORY_CAPABILITY = null;
 	
 	private StoneInventory inventory;
 

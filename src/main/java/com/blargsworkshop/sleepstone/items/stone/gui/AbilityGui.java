@@ -105,7 +105,7 @@ public class AbilityGui extends GuiScreen {
 	public AbilityGui(EntityPlayer player, ItemStack stone) {
 		this.inventory = StoneInventoryProvider.getStoneInventory(stone);
 		this.player = player;
-		this.props = AbilityStatusProvider.getCapability(player);
+		this.props = AbilityStatusProvider.getAbilityStatus(player);
 	}
 	
 	@Override

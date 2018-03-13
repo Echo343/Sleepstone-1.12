@@ -67,7 +67,7 @@ public class MainEventHandler implements IEventHandler {
 		if (Utils.isServer(event.getEntity().getEntityWorld())) {
 			if (event.getEntity() instanceof EntityPlayer) {
 				EntityPlayer player = (EntityPlayer) event.getEntity();
-				AbilityStatusProvider.getCapability(player).syncAll();
+				AbilityStatusProvider.getAbilityStatus(player).syncAll();
 			}
 		}
 	}
@@ -75,9 +75,9 @@ public class MainEventHandler implements IEventHandler {
 	@SubscribeEvent
 	public void onClonePlayer(PlayerEvent.Clone event) {
 		if (event.isWasDeath()) {
-			IStorage<IAbilityStatus> dataStore = AbilityStatusProvider.ABILITY_STATUS_CAPABILITY.getStorage();
-			NBTBase data = dataStore.writeNBT(AbilityStatusProvider.ABILITY_STATUS_CAPABILITY, AbilityStatusProvider.getCapability(event.getOriginal()), null);
-			dataStore.readNBT(AbilityStatusProvider.ABILITY_STATUS_CAPABILITY, AbilityStatusProvider.getCapability(event.getEntityPlayer()), null, data);
+			IStorage<IAbilityStatus> dataStore = AbilityStatusProvider.getCapability().getStorage();
+			NBTBase data = dataStore.writeNBT(AbilityStatusProvider.getCapability(), AbilityStatusProvider.getAbilityStatus(event.getOriginal()), null);
+			dataStore.readNBT(AbilityStatusProvider.getCapability(), AbilityStatusProvider.getAbilityStatus(event.getEntityPlayer()), null, data);
 		}
 	}
 	
@@ -85,7 +85,7 @@ public class MainEventHandler implements IEventHandler {
 	public void onLivingFallEvent(LivingFallEvent event) {
 		if (Utils.isServer(event.getEntity().getEntityWorld()) && event.getEntity() instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) event.getEntity();
-			if (event.getDistance() > 3.0F && AbilityStatusProvider.getCapability(player).isAbilityAvailable(Ability.ETHEREAL_FEET)) {
+			if (event.getDistance() > 3.0F && AbilityStatusProvider.getAbilityStatus(player).isAbilityAvailable(Ability.ETHEREAL_FEET)) {
 				event.setDistance(2.0F);
 				Log.debug(player.getDisplayNameString() + " just fell on the server.", player);				
 			}
@@ -103,7 +103,7 @@ public class MainEventHandler implements IEventHandler {
 	public void onLivingAttacked(LivingAttackEvent event) {
 		if (event.getEntityLiving() instanceof EntityPlayer && Utils.isServer(event.getEntity().getEntityWorld())) {
 			EntityPlayer player = (EntityPlayer) event.getEntityLiving();
-			if (AbilityStatusProvider.getCapability(player).isAbilityAvailable(Ability.PRECOGNITION)) {
+			if (AbilityStatusProvider.getAbilityStatus(player).isAbilityAvailable(Ability.PRECOGNITION)) {
 				if (isDodgeableAttack(event.getSource())) {
 					double dodgeChance = Math.random();
 					if (dodgeChance < 0.5) {
@@ -113,7 +113,7 @@ public class MainEventHandler implements IEventHandler {
 					}
 				}
 			}
-			if (AbilityStatusProvider.getCapability(player).isAbilityAvailable(Ability.VENOM_IMMUNITY)) {
+			if (AbilityStatusProvider.getAbilityStatus(player).isAbilityAvailable(Ability.VENOM_IMMUNITY)) {
 				Potion poison = Potion.getPotionFromResourceLocation("poison");
 				Potion wither = Potion.getPotionFromResourceLocation("wither");
 				if (event.getSource().equals(DamageSource.MAGIC) && player.isPotionActive(poison)) {

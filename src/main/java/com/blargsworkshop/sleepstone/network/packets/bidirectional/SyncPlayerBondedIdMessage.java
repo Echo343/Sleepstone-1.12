@@ -36,7 +36,7 @@ public class SyncPlayerBondedIdMessage extends AbstractMessage<SyncPlayerBondedI
 
 	@Override
 	public void process(EntityPlayer player, Side side) {
-		IAbilityStatus props = player.getCapability(AbilityStatusProvider.ABILITY_STATUS_CAPABILITY, null);
+		IAbilityStatus props = AbilityStatusProvider.getAbilityStatus(player);
 		props.setBondedStoneIdWithoutSync(bondedId);
 	}
 

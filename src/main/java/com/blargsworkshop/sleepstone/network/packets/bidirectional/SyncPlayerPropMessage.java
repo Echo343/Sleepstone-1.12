@@ -39,7 +39,7 @@ public class SyncPlayerPropMessage extends AbstractMessage<SyncPlayerPropMessage
 
 	@Override
 	public void process(EntityPlayer player, Side side) {
-		IAbilityStatus props = player.getCapability(AbilityStatusProvider.ABILITY_STATUS_CAPABILITY, null);
+		IAbilityStatus props = AbilityStatusProvider.getAbilityStatus(player);
 		props.setAbilityWithoutSync(ability, bool);
 	}
 

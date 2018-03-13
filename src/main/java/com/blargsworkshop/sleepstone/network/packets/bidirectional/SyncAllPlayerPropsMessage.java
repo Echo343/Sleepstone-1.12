@@ -21,9 +21,9 @@ public class SyncAllPlayerPropsMessage extends AbstractMessage<SyncAllPlayerProp
 	public SyncAllPlayerPropsMessage() {}
 	
 	public SyncAllPlayerPropsMessage(EntityPlayer player) {
-		IStorage<IAbilityStatus> storage = AbilityStatusProvider.ABILITY_STATUS_CAPABILITY.getStorage();
-		IAbilityStatus abilityStatus = player.getCapability(AbilityStatusProvider.ABILITY_STATUS_CAPABILITY, null);
-		data = (NBTTagCompound) storage.writeNBT(AbilityStatusProvider.ABILITY_STATUS_CAPABILITY, abilityStatus, null);
+		IStorage<IAbilityStatus> storage = AbilityStatusProvider.getCapability().getStorage();
+		IAbilityStatus abilityStatus = AbilityStatusProvider.getAbilityStatus(player);
+		data = (NBTTagCompound) storage.writeNBT(AbilityStatusProvider.getCapability(), abilityStatus, null);
 	}
 
 	@Override
@@ -38,9 +38,9 @@ public class SyncAllPlayerPropsMessage extends AbstractMessage<SyncAllPlayerProp
 
 	@Override
 	public void process(EntityPlayer player, Side side) {
-		IStorage<IAbilityStatus> storage = AbilityStatusProvider.ABILITY_STATUS_CAPABILITY.getStorage();
-		IAbilityStatus abilityStatus = player.getCapability(AbilityStatusProvider.ABILITY_STATUS_CAPABILITY, null);
-		storage.readNBT(AbilityStatusProvider.ABILITY_STATUS_CAPABILITY, abilityStatus, null, data);
+		IStorage<IAbilityStatus> storage = AbilityStatusProvider.getCapability().getStorage();
+		IAbilityStatus abilityStatus = AbilityStatusProvider.getAbilityStatus(player);
+		storage.readNBT(AbilityStatusProvider.getCapability(), abilityStatus, null, data);
 	}
 
 	@Override

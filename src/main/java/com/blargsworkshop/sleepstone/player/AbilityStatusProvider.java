@@ -10,7 +10,7 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 public class AbilityStatusProvider implements ICapabilitySerializable<NBTBase> {
 	
 	@CapabilityInject(IAbilityStatus.class)
-	public static final Capability<IAbilityStatus> ABILITY_STATUS_CAPABILITY = null;
+	static final Capability<IAbilityStatus> ABILITY_STATUS_CAPABILITY = null;
 	
 	private IAbilityStatus instance;
 
@@ -38,7 +38,11 @@ public class AbilityStatusProvider implements ICapabilitySerializable<NBTBase> {
 		ABILITY_STATUS_CAPABILITY.getStorage().readNBT(ABILITY_STATUS_CAPABILITY, instance, null, nbt);
 	}
 
-	public static IAbilityStatus getCapability(EntityPlayer player) {
+	public static IAbilityStatus getAbilityStatus(EntityPlayer player) {
 		return player.getCapability(ABILITY_STATUS_CAPABILITY, null);
+	}
+	
+	public static Capability<IAbilityStatus> getCapability() {
+		return ABILITY_STATUS_CAPABILITY;
 	}
 }

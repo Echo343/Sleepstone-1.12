@@ -22,7 +22,7 @@ public class GuiHandler implements IGuiHandler {
 	public Object getServerGuiElement(int guiId, EntityPlayer player, World world,	int x, int y, int z) {
 		if (guiId == GuiEnum.ABILITY.ordinal()) {
 			IStoneProperties stoneProps = StonePropertiesProvider.getProperties(player.getHeldItemMainhand());
-			IAbilityStatus props = AbilityStatusProvider.getCapability(player);
+			IAbilityStatus props = AbilityStatusProvider.getAbilityStatus(player);
 			if (!stoneProps.getUniqueId().equals(props.getBondedStoneId())) {
 				props.setBondedStoneId(stoneProps.getUniqueId());
 				Utils.addChatMessage(player, "text.guistone.sleepstone_attunes_to_you");
