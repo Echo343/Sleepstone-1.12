@@ -32,6 +32,7 @@ public class AidInventoryContainer extends Container {
 		
     public AidInventoryContainer(World world, EntityPlayer player, InventoryPlayer inventoryPlayer, ItemStack stone) {
         inventory = TemporalAidProvider.getInventory(stone);
+        inventory.setTarget(TemporalAidProvider.getTarget(player).getTarget());
         
         /** Gem Slots */
         //Group one
