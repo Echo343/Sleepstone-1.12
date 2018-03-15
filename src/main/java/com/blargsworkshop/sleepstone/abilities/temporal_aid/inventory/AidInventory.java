@@ -35,17 +35,18 @@ public class AidInventory extends ItemStackHandler implements IAidInventory {
     protected void onContentsChanged(int slot) {
     	if (player != null && slot == 0 && !this.getStackInSlot(slot).isEmpty()) {
     		ItemStack teleportItem = this.getStackInSlot(0);
-    		this.setStackInSlot(0, ItemStack.EMPTY);
+    		this.stacks.set(0, ItemStack.EMPTY);
     		TemporalAidProvider.getTarget(player).getTarget().dropItem(teleportItem, true, false);
+
+    		if (!stone.hasTagCompound()) {
+    			NBTTagCompound tagComp = new NBTTagCompound();
+    			tagComp.setTag(INVENTORY_TAG, this.serializeNBT());
+    			stone.setTagCompound(tagComp);			
+    		}
+    		else {
+    			setTagCompound(this.serializeNBT());
+    		}
     	}
-//    	if (!stone.hasTagCompound()) {
-//    		NBTTagCompound tagComp = new NBTTagCompound();
-//			tagComp.setTag(INVENTORY_TAG, this.serializeNBT());
-//    		stone.setTagCompound(tagComp);			
-//		}
-//    	else {
-//    		setTagCompound(this.serializeNBT());
-//    	}
     }
     
     @Override
