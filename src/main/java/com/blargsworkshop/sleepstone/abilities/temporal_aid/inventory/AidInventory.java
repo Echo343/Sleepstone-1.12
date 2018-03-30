@@ -35,7 +35,7 @@ public class AidInventory extends ItemStackHandler implements IAidInventory {
     protected void onContentsChanged(int slot) {
     	if (player != null && slot == 0 && !this.getStackInSlot(slot).isEmpty()) {
     		ItemStack teleportItem = this.getStackInSlot(0);
-    		this.stacks.set(0, ItemStack.EMPTY);
+    		this.stacks.set(slot, ItemStack.EMPTY);
     		TemporalAidProvider.getTarget(player).getTarget().dropItem(teleportItem, true, false);
 
     		if (!stone.hasTagCompound()) {
