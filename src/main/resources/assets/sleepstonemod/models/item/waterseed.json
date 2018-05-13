@@ -1,6 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "sleepstonemod:items/seed-fire"
+        "layer0": "sleepstonemod:items/seed-water"
     }
 }

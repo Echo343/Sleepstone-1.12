@@ -3,6 +3,9 @@
     "ingredients": [
       {
         "item": "sleepstonemod:fireseed"
+      },
+      {
+        "item": "sleepstonemod:waterseed"
       }
     ],
     "result": {

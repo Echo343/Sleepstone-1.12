@@ -24,6 +24,7 @@ import com.blargsworkshop.sleepstone.items.gems.TimeSpaceGem;
 import com.blargsworkshop.sleepstone.items.gems.mats.FireSeed;
 import com.blargsworkshop.sleepstone.items.gems.mats.MonkCraftable;
 import com.blargsworkshop.sleepstone.items.gems.mats.PathfinderCraftable;
+import com.blargsworkshop.sleepstone.items.gems.mats.WaterSeed;
 import com.blargsworkshop.sleepstone.items.stone.Sleepstone;
 
 import net.minecraft.creativetab.CreativeTabs;
@@ -61,6 +62,8 @@ public class ModItems implements IModItems{
 	public static Item itemPathfinderCraftable = new PathfinderCraftable();
 	@ModItem
 	public static Item itemFireSeed = new FireSeed();
+	@ModItem
+	public static Item itemWaterSeed = new WaterSeed();
 	@ModItem
 	public static Item itemEnderShard = new EnderShard();
 	

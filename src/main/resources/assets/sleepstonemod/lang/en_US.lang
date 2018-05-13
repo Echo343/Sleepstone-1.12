@@ -28,6 +28,7 @@ item.stonecraftable_15.name=Heated Crystalline Lattice Structure
 item.stonecraftable_16.name=Radial Empowered Orb
 
 item.fireseed.name=Fire Seed
+item.waterseed.name=Water Seed
 
 item.endershard.name=Ender Shard
 
