@@ -23,6 +23,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
@@ -127,6 +128,16 @@ public class MainEventHandler implements IEventHandler {
 					Log.debug("Removed wither from " + player.getDisplayNameString(), player);
 				}
 			}
+		}
+	}
+	
+	@SubscribeEvent
+	public void onLootTableLoad(LootTableLoadEvent event) {
+		final String PREFIX = "minecraft:gameplay/fishing/";
+		String name = event.getName().toString();
+		
+		if (name.startsWith(PREFIX)) {
+//			event.getTable().addPool(new LootPool(new LootEntry[] {}));
 		}
 	}
 	
