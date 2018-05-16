@@ -6,8 +6,10 @@ import com.blargsworkshop.sleepstone.items.stone.inventory.gui.StoneSlotType;
 import net.minecraft.entity.EntityFlying;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.monster.EntityElderGuardian;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.monster.EntityEndermite;
+import net.minecraft.entity.monster.EntityGuardian;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.item.ItemStack;
@@ -40,10 +42,22 @@ public class MobDrops {
 				mob instanceof EntitySlime && ((EntitySlime) mob).getSlimeSize() == 3 ||
 				mob instanceof EntityFlying)) {
 			double dropChance = Math.random();
-			// 3% drop chance
-			if (dropChance <= 0.03) {
+			// 5% drop chance
+			if (dropChance <= 0.05) {
 				ItemStack fireSeed = new ItemStack(ModItems.itemFireSeed);
 				event.getDrops().add(new EntityItem(mob.getEntityWorld(), mob.posX, mob.posY, mob.posZ, fireSeed));
+			}
+		}
+	}
+	
+	public static void handleGuardianGemDropRates(LivingDropsEvent event) {
+		EntityLivingBase mob = event.getEntityLiving();
+		if (mob instanceof EntityGuardian) {
+			double dropChance = Math.random();
+			// 3% drop chance, or 10% for Elder Guardians
+			if (dropChance <= 0.03 || mob instanceof EntityElderGuardian && dropChance <= 0.10) {
+				ItemStack waterSeed = new ItemStack(ModItems.itemWaterSeed);
+				event.getDrops().add(new EntityItem(mob.getEntityWorld(), mob.posX, mob.posY, mob.posZ, waterSeed));
 			}
 		}
 	}
@@ -61,8 +75,8 @@ public class MobDrops {
 		if (	mob instanceof EntityEnderman ||
 				mob instanceof EntityEndermite) {
 			double dropChance = Math.random();
-			// ~7% drop chance (1/15)
-			if (dropChance <= 0.067) {
+			// 5% drop chance (1/20)
+			if (dropChance <= 0.05) {
 				ItemStack enderShard = new ItemStack(ModItems.itemEnderShard);
 				event.getDrops().add(new EntityItem(mob.getEntityWorld(), mob.posX, mob.posY, mob.posZ, enderShard));
 			}
