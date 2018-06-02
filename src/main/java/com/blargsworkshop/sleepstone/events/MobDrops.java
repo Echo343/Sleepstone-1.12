@@ -56,8 +56,8 @@ public class MobDrops {
 			double dropChance = Math.random();
 			// 3% drop chance, or 10% for Elder Guardians
 			if (dropChance <= 0.03 || mob instanceof EntityElderGuardian && dropChance <= 0.10) {
-				ItemStack waterSeed = new ItemStack(ModItems.itemWaterSeed);
-				event.getDrops().add(new EntityItem(mob.getEntityWorld(), mob.posX, mob.posY, mob.posZ, waterSeed));
+				ItemStack guardianGem = new ItemStack(ModItems.itemGuardianGem);
+				event.getDrops().add(new EntityItem(mob.getEntityWorld(), mob.posX, mob.posY, mob.posZ, guardianGem));
 			}
 		}
 	}

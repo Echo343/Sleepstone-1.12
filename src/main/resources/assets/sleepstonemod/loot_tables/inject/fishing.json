@@ -1,7 +1,7 @@
 {
     "pools": [
         {
-            "name": "main",
+            "name": "waterseed_loot",
             "rolls": 1,
             "entries": [
                 {

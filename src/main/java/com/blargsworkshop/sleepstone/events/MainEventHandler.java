@@ -21,6 +21,11 @@ import net.minecraft.nbt.NBTBase;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.storage.loot.LootEntry;
+import net.minecraft.world.storage.loot.LootEntryTable;
+import net.minecraft.world.storage.loot.LootPool;
+import net.minecraft.world.storage.loot.RandomValueRange;
+import net.minecraft.world.storage.loot.conditions.LootCondition;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.LootTableLoadEvent;
@@ -131,14 +136,23 @@ public class MainEventHandler implements IEventHandler {
 		}
 	}
 	
+	final static String FISHING_LOOT_TABLE = "minecraft:gameplay/fishing";
+	final static String FISHING_INJECT_FILE = "fishing";
 	@SubscribeEvent
 	public void onLootTableLoad(LootTableLoadEvent event) {
-		final String PREFIX = "minecraft:gameplay/fishing/";
 		String name = event.getName().toString();
 		
-		if (name.startsWith(PREFIX)) {
-//			event.getTable().addPool(new LootPool(new LootEntry[] {}));
+		if (name.equals(FISHING_LOOT_TABLE)) {
+			event.getTable().addPool(getInjectPool(FISHING_INJECT_FILE));
 		}
+	}
+	
+	private LootPool getInjectPool(String entryName) {
+		return new LootPool(new LootEntry[] { getInjectEntry(entryName, 1) }, new LootCondition[0], new RandomValueRange(1), new RandomValueRange(0, 1), "sleepstonemod_inject_pool");
+	}
+
+	private LootEntryTable getInjectEntry(String name, int weight) {
+		return new LootEntryTable(new ResourceLocation(ModInfo.ID, "inject/" + name), weight, 0, new LootCondition[0], "sleepstonemod_inject_entry");
 	}
 	
 	@SubscribeEvent
