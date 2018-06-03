@@ -24,7 +24,13 @@ public class FoodSaturationPotion extends BlargsPotion {
 		setBeneficial();
 		if (foodSaturationLevel == null) {
 			try {
-				foodSaturationLevel = FoodStats.class.getDeclaredField("foodSaturationLevel");
+				try {
+					foodSaturationLevel = FoodStats.class.getDeclaredField("foodSaturationLevel");
+				}
+				catch (NoSuchFieldException e) {
+					// grep -w './build/taskLogs/retroMapReplacedMain.log' -e "foodSaturationLevel" | awk -F: '/RENAME MAP/ {print $2}'
+					foodSaturationLevel = FoodStats.class.getDeclaredField("field_75125_b");
+				}
 				foodSaturationLevel.setAccessible(true);
 			} catch (NoSuchFieldException | SecurityException | NullPointerException e) {
 				hasError = true;
