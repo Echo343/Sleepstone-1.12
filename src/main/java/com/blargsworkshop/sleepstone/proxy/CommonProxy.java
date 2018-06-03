@@ -27,6 +27,7 @@ import com.blargsworkshop.sleepstone.items.stone.properties.IStoneProperties;
 import com.blargsworkshop.sleepstone.items.stone.properties.StoneProperties;
 import com.blargsworkshop.sleepstone.items.stone.properties.StonePropertiesStorage;
 import com.blargsworkshop.sleepstone.network.packets.bidirectional.SyncAllPlayerPropsMessage;
+import com.blargsworkshop.sleepstone.network.packets.bidirectional.SyncPlayerBondedIdMessage;
 import com.blargsworkshop.sleepstone.network.packets.bidirectional.SyncPlayerPropMessage;
 import com.blargsworkshop.sleepstone.network.packets.toserver.CommandMessage;
 import com.blargsworkshop.sleepstone.network.packets.toserver.OpenGuiMessage;
@@ -74,6 +75,7 @@ public class CommonProxy extends BlargsCommonProxy {
 		//Bidirectional Messages
 		dispatcher.registerMessage(SyncAllPlayerPropsMessage.class);
 		dispatcher.registerMessage(SyncPlayerPropMessage.class);
+		dispatcher.registerMessage(SyncPlayerBondedIdMessage.class);
 	}
 
 	@Override
