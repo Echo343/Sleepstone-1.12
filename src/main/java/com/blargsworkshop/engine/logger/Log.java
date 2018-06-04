@@ -167,6 +167,7 @@ public class Log {
 			default:
 				break;
 			}
+			break;
 		case INFO:
 			switch (level) {
 			case ERROR:
@@ -175,6 +176,7 @@ public class Log {
 			default:
 				break;
 			}
+			break;
 		case DEBUG:
 			switch (level) {
 			case ERROR:
@@ -184,6 +186,7 @@ public class Log {
 			default:
 				break;
 			}
+			break;
 		case DETAIL:
 			shouldLog = true;
 			break;		
