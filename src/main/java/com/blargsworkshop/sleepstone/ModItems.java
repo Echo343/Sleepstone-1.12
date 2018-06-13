@@ -13,6 +13,7 @@ import com.blargsworkshop.engine.recipe.SmeltingRecipe;
 import com.blargsworkshop.engine.sound.BlargsSoundEvent;
 import com.blargsworkshop.sleepstone.abilities.iron_stomach.FoodSaturationPotion;
 import com.blargsworkshop.sleepstone.abilities.windwalker.WindwalkerPotion;
+import com.blargsworkshop.sleepstone.items.airmattress.AirMattress;
 import com.blargsworkshop.sleepstone.items.endershard.EnderShard;
 import com.blargsworkshop.sleepstone.items.gems.ElementalGem;
 import com.blargsworkshop.sleepstone.items.gems.EtherealGem;
@@ -38,10 +39,12 @@ import net.minecraft.util.SoundEvent;
  * All the items in the mod.
  */
 public class ModItems implements IModItems{
-	public static CreativeTabs tabSleepstone = RegisterModComponents.getCreativeTab(ModInfo.CREATIVE_TAB_SLEEPSTONE, () -> ModItems.itemSleepstone);
+	public static CreativeTabs tabSleepstone = RegisterModComponents.createCreativeTab(ModInfo.CREATIVE_TAB_SLEEPSTONE, () -> ModItems.itemSleepstone);
 	
 	@ModItem
 	public static Item itemSleepstone = new Sleepstone();
+	@ModItem
+	public static Item itemAirMattress = new AirMattress();
 	
 	@ModItem
 	public static Gem itemMonkGem = new MonkGem();

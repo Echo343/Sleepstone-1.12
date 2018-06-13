@@ -1,5 +1,7 @@
 package com.blargsworkshop.sleepstone.items.gems.mats;
 
+import com.blargsworkshop.sleepstone.items.BaseSubtype;
+
 /**
  * item.stonecraftable_0.name=Hardened Clay Piece
  * item.stonecraftable_1.name=Blasted Clay Piece
@@ -22,7 +24,7 @@ package com.blargsworkshop.sleepstone.items.gems.mats;
  * @author Echo343
  *
  */
-public class MonkCraftable extends BaseCraftable {
+public class MonkCraftable extends BaseSubtype {
 	
 	private static final String UNLOCALIZED_NAME = "craftable_monk";
 	private static final String REGISTRY_NAME = "craftable_monk";

@@ -89,6 +89,7 @@ public class Tooltip extends Gui implements ITooltip {
 	 * @param mouseY
 	 * @return Returns this if the tooltip is ready to draw, null if not.
 	 */
+	@Override
 	public Tooltip drawIndicatorsAndDetect(Minecraft mc, int mouseX, int mouseY)
 	{
 		if (hasToolTip()) {
@@ -120,6 +121,7 @@ public class Tooltip extends Gui implements ITooltip {
 		}
 	}
 	
+	@Override
 	public void draw(Minecraft mc, int mouseX, int mouseY) {
 		FontRenderer fontRenderer = mc.fontRenderer;
 		String[] tooltipArray = parseTooltipArray(fontRenderer);

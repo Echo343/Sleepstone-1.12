@@ -120,6 +120,7 @@ public class AbilityStatus implements IAbilityStatus {
 		}
 	}
 	
+	@Override
 	public boolean isAbilityAvailable(Ability ability) {
 		boolean doesPlayer = false;
 		boolean hasStone = false;

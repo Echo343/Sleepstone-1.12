@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.function.Supplier;
 
 import com.blargsworkshop.engine.IModItems;
+import com.blargsworkshop.engine.annotations.ModBlock;
 import com.blargsworkshop.engine.annotations.ModItem;
 import com.blargsworkshop.engine.annotations.ModPotion;
 import com.blargsworkshop.engine.annotations.ModRecipe;
@@ -13,6 +14,7 @@ import com.blargsworkshop.engine.annotations.ModSound;
 import com.blargsworkshop.engine.logger.Log;
 import com.blargsworkshop.engine.recipe.IBlargRecipe;
 
+import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -29,6 +31,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class RegisterModComponents {
 	
 	protected List<Item> modItems = new ArrayList<>();
+	protected List<Block> modBlocks = new ArrayList<>();
 	protected List<Potion> modPotions = new ArrayList<>();
 	protected List<SoundEvent> modSounds = new ArrayList<>();
 	protected List<IBlargRecipe> modRecipes = new ArrayList<>();
@@ -47,6 +50,9 @@ public class RegisterModComponents {
 			if (f.isAnnotationPresent(ModItem.class)) {
 				modItems.add((Item) f.get(null));
 			}
+			else if (f.isAnnotationPresent(ModBlock.class)) {
+				modBlocks.add((Block) f.get(null));
+			}
 			else if (f.isAnnotationPresent(ModPotion.class)) {
 				modPotions.add((Potion) f.get(null));
 			}
@@ -64,6 +70,11 @@ public class RegisterModComponents {
 			if (innerClass.isAnnotationPresent(ModItem.class)) {
 				for (Field f : innerClass.getDeclaredFields()) {
 					modItems.add((Item) f.get(null));
+				}
+			}
+			else if (innerClass.isAnnotationPresent(ModBlock.class)) {
+				for (Field f : innerClass.getDeclaredFields()) {
+					modBlocks.add((Block) f.get(null));
 				}
 			}
 			else if (innerClass.isAnnotationPresent(ModPotion.class)) {
@@ -90,6 +101,15 @@ public class RegisterModComponents {
 		for (Item i : modItems) {
 			event.getRegistry().register(i);
 			Log.detail("Registering Item - " + i.getRegistryName());
+		}
+	}
+	
+	@SubscribeEvent
+	public void registerBlocks(RegistryEvent.Register<Block> event) {
+		Log.detail("RegisterModComponents - Blocks");
+		for (Block i : modBlocks) {
+			event.getRegistry().register(i);
+			Log.detail("Registering Block - " + i.getRegistryName());
 		}
 	}
 	
@@ -130,7 +150,7 @@ public class RegisterModComponents {
 	 * @param delegate - This is a function that supplies an item which is used as the icon for the tab.
 	 * @return a new CreativeTabs instance is returned.
 	 */
-	public static CreativeTabs getCreativeTab(String creativeTabName, Supplier<Item> delegate) {
+	public static CreativeTabs createCreativeTab(String creativeTabName, Supplier<Item> delegate) {
 		return new CreativeTabs(creativeTabName) {
 			@Override
 			public ItemStack getTabIconItem() {

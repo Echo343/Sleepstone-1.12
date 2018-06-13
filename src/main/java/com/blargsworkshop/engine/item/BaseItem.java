@@ -4,7 +4,7 @@ import net.minecraft.item.Item;
 
 public abstract class BaseItem extends Item {
 	
-	private final String name;
+//	private final String name;
 	
 	/**
 	 * Creates a new item.
@@ -12,12 +12,12 @@ public abstract class BaseItem extends Item {
 	 * @param registryName - this is the filename of the .json file for the model without the ".json". This will also be used for name in the item registry.
 	 */
 	public BaseItem(String unlocalizedName, String registryName) {
-		this.name = unlocalizedName;
+//		this.name = unlocalizedName;
 		this.setUnlocalizedName(unlocalizedName);
 		this.setRegistryName(registryName);
 	}
-	
-	public String getName() {
-		return name;
-	}
+	// TODO remove
+//	public String getName() {
+//		return name;
+//	}
 }

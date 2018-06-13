@@ -114,6 +114,7 @@ public abstract class AbstractMessage<T extends AbstractMessage<T>> implements I
 		IThreadListener thread = getProxy().getThreadFromContext(ctx);
 		// pretty much copied straight from vanilla code, see {@link PacketThreadUtil#checkThreadAndEnqueue}
 		thread.addScheduledTask(new Runnable() {
+			@Override
 			public void run() {
 				msg.process(getProxy().getPlayerEntity(ctx), ctx.side);
 			}
