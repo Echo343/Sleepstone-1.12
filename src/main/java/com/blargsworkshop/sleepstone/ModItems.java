@@ -1,6 +1,7 @@
 package com.blargsworkshop.sleepstone;
 
 import com.blargsworkshop.engine.IModItems;
+import com.blargsworkshop.engine.annotations.ModBlock;
 import com.blargsworkshop.engine.annotations.ModItem;
 import com.blargsworkshop.engine.annotations.ModPotion;
 import com.blargsworkshop.engine.annotations.ModRecipe;
@@ -13,7 +14,8 @@ import com.blargsworkshop.engine.recipe.SmeltingRecipe;
 import com.blargsworkshop.engine.sound.BlargsSoundEvent;
 import com.blargsworkshop.sleepstone.abilities.iron_stomach.FoodSaturationPotion;
 import com.blargsworkshop.sleepstone.abilities.windwalker.WindwalkerPotion;
-import com.blargsworkshop.sleepstone.items.airmattress.AirMattress;
+import com.blargsworkshop.sleepstone.items.airmattress.AirMattressItem;
+import com.blargsworkshop.sleepstone.items.airmattress.AirMattressBlock;
 import com.blargsworkshop.sleepstone.items.endershard.EnderShard;
 import com.blargsworkshop.sleepstone.items.gems.ElementalGem;
 import com.blargsworkshop.sleepstone.items.gems.EtherealGem;
@@ -29,7 +31,6 @@ import com.blargsworkshop.sleepstone.items.gems.mats.WaterSeed;
 import com.blargsworkshop.sleepstone.items.stone.Sleepstone;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -43,8 +44,6 @@ public class ModItems implements IModItems{
 	
 	@ModItem
 	public static Item itemSleepstone = new Sleepstone();
-	@ModItem
-	public static Item itemAirMattress = new AirMattress();
 	
 	@ModItem
 	public static Gem itemMonkGem = new MonkGem();
@@ -70,6 +69,16 @@ public class ModItems implements IModItems{
 	@ModItem
 	public static Item itemEnderShard = new EnderShard();
 	
+	@ModItem
+	public static class Items {
+		public static AirMattressItem airMattress = new AirMattressItem();
+	}
+	
+	@ModBlock
+	public static class Blocks {
+		public static AirMattressBlock airMattress = new AirMattressBlock();
+	}
+	
 	@ModPotion
 	public static class Potions {
 		public static BlargsPotion warpSickness = new BlargsPotion(new ResourceLocation(ModInfo.ID, "warpsickness"), "potion.warpingsickness");
@@ -89,7 +98,7 @@ public class ModItems implements IModItems{
 		public static IBlargRecipe blastedClayPiece = new SmeltingRecipe(new ItemStack(ModItems.itemMonkCraftable, 1, 0), new ItemStack(ModItems.itemMonkCraftable, 1, 1), 0.1f);
 		public static IBlargRecipe blastedCeramicFoundation = new SmeltingRecipe(new ItemStack(ModItems.itemMonkCraftable, 1, 2), new ItemStack(ModItems.itemMonkCraftable, 1, 3), 1f);
 		public static IBlargRecipe hyperInfusedMass = new SmeltingRecipe(new ItemStack(ModItems.itemMonkCraftable, 1, 6), new ItemStack(ModItems.itemMonkCraftable, 1, 7), 1f);
-		public static IBlargRecipe refinedObsidian = new SmeltingRecipe(new ItemStack(Blocks.OBSIDIAN), new ItemStack(ModItems.itemMonkCraftable, 1, 8), 0.4f);
+		public static IBlargRecipe refinedObsidian = new SmeltingRecipe(new ItemStack(net.minecraft.init.Blocks.OBSIDIAN), new ItemStack(ModItems.itemMonkCraftable, 1, 8), 0.4f);
 		public static IBlargRecipe hardenedObsidianClump = new SmeltingRecipe(new ItemStack(ModItems.itemMonkCraftable, 1, 10), new ItemStack(ModItems.itemMonkCraftable, 1, 11), 0.7f);
 		public static IBlargRecipe strengthenedDiamondLattice = new SmeltingRecipe(new ItemStack(ModItems.itemMonkCraftable, 1, 12), new ItemStack(ModItems.itemMonkCraftable, 1, 13), 1f);
 		public static IBlargRecipe heatedCrystallineLatticeStructure = new SmeltingRecipe(new ItemStack(ModItems.itemMonkCraftable, 1, 14), new ItemStack(ModItems.itemMonkCraftable, 1, 15), 1f);

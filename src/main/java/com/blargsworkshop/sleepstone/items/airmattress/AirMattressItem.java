@@ -1,5 +1,6 @@
 package com.blargsworkshop.sleepstone.items.airmattress;
 
+import com.blargsworkshop.sleepstone.ModItems;
 import com.blargsworkshop.sleepstone.items.BaseSubtype;
 
 import net.minecraft.advancements.CriteriaTriggers;
@@ -9,7 +10,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityBed;
@@ -21,12 +22,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-public class AirMattress extends BaseSubtype {
+public class AirMattressItem extends BaseSubtype {
 	private static final String UNLOCALIZED_NAME = "airmattress";
 	private static final String REGISTRY_NAME = "item_airmattress";
-	private static final int NUMBER_OF_SUBTYPES = 16;
+	private static final int NUMBER_OF_SUBTYPES = EnumDyeColor.values().length;
 
-	public AirMattress() {
+	public AirMattressItem() {
 		super(UNLOCALIZED_NAME, REGISTRY_NAME, NUMBER_OF_SUBTYPES);
 	}
 
@@ -70,7 +71,7 @@ public class AirMattress extends BaseSubtype {
 
                 if (flag2 && flag3 && worldIn.getBlockState(pos.down()).isTopSolid() && worldIn.getBlockState(blockpos.down()).isTopSolid())
                 {
-                    IBlockState iblockstate2 = Blocks.BED.getDefaultState().withProperty(BlockBed.OCCUPIED, Boolean.valueOf(false)).withProperty(BlockBed.FACING, enumfacing).withProperty(BlockBed.PART, BlockBed.EnumPartType.FOOT);
+                    IBlockState iblockstate2 = ModItems.Blocks.airMattress.getDefaultState().withProperty(BlockBed.OCCUPIED, Boolean.valueOf(false)).withProperty(BlockBed.FACING, enumfacing).withProperty(BlockBed.PART, BlockBed.EnumPartType.FOOT);
                     worldIn.setBlockState(pos, iblockstate2, 10);
                     worldIn.setBlockState(blockpos, iblockstate2.withProperty(BlockBed.PART, BlockBed.EnumPartType.HEAD), 10);
                     SoundType soundtype = iblockstate2.getBlock().getSoundType(iblockstate2, worldIn, pos, player);
@@ -110,5 +111,15 @@ public class AirMattress extends BaseSubtype {
                 return EnumActionResult.FAIL;
             }
         }
+    }
+	
+	/**
+     * Returns the unlocalized name of this item. This version accepts an ItemStack so different stacks can have
+     * different names based on their damage or NBT.
+     */
+    @Override
+	public String getUnlocalizedName(ItemStack stack)
+    {
+        return super.getUnlocalizedName() + "." + EnumDyeColor.byMetadata(stack.getMetadata()).getUnlocalizedName();
     }
 }
