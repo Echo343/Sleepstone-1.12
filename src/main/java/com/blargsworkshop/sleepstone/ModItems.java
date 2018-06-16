@@ -7,6 +7,7 @@ import com.blargsworkshop.engine.annotations.ModPotion;
 import com.blargsworkshop.engine.annotations.ModRecipe;
 import com.blargsworkshop.engine.annotations.ModSound;
 import com.blargsworkshop.engine.annotations.ModSprite;
+import com.blargsworkshop.engine.annotations.ModTileEntity;
 import com.blargsworkshop.engine.event.RegisterModComponents;
 import com.blargsworkshop.engine.potion.BlargsPotion;
 import com.blargsworkshop.engine.recipe.IBlargRecipe;
@@ -14,8 +15,9 @@ import com.blargsworkshop.engine.recipe.SmeltingRecipe;
 import com.blargsworkshop.engine.sound.BlargsSoundEvent;
 import com.blargsworkshop.sleepstone.abilities.iron_stomach.FoodSaturationPotion;
 import com.blargsworkshop.sleepstone.abilities.windwalker.WindwalkerPotion;
-import com.blargsworkshop.sleepstone.items.airmattress.AirMattressItem;
 import com.blargsworkshop.sleepstone.items.airmattress.AirMattressBlock;
+import com.blargsworkshop.sleepstone.items.airmattress.AirMattressItem;
+import com.blargsworkshop.sleepstone.items.airmattress.AirMattressTileEntity;
 import com.blargsworkshop.sleepstone.items.endershard.EnderShard;
 import com.blargsworkshop.sleepstone.items.gems.ElementalGem;
 import com.blargsworkshop.sleepstone.items.gems.EtherealGem;
@@ -77,6 +79,11 @@ public class ModItems implements IModItems{
 	@ModBlock
 	public static class Blocks {
 		public static AirMattressBlock airMattress = new AirMattressBlock();
+	}
+	
+	@ModTileEntity
+	public static class TEs {
+		public static AirMattressTileEntity airMattress = new AirMattressTileEntity();
 	}
 	
 	@ModPotion

@@ -9,6 +9,8 @@ import com.blargsworkshop.engine.annotations.ModItem;
 import com.blargsworkshop.engine.annotations.ModSprite;
 import com.blargsworkshop.engine.item.ISubtypable;
 import com.blargsworkshop.engine.logger.Log;
+import com.blargsworkshop.sleepstone.items.airmattress.AirMattressTileEntity;
+import com.blargsworkshop.sleepstone.items.airmattress.TileEntityAirMattressRenderer;
 
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -16,6 +18,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -76,6 +79,8 @@ public class RegisterModels {
 			registerItemModel(i);
 			Log.detail("Register Models - " + i.getRegistryName());
 		}
+		//TODO automate this
+		ClientRegistry.bindTileEntitySpecialRenderer(AirMattressTileEntity.class, new TileEntityAirMattressRenderer());
 	}
 	
 	/**

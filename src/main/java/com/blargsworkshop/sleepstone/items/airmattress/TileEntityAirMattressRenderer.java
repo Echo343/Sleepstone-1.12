@@ -1,5 +1,7 @@
 package com.blargsworkshop.sleepstone.items.airmattress;
 
+import com.blargsworkshop.sleepstone.ModInfo;
+
 import net.minecraft.client.model.ModelBed;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -117,7 +119,7 @@ public class TileEntityAirMattressRenderer extends TileEntitySpecialRenderer<Air
 
         for (EnumDyeColor enumdyecolor : aenumdyecolor)
         {
-            TEXTURES[enumdyecolor.getMetadata()] = new ResourceLocation("textures/entity/airmattress/" + enumdyecolor.getDyeColorName() + ".png");
+            TEXTURES[enumdyecolor.getMetadata()] = new ResourceLocation(ModInfo.ID + ":" + "textures/entity/airmattress/" + enumdyecolor.getDyeColorName() + ".png");
         }
     }
 }
