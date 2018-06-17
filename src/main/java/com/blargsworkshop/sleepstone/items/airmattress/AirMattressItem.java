@@ -13,7 +13,6 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityBed;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -24,7 +23,7 @@ import net.minecraft.world.World;
 
 public class AirMattressItem extends BaseSubtype {
 	private static final String UNLOCALIZED_NAME = "airmattress";
-	private static final String REGISTRY_NAME = "item_airmattress";
+	private static final String REGISTRY_NAME = "airmattress";
 	private static final int NUMBER_OF_SUBTYPES = EnumDyeColor.values().length;
 
 	public AirMattressItem() {
@@ -78,16 +77,16 @@ public class AirMattressItem extends BaseSubtype {
                     worldIn.playSound((EntityPlayer)null, pos, soundtype.getPlaceSound(), SoundCategory.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
                     TileEntity tileentity = worldIn.getTileEntity(blockpos);
 
-                    if (tileentity instanceof TileEntityBed)
+                    if (tileentity instanceof AirMattressTileEntity)
                     {
-                        ((TileEntityBed)tileentity).setItemValues(itemstack);
+                        ((AirMattressTileEntity)tileentity).setItemValues(itemstack);
                     }
 
                     TileEntity tileentity1 = worldIn.getTileEntity(pos);
 
-                    if (tileentity1 instanceof TileEntityBed)
+                    if (tileentity1 instanceof AirMattressTileEntity)
                     {
-                        ((TileEntityBed)tileentity1).setItemValues(itemstack);
+                        ((AirMattressTileEntity)tileentity1).setItemValues(itemstack);
                     }
 
                     worldIn.notifyNeighborsRespectDebug(pos, block, false);
