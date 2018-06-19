@@ -9,6 +9,8 @@ import com.blargsworkshop.engine.annotations.ModItem;
 import com.blargsworkshop.engine.annotations.ModSprite;
 import com.blargsworkshop.engine.item.ISubtypable;
 import com.blargsworkshop.engine.logger.Log;
+import com.blargsworkshop.sleepstone.ModItems;
+import com.blargsworkshop.sleepstone.items.airmattress.AirMattressItemStackRenderer;
 import com.blargsworkshop.sleepstone.items.airmattress.AirMattressTileEntity;
 import com.blargsworkshop.sleepstone.items.airmattress.TileEntityAirMattressRenderer;
 
@@ -81,6 +83,7 @@ public class RegisterModels {
 		}
 		//TODO automate this
 		ClientRegistry.bindTileEntitySpecialRenderer(AirMattressTileEntity.class, new TileEntityAirMattressRenderer());
+		((Item)ModItems.Items.airMattress).setTileEntityItemStackRenderer(new AirMattressItemStackRenderer());
 	}
 	
 	/**
