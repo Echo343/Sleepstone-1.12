@@ -12,8 +12,8 @@ public class AirMattressItemStackRenderer extends TileEntityItemStackRenderer {
 	AirMattressTileEntity te = new AirMattressTileEntity();
 
 	@Override
-	public void renderByItem(ItemStack p_192838_1_, float partialTicks) {
-		te.setItemValues(p_192838_1_);
+	public void renderByItem(ItemStack stack, float partialTicks) {
+		te.setItemValues(stack);
 		TileEntityRendererDispatcher.instance.render(te, 0.0D, 0.0D, 0.0D, 0.0F);
 	}
 

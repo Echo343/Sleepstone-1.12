@@ -2,7 +2,9 @@ package com.blargsworkshop.engine.event;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import com.blargsworkshop.engine.IModItems;
 import com.blargsworkshop.engine.annotations.ModItem;
@@ -14,7 +16,10 @@ import com.blargsworkshop.sleepstone.items.airmattress.AirMattressItemStackRende
 import com.blargsworkshop.sleepstone.items.airmattress.AirMattressTileEntity;
 import com.blargsworkshop.sleepstone.items.airmattress.TileEntityAirMattressRenderer;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -84,6 +89,12 @@ public class RegisterModels {
 		//TODO automate this
 		ClientRegistry.bindTileEntitySpecialRenderer(AirMattressTileEntity.class, new TileEntityAirMattressRenderer());
 		((Item)ModItems.Items.airMattress).setTileEntityItemStackRenderer(new AirMattressItemStackRenderer());
+		ModelLoader.setCustomStateMapper(ModItems.Blocks.airMattress, new IStateMapper() {
+			@Override
+			public Map<IBlockState, ModelResourceLocation> putStateModelLocations(Block blockIn) {
+				return Collections.emptyMap();
+			}
+		});
 	}
 	
 	/**

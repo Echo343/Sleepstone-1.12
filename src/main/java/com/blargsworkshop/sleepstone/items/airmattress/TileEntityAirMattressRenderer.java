@@ -2,7 +2,6 @@ package com.blargsworkshop.sleepstone.items.airmattress;
 
 import com.blargsworkshop.sleepstone.ModInfo;
 
-import net.minecraft.client.model.ModelBed;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.EnumDyeColor;
@@ -11,7 +10,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class TileEntityAirMattressRenderer extends TileEntitySpecialRenderer<AirMattressTileEntity> {
 	private static final ResourceLocation[] TEXTURES;
-    private ModelBed model = new ModelBed();
+    private AirMattressModel model = new AirMattressModel();
     private int version;
 
     public TileEntityAirMattressRenderer()
@@ -24,7 +23,7 @@ public class TileEntityAirMattressRenderer extends TileEntitySpecialRenderer<Air
     {
         if (this.version != this.model.getModelVersion())
         {
-            this.model = new ModelBed();
+            this.model = new AirMattressModel();
             this.version = this.model.getModelVersion();
         }
 

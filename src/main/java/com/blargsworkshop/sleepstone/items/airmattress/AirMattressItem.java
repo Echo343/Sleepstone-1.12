@@ -1,5 +1,9 @@
 package com.blargsworkshop.sleepstone.items.airmattress;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.ModItems;
 import com.blargsworkshop.sleepstone.items.BaseSubtype;
 
@@ -16,6 +20,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -28,6 +33,15 @@ public class AirMattressItem extends BaseSubtype {
 
 	public AirMattressItem() {
 		super(UNLOCALIZED_NAME, REGISTRY_NAME, NUMBER_OF_SUBTYPES);
+	}
+	
+	@Override
+	public Map<Integer, ResourceLocation> getResourceLocationMap() {
+		Map<Integer, ResourceLocation> resourceMap = new HashMap<>(getNumberOfSubtypes(), 1f);
+		for (int i = 0; i < getNumberOfSubtypes(); i++) {
+			resourceMap.put(i, new ResourceLocation(ModInfo.ID + ":" + registryName));
+		}
+		return resourceMap;
 	}
 
 	/**

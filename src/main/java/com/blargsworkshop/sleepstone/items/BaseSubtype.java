@@ -13,7 +13,7 @@ import net.minecraft.util.ResourceLocation;
 
 public abstract class BaseSubtype extends BaseModItem implements ISubtypable {
 	private final int numberOfSubtypes;
-	private final String registryName;
+	protected final String registryName;
 	
 	public BaseSubtype(String unlocalizedName, String registryName, int numberOfSubtypes) {
 		super(unlocalizedName, registryName);

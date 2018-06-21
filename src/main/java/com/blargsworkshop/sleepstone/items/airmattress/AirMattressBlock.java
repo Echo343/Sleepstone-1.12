@@ -17,8 +17,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityBed;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class AirMattressBlock extends BlockBed {
 	private static final String UNLOCALIZED_NAME = "airmattress";
@@ -84,5 +87,41 @@ public class AirMattressBlock extends BlockBed {
     {
         return new AirMattressTileEntity();
     }
+    
+    /**
+     * Spawn particles for when the block is destroyed. Due to the nature
+     * of how this is invoked, the x/y/z locations are not always guaranteed
+     * to host your block. So be sure to do proper sanity checks before assuming
+     * that the location is this block.
+     *
+     * @param world The current world
+     * @param pos Position to spawn the particle
+     * @param manager A reference to the current particle manager.
+     * @return True to prevent vanilla break particles from spawning.
+     */
+    @Override
+	@SideOnly(Side.CLIENT)
+    public boolean addDestroyEffects(World world, BlockPos pos, net.minecraft.client.particle.ParticleManager manager)
+    {
+        return true;
+    }
 
+    /**
+     * Spawn a digging particle effect in the world, this is a wrapper
+     * around EffectRenderer.addBlockHitEffects to allow the block more
+     * control over the particles. Useful when you have entirely different
+     * texture sheets for different sides/locations in the world.
+     *
+     * @param state The current state
+     * @param world The current world
+     * @param target The target the player is looking at {x/y/z/side/sub}
+     * @param manager A reference to the current particle manager.
+     * @return True to prevent vanilla digging particles form spawning.
+     */
+    @Override
+	@SideOnly(Side.CLIENT)
+    public boolean addHitEffects(IBlockState state, World worldObj, RayTraceResult target, net.minecraft.client.particle.ParticleManager manager)
+    {
+        return true;
+    }
 }
