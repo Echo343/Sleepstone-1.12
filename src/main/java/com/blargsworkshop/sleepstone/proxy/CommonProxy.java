@@ -20,6 +20,7 @@ import com.blargsworkshop.sleepstone.abilities.temporal_aid.inventory.IAidInvent
 import com.blargsworkshop.sleepstone.abilities.temporal_aid.target.ITemporalAidTarget;
 import com.blargsworkshop.sleepstone.abilities.temporal_aid.target.TemporalAidTarget;
 import com.blargsworkshop.sleepstone.abilities.temporal_aid.target.TemporalAidTargetStorage;
+import com.blargsworkshop.sleepstone.events.AirMattressHandler;
 import com.blargsworkshop.sleepstone.events.MainEventHandler;
 import com.blargsworkshop.sleepstone.events.TickEventHandler;
 import com.blargsworkshop.sleepstone.gui.GuiHandler;
@@ -53,6 +54,7 @@ public class CommonProxy extends BlargsCommonProxy {
 		Map<EventHandlerType, IEventHandler> handlers = new HashMap<>();
 		handlers.put(EventHandlerType.FORGE, new MainEventHandler());
 		handlers.put(EventHandlerType.FML, new TickEventHandler());
+		handlers.put(EventHandlerType.FORGE, new AirMattressHandler());
 		return handlers;
 	}
 	
