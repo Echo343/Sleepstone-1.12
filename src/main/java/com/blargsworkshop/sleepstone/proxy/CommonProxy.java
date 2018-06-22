@@ -1,9 +1,7 @@
 package com.blargsworkshop.sleepstone.proxy;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.blargsworkshop.engine.IModItems;
 import com.blargsworkshop.engine.event.IEventHandler;
@@ -43,19 +41,18 @@ public class CommonProxy extends BlargsCommonProxy {
 	
 	@Override
 	public void registerCapabilities() {
-		CapabilityManager.INSTANCE.register(IAbilityStatus.class, new AbilityStatusStorage(), AbilityStatus.class);
-		CapabilityManager.INSTANCE.register(IStoneProperties.class, new StonePropertiesStorage(), StoneProperties.class);
-		CapabilityManager.INSTANCE.register(ITemporalAidTarget.class, new TemporalAidTargetStorage(), TemporalAidTarget.class);
-		CapabilityManager.INSTANCE.register(IAidInventory.class, new AidInventoryStorage(), AidInventory.class);
+		CapabilityManager.INSTANCE.register(IAbilityStatus.class, new AbilityStatusStorage(), AbilityStatus::new);
+		CapabilityManager.INSTANCE.register(IStoneProperties.class, new StonePropertiesStorage(), StoneProperties::new);
+		CapabilityManager.INSTANCE.register(ITemporalAidTarget.class, new TemporalAidTargetStorage(), TemporalAidTarget::new);
+		CapabilityManager.INSTANCE.register(IAidInventory.class, new AidInventoryStorage(), AidInventory::new);
 	}
 
 	@Override
-	public Map<EventHandlerType, IEventHandler> getEventHandlers() {
-		Map<EventHandlerType, IEventHandler> handlers = new HashMap<>();
-		handlers.put(EventHandlerType.FORGE, new MainEventHandler());
-		handlers.put(EventHandlerType.FML, new TickEventHandler());
-		// TODO breaks for some reason
-//		handlers.put(EventHandlerType.FORGE, new AirMattressHandler());
+	public List<IEventHandler> getEventHandlers() {
+		List<IEventHandler> handlers = new ArrayList<>();
+		handlers.add(new MainEventHandler());
+		handlers.add(new TickEventHandler());
+		handlers.add(new AirMattressHandler());
 		return handlers;
 	}
 	

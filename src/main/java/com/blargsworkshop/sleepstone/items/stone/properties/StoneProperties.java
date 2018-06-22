@@ -10,6 +10,8 @@ public class StoneProperties implements IStoneProperties {
 	private static final String UNIQUE_ID = "uniqueid";
 	private ItemStack stone = null;
 	
+	public StoneProperties() { }
+	
 	public StoneProperties(ItemStack stone) {
 		this.stone = stone;
 		String uniqueId = UUID.randomUUID().toString();

@@ -15,6 +15,8 @@ public class AidInventory extends ItemStackHandler implements IAidInventory {
 	private ItemStack stone = null;
 	private EntityPlayer player = null;
 
+	public AidInventory() { }
+	
 	public AidInventory(ItemStack stack) {
     	super(INV_SIZE);
     	stone = stack;

@@ -60,4 +60,9 @@ public class AirMattressHandler implements IEventHandler {
 		return Boolean.TRUE.equals(playerWakeUpMap.get(playerDisplayNameString));
 	}
 
+	@Override
+	public EventHandlerType getBusType() {
+		return EventHandlerType.FORGE;
+	}
+
 }

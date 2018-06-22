@@ -1,7 +1,6 @@
 package com.blargsworkshop.engine.proxy;
 
 import java.util.List;
-import java.util.Map;
 
 import com.blargsworkshop.engine.IModItems;
 import com.blargsworkshop.engine.event.IEventHandler;
@@ -21,14 +20,8 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public abstract class BlargsCommonProxy implements IProxy {
 	
-	protected enum EventHandlerType {
-		DEFAULT,
-		FORGE,
-		FML
-	}
-
 	public abstract void registerCapabilities();
-	public abstract Map<EventHandlerType, IEventHandler> getEventHandlers();
+	public abstract List<IEventHandler> getEventHandlers();
 	public abstract List<IGuiHandler> getGuiHandlers();
 	public abstract void registerPackets();
 	
@@ -76,8 +69,8 @@ public abstract class BlargsCommonProxy implements IProxy {
     
     @SuppressWarnings("deprecation")
 	public void registerEventHandlers() {
-		getEventHandlers().forEach((EventHandlerType eType, IEventHandler handler) -> {
-			switch (eType) {
+		getEventHandlers().forEach((IEventHandler handler) -> {
+			switch (handler.getBusType()) {
 			case DEFAULT:
 			case FORGE:
 				MinecraftForge.EVENT_BUS.register(handler);
@@ -86,7 +79,7 @@ public abstract class BlargsCommonProxy implements IProxy {
 		    	FMLCommonHandler.instance().bus().register(handler);
 				break;
 			default:
-				Log.error("Can not register event handler to type: " + eType.name());
+				Log.error("Can not register event handler: " + handler.getClass().getName());
 				break;
 			}
 		});

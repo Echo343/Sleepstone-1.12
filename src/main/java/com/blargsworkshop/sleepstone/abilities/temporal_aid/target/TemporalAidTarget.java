@@ -8,6 +8,8 @@ public class TemporalAidTarget implements ITemporalAidTarget {
 
 	private EntityPlayer target = null;
 	
+	public TemporalAidTarget() { }
+	
 	@Override
 	public EntityPlayer getTarget() {
 		return target;

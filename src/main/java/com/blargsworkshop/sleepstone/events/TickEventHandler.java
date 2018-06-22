@@ -47,4 +47,9 @@ public class TickEventHandler implements IEventHandler {
 			}
 		}
 	}
+
+	@Override
+	public EventHandlerType getBusType() {
+		return EventHandlerType.FML;
+	}
 }
