@@ -1,0 +1,75 @@
+{
+    "type": "crafting_shapeless",
+    "ingredients": [
+        [
+            {
+                "item": "sleepstonemod:airmattress",
+                "data": 1
+            },
+            {
+                "item": "sleepstonemod:airmattress",
+                "data": 2
+            },
+            {
+                "item": "sleepstonemod:airmattress",
+                "data": 3
+            },
+            {
+                "item": "sleepstonemod:airmattress",
+                "data": 4
+            },
+            {
+                "item": "sleepstonemod:airmattress",
+                "data": 5
+            },
+            {
+                "item": "sleepstonemod:airmattress",
+                "data": 6
+            },
+            {
+                "item": "sleepstonemod:airmattress",
+                "data": 7
+            },
+            {
+                "item": "sleepstonemod:airmattress",
+                "data": 8
+            },
+            {
+                "item": "sleepstonemod:airmattress",
+                "data": 9
+            },
+            {
+                "item": "sleepstonemod:airmattress",
+                "data": 10
+            },
+            {
+                "item": "sleepstonemod:airmattress",
+                "data": 11
+            },
+            {
+                "item": "sleepstonemod:airmattress",
+                "data": 12
+            },
+            {
+                "item": "sleepstonemod:airmattress",
+                "data": 13
+            },
+            {
+                "item": "sleepstonemod:airmattress",
+                "data": 14
+            },
+            {
+                "item": "sleepstonemod:airmattress",
+                "data": 15
+            }
+        ],
+        {
+            "item": "minecraft:dye",
+            "data": 15
+        }
+    ],
+    "result": {
+        "item": "sleepstonemod:airmattress",
+        "data": 0
+    }
+}

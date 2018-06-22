@@ -1,0 +1,21 @@
+{
+    "type": "crafting_shaped",
+    "group": "airmattress",
+    "pattern": [
+        "FFF",
+        "XXX"
+    ],
+    "key": {
+        "F": {
+            "item": "minecraft:feather"
+        },
+        "X": {
+            "item": "minecraft:wool",
+            "data": 0
+        }
+    },
+    "result": {
+        "item": "sleepstonemod:airmattress",
+        "data": 0
+    }
+}
