@@ -1,9 +1,13 @@
 package com.blargsworkshop.sleepstone.events;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 import com.blargsworkshop.engine.event.IEventHandler;
 import com.blargsworkshop.engine.logger.Log;
 import com.blargsworkshop.engine.utility.Utils;
 import com.blargsworkshop.sleepstone.ModInfo;
+import com.blargsworkshop.sleepstone.ModItems;
 import com.blargsworkshop.sleepstone.abilities.Ability;
 import com.blargsworkshop.sleepstone.abilities.temporal_aid.PlayerTemporalAidProvider;
 import com.blargsworkshop.sleepstone.abilities.temporal_aid.StoneTemporalAidProvider;
@@ -14,6 +18,7 @@ import com.blargsworkshop.sleepstone.items.stone.properties.StonePropertiesProvi
 import com.blargsworkshop.sleepstone.player.AbilityStatusProvider;
 import com.blargsworkshop.sleepstone.player.IAbilityStatus;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -21,6 +26,7 @@ import net.minecraft.nbt.NBTBase;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.storage.loot.LootEntry;
 import net.minecraft.world.storage.loot.LootEntryTable;
 import net.minecraft.world.storage.loot.LootPool;
@@ -35,6 +41,8 @@ import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.PlayerSetSpawnEvent;
+import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 /**
@@ -166,4 +174,52 @@ public class MainEventHandler implements IEventHandler {
 			MobDrops.handleEnderShardDropRates(event);
 		}
 	}
+	
+	
+	
+	private static final Map<String, Boolean> playerWakeUpMap = new ConcurrentHashMap<>();
+	private static final Map<String, BlockPos> spawnPoints = new ConcurrentHashMap<>();
+
+	@SubscribeEvent
+	public void onPlayerWakingUp(PlayerWakeUpEvent event) {
+		if (Utils.isServer(event.getEntityPlayer().getEntityWorld()) && event.shouldSetSpawn()) {
+			EntityPlayer player = event.getEntityPlayer();
+			BlockPos oldSpawnPoint = player.getBedLocation();
+			putOldSpawnPoint(player.getDisplayNameString(), oldSpawnPoint);
+			playerWakeUpMap.put(player.getDisplayNameString(), Boolean.TRUE);
+		}
+	}
+	
+	@SubscribeEvent
+	public void onSetPlayerSpawn(PlayerSetSpawnEvent event) {
+		EntityPlayer player = event.getEntityPlayer();
+		if (Utils.isServer(player.getEntityWorld()) && didPlayerJustWakeUp(player.getDisplayNameString())) {
+			playerWakeUpMap.put(player.getDisplayNameString(), Boolean.FALSE);
+			BlockPos sleptInBedLocation = player.getBedLocation();
+			if (sleptInBedLocation != null) {
+				Block bedType = player.getEntityWorld().getBlockState(sleptInBedLocation).getBlock();
+				if (bedType != null && bedType == ModItems.Blocks.airMattress) {
+					BlockPos newSpawnPoint = player.getBedLocation();
+					BlockPos oldSpawnPoint = spawnPoints.get(player.getDisplayNameString());
+					if (!newSpawnPoint.equals(oldSpawnPoint)) {
+						player.setSpawnPoint(oldSpawnPoint, false);
+					}
+				}
+			}
+		}
+	}
+	
+	private void putOldSpawnPoint(String playerDisplayNameString, BlockPos oldSpawnPoint) {
+		if (oldSpawnPoint == null) {
+			spawnPoints.remove(playerDisplayNameString);
+		}
+		else {
+			spawnPoints.put(playerDisplayNameString, oldSpawnPoint);
+		}
+	}
+	
+	private boolean didPlayerJustWakeUp(String playerDisplayNameString) {
+		return Boolean.TRUE.equals(playerWakeUpMap.get(playerDisplayNameString));
+	}
+
 }

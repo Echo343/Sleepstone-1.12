@@ -7,6 +7,7 @@ import com.blargsworkshop.sleepstone.ModItems.Potions;
 import com.blargsworkshop.sleepstone.abilities.Ability;
 import com.blargsworkshop.sleepstone.abilities.windwalker.Windwalker;
 import com.blargsworkshop.sleepstone.player.AbilityStatusProvider;
+import com.blargsworkshop.sleepstone.player.IAbilityStatus;
 
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -36,11 +37,12 @@ public class TickEventHandler implements IEventHandler {
 		}
 				
 		if (Utils.isServer(e.player.getEntityWorld()) && e.player.ticksExisted % CHECK_RATE == 0) {
-			if (AbilityStatusProvider.getAbilityStatus(e.player).isAbilityAvailable(Ability.IRON_STOMACH)) {
+			IAbilityStatus abilityStatus = AbilityStatusProvider.getAbilityStatus(e.player);
+			if (abilityStatus.isAbilityAvailable(Ability.IRON_STOMACH)) {
 				e.player.addPotionEffect(new BlargsPotionEffect(Potions.foodSaturation, REFRESH_DURATION, 0, true, true));
 			}
 			
-			if (AbilityStatusProvider.getAbilityStatus(e.player).isAbilityAvailable(Ability.WINDWALKER)) {
+			if (abilityStatus.isAbilityAvailable(Ability.WINDWALKER)) {
 				e.player.addPotionEffect(new BlargsPotionEffect(Potions.windwalker, REFRESH_DURATION, 0, true, true));
 			}
 		}

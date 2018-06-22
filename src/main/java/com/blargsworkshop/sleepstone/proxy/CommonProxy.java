@@ -54,7 +54,8 @@ public class CommonProxy extends BlargsCommonProxy {
 		Map<EventHandlerType, IEventHandler> handlers = new HashMap<>();
 		handlers.put(EventHandlerType.FORGE, new MainEventHandler());
 		handlers.put(EventHandlerType.FML, new TickEventHandler());
-		handlers.put(EventHandlerType.FORGE, new AirMattressHandler());
+		// TODO breaks for some reason
+//		handlers.put(EventHandlerType.FORGE, new AirMattressHandler());
 		return handlers;
 	}
 	

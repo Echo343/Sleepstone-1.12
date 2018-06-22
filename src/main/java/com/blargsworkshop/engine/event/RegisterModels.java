@@ -17,6 +17,8 @@ import com.blargsworkshop.engine.annotations.TEISR;
 import com.blargsworkshop.engine.annotations.TESR;
 import com.blargsworkshop.engine.item.ISubtypable;
 import com.blargsworkshop.engine.logger.Log;
+import com.blargsworkshop.sleepstone.items.airmattress.AirMattressTileEntity;
+import com.blargsworkshop.sleepstone.items.airmattress.TileEntityAirMattressRenderer;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -131,9 +133,9 @@ public class RegisterModels {
 			Log.detail("Register Models - " + i.getRegistryName());
 		}
 		
-		tesrTileEnities.forEach((tile, tesr) -> {
-			ClientRegistry.bindTileEntitySpecialRenderer(tile.getClass(), tesr.newInstance());
-		});
+//		tesrTileEnities.forEach((tile, tesr) -> {
+//			ClientRegistry.bindTileEntitySpecialRenderer(tile.getClass(), tesr.newInstance());
+//		});
 		teisrItems.forEach((item, teisr) -> {
 			try {
 				item.setTileEntityItemStackRenderer(teisr.newInstance());
@@ -151,7 +153,7 @@ public class RegisterModels {
 		});
 		
 		//TODO automate this
-//		ClientRegistry.bindTileEntitySpecialRenderer(AirMattressTileEntity.class, new TileEntityAirMattressRenderer());
+		ClientRegistry.bindTileEntitySpecialRenderer(AirMattressTileEntity.class, new TileEntityAirMattressRenderer());
 //		((Item)ModItems.Items.airMattress).setTileEntityItemStackRenderer(new AirMattressItemStackRenderer());
 //		ModelLoader.setCustomStateMapper(ModItems.Blocks.airMattress, new IStateMapper() {
 //			@Override
