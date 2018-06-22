@@ -117,7 +117,7 @@ public class RegisterModComponents {
 	}
 	
 	@SubscribeEvent
-	public void registerBlocks(RegistryEvent.Register<Block> event) {
+	public void registerBlocksAndTileEntities(RegistryEvent.Register<Block> event) {
 		Log.detail("RegisterModComponents - Blocks");
 		for (Block i : modBlocks) {
 			event.getRegistry().register(i);

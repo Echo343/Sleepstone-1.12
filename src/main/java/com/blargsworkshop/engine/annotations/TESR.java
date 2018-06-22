@@ -1,18 +1,23 @@
+/**
+ * 
+ */
 package com.blargsworkshop.engine.annotations;
 
 import static java.lang.annotation.ElementType.FIELD;
-import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-/**
- * Put this tag on your blocks in your IModItem class to have them auto registered.
- * Don't forget to set the registry name
- */
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
 @Documented
 @Retention(RUNTIME)
-@Target({ TYPE, FIELD })
-public @interface ModBlock { }
+@Target(FIELD)
+@SideOnly(Side.CLIENT)
+public @interface TESR {
+	Class<? extends TileEntitySpecialRenderer<?>> value();
+}
