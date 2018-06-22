@@ -16,50 +16,43 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class AirMattressHandler implements IEventHandler {
 	private static final Map<String, Boolean> playerWakeUpMap = new ConcurrentHashMap<>();
-	private static final Map<String, BlockPos> spawnPoints = new ConcurrentHashMap<>();
 
 	@SubscribeEvent
 	public void onPlayerWakingUp(PlayerWakeUpEvent event) {
 		if (Utils.isServer(event.getEntityPlayer().getEntityWorld()) && event.shouldSetSpawn()) {
-			EntityPlayer player = event.getEntityPlayer();
-			BlockPos oldSpawnPoint = player.getBedLocation();
-			putOldSpawnPoint(player.getDisplayNameString(), oldSpawnPoint);
-			playerWakeUpMap.put(player.getDisplayNameString(), Boolean.TRUE);
+			setPlayerWakeUp(event.getEntityPlayer());
 		}
 	}
 	
-	@SubscribeEvent
+	@SubscribeEvent(receiveCanceled = true)
 	public void onSetPlayerSpawn(PlayerSetSpawnEvent event) {
 		EntityPlayer player = event.getEntityPlayer();
-		if (Utils.isServer(player.getEntityWorld()) && didPlayerJustWakeUp(player.getDisplayNameString())) {
-			playerWakeUpMap.put(player.getDisplayNameString(), Boolean.FALSE);
-			BlockPos sleptInBedLocation = player.getBedLocation();
-			if (sleptInBedLocation != null) {
-				Block bedType = player.getEntityWorld().getBlockState(sleptInBedLocation).getBlock();
-				if (bedType != null && bedType == ModItems.Blocks.airMattress) {
-					BlockPos newSpawnPoint = player.getBedLocation();
-					BlockPos oldSpawnPoint = spawnPoints.get(player.getDisplayNameString());
-					if (!newSpawnPoint.equals(oldSpawnPoint)) {
-						player.setSpawnPoint(oldSpawnPoint, false);
+		if (Utils.isServer(player.getEntityWorld()) && didPlayerJustWakeUp(player)) {
+			clearPlayerWakeUp(player);
+			if (!event.isCanceled()) {
+				BlockPos sleptInBedLocation = event.getNewSpawn();
+				if (sleptInBedLocation != null) {
+					Block blockType = player.getEntityWorld().getBlockState(sleptInBedLocation).getBlock();
+					if (blockType != null && blockType == ModItems.Blocks.airMattress && event.isCancelable()) {
+						event.setCanceled(true);
 					}
 				}
 			}
 		}
 	}
 	
-	private void putOldSpawnPoint(String playerDisplayNameString, BlockPos oldSpawnPoint) {
-		if (oldSpawnPoint == null) {
-			spawnPoints.remove(playerDisplayNameString);
-		}
-		else {
-			spawnPoints.put(playerDisplayNameString, oldSpawnPoint);
-		}
+	private boolean didPlayerJustWakeUp(EntityPlayer player) {
+		return Boolean.TRUE.equals(playerWakeUpMap.get(player.getDisplayNameString()));
 	}
 	
-	private boolean didPlayerJustWakeUp(String playerDisplayNameString) {
-		return Boolean.TRUE.equals(playerWakeUpMap.get(playerDisplayNameString));
+	private void setPlayerWakeUp(EntityPlayer player) {
+		playerWakeUpMap.put(player.getDisplayNameString(), Boolean.TRUE);
 	}
-
+	
+	private void clearPlayerWakeUp(EntityPlayer player) {
+		playerWakeUpMap.put(player.getDisplayNameString(), Boolean.FALSE);
+	}
+	
 	@Override
 	public EventHandlerType getBusType() {
 		return EventHandlerType.FORGE;
