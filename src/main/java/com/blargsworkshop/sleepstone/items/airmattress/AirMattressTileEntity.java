@@ -8,6 +8,8 @@ import net.minecraft.block.BlockBed;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.EnumPacketDirection;
+import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.relauncher.Side;
@@ -21,6 +23,13 @@ public class AirMattressTileEntity extends TileEntity implements IModTileEntity 
 	@Override
 	public String getResourceLocation() {
 		return ModInfo.ID + ":" + RESOURCE_NAME;
+	}
+	
+	@Override
+	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+		if (net.getDirection() == EnumPacketDirection.CLIENTBOUND) {
+			this.readFromNBT(pkt.getNbtCompound());
+		}
 	}
 
     public void setItemValues(ItemStack p_193051_1_)
