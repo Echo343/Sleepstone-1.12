@@ -25,7 +25,8 @@
             "item": "minecraft:saddle"
         },
         {
-            "item": "minecraft:diamond"
+            "item": "sleepstonemod:craftable_pathfinder",
+            "data": 0
         },
         {
             "item": "minecraft:snowball"
