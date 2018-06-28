@@ -12,20 +12,19 @@ import com.blargsworkshop.engine.annotations.ModBlock;
 import com.blargsworkshop.engine.annotations.ModItem;
 import com.blargsworkshop.engine.annotations.ModSprite;
 import com.blargsworkshop.engine.annotations.ModTileEntity;
-import com.blargsworkshop.engine.annotations.NoBlockstate;
-import com.blargsworkshop.engine.annotations.TEISR;
-import com.blargsworkshop.engine.annotations.TESR;
+import com.blargsworkshop.engine.annotations.render.NoBlockstate;
+import com.blargsworkshop.engine.annotations.render.TEISR;
+import com.blargsworkshop.engine.annotations.render.tesr.ITESRMapProvider;
+import com.blargsworkshop.engine.annotations.render.tesr.TESR;
+import com.blargsworkshop.engine.annotations.render.tesr.TESRMap;
 import com.blargsworkshop.engine.item.ISubtypable;
 import com.blargsworkshop.engine.logger.Log;
-import com.blargsworkshop.sleepstone.items.airmattress.AirMattressTileEntity;
-import com.blargsworkshop.sleepstone.items.airmattress.TileEntityAirMattressRenderer;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.client.renderer.tileentity.TileEntityItemStackRenderer;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
@@ -48,8 +47,8 @@ public class RegisterModels {
 	private List<ResourceLocation> modSprites = new ArrayList<>();
 	
 	private List<Block> tesrBlocks = new ArrayList<>();
+	private List<TileEntity> tesrTileEnities = new ArrayList<>();
 	private Map<Item, Class<? extends TileEntityItemStackRenderer>> teisrItems = new HashMap<>();
-	private Map<TileEntity, Class<? extends TileEntitySpecialRenderer<?>>> tesrTileEnities = new HashMap<>();
 	
 	public RegisterModels(Class<? extends IModItems> class1) {
 		try {
@@ -74,7 +73,7 @@ public class RegisterModels {
 				teisrItems.put((Item) f.get(null), f.getAnnotation(TEISR.class).value());
 			}
 			else if (f.isAnnotationPresent(TESR.class) && f.isAnnotationPresent(ModTileEntity.class)) {
-				tesrTileEnities.put((TileEntity) f.get(null), f.getAnnotation(TESR.class).value());
+				tesrTileEnities.add((TileEntity) f.get(null));
 			}
 			else if (f.isAnnotationPresent(NoBlockstate.class) && f.isAnnotationPresent(ModBlock.class)) {
 				tesrBlocks.add((Block) f.get(null));
@@ -106,7 +105,7 @@ public class RegisterModels {
 			else if (innerClass.isAnnotationPresent(ModTileEntity.class)) {
 				for (Field f : innerClass.getDeclaredFields()) {
 					if (f.isAnnotationPresent(TESR.class)) {
-						tesrTileEnities.put((TileEntity) f.get(null), f.getAnnotation(TESR.class).value());
+						tesrTileEnities.add((TileEntity) f.get(null));
 					}
 				}
 			}
@@ -125,6 +124,7 @@ public class RegisterModels {
 	 * Registers our models
 	 * @param event
 	 */
+	@SuppressWarnings("unchecked")
 	@SubscribeEvent
 	public void onModelRegistry(ModelRegistryEvent event) {
 		Log.detail("Register Models - Models");
@@ -133,9 +133,14 @@ public class RegisterModels {
 			Log.detail("Register Models - " + i.getRegistryName());
 		}
 		
-//		tesrTileEnities.forEach((tile, tesr) -> {
-//			ClientRegistry.bindTileEntitySpecialRenderer(tile.getClass(), tesr.newInstance());
-//		});
+		// WOW - please someone offer a better way to do this.  I'm done with this. Generics are frustrating.
+		tesrTileEnities.forEach((tile) -> {
+			if (tile instanceof ITESRMapProvider) {
+				@SuppressWarnings("rawtypes")
+				TESRMap tesrMap = ((ITESRMapProvider<?>)tile).getTESRMap();
+				ClientRegistry.bindTileEntitySpecialRenderer(tesrMap.getTileEntityClass(), tesrMap.getSpecialRenderer());
+			}
+		});
 		teisrItems.forEach((item, teisr) -> {
 			try {
 				item.setTileEntityItemStackRenderer(teisr.newInstance());
@@ -151,16 +156,6 @@ public class RegisterModels {
 				}
 			});
 		});
-		
-		//TODO automate this
-		ClientRegistry.bindTileEntitySpecialRenderer(AirMattressTileEntity.class, new TileEntityAirMattressRenderer());
-//		((Item)ModItems.Items.airMattress).setTileEntityItemStackRenderer(new AirMattressItemStackRenderer());
-//		ModelLoader.setCustomStateMapper(ModItems.Blocks.airMattress, new IStateMapper() {
-//			@Override
-//			public Map<IBlockState, ModelResourceLocation> putStateModelLocations(Block blockIn) {
-//				return Collections.emptyMap();
-//			}
-//		});
 	}
 	
 	/**
@@ -179,8 +174,8 @@ public class RegisterModels {
 	
 	private void registerItemModel(Item item) {
 		if (item.getHasSubtypes() && item instanceof ISubtypable) {
-			ISubtypable craftable = (ISubtypable) item;
-			craftable.getResourceLocationMap().forEach((Integer meta, ResourceLocation resource) -> {
+			ISubtypable subtypableItem = (ISubtypable) item;
+			subtypableItem.getResourceLocationMap().forEach((Integer meta, ResourceLocation resource) -> {
 				ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(resource, null));
 			});
 		}

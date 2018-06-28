@@ -8,9 +8,9 @@ import com.blargsworkshop.engine.annotations.ModRecipe;
 import com.blargsworkshop.engine.annotations.ModSound;
 import com.blargsworkshop.engine.annotations.ModSprite;
 import com.blargsworkshop.engine.annotations.ModTileEntity;
-import com.blargsworkshop.engine.annotations.NoBlockstate;
-import com.blargsworkshop.engine.annotations.TEISR;
-import com.blargsworkshop.engine.annotations.TESR;
+import com.blargsworkshop.engine.annotations.render.NoBlockstate;
+import com.blargsworkshop.engine.annotations.render.TEISR;
+import com.blargsworkshop.engine.annotations.render.tesr.TESR;
 import com.blargsworkshop.engine.event.RegisterModComponents;
 import com.blargsworkshop.engine.potion.BlargsPotion;
 import com.blargsworkshop.engine.recipe.IBlargRecipe;
@@ -22,7 +22,6 @@ import com.blargsworkshop.sleepstone.items.airmattress.AirMattressBlock;
 import com.blargsworkshop.sleepstone.items.airmattress.AirMattressItem;
 import com.blargsworkshop.sleepstone.items.airmattress.AirMattressItemStackRenderer;
 import com.blargsworkshop.sleepstone.items.airmattress.AirMattressTileEntity;
-import com.blargsworkshop.sleepstone.items.airmattress.TileEntityAirMattressRenderer;
 import com.blargsworkshop.sleepstone.items.endershard.EnderShard;
 import com.blargsworkshop.sleepstone.items.gems.ElementalGem;
 import com.blargsworkshop.sleepstone.items.gems.EtherealGem;
@@ -90,7 +89,7 @@ public class ModItems implements IModItems{
 	
 	@ModTileEntity
 	public static class TEs {
-		@TESR(TileEntityAirMattressRenderer.class)
+		@TESR
 		public static AirMattressTileEntity airMattress = new AirMattressTileEntity();
 	}
 	

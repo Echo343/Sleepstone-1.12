@@ -1,5 +1,7 @@
 package com.blargsworkshop.sleepstone.items.airmattress;
 
+import com.blargsworkshop.engine.annotations.render.tesr.ITESRMapProvider;
+import com.blargsworkshop.engine.annotations.render.tesr.TESRMap;
 import com.blargsworkshop.engine.tile.IModTileEntity;
 import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.ModItems;
@@ -15,7 +17,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class AirMattressTileEntity extends TileEntity implements IModTileEntity {
+public class AirMattressTileEntity extends TileEntity implements IModTileEntity, ITESRMapProvider<AirMattressTileEntity> {
 	private static final String RESOURCE_NAME = "airmattresste";
 	
 	protected EnumDyeColor color = EnumDyeColor.RED;
@@ -89,5 +91,11 @@ public class AirMattressTileEntity extends TileEntity implements IModTileEntity 
     {
         return new ItemStack(ModItems.Items.airMattress, 1, this.color.getMetadata());
     }
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public TESRMap<AirMattressTileEntity> getTESRMap() {
+		return new TESRMap<>(AirMattressTileEntity.class, new TileEntityAirMattressRenderer());
+	}
 
 }
