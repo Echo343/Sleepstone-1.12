@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.blargsworkshop.engine.annotations.render.tesr;
+package com.blargsworkshop.engine.annotations.render;
 
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
@@ -10,6 +10,7 @@ import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -18,4 +19,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @Target(FIELD)
 @SideOnly(Side.CLIENT)
 public @interface TESR {
+	@SuppressWarnings("rawtypes")
+	Class<? extends TileEntitySpecialRenderer> value();
 }
