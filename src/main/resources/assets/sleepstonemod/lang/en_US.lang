@@ -68,6 +68,7 @@ text.guistoneinventory.inventory=Inventory
 text.guistone.sleepstone_attunes_to_you=The Sleepstone glows brightly as it attunes to you.
 
 text.guistone.inv_button=Inv
+text.guistone.warp_button=Warp
 
 text.guistone.venom_immunity_button=Venom Immunity
 text.guistone.venom_immunity_tooltip=With the knowledge of the monks and the thirst for adventure, you have found a way to become immune to the spider's poison and the touch of the withered ones.  This ability will serve you well on your travels.
@@ -87,7 +88,5 @@ text.guistone.phantom_torch_button=Phantom Torch
 text.guistone.phantom_torch_tooltip=By "borrowing" a torch from the ethereal realm, you find you have an unlimited supply.  This type of torch is known as a phantom torch because upon breaking it fades back into the ethereal realm.  Pathfinders equiped with a sleepstone often use this ability on their expeditions.  Unfortunately, many have discovered only one with the phantom torch ability can properly anchor it to the physical world.
 text.guistone.windwalker_button=Windwalker
 text.guistone.windwalker_tooltip=By using the power of the elements, air to be exact, a pathfinder can travel much, much faster than normal.  This ability seems to also grant some protection from litterally stubbing your toe on a rock or even a chicken.
-
-text.guistone.warp=Warp
 
 text.temporal_aid.__is_getting_ready_to_send_some_items=%s is getting ready to send some items to you.

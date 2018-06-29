@@ -4,8 +4,11 @@ import java.io.IOException;
 
 import com.blargsworkshop.engine.network.AbstractMessage.AbstractServerMessage;
 import com.blargsworkshop.engine.proxy.IProxy;
+import com.blargsworkshop.engine.utility.Utils;
 import com.blargsworkshop.sleepstone.SleepstoneMod;
+import com.blargsworkshop.sleepstone.ModItems.Potions;
 import com.blargsworkshop.sleepstone.abilities.barrier.RockWall;
+import com.blargsworkshop.sleepstone.items.stone.Sleepstone;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -15,7 +18,8 @@ import net.minecraftforge.fml.relauncher.Side;
 public class CommandMessage extends AbstractServerMessage<CommandMessage> {
 
 	public static enum Command {
-		ROCKWALL
+		ROCKWALL,
+		WARP
 	}
 	
 	private Command command;
@@ -39,12 +43,20 @@ public class CommandMessage extends AbstractServerMessage<CommandMessage> {
 	@Override
 	public void process(EntityPlayer player, Side side) {
 		switch (command) {
-		case ROCKWALL:
-			RockWall rockwall = new RockWall();
-			rockwall.generate((EntityPlayerMP) player);
-			break;
-		default:
-			break;
+			case ROCKWALL:
+				RockWall rockwall = new RockWall();
+				rockwall.generate((EntityPlayerMP) player);
+				break;
+			case WARP:
+				if (player.isPotionActive(Potions.warpSickness)) {
+					Utils.addChatMessage(player, "text.sleepstone.suffering_effects_of_warping");
+				}
+				else {
+					Sleepstone.warpPlayerToBed(player);
+				}
+				break;
+			default:
+				break;
 		}
 	}
 		

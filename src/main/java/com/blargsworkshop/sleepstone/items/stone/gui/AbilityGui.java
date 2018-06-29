@@ -19,9 +19,9 @@ import com.blargsworkshop.sleepstone.items.stone.inventory.StoneInventory;
 import com.blargsworkshop.sleepstone.items.stone.inventory.StoneInventoryProvider;
 import com.blargsworkshop.sleepstone.network.packets.toserver.CommandMessage;
 import com.blargsworkshop.sleepstone.network.packets.toserver.CommandMessage.Command;
+import com.blargsworkshop.sleepstone.network.packets.toserver.OpenGuiMessage;
 import com.blargsworkshop.sleepstone.player.AbilityStatusProvider;
 import com.blargsworkshop.sleepstone.player.IAbilityStatus;
-import com.blargsworkshop.sleepstone.network.packets.toserver.OpenGuiMessage;
 
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -42,7 +42,8 @@ public class AbilityGui extends GuiScreen {
 		IRON_STOMACH(Ability.IRON_STOMACH, ToggleButton.class, 2, 0),
 		PHANTOM_TORCH(Ability.PHANTOM_TORCH, BasicButton.class, 2, 1),
 		WINDWALKER(Ability.WINDWALKER, ToggleButton.class, 2, 2),
-		INV;
+		INV,
+		WARP;
 		
 		private static final String MESSAGE_KEY_PREFIX = "text.guistone.";
 		private Ability ability = null;
@@ -57,6 +58,10 @@ public class AbilityGui extends GuiScreen {
 			this.type = buttonType;
 			this.column = col;
 			this.row = row;
+		}
+		
+		public boolean hasAbility() {
+			return ability != null;
 		}
 		
 		public Ability getAbility() {
@@ -134,12 +139,7 @@ public class AbilityGui extends GuiScreen {
 		Tooltip tooltip = null;
 		
 		for (Button btn : Button.values()) {
-			// Inv button is handled separately
-			if (btn.equals(Button.INV)) {
-				continue;
-			}
-			
-			if (shouldShowButton(btn)) {
+			if (btn.hasAbility() && shouldShowButton(btn)) {
 				int rowPosition = firstRow + btn.getRow() * EFFECTIVE_BUTTON_HEIGHT;
 				int columnPosition = firstColumn + btn.getColumn() * EFFECTIVE_BUTTON_WIDTH;
 				
@@ -157,8 +157,14 @@ public class AbilityGui extends GuiScreen {
 			}
 		}
 		
+		// Non-ability buttons are handled separately (ie. Inv, Warp)
 		GuiButton invButton = new BasicButton(Button.INV, left + X_SIZE - 40, top + Y_SIZE - 30, 20, Utils.localize(Button.INV.getMessageKey()));
 		this.buttonList.add(invButton); // TODO Use an icon of some sort.
+		
+		int warpButtonXPos = (left - BasicButton.DEFAULT_WIDTH) / 2;
+		int warpButtonYPos = top + Y_SIZE - BasicButton.DEFAULT_HEIGHT - 10;
+		GuiButton warpButton = new BasicButton(Button.WARP, warpButtonXPos, warpButtonYPos, Utils.localize(Button.WARP.getMessageKey()));
+		this.buttonList.add(warpButton);
 	}
 	
 	@Override
@@ -180,33 +186,37 @@ public class AbilityGui extends GuiScreen {
 		Button btn = (Button)((BasicButton)button).getButtonType();
 				
 		switch (btn) {
-		case INV:
-			NetworkOverlord.get(ModInfo.ID).sendToServer(new OpenGuiMessage(GuiEnum.STONE_INVENTORY));
-			break;
-		case ROCK_BARRIER:
-			NetworkOverlord.get(ModInfo.ID).sendToServer(new CommandMessage(Command.ROCKWALL));
-			player.closeScreen();
-			break;
-		case ETHEREAL_FEET:
-		case IRON_STOMACH:
-		case PRECOGNITION:
-		case VENOM_IMMUNITY:
-			toggleButton(button);
-			props.setAbility(btn.getAbility(), ((ToggleButton) button).isOn());
-			break;
-		case WINDWALKER:
-			toggleButton(button);
-			props.setAbility(btn.getAbility(), ((ToggleButton) button).isOn());
-			player.closeScreen();
-			break;
-		case HELLJUMPER:
-		case PHANTOM_TORCH:
-			break;
-		case TEMPORAL_AID:
-			player.openGui(SleepstoneMod.getInstance(), GuiEnum.TEMPORAL_AID_PLAYER_SELECTION.ordinal(), player.getEntityWorld(), (int) player.posX, (int) player.posY, (int) player.posZ);
-			break;
-		default:
-			break;
+			case WARP:
+				NetworkOverlord.get(ModInfo.ID).sendToServer(new CommandMessage(Command.WARP));
+				player.closeScreen();
+				break;
+			case INV:
+				NetworkOverlord.get(ModInfo.ID).sendToServer(new OpenGuiMessage(GuiEnum.STONE_INVENTORY));
+				break;
+			case ROCK_BARRIER:
+				NetworkOverlord.get(ModInfo.ID).sendToServer(new CommandMessage(Command.ROCKWALL));
+				player.closeScreen();
+				break;
+			case ETHEREAL_FEET:
+			case IRON_STOMACH:
+			case PRECOGNITION:
+			case VENOM_IMMUNITY:
+				toggleButton(button);
+				props.setAbility(btn.getAbility(), ((ToggleButton) button).isOn());
+				break;
+			case WINDWALKER:
+				toggleButton(button);
+				props.setAbility(btn.getAbility(), ((ToggleButton) button).isOn());
+				player.closeScreen();
+				break;
+			case HELLJUMPER:
+			case PHANTOM_TORCH:
+				break;
+			case TEMPORAL_AID:
+				player.openGui(SleepstoneMod.getInstance(), GuiEnum.TEMPORAL_AID_PLAYER_SELECTION.ordinal(), player.getEntityWorld(), (int) player.posX, (int) player.posY, (int) player.posZ);
+				break;
+			default:
+				break;
 		}
 	}
 	
