@@ -46,9 +46,9 @@ public class AirMattressTileEntity extends TileEntity implements IModTileEntity 
      * @return true forcing the invalidation of the existing TE, false not to invalidate the existing TE
      */
     @Override
-	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate)
+	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState)
     {
-        return oldState.getBlock() != newSate.getBlock();
+        return oldState.getBlock() != newState.getBlock();
     }
 
     public void setItemValues(ItemStack p_193051_1_)

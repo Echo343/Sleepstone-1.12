@@ -4,8 +4,8 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
 public class AirMattressModel extends ModelBase {
-    public ModelRenderer headPiece;
-    public ModelRenderer footPiece;
+    public final ModelRenderer headPiece;
+    public final ModelRenderer footPiece;
 
     public AirMattressModel()
     {

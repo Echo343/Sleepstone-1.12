@@ -9,7 +9,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class AirMattressItemStackRenderer extends TileEntityItemStackRenderer {
 	
-	AirMattressTileEntity tile = new AirMattressTileEntity();
+	private final AirMattressTileEntity tile = new AirMattressTileEntity();
 
 	@Override
 	public void renderByItem(ItemStack stack, float partialTicks) {
