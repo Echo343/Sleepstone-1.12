@@ -28,8 +28,7 @@ public class Sleepstone extends BaseModItem {
 	public static void warpPlayerToBed(EntityPlayer player) {
 		World world = player.getEntityWorld();
 		if (Utils.isServer(world) && player instanceof EntityPlayerMP) {
-			// TODO I think this will warp even when the bed is destroyed. Or rather if the bed is destroyed, no status message will show.
-			BlockPos bedPos = player.getBedLocation(player.dimension);
+			BlockPos bedPos = player.getBedLocation();
 			if (bedPos != null) {
 				BlockPos bedSpawnPos = EntityPlayer.getBedSpawnLocation(world, bedPos, false);
 				if (bedSpawnPos != null) {
@@ -39,9 +38,12 @@ public class Sleepstone extends BaseModItem {
 					SoundManager.playSoundAtEntityFromServer(player, Sounds.teleport);
 					Log.debug("Warping to: " + (bedSpawnPos.getX()) + ", " + (bedSpawnPos.getY()) + ", " + (bedSpawnPos.getZ()), player);
 				}
+				else {
+					Utils.addChatMessage(player, "text.sleepstone.bed_destroyed");
+				}
 			}
 			else {
-				Utils.addChatMessage(player, "text.sleepstone.bed_destroyed");
+				Utils.addChatMessage(player, "text.sleepstone.no_spawn_point");
 			}
 		}
 	}
