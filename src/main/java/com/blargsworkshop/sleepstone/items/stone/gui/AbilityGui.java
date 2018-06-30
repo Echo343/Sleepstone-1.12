@@ -28,6 +28,7 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextFormatting;
 
 
 public class AbilityGui extends GuiScreen {
@@ -161,9 +162,10 @@ public class AbilityGui extends GuiScreen {
 		GuiButton invButton = new BasicButton(Button.INV, left + X_SIZE - 40, top + Y_SIZE - 30, 20, Utils.localize(Button.INV.getMessageKey()));
 		this.buttonList.add(invButton); // TODO Use an icon of some sort.
 		
-		int warpButtonXPos = (left - BasicButton.DEFAULT_WIDTH) / 2;
-		int warpButtonYPos = top + Y_SIZE - BasicButton.DEFAULT_HEIGHT - 10;
-		GuiButton warpButton = new BasicButton(Button.WARP, warpButtonXPos, warpButtonYPos, Utils.localize(Button.WARP.getMessageKey()));
+		final int warpButtonWidth = 95;
+		int warpButtonXPos = (this.width - warpButtonWidth) / 2;
+		int warpButtonYPos = (this.height - BasicButton.DEFAULT_HEIGHT) / 2;
+		GuiButton warpButton = new BasicButton(Button.WARP, warpButtonXPos, warpButtonYPos, warpButtonWidth, TextFormatting.BOLD + Utils.localize(Button.WARP.getMessageKey()));
 		this.buttonList.add(warpButton);
 	}
 	
