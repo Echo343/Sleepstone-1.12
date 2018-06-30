@@ -5,6 +5,8 @@ import java.util.Iterator;
 import com.blargsworkshop.engine.logger.Log;
 
 import io.netty.channel.ChannelFutureListener;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.play.server.SPacketEntityEffect;
 import net.minecraft.network.play.server.SPacketRespawn;
@@ -37,9 +39,17 @@ public class SimpleTeleporter {
 	 * @param position - Target destination
 	 */
 	public static void teleportPlayerWithinDimension(EntityPlayerMP player, BlockPos position) {
+		if (player.isRiding()) {
+			Entity entity = player.getRidingEntity();
+			player.dismountRidingEntity();
+			if (entity instanceof EntityAnimal) {
+				entity.setPositionAndUpdate(position.getX(), position.getY(), position.getZ());
+				entity.getEntityWorld().updateEntityWithOptionalForce(entity, false);
+			}
+		}		
 		player.setPositionAndUpdate(position.getX(), position.getY(), position.getZ());
 		player.getEntityWorld().updateEntityWithOptionalForce(player, false);
-	}	
+	}
 	
 	/**
 	 * Teleports a player from their current dimension to another.
