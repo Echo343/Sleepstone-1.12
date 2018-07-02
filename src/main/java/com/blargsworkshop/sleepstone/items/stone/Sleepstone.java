@@ -33,7 +33,7 @@ public class Sleepstone extends BaseModItem {
 				BlockPos bedSpawnPos = EntityPlayer.getBedSpawnLocation(world, bedPos, false);
 				if (bedSpawnPos != null) {
 					SoundManager.playSoundAtEntityFromServer(player, Sounds.swoosh);
-					SimpleTeleporter.teleportPlayerWithinDimension((EntityPlayerMP) player, bedSpawnPos);
+					SimpleTeleporter.teleportPlayerWithinDimension((EntityPlayerMP) player, bedSpawnPos, true);
 					player.addPotionEffect(new WarpSicknessPotionEffect());
 					SoundManager.playSoundAtEntityFromServer(player, Sounds.teleport);
 					Log.debug("Warping to: " + (bedSpawnPos.getX()) + ", " + (bedSpawnPos.getY()) + ", " + (bedSpawnPos.getZ()), player);

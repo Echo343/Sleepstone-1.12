@@ -37,9 +37,10 @@ public class SimpleTeleporter {
 	 * Teleports a player to a new place in the current world.
 	 * @param player - Player to teleport
 	 * @param position - Target destination
+	 * @param takeRidingAnimal true - also warps the ridingEntity (instanceof EntityAnimal), but first dismounts the player.  
 	 */
-	public static void teleportPlayerWithinDimension(EntityPlayerMP player, BlockPos position) {
-		if (player.isRiding()) {
+	public static void teleportPlayerWithinDimension(EntityPlayerMP player, BlockPos position, boolean takeRidingAnimal) {
+		if (takeRidingAnimal && player.isRiding()) {
 			Entity entity = player.getRidingEntity();
 			player.dismountRidingEntity();
 			if (entity instanceof EntityAnimal) {
@@ -49,6 +50,15 @@ public class SimpleTeleporter {
 		}		
 		player.setPositionAndUpdate(position.getX(), position.getY(), position.getZ());
 		player.getEntityWorld().updateEntityWithOptionalForce(player, false);
+	}
+	
+	/**
+	 * Teleports a player to a new place in the current world.
+	 * @param player - Player to teleport
+	 * @param position - Target destination
+	 */
+	public static void teleportPlayerWithinDimension(EntityPlayerMP player, BlockPos position) {
+		teleportPlayerWithinDimension(player, position, false);
 	}
 	
 	/**
