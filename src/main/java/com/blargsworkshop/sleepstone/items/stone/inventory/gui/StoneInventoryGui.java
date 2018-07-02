@@ -23,13 +23,12 @@ public class StoneInventoryGui extends GuiContainer
 		super(containerItem);
 		this.xSize = 175;
 		this.ySize = 222;
-		this.guiLeft = (this.width - this.xSize) / 2;
-		this.guiTop = (this.height - this.ySize) / 2;
 	}
 
 	@Override
-	public void initGui() {
-		super.initGui();
+	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+		super.drawScreen(mouseX, mouseY, partialTicks);
+		this.renderHoveredToolTip(mouseX, mouseY);
 	}
 	
 	/**
