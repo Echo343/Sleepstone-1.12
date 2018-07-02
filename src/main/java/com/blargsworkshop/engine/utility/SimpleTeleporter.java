@@ -31,7 +31,8 @@ import net.minecraftforge.fml.relauncher.Side;
  * <br>
  * This might make sense to get moved to a player capability.
  */
-public class SimpleTeleporter {
+public enum SimpleTeleporter {
+	INSTANCE;
 
 	/**
 	 * Teleports a player to a new place in the current world.
@@ -39,7 +40,7 @@ public class SimpleTeleporter {
 	 * @param position - Target destination
 	 * @param takeRidingAnimal true - also warps the ridingEntity (instanceof EntityAnimal), but first dismounts the player.  
 	 */
-	public static void teleportPlayerWithinDimension(EntityPlayerMP player, BlockPos position, boolean takeRidingAnimal) {
+	public void teleportPlayerWithinDimension(EntityPlayerMP player, BlockPos position, boolean takeRidingAnimal) {
 		if (takeRidingAnimal && player.isRiding()) {
 			Entity entity = player.getRidingEntity();
 			player.dismountRidingEntity();
@@ -57,7 +58,7 @@ public class SimpleTeleporter {
 	 * @param player - Player to teleport
 	 * @param position - Target destination
 	 */
-	public static void teleportPlayerWithinDimension(EntityPlayerMP player, BlockPos position) {
+	public void teleportPlayerWithinDimension(EntityPlayerMP player, BlockPos position) {
 		teleportPlayerWithinDimension(player, position, false);
 	}
 	
@@ -67,7 +68,7 @@ public class SimpleTeleporter {
 	 * @param destDimension - Destination dimension
 	 * @param position - Target location in destination dimension
 	 */
-	public static void teleportPlayerToDimension(EntityPlayerMP player, DimensionType destDimension, BlockPos position) {
+	public void teleportPlayerToDimension(EntityPlayerMP player, DimensionType destDimension, BlockPos position) {
 		DimensionType sourceDimension = DimensionType.getById(player.dimension);
 		MinecraftServer server = FMLCommonHandler.instance().getMinecraftServerInstance();
         PlayerList scm = server.getPlayerList();
@@ -104,7 +105,7 @@ public class SimpleTeleporter {
 		Log.debug(logMessage, player);
 	}
 	
-	private static void sendDimensionRegister(EntityPlayerMP player, int dimensionID) {
+	private void sendDimensionRegister(EntityPlayerMP player, int dimensionID) {
 		DimensionType providerID = DimensionManager.getProviderType(dimensionID);
 		ForgeMessage forgeMsg = new ForgeMessage.DimensionRegisterMessage(dimensionID, providerID.toString());
 		FMLEmbeddedChannel channel = NetworkRegistry.INSTANCE.getChannel("FORGE", Side.SERVER);

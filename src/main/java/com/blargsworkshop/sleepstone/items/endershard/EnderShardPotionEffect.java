@@ -44,7 +44,7 @@ public class EnderShardPotionEffect extends BlargsPotionEffect {
 	protected void onFinishedPotionEffect(EntityLivingBase entity) {		
 		if (Utils.isServer(entity.getEntityWorld()) && entity instanceof EntityPlayerMP) {
 			Log.debug("Ender Shard just ended.", (EntityPlayer) entity);
-			SimpleTeleporter.teleportPlayerToDimension((EntityPlayerMP) entity, getReturnDimension(), getReturnPosition());
+			SimpleTeleporter.INSTANCE.teleportPlayerToDimension((EntityPlayerMP) entity, getReturnDimension(), getReturnPosition());
 		}
 	}
 }
