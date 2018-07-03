@@ -3,7 +3,6 @@ package com.blargsworkshop.sleepstone.abilities.barrier;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -19,8 +18,8 @@ public class RockWall {
 		for (int y = -1; y <= 2; y++) {
 			for (BlockPos shapeFragment : shape) {
 				BlockPos p = playerPosition.add(shapeFragment.getX(), y, shapeFragment.getZ());
-				if (world.getBlockState(p).getMaterial().equals(Material.AIR)) {
-					world.setBlockState(p, Blocks.DIRT.getDefaultState());
+				if (world.getBlockState(p).getBlock().isReplaceable(world, p)) {
+					world.setBlockState(p, Blocks.LEAVES.getDefaultState());
 				}
 			}
 		}
