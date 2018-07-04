@@ -8,7 +8,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class RockWall {
+public class NatureWall {
 	
 	public void generate(EntityPlayerMP player) {
 		World world = player.getEntityWorld();
@@ -27,6 +27,7 @@ public class RockWall {
 	
 	protected List<BlockPos> getShape() {
 		ArrayList<BlockPos> shape = new ArrayList<>();
+		//Inner ring
 		shape.add(new BlockPos(0, 0, 3));
 		shape.add(new BlockPos(1, 0, 3));
 		shape.add(new BlockPos(2, 0, 2));
@@ -43,6 +44,39 @@ public class RockWall {
 		shape.add(new BlockPos(-3, 0, 1));
 		shape.add(new BlockPos(-2, 0, 2));
 		shape.add(new BlockPos(-1, 0, 3));
+		//Outer ring
+		shape.add(new BlockPos(0, 0, 4));
+		shape.add(new BlockPos(1, 0, 4));
+		shape.add(new BlockPos(2, 0, 4));
+		shape.add(new BlockPos(2, 0, 3));
+		shape.add(new BlockPos(3, 0, 3));
+		shape.add(new BlockPos(3, 0, 2));
+		shape.add(new BlockPos(4, 0, 2));
+		shape.add(new BlockPos(4, 0, 1));
+		shape.add(new BlockPos(4, 0, 0));
+		shape.add(new BlockPos(4, 0, -1));
+		shape.add(new BlockPos(4, 0, -2));
+		shape.add(new BlockPos(3, 0, -2));
+		shape.add(new BlockPos(3, 0, -3));
+		shape.add(new BlockPos(2, 0, -3));
+		shape.add(new BlockPos(2, 0, -4));
+		shape.add(new BlockPos(1, 0, -4));
+		shape.add(new BlockPos(0, 0, -4));
+		shape.add(new BlockPos(-1, 0, -4));
+		shape.add(new BlockPos(-2, 0, -4));
+		shape.add(new BlockPos(-2, 0, -3));
+		shape.add(new BlockPos(-3, 0, -3));
+		shape.add(new BlockPos(-3, 0, -2));
+		shape.add(new BlockPos(-4, 0, -2));
+		shape.add(new BlockPos(-4, 0, -1));
+		shape.add(new BlockPos(-4, 0, 0));
+		shape.add(new BlockPos(-4, 0, 1));
+		shape.add(new BlockPos(-4, 0, 2));
+		shape.add(new BlockPos(-3, 0, 2));
+		shape.add(new BlockPos(-3, 0, 3));
+		shape.add(new BlockPos(-2, 0, 3));
+		shape.add(new BlockPos(-2, 0, 4));
+		shape.add(new BlockPos(-1, 0, 4));
 		return shape;
 	}
 

@@ -5,7 +5,7 @@ import com.blargsworkshop.sleepstone.items.stone.inventory.gui.StoneSlotType;
 public enum Ability {
 	VENOM_IMMUNITY(StoneSlotType.GUARDIAN_1, StoneSlotType.MONK_1),
 	ETHEREAL_FEET(StoneSlotType.GUARDIAN_2, StoneSlotType.ETHEREAL_1),
-	ROCK_BARRIER(StoneSlotType.GUARDIAN_3, StoneSlotType.ELEMENTAL_1),
+	BARRIER(StoneSlotType.GUARDIAN_3, StoneSlotType.ELEMENTAL_1),
 	PRECOGNITION(StoneSlotType.TIMESPACE_1, StoneSlotType.MONK_2),
 	TEMPORAL_AID(StoneSlotType.TIMESPACE_2, StoneSlotType.ETHEREAL_2),
 	HELLJUMPER(StoneSlotType.TIMESPACE_3, StoneSlotType.ELEMENTAL_2),

@@ -7,7 +7,7 @@ import com.blargsworkshop.engine.proxy.IProxy;
 import com.blargsworkshop.engine.utility.Utils;
 import com.blargsworkshop.sleepstone.SleepstoneMod;
 import com.blargsworkshop.sleepstone.ModItems.Potions;
-import com.blargsworkshop.sleepstone.abilities.barrier.RockWall;
+import com.blargsworkshop.sleepstone.abilities.barrier.NatureWall;
 import com.blargsworkshop.sleepstone.items.stone.Sleepstone;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,7 +18,7 @@ import net.minecraftforge.fml.relauncher.Side;
 public class CommandMessage extends AbstractServerMessage<CommandMessage> {
 
 	public static enum Command {
-		ROCKWALL,
+		LEAFWALL,
 		WARP
 	}
 	
@@ -43,9 +43,9 @@ public class CommandMessage extends AbstractServerMessage<CommandMessage> {
 	@Override
 	public void process(EntityPlayer player, Side side) {
 		switch (command) {
-			case ROCKWALL:
-				RockWall rockwall = new RockWall();
-				rockwall.generate((EntityPlayerMP) player);
+			case LEAFWALL:
+				NatureWall leafwall = new NatureWall();
+				leafwall.generate((EntityPlayerMP) player);
 				break;
 			case WARP:
 				if (player.isPotionActive(Potions.warpSickness)) {

@@ -36,7 +36,7 @@ public class AbilityGui extends GuiScreen {
 	protected static enum Button {
 		VENOM_IMMUNITY(Ability.VENOM_IMMUNITY, ToggleButton.class, 0, 0),
 		ETHEREAL_FEET(Ability.ETHEREAL_FEET, ToggleButton.class, 0, 1),
-		ROCK_BARRIER(Ability.ROCK_BARRIER, BasicButton.class, 0, 2),
+		BARRIER(Ability.BARRIER, BasicButton.class, 0, 2),
 		PRECOGNITION(Ability.PRECOGNITION, ToggleButton.class, 1, 0),
 		TEMPORAL_AID(Ability.TEMPORAL_AID, BasicButton.class, 1, 1),
 		HELLJUMPER(Ability.HELLJUMPER, BasicButton.class, 1, 2),
@@ -195,8 +195,8 @@ public class AbilityGui extends GuiScreen {
 			case INV:
 				NetworkOverlord.get(ModInfo.ID).sendToServer(new OpenGuiMessage(GuiEnum.STONE_INVENTORY));
 				break;
-			case ROCK_BARRIER:
-				NetworkOverlord.get(ModInfo.ID).sendToServer(new CommandMessage(Command.ROCKWALL));
+			case BARRIER:
+				NetworkOverlord.get(ModInfo.ID).sendToServer(new CommandMessage(Command.LEAFWALL));
 				player.closeScreen();
 				break;
 			case ETHEREAL_FEET:
