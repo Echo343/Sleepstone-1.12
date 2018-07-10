@@ -1,4 +1,4 @@
-package com.blargsworkshop.sleepstone.abilities.temporal_aid.inventory;
+  package com.blargsworkshop.sleepstone.abilities.temporal_aid.inventory;
 
 import com.blargsworkshop.sleepstone.abilities.temporal_aid.TemporalAidProvider;
 
@@ -36,18 +36,18 @@ public class AidInventoryContainer extends Container {
         
         /** Gem Slots */
         //Group one
-        this.addSlotToContainer(new SlotItemHandler(inventory, 0, 22, 28));
+        this.addSlotToContainer(new SlotItemHandler(inventory, 0, 80, 15));
                 
         /** Player Inventory - Uses default locations for standard inventory texture file */
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 9; j++) {
-                this.addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, 8 + j * 18, 140 + i * 18));
+                this.addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, 8 + j * 18, 44 + i * 18));
             }
         }
 
         /** Player Action Bar - uses default locations for standard action bar texture file */
         for (int i = 0; i < 9; i++) {
-            this.addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 198));
+            this.addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 102));
         }
     }
 

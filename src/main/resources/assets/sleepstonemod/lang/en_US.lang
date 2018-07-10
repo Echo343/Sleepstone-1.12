@@ -65,6 +65,7 @@ text.toggle_button.off=Off
 text.toggle_button.on=On
 
 text.guistoneinventory.sleepstone=Sleepstone
+text.guistoneinventory.temporalaid=Temporal Aid
 text.guistoneinventory.inventory=Inventory
 text.guistone.sleepstone_attunes_to_you=The Sleepstone glows brightly as it attunes to you.
 

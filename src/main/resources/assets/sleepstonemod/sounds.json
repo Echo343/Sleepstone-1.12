@@ -1,4 +1,8 @@
 {
+	"pop": {
+		"category": "player",
+		"sounds": [{"name": "sleepstonemod:pop", "stream": false}]
+	},
 	"teleport": {
 		"category": "player",
 		"sounds": [{"name": "sleepstonemod:bhab", "stream": false}]

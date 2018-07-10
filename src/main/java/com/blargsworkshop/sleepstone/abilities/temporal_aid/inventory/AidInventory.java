@@ -2,16 +2,18 @@ package com.blargsworkshop.sleepstone.abilities.temporal_aid.inventory;
 
 import javax.annotation.Nonnull;
 
+import com.blargsworkshop.engine.sound.SoundManager;
+import com.blargsworkshop.sleepstone.ModItems.Sounds;
 import com.blargsworkshop.sleepstone.abilities.temporal_aid.TemporalAidProvider;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.play.server.SPacketSetSlot;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class AidInventory extends ItemStackHandler implements IAidInventory {
     
-	private static final String INVENTORY_TAG = "temporalaid_inventory";
 	private ItemStack stone = null;
 	private EntityPlayer player = null;
 
@@ -39,14 +41,9 @@ public class AidInventory extends ItemStackHandler implements IAidInventory {
     		ItemStack teleportItem = this.getStackInSlot(0);
     		this.stacks.set(slot, ItemStack.EMPTY);
     		TemporalAidProvider.getTarget(player).getTarget().dropItem(teleportItem, true, false);
-
-    		if (!stone.hasTagCompound()) {
-    			NBTTagCompound tagComp = new NBTTagCompound();
-    			tagComp.setTag(INVENTORY_TAG, this.serializeNBT());
-    			stone.setTagCompound(tagComp);			
-    		}
-    		else {
-    			setTagCompound(this.serializeNBT());
+    		SoundManager.playSoundAtEntityFromServer(player, Sounds.pop);
+    		if (player instanceof EntityPlayerMP) {
+    			((EntityPlayerMP) player).connection.sendPacket(new SPacketSetSlot(player.openContainer.windowId, 0, ItemStack.EMPTY));
     		}
     	}
     }
@@ -57,15 +54,5 @@ public class AidInventory extends ItemStackHandler implements IAidInventory {
         validateSlotIndex(slot);
         this.stacks.set(slot, stack);
         onContentsChanged(slot);
-    }
-    
-    @Override
-	public NBTTagCompound getTagCompound() {
-    	return stone.getTagCompound().getCompoundTag(INVENTORY_TAG);
-    }
-    
-    @Override
-	public void setTagCompound(NBTTagCompound nbt) {
-    	stone.getTagCompound().setTag(INVENTORY_TAG, nbt);
-    }
+    }    
 }

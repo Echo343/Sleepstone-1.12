@@ -10,13 +10,13 @@ import net.minecraft.util.ResourceLocation;
 
 public class AidInventoryGui extends GuiContainer
 {    
-	private static final ResourceLocation backgroundImage = new ResourceLocation(ModInfo.ID, "textures/gui/GuiInventoryStone.png");
+	private static final ResourceLocation backgroundImage = new ResourceLocation(ModInfo.ID, "textures/gui/gui_temporalaid.png");
 	
 	public AidInventoryGui(AidInventoryContainer containerItem)
 	{
 		super(containerItem);
-		this.xSize = 175;
-		this.ySize = 222;
+		this.xSize = 176;
+		this.ySize = 126;
 	}
 
 	@Override
@@ -31,7 +31,7 @@ public class AidInventoryGui extends GuiContainer
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
-		String strSleepstone = Utils.localize("text.guistoneinventory.sleepstone");
+		String strSleepstone = Utils.localize("text.guistoneinventory.temporalaid");
 		String strContainer = Utils.localize("container.inventory");
 		this.fontRenderer.drawString(strSleepstone, (this.xSize - this.fontRenderer.getStringWidth(strSleepstone)) / 2, 5, 4210752);
 		this.fontRenderer.drawString(strContainer, 8, this.ySize - 96 + 2, 4210752);
