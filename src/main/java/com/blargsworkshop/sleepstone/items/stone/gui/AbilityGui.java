@@ -189,15 +189,15 @@ public class AbilityGui extends GuiScreen {
 				
 		switch (btn) {
 			case WARP:
-				NetworkOverlord.get(ModInfo.ID).sendToServer(new CommandMessage(Command.WARP));
 				player.closeScreen();
+				NetworkOverlord.get(ModInfo.ID).sendToServer(new CommandMessage(Command.WARP));
 				break;
 			case INV:
 				NetworkOverlord.get(ModInfo.ID).sendToServer(new OpenGuiMessage(GuiEnum.STONE_INVENTORY));
 				break;
 			case BARRIER:
-				NetworkOverlord.get(ModInfo.ID).sendToServer(new CommandMessage(Command.LEAFWALL));
 				player.closeScreen();
+				NetworkOverlord.get(ModInfo.ID).sendToServer(new CommandMessage(Command.LEAFWALL));
 				break;
 			case ETHEREAL_FEET:
 			case IRON_STOMACH:
@@ -212,6 +212,9 @@ public class AbilityGui extends GuiScreen {
 				player.closeScreen();
 				break;
 			case HELLJUMPER:
+				player.closeScreen();
+				NetworkOverlord.get(ModInfo.ID).sendToServer(new CommandMessage(Command.HELLJUMP));
+				break;
 			case PHANTOM_TORCH:
 				break;
 			case TEMPORAL_AID:

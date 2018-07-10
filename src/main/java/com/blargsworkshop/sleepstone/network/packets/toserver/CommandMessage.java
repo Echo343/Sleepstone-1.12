@@ -18,6 +18,7 @@ import net.minecraftforge.fml.relauncher.Side;
 public class CommandMessage extends AbstractServerMessage<CommandMessage> {
 
 	public static enum Command {
+		HELLJUMP,
 		LEAFWALL,
 		WARP
 	}
@@ -43,6 +44,9 @@ public class CommandMessage extends AbstractServerMessage<CommandMessage> {
 	@Override
 	public void process(EntityPlayer player, Side side) {
 		switch (command) {
+			case HELLJUMP:
+				Utils.addUnlocalizedChatMessage(player, "This ability fizzles.");
+				break;
 			case LEAFWALL:
 				NatureWall leafwall = new NatureWall();
 				leafwall.generate((EntityPlayerMP) player);
