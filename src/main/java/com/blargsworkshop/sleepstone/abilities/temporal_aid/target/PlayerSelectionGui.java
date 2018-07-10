@@ -10,6 +10,8 @@ import java.util.UUID;
 import org.lwjgl.opengl.GL11;
 
 import com.blargsworkshop.engine.gui.buttons.BasicButton;
+import com.blargsworkshop.engine.logger.Log;
+import com.blargsworkshop.engine.logger.Log.LogLevel;
 import com.blargsworkshop.engine.network.NetworkOverlord;
 import com.blargsworkshop.sleepstone.ModInfo;
 import com.blargsworkshop.sleepstone.abilities.temporal_aid.OpenAidGuiMessage;
@@ -31,13 +33,13 @@ public class PlayerSelectionGui extends GuiScreen {
 	private static final int VERTICAL_SPACING = 4;
 	private static final int BUTTON_SCREEN_WIDTH = BasicButton.DEFAULT_WIDTH;
 	private static final int EFFECTIVE_BUTTON_HEIGHT = BasicButton.DEFAULT_HEIGHT + VERTICAL_SPACING;
-//	private EntityPlayer player;
+	private EntityPlayer player;
 	
 	private Map<Integer, UUID> buttonMap = new HashMap<>();
 	
 	
 	public PlayerSelectionGui(EntityPlayer player) {
-//		this.player = player;
+		this.player = player;
 	}
 	
 	@Override
@@ -58,6 +60,9 @@ public class PlayerSelectionGui extends GuiScreen {
 		Iterator<NetworkPlayerInfo> iter = players.iterator();
 		while (iter.hasNext()) {
 			NetworkPlayerInfo playerInfo = iter.next();
+			if (!Log.compare(LogLevel.DEBUG) && playerInfo.getGameProfile().getId().equals(player.getUniqueID())) {
+				continue;
+			}
 			BasicButton button = new BasicButton(i, firstColumn, firstRow + (i * EFFECTIVE_BUTTON_HEIGHT), playerInfo.getGameProfile().getName());
 			this.addButton(button);
 			buttonMap.put(i, playerInfo.getGameProfile().getId());
