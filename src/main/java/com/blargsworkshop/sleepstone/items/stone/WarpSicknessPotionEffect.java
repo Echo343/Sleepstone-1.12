@@ -16,6 +16,10 @@ public class WarpSicknessPotionEffect extends BlargsPotionEffect {
 		super(Potions.warpSickness, WARP_SICKNESS_DURATION, 0, false, false);
 	}
 	
+	public WarpSicknessPotionEffect(int durInSeconds) {
+		super(Potions.warpSickness, durInSeconds * 20, 0, false, false);
+	}
+	
 	@Override
 	protected void onFinishedPotionEffect(EntityLivingBase entity) {		
 		if (Utils.isServer(entity.getEntityWorld()) && entity instanceof EntityPlayer) {
