@@ -74,9 +74,16 @@ public class Helljump {
 	
 	protected void createBubble(BlockPos p) {
 		BlockPos pos;
+		// Create bubble of glass
 		for (BlockPos part : bubbleShape) {
 			pos = p.add(part.getX(), part.getY(), part.getZ());
 			destWorld.setBlockState(pos, Blocks.GLASS.getDefaultState());
+		}
+		
+		// Set to air where the player occupies
+		for (int i = 0; i < 2; i++) {
+			pos = p.add(0, i, 0);
+			destWorld.setBlockState(pos, Blocks.AIR.getDefaultState());
 		}
 		
 		// Create flooring block if needed
@@ -88,9 +95,10 @@ public class Helljump {
 	
 	private BlockPos findSafeSpot(BlockPos destinationPoint) {
 		BlockPos safeLocation = null;
+		BlockPos searchLocation;
 		Iterator<BlockPos> iterSearchPattern = new SearchPattern(destinationPoint);
 		while (iterSearchPattern.hasNext()) {
-			BlockPos searchLocation = iterSearchPattern.next();
+			searchLocation = iterSearchPattern.next();
 			if (isLocationSafe(searchLocation)) {
 				safeLocation = searchLocation;
 				break;
@@ -102,23 +110,24 @@ public class Helljump {
 	@SuppressWarnings("deprecation")
 	private boolean isLocationSafe(BlockPos location) {
 		// Check the shape, these blocks can only be replaceables
+		BlockPos pos;
 		for (BlockPos shapePiece: bubbleShape) {
-			BlockPos pos = location.add(shapePiece.getX(), shapePiece.getY(), shapePiece.getZ());
+			pos = location.add(shapePiece.getX(), shapePiece.getY(), shapePiece.getZ());
 			if (!destWorld.getBlockState(pos).getBlock().isReplaceable(destWorld, pos)) {
 				return false;
 			}
 		}
 		
-		// Check the place where the player stands, must be only replaceable
+		// Check the place where the player occupies, must be only replaceable
 		for (int i = 0; i < 2; i++) {
-			BlockPos pos = location.add(0, i, 0);
+			pos = location.add(0, i, 0);
 			if (!destWorld.getBlockState(pos).getBlock().isReplaceable(destWorld, pos)) {
 				return false;
 			}
 		}
 		
 		// Check the floor, must be a replaceable or a solid.
-		BlockPos pos = location.add(0, -1, 0);
+		pos = location.add(0, -1, 0);
 		IBlockState state = destWorld.getBlockState(pos);
 		Block groundBlock = state.getBlock();
 		if (!groundBlock.isReplaceable(destWorld, pos)) {
