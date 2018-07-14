@@ -12,8 +12,8 @@ import net.minecraft.entity.player.EntityPlayer;
  * LogChat - true causes the log message to also be passed to the player chat client if a player was passed to the method.
  */
 public class Log {
-	private static LogLevel level = LogLevel.ADV_DEBUG;
-	private static boolean logChat = true;
+	private static LogLevel level = LogLevel.ERROR;
+	private static boolean logChat = false;
 
 	/**
 	 * Off - turns logging off
