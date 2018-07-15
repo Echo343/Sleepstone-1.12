@@ -45,11 +45,11 @@ public enum SimpleTeleporter {
 			Entity entity = player.getRidingEntity();
 			player.dismountRidingEntity();
 			if (entity instanceof EntityAnimal) {
-				entity.setPositionAndUpdate(position.getX(), position.getY(), position.getZ());
+				entity.setPositionAndUpdate(position.getX() + 0.5D, position.getY(), position.getZ() + 0.5D);
 				entity.getEntityWorld().updateEntityWithOptionalForce(entity, false);
 			}
 		}		
-		player.setPositionAndUpdate(position.getX(), position.getY(), position.getZ());
+		player.setPositionAndUpdate(position.getX() + 0.5D, position.getY(), position.getZ() + 0.5D);
 		player.getEntityWorld().updateEntityWithOptionalForce(player, false);
 	}
 	
@@ -86,11 +86,11 @@ public enum SimpleTeleporter {
             player.interactionManager.getGameType()));
         sourceWorld.removeEntityDangerously(player); // Removes player right now instead of waiting for next tick
         player.isDead = false;
-        player.setLocationAndAngles(position.getX(), position.getY(), position.getZ(), player.rotationYaw, player.rotationPitch);
+        player.setLocationAndAngles(position.getX() + 0.5D, position.getY(), position.getZ() + 0.5D, player.rotationYaw, player.rotationPitch);
         destinationWorld.spawnEntity(player);
         player.setWorld(destinationWorld);
         scm.preparePlayer(player, sourceWorld);
-        player.connection.setPlayerLocation(position.getX(), position.getY(), position.getZ(), player.rotationYaw, player.rotationPitch);
+        player.connection.setPlayerLocation(position.getX() + 0.5D, position.getY(), position.getZ() + 0.5D, player.rotationYaw, player.rotationPitch);
         player.interactionManager.setWorld(destinationWorld);
         scm.updateTimeAndWeatherForPlayer(player, destinationWorld);
         scm.syncPlayerInventory(player);

@@ -13,10 +13,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
-import net.minecraftforge.common.DimensionManager;
 
 public class Helljump {
 	
@@ -35,14 +35,14 @@ public class Helljump {
 		else {
 			destinationDim = DimensionType.OVERWORLD;
 		}
-		destWorld = DimensionManager.getWorld(destinationDim.getId());
+		MinecraftServer minecraftserver = player.getServer();
+		destWorld = minecraftserver.getWorld(destinationDim.getId());
 	}
 	
 	public boolean tryJump() {
 		boolean wasJumpSuccessful = false;
 		
 		BlockPos destinationPoint = calcJumpPoint(destinationDim);
-		// TODO not sure if I have to load the world chunks.
 		BlockPos safePoint = findSafeSpot(destinationPoint);
 		if (safePoint != null) {
 			createBubble(safePoint);
@@ -109,11 +109,12 @@ public class Helljump {
 	
 	@SuppressWarnings("deprecation")
 	private boolean isLocationSafe(BlockPos location) {
+		// TODO allow partial bubbles.
 		// Check the shape, these blocks can only be replaceables
 		BlockPos pos;
 		for (BlockPos shapePiece: bubbleShape) {
 			pos = location.add(shapePiece.getX(), shapePiece.getY(), shapePiece.getZ());
-			if (!destWorld.getBlockState(pos).getBlock().isReplaceable(destWorld, pos)) {
+			if (!destWorld.getBlockState(pos).getBlock().isReplaceable(destWorld, pos) && !(destWorld.getBlockState(pos).getBlock() == Blocks.GLASS)) {
 				return false;
 			}
 		}
