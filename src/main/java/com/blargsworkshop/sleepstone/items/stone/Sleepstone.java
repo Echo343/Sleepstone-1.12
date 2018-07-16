@@ -1,20 +1,13 @@
 package com.blargsworkshop.sleepstone.items.stone;
 
-import com.blargsworkshop.engine.logger.Log;
-import com.blargsworkshop.engine.sound.SoundManager;
-import com.blargsworkshop.engine.utility.SimpleTeleporter;
-import com.blargsworkshop.engine.utility.Utils;
-import com.blargsworkshop.sleepstone.ModItems.Sounds;
 import com.blargsworkshop.sleepstone.SleepstoneMod;
 import com.blargsworkshop.sleepstone.gui.GuiEnum;
 import com.blargsworkshop.sleepstone.items.BaseModItem;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class Sleepstone extends BaseModItem {
@@ -24,29 +17,6 @@ public class Sleepstone extends BaseModItem {
 	private static final String REGISTRY_NAME = "sleepstone";
 	
 //	protected CooldownTimer cooldownTimer = new CooldownTimer();
-	
-	public static void warpPlayerToBed(EntityPlayer player) {
-		World world = player.getEntityWorld();
-		if (Utils.isServer(world) && player instanceof EntityPlayerMP) {
-			BlockPos bedPos = player.getBedLocation();
-			if (bedPos != null) {
-				BlockPos bedSpawnPos = EntityPlayer.getBedSpawnLocation(world, bedPos, false);
-				if (bedSpawnPos != null) {
-					SoundManager.playSoundAtEntityFromServer(player, Sounds.swoosh);
-					SimpleTeleporter.INSTANCE.teleportPlayerWithinDimension((EntityPlayerMP) player, bedSpawnPos, true);
-					player.addPotionEffect(new WarpSicknessPotionEffect());
-					SoundManager.playSoundAtEntityFromServer(player, Sounds.teleport);
-					Log.debug("Warping to: " + (bedSpawnPos.getX()) + ", " + (bedSpawnPos.getY()) + ", " + (bedSpawnPos.getZ()), player);
-				}
-				else {
-					Utils.addChatMessage(player, "text.sleepstone.bed_destroyed");
-				}
-			}
-			else {
-				Utils.addChatMessage(player, "text.sleepstone.no_spawn_point");
-			}
-		}
-	}
 	
 	public Sleepstone() {
 		super(UNLOCALIZED_NAME, REGISTRY_NAME);

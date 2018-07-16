@@ -6,6 +6,8 @@ import java.util.List;
 
 import com.blargsworkshop.engine.sound.SoundManager;
 import com.blargsworkshop.engine.utility.SimpleTeleporter;
+import com.blargsworkshop.engine.utility.Utils;
+import com.blargsworkshop.sleepstone.ModItems.Potions;
 import com.blargsworkshop.sleepstone.ModItems.Sounds;
 import com.blargsworkshop.sleepstone.items.stone.WarpSicknessPotionEffect;
 
@@ -39,7 +41,23 @@ public class Helljump {
 		destWorld = minecraftserver.getWorld(destinationDim.getId());
 	}
 	
-	public boolean tryJump() {
+	public void startJump() {
+		if (player.isPotionActive(Potions.warpSickness)) {
+			Utils.addChatMessage(player, "text.sleepstone.suffering_effects_of_warping");
+		}
+		else {
+			if (player.dimension == DimensionType.NETHER.getId() || player.dimension == DimensionType.OVERWORLD.getId()) {
+				if (!tryJump()) {
+					Utils.addChatMessage(player, "text.helljump.fizzle");
+				}
+			}
+			else {
+				Utils.addChatMessage(player, "text.helljump.not.dimension.attuned");
+			}
+		}
+	}
+	
+	protected boolean tryJump() {
 		boolean wasJumpSuccessful = false;
 		
 		BlockPos destinationPoint = calcJumpPoint(destinationDim);
