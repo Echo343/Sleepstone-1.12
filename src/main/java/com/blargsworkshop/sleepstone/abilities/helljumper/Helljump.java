@@ -95,7 +95,9 @@ public class Helljump {
 		// Create bubble of glass
 		for (BlockPos part : bubbleShape) {
 			pos = p.add(part.getX(), part.getY(), part.getZ());
-			destWorld.setBlockState(pos, Blocks.GLASS.getDefaultState());
+			if (destWorld.getBlockState(pos).getBlock().isReplaceable(destWorld, pos)) {
+				destWorld.setBlockState(pos, Blocks.GLASS.getDefaultState());
+			}
 		}
 		
 		// Set to air where the player occupies
@@ -132,7 +134,7 @@ public class Helljump {
 		BlockPos pos;
 		for (BlockPos shapePiece: bubbleShape) {
 			pos = location.add(shapePiece.getX(), shapePiece.getY(), shapePiece.getZ());
-			if (!destWorld.getBlockState(pos).getBlock().isReplaceable(destWorld, pos) && !(destWorld.getBlockState(pos).getBlock() == Blocks.GLASS)) {
+			if (!destWorld.getBlockState(pos).getBlock().isReplaceable(destWorld, pos) && !destWorld.getBlockState(pos).isNormalCube()) {
 				return false;
 			}
 		}
@@ -149,10 +151,8 @@ public class Helljump {
 		pos = location.add(0, -1, 0);
 		IBlockState state = destWorld.getBlockState(pos);
 		Block groundBlock = state.getBlock();
-		if (!groundBlock.isReplaceable(destWorld, pos)) {
-			if (!groundBlock.isTopSolid(state)) {
-				return false;
-			}
+		if (!groundBlock.isReplaceable(destWorld, pos) && !state.isTopSolid()) {
+			return false;
 		}
 		
 		return true;
