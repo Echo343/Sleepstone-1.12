@@ -6,6 +6,7 @@ import com.blargsworkshop.engine.utility.SimpleTeleporter;
 import com.blargsworkshop.engine.utility.Utils;
 import com.blargsworkshop.sleepstone.ModItems.Potions;
 import com.blargsworkshop.sleepstone.ModItems.Sounds;
+import com.blargsworkshop.sleepstone.abilities.warp.WarpPotionEffect.WarpType;
 import com.blargsworkshop.sleepstone.items.stone.WarpSicknessPotionEffect;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,7 +17,7 @@ import net.minecraft.world.World;
 public enum Warp {
 	INSTANCE;
 	
-	private void warpPlayerToBed(EntityPlayerMP player) {
+	public void warpPlayerToBed(EntityPlayerMP player) {
 		World world = player.getEntityWorld();
 		if (Utils.isServer(world)) {
 			BlockPos bedPos = player.getBedLocation();
@@ -44,7 +45,7 @@ public enum Warp {
 			Utils.addStatusMessage(player, "text.sleepstone.suffering_effects_of_warping");
 		}
 		else {
-			warpPlayerToBed(player);
+			player.addPotionEffect(new WarpPotionEffect(player, WarpType.WARP));
 		}
 	}
 

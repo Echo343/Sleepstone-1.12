@@ -61,6 +61,7 @@ text.sleepstone.no_spawn_point=You do not have a bed spawn point in this world.
 text.sleepstone.suffering_effects_of_warping=You are still suffering the effects of Warping.
 
 potion.warpingsickness=Warp Sickness
+potion.warpchannel=Warping...
 potion.endershard=Unstable Warp
 potion.foodsaturation=Pathfinder
 potion.windwalker=Windwalker

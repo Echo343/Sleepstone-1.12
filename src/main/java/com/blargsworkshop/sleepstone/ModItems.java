@@ -97,6 +97,7 @@ public class ModItems implements IModItems{
 	@ModPotion
 	public static class Potions {
 		public static BlargsPotion warpSickness = new BlargsPotion(new ResourceLocation(ModInfo.ID, "warpsickness"), "potion.warpingsickness");
+		public static BlargsPotion warpChannel = new BlargsPotion(new ResourceLocation(ModInfo.ID, "warpchannel"), "potion.warpchannel");
 		public static BlargsPotion enderShardWarp = new BlargsPotion(new ResourceLocation(ModInfo.ID, "endershard"), "potion.endershard");
 		public static BlargsPotion foodSaturation = new FoodSaturationPotion(new ResourceLocation(ModInfo.ID, "foodsaturation"), "potion.foodsaturation");
 		public static BlargsPotion windwalker = new WindwalkerPotion(new ResourceLocation(ModInfo.ID, "windwalker"), "potion.windwalker");
