@@ -4,6 +4,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -20,7 +21,9 @@ public class Utils {
 	}
 
 	public static void addChatMessage(EntityPlayer player, String messageKey, Object... args) {
-		player.sendMessage(new TextComponentTranslation(messageKey, args));
+		TextComponentTranslation txt = new TextComponentTranslation(messageKey, args);
+		txt.getStyle().setColor(TextFormatting.AQUA);
+		player.sendMessage(txt);
 	}
 
 	public static void addUnlocalizedChatMessage(EntityPlayer player, String message) {
