@@ -43,7 +43,7 @@ public class Helljump {
 	
 	public void startJump() {
 		if (player.isPotionActive(Potions.warpSickness)) {
-			Utils.addChatMessage(player, "text.sleepstone.suffering_effects_of_warping");
+			Utils.addStatusMessage(player, "text.sleepstone.suffering_effects_of_warping");
 		}
 		else {
 			if (player.dimension == DimensionType.NETHER.getId() || player.dimension == DimensionType.OVERWORLD.getId()) {

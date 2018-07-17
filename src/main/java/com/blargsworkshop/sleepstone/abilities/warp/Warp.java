@@ -30,18 +30,18 @@ public enum Warp {
 					Log.debug("Warping to: " + (bedSpawnPos.getX()) + ", " + (bedSpawnPos.getY()) + ", " + (bedSpawnPos.getZ()), player);
 				}
 				else {
-					Utils.addChatMessage(player, "text.sleepstone.bed_destroyed");
+					Utils.addStatusMessage(player, "text.sleepstone.bed_destroyed");
 				}
 			}
 			else {
-				Utils.addChatMessage(player, "text.sleepstone.no_spawn_point");
+				Utils.addStatusMessage(player, "text.sleepstone.no_spawn_point");
 			}
 		}
 	}
 	
 	public void startWarp(EntityPlayerMP player) {
 		if (player.isPotionActive(Potions.warpSickness)) {
-			Utils.addChatMessage(player, "text.sleepstone.suffering_effects_of_warping");
+			Utils.addStatusMessage(player, "text.sleepstone.suffering_effects_of_warping");
 		}
 		else {
 			warpPlayerToBed(player);

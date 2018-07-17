@@ -13,7 +13,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
  * General helper functions.  Ideally I would like to get rid of this class.
  * But I'm not sure where to put the isServer, isClient methods.
  */
+// TODO this class is doing too much misc.
 public class Utils {
+	
+	private static final TextFormatting TEXT_COLOR = TextFormatting.AQUA;
 
 	@SideOnly(Side.CLIENT)
 	public static String localize(String messageKey, Object... parameters) {
@@ -22,8 +25,14 @@ public class Utils {
 
 	public static void addChatMessage(EntityPlayer player, String messageKey, Object... args) {
 		TextComponentTranslation txt = new TextComponentTranslation(messageKey, args);
-		txt.getStyle().setColor(TextFormatting.AQUA);
+		txt.getStyle().setColor(TEXT_COLOR);
 		player.sendMessage(txt);
+	}
+	
+	public static void addStatusMessage(EntityPlayer player, String messageKey, Object... args) {
+		TextComponentTranslation text = new TextComponentTranslation(messageKey, args);
+		text.getStyle().setColor(TEXT_COLOR);
+		player.sendStatusMessage(text, true);
 	}
 
 	public static void addUnlocalizedChatMessage(EntityPlayer player, String message) {
