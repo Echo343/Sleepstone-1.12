@@ -69,6 +69,9 @@ public class Helljump {
 			player.addPotionEffect(new WarpSicknessPotionEffect(30));
 			SoundManager.playSoundAtEntityFromServer(player, Sounds.teleport);
 			wasJumpSuccessful = true;
+			
+			BlockPos difference = safePoint.subtract(destinationPoint);
+			Utils.addChatMessage(player, "text.helljump.offset", difference.getX(), difference.getY(), difference.getZ());
 		}
 		
 		return wasJumpSuccessful;
@@ -134,7 +137,10 @@ public class Helljump {
 		BlockPos pos;
 		for (BlockPos shapePiece: bubbleShape) {
 			pos = location.add(shapePiece.getX(), shapePiece.getY(), shapePiece.getZ());
-			if (!destWorld.getBlockState(pos).getBlock().isReplaceable(destWorld, pos) && !destWorld.getBlockState(pos).isNormalCube()) {
+			if (
+					!destWorld.getBlockState(pos).getBlock().isReplaceable(destWorld, pos) &&
+					!destWorld.getBlockState(pos).isNormalCube() &&
+					!destWorld.getBlockState(pos).getBlock().equals(Blocks.GLASS)) {
 				return false;
 			}
 		}
@@ -151,7 +157,10 @@ public class Helljump {
 		pos = location.add(0, -1, 0);
 		IBlockState state = destWorld.getBlockState(pos);
 		Block groundBlock = state.getBlock();
-		if (!groundBlock.isReplaceable(destWorld, pos) && !state.isTopSolid()) {
+		if (
+				!groundBlock.isReplaceable(destWorld, pos) &&
+				!state.isTopSolid() &&
+				!groundBlock.equals(Blocks.GLASS)) {
 			return false;
 		}
 		
