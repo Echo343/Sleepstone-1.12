@@ -47,9 +47,7 @@ public class Helljump {
 		}
 		else {
 			if (player.dimension == DimensionType.NETHER.getId() || player.dimension == DimensionType.OVERWORLD.getId()) {
-				if (!tryJump()) {
-					Utils.addChatMessage(player, "text.helljump.fizzle");
-				}
+				player.addPotionEffect(new HelljumpWarpEffect(this));
 			}
 			else {
 				Utils.addChatMessage(player, "text.helljump.not.dimension.attuned");
@@ -57,7 +55,11 @@ public class Helljump {
 		}
 	}
 	
-	protected boolean tryJump() {
+	public EntityPlayerMP getPlayer() {
+		return this.player;
+	}
+	
+	public boolean tryJump() {
 		boolean wasJumpSuccessful = false;
 		
 		BlockPos destinationPoint = calcJumpPoint(destinationDim);
