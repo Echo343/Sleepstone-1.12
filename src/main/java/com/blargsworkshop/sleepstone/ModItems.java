@@ -17,6 +17,7 @@ import com.blargsworkshop.engine.recipe.IBlargRecipe;
 import com.blargsworkshop.engine.recipe.SmeltingRecipe;
 import com.blargsworkshop.engine.sound.BlargsSoundEvent;
 import com.blargsworkshop.sleepstone.abilities.iron_stomach.FoodSaturationPotion;
+import com.blargsworkshop.sleepstone.abilities.warp.WarpChannelingPotion;
 import com.blargsworkshop.sleepstone.abilities.windwalker.WindwalkerPotion;
 import com.blargsworkshop.sleepstone.items.airmattress.AirMattressBlock;
 import com.blargsworkshop.sleepstone.items.airmattress.AirMattressItem;
@@ -97,7 +98,7 @@ public class ModItems implements IModItems{
 	@ModPotion
 	public static class Potions {
 		public static BlargsPotion warpSickness = new BlargsPotion(new ResourceLocation(ModInfo.ID, "warpsickness"), "potion.warpingsickness");
-		public static BlargsPotion warpChannel = new BlargsPotion(new ResourceLocation(ModInfo.ID, "warpchannel"), "potion.warpchannel");
+		public static BlargsPotion warpChannel = new WarpChannelingPotion(new ResourceLocation(ModInfo.ID, "warpchannel"), "potion.warpchannel");
 		public static BlargsPotion enderShardWarp = new BlargsPotion(new ResourceLocation(ModInfo.ID, "endershard"), "potion.endershard");
 		public static BlargsPotion foodSaturation = new FoodSaturationPotion(new ResourceLocation(ModInfo.ID, "foodsaturation"), "potion.foodsaturation");
 		public static BlargsPotion windwalker = new WindwalkerPotion(new ResourceLocation(ModInfo.ID, "windwalker"), "potion.windwalker");

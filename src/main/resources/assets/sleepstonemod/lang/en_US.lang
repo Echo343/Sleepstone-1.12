@@ -60,6 +60,8 @@ text.sleepstone.bed_destroyed=Your bed seems to have been destroyed. :'-(
 text.sleepstone.no_spawn_point=You do not have a bed spawn point in this world.
 text.sleepstone.suffering_effects_of_warping=You are still suffering the effects of Warping.
 
+text.warp.channel.interrupt=I can't concentrate on the stone while moving.
+
 potion.warpingsickness=Warp Sickness
 potion.warpchannel=Warping...
 potion.endershard=Unstable Warp
