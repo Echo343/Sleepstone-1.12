@@ -5,6 +5,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 
 public class BlargsPotionEffect extends PotionEffect {
+	private boolean alreadyRanOnce = false; 
 
 	public BlargsPotionEffect(PotionEffect potionEffect) {
 		super(potionEffect);
@@ -34,8 +35,9 @@ public class BlargsPotionEffect extends PotionEffect {
 	public boolean onUpdate(EntityLivingBase entity) {
 		boolean isStillGoing = super.onUpdate(entity);
 		// Potion Effect is about to end.  Do something cool.
-		if (!isStillGoing) {
+		if (!isStillGoing && !alreadyRanOnce) {
 			onFinishedPotionEffect(entity);
+			alreadyRanOnce = true;
 		}
 		return isStillGoing;
 	}
