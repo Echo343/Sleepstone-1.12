@@ -39,6 +39,6 @@ public class WarpChannelingPotion extends BlargsPotion {
 	 */
 	@Override
 	public boolean isReady(int duration, int amplifier) {
-		return duration % 10 == 0;
+		return duration % 5 == 0;
 	}
 }

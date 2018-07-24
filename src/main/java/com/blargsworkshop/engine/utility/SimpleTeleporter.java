@@ -74,7 +74,7 @@ public enum SimpleTeleporter {
         PlayerList scm = server.getPlayerList();
         player.dimension = destDimension.getId();
         WorldServer sourceWorld = player.getServerWorld();
-        WorldServer destinationWorld = DimensionManager.getWorld(destDimension.getId());
+        WorldServer destinationWorld = player.getServer().getWorld(destDimension.getId());
         // <<< Fix for MCPC+
         // -- Is this still necessary now that we are calling firePlayerChangedDimensionEvent?
         // -- Yes, apparently it is.
