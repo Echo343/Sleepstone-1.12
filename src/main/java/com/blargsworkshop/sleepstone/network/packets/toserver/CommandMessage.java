@@ -46,7 +46,7 @@ public class CommandMessage extends AbstractServerMessage<CommandMessage> {
 			EntityPlayerMP playerMP = (EntityPlayerMP) player;
 			switch (command) {
 				case HELLJUMP:
-					new Helljump(playerMP).startJump();
+					Helljump.startJump(playerMP);
 					break;
 				case LEAFWALL:
 					NatureWall.INSTANCE.generate(playerMP);

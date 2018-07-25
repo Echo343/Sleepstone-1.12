@@ -13,6 +13,7 @@ import com.blargsworkshop.sleepstone.items.stone.WarpSicknessPotionEffect;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.server.MinecraftServer;
@@ -26,7 +27,7 @@ public class Helljump {
 	private final EntityPlayerMP player;
 	private final BlockPos departLocation;
 	private final DimensionType destinationDim;
-	private final World destWorld;
+	public final World destWorld;
 	
 	public Helljump(EntityPlayerMP player) {
 		this.player = player;
@@ -41,13 +42,13 @@ public class Helljump {
 		destWorld = minecraftserver.getWorld(destinationDim.getId());
 	}
 	
-	public void startJump() {
+	public static void startJump(EntityPlayer player) {
 		if (player.isPotionActive(Potions.warpSickness)) {
 			Utils.addStatusMessage(player, "text.sleepstone.suffering_effects_of_warping");
 		}
 		else {
 			if (player.dimension == DimensionType.NETHER.getId() || player.dimension == DimensionType.OVERWORLD.getId()) {
-				player.addPotionEffect(new HelljumpWarpEffect(this));
+				player.addPotionEffect(new HelljumpWarpEffect(player));
 			}
 			else {
 				Utils.addChatMessage(player, "text.helljump.not.dimension.attuned");
