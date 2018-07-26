@@ -5,10 +5,14 @@
 	},
 	"teleport": {
 		"category": "player",
-		"sounds": [{"name": "sleepstonemod:bhab", "stream": false}]
+		"sounds": [{"name": "sleepstonemod:warp_arive2", "stream": false}]
 	},
 	"swoosh": {
 		"category": "player",
-		"sounds": [{"name": "sleepstonemod:swoosh", "stream": false}]
+		"sounds": [{"name": "sleepstonemod:warp_depart", "stream": false}]
+	},
+	"channel": {
+		"category": "player",
+		"sounds": [{"name": "sleepstonemod:channeling", "stream": false}]
 	}
 }

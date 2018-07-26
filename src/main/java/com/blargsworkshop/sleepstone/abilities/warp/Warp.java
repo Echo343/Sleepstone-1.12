@@ -18,6 +18,27 @@ import net.minecraft.world.World;
 public enum Warp {
 	INSTANCE;
 	
+	public void startWarp(EntityPlayerMP player) {
+		if (player.isPotionActive(Potions.warpSickness)) {
+			Utils.addStatusMessage(player, "text.sleepstone.suffering_effects_of_warping");
+		}
+		else if (getValidWarpLocation(player) != null) {
+			player.addPotionEffect(new WarpPotionEffect(player));
+			SoundManager.playSoundAtEntityFromServer(player, Sounds.channel);
+		}
+	}
+	
+	public void warpPlayerToBed(EntityPlayerMP player) {
+		BlockPos bedSpawnPos = getValidWarpLocation(player);
+		if (bedSpawnPos != null) {
+			SoundManager.playSoundAtEntityFromServer(player, Sounds.swoosh);
+			SimpleTeleporter.INSTANCE.teleportPlayerWithinDimension(player, bedSpawnPos, true);
+			player.addPotionEffect(new WarpSicknessPotionEffect());
+			SoundManager.playSoundAtEntityFromServer(player, Sounds.teleport);
+			Log.debug("Warping to: " + (bedSpawnPos.getX()) + ", " + (bedSpawnPos.getY()) + ", " + (bedSpawnPos.getZ()), player);
+		}
+	}
+	
 	private BlockPos getValidWarpLocation(@Nonnull EntityPlayerMP player) {
 		BlockPos validWarpLocation = null;
 		World world = player.getEntityWorld();
@@ -38,25 +59,4 @@ public enum Warp {
 		}
 		return validWarpLocation;
 	}
-	
-	public void startWarp(EntityPlayerMP player) {
-		if (player.isPotionActive(Potions.warpSickness)) {
-			Utils.addStatusMessage(player, "text.sleepstone.suffering_effects_of_warping");
-		}
-		else if (getValidWarpLocation(player) != null) {
-			player.addPotionEffect(new WarpPotionEffect(player));
-		}
-	}
-	
-	public void warpPlayerToBed(EntityPlayerMP player) {
-		BlockPos bedSpawnPos = getValidWarpLocation(player);
-		if (bedSpawnPos != null) {
-			SoundManager.playSoundAtEntityFromServer(player, Sounds.swoosh);
-			SimpleTeleporter.INSTANCE.teleportPlayerWithinDimension(player, bedSpawnPos, true);
-			player.addPotionEffect(new WarpSicknessPotionEffect());
-			SoundManager.playSoundAtEntityFromServer(player, Sounds.teleport);
-			Log.debug("Warping to: " + (bedSpawnPos.getX()) + ", " + (bedSpawnPos.getY()) + ", " + (bedSpawnPos.getZ()), player);
-		}
-	}
-
 }

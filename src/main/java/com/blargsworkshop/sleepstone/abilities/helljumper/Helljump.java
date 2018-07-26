@@ -1,7 +1,9 @@
 package com.blargsworkshop.sleepstone.abilities.helljumper;
 
+import com.blargsworkshop.engine.sound.SoundManager;
 import com.blargsworkshop.engine.utility.Utils;
 import com.blargsworkshop.sleepstone.ModItems.Potions;
+import com.blargsworkshop.sleepstone.ModItems.Sounds;
 
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.BlockPos;
@@ -21,6 +23,7 @@ public enum Helljump {
 				BlockPos safePoint = jumper.findSafeSpot(destinationPoint);
 				if (safePoint != null) {
 					player.addPotionEffect(new HelljumpWarpEffect(player));
+					SoundManager.playSoundAtEntityFromServer(player, Sounds.channel);
 				}
 				else {
 					Utils.addStatusMessage(player, "text.helljump.fizzle");
