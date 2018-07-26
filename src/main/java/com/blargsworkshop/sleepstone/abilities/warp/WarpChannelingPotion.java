@@ -27,7 +27,7 @@ public class WarpChannelingPotion extends BlargsPotion {
 			if (effect != null && effect instanceof IWarpEffect) {
 				BlockPos channelLocation = ((IWarpEffect) effect).getStartLocation();
 				if (!channelLocation.equals(player.getPosition())) {
-					player.removeActivePotionEffect(this);
+					player.removePotionEffect(this);
 					Utils.addStatusMessage(player, "text.warp.channel.interrupt");
 				}
 			}

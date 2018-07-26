@@ -15,15 +15,12 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.BlockPos;
 
 public class HelljumpWarpEffect extends BlargsPotionEffect implements IWarpEffect {
-	private final static int WARP_CHANNEL_DURATION = Log.compare(LogLevel.DEBUG) ? 5 : 20 * 4;
+	private final static int WARP_CHANNEL_DURATION = Log.compare(LogLevel.DEBUG) ? 5+75 : 20 * 4;
 	
 	private final BlockPos startLocation;
-//	private final Helljump jumper;
 
 	public HelljumpWarpEffect(@Nonnull EntityPlayer player) {
 		super(Potions.warpChannel, WARP_CHANNEL_DURATION, 0, false, true);
-//		this.jumper = jumper;
-//		this.startLocation = jumper.getPlayer().getPosition();
 		this.startLocation = player.getPosition();
 	}
 
@@ -36,24 +33,9 @@ public class HelljumpWarpEffect extends BlargsPotionEffect implements IWarpEffec
 	protected void onFinishedPotionEffect(EntityLivingBase entity) {
 		if (Utils.isServer(entity.getEntityWorld()) && entity instanceof EntityPlayerMP) {
 			EntityPlayerMP player = (EntityPlayerMP) entity;
-			if (!new Helljump(player).tryJump()) {
+			if (!new Helljumper(player).tryJump()) {
 				Utils.addStatusMessage(player, "text.helljump.fizzle");
 			}
-//		if (Utils.isServer(entity.getEntityWorld()) && entity instanceof EntityPlayerMP) {
-//			EntityPlayerMP player = (EntityPlayerMP) entity;
-//			if (!jumper.tryJump()) {
-//				Utils.addChatMessage(player, "text.helljump.fizzle");
-//			}
-//			IThreadListener thread = jumper.destWorld.getMinecraftServer();
-//			thread.addScheduledTask(new Runnable() {
-//				@Override
-//				public void run() {
-//					EntityPlayerMP player = (EntityPlayerMP) entity;
-//					if (!jumper.tryJump()) {
-//						Utils.addChatMessage(player, "text.helljump.fizzle");
-//					}
-//				}
-//			});
 		}
 	}
 }
