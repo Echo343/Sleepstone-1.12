@@ -110,6 +110,7 @@ public class ModItems implements IModItems{
 		public static SoundEvent swoosh = new BlargsSoundEvent(new ResourceLocation(ModInfo.ID, "swoosh"));
 		public static SoundEvent teleport = new BlargsSoundEvent(new ResourceLocation(ModInfo.ID, "teleport"));
 		public static SoundEvent channel = new BlargsSoundEvent(new ResourceLocation(ModInfo.ID, "channel"));
+		public static SoundEvent fizzle = new BlargsSoundEvent(new ResourceLocation(ModInfo.ID, "fizzle"));
 	}
 
 	@ModRecipe

@@ -37,6 +37,7 @@ public class Helljumper {
 			}
 			else {
 				Utils.addStatusMessage(player, "text.helljump.fizzle");
+				SoundManager.playSoundAtEntityFromServer(player, Sounds.fizzle);
 			}
 		}
 		else {

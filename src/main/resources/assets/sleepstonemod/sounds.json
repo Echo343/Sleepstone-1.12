@@ -14,5 +14,9 @@
 	"channel": {
 		"category": "player",
 		"sounds": [{"name": "sleepstonemod:channeling", "stream": false}]
+	},
+	"fizzle": {
+		"category": "player",
+		"sounds": [{"name": "sleepstonemod:fizzle", "stream": false}]
 	}
 }
