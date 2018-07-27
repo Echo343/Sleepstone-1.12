@@ -1,7 +1,7 @@
 package com.blargsworkshop.sleepstone.abilities.barrier;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -40,8 +40,7 @@ public enum NatureWall {
 	}
 	
 	protected Map<EnumFacing, List<BlockPos>> getVinesMap() {
-		// TODO make enumMap
-		Map<EnumFacing, List<BlockPos>> vines = new HashMap<>();
+		Map<EnumFacing, List<BlockPos>> vines = new EnumMap<>(EnumFacing.class);
 		List<BlockPos> north = new ArrayList<>();
 		north.add(new BlockPos(-1, 0, 2));
 		north.add(new BlockPos(0, 0, 2));
