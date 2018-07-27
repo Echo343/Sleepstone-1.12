@@ -14,9 +14,6 @@ public class TemporalAidTargetStorage implements IStorage<ITemporalAidTarget> {
 
 	@Override
 	public void readNBT(Capability<ITemporalAidTarget> capability, ITemporalAidTarget instance, EnumFacing side, NBTBase nbt) {
-//		TODO - try without the read.
-//		NBTTagCompound tag = (NBTTagCompound) nbt;
-//		instance.getTarget().deserializeNBT(tag);
 	}
 
 }

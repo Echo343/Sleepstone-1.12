@@ -56,6 +56,8 @@ text.helljump.fizzle=The stone glows brightly and then fizzles.
 text.helljump.not.dimension.attuned=The stone pulses once, dimly. It doesn't seemed to be attuned to this dimension.
 text.helljump.offset=Helljump offset {X=%d, Y=%d, Z=%d}
 
+text.precognition.dodge=I dodged the %s.
+
 text.sleepstone.bed_destroyed=Your bed seems to have been destroyed. :'-(
 text.sleepstone.no_spawn_point=You do not have a bed spawn point in this world.
 text.sleepstone.suffering_effects_of_warping=You are still suffering the effects of Warping.
