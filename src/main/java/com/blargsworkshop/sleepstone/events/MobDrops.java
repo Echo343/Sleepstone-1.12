@@ -17,8 +17,18 @@ import net.minecraft.potion.Potion;
 import net.minecraft.world.DimensionType;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 
-public class MobDrops {
-	public static void handleGlobalGemDropRates(LivingDropsEvent event) {
+public enum MobDrops {
+	INSTANCE;
+	
+	public void handleMobDropRates(LivingDropsEvent event) {
+		handleGlobalGemDropRates(event);
+		handleFireSeedDropRates(event);
+		handleGuardianGemDropRates(event);
+		handleEtherealGemDropRates(event);
+		handleEnderShardDropRates(event);
+	}
+	
+	private void handleGlobalGemDropRates(LivingDropsEvent event) {
 		EntityLivingBase mob = event.getEntityLiving();
 		if (	mob instanceof EntityMob ||
 				mob instanceof EntitySlime && ((EntitySlime) mob).getSlimeSize() == 1 ||
@@ -34,7 +44,7 @@ public class MobDrops {
 		}
 	}
 
-	public static void handleFireSeedDropRates(LivingDropsEvent event) {
+	private void handleFireSeedDropRates(LivingDropsEvent event) {
 		EntityLivingBase mob = event.getEntityLiving();
 		// Mobs in the nether only
 		if (mob.dimension == DimensionType.NETHER.getId() &&
@@ -50,7 +60,7 @@ public class MobDrops {
 		}
 	}
 	
-	public static void handleGuardianGemDropRates(LivingDropsEvent event) {
+	private void handleGuardianGemDropRates(LivingDropsEvent event) {
 		EntityLivingBase mob = event.getEntityLiving();
 		if (mob instanceof EntityGuardian) {
 			double dropChance = Math.random();
@@ -62,7 +72,7 @@ public class MobDrops {
 		}
 	}
 
-	public static void handleEtherealGemDropRates(LivingDropsEvent event) {
+	private void handleEtherealGemDropRates(LivingDropsEvent event) {
 		EntityLivingBase mob = event.getEntityLiving();
 		if (mob instanceof EntityMob && mob.isPotionActive(Potion.getPotionFromResourceLocation("minecraft:invisibility"))) {		
 			ItemStack etherealGem = new ItemStack(ModItems.itemEtherealGem);		
@@ -70,7 +80,7 @@ public class MobDrops {
 		}
 	}
 	
-	public static void handleEnderShardDropRates(LivingDropsEvent event) {
+	private void handleEnderShardDropRates(LivingDropsEvent event) {
 		EntityLivingBase mob = event.getEntityLiving();
 		if (	mob instanceof EntityEnderman ||
 				mob instanceof EntityEndermite) {

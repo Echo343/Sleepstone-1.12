@@ -157,12 +157,7 @@ public class MainEventHandler implements IEventHandler {
 	@SubscribeEvent
 	public void onLivingEntityDrops(LivingDropsEvent event) {
 		if (Utils.isServer(event.getEntity().getEntityWorld())) {
-			// TODO turn into a singleton or use loot tables
-			MobDrops.handleGlobalGemDropRates(event);
-			MobDrops.handleFireSeedDropRates(event);
-			MobDrops.handleGuardianGemDropRates(event);
-			MobDrops.handleEtherealGemDropRates(event);
-			MobDrops.handleEnderShardDropRates(event);
+			MobDrops.INSTANCE.handleMobDropRates(event);
 		}
 	}
 
