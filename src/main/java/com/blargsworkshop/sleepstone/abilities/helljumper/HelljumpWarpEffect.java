@@ -10,18 +10,19 @@ import com.blargsworkshop.sleepstone.ModItems.Potions;
 import com.blargsworkshop.sleepstone.abilities.warp.IWarpEffect;
 
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.BlockPos;
 
 public class HelljumpWarpEffect extends BlargsPotionEffect implements IWarpEffect {
-	private final static int WARP_CHANNEL_DURATION = Log.compare(LogLevel.DEBUG) ? 5+75 : 20 * 4;
+	private final static int WARP_CHANNEL_DURATION = Log.compare(LogLevel.DETAIL) ? 5 : 20 * 4;
 	
 	private final BlockPos startLocation;
+	private final Helljumper jumper;
 
-	public HelljumpWarpEffect(@Nonnull EntityPlayer player) {
+	public HelljumpWarpEffect(@Nonnull Helljumper jumper) {
 		super(Potions.warpChannel, WARP_CHANNEL_DURATION, 0, false, true);
-		this.startLocation = player.getPosition();
+		this.startLocation = jumper.player.getPosition();
+		this.jumper = jumper;
 	}
 
 	@Override
@@ -32,10 +33,7 @@ public class HelljumpWarpEffect extends BlargsPotionEffect implements IWarpEffec
 	@Override
 	protected void onFinishedPotionEffect(EntityLivingBase entity) {
 		if (Utils.isServer(entity.getEntityWorld()) && entity instanceof EntityPlayerMP) {
-			EntityPlayerMP player = (EntityPlayerMP) entity;
-			if (!new Helljumper(player).tryJump()) {
-				Utils.addStatusMessage(player, "text.helljump.fizzle");
-			}
+			jumper.jump();
 		}
 	}
 }

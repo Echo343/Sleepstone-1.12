@@ -7,6 +7,7 @@ import java.util.List;
 import com.blargsworkshop.engine.sound.SoundManager;
 import com.blargsworkshop.engine.utility.SimpleTeleporter;
 import com.blargsworkshop.engine.utility.Utils;
+import com.blargsworkshop.sleepstone.ModItems.Potions;
 import com.blargsworkshop.sleepstone.ModItems.Sounds;
 import com.blargsworkshop.sleepstone.items.stone.WarpSicknessPotionEffect;
 
@@ -21,24 +22,42 @@ import net.minecraft.world.World;
 public class Helljumper {
 	
 	private final List<BlockPos> bubbleShape = getBubbleShape();
-	private final EntityPlayerMP player;
-	private final BlockPos departLocation;
+	public final EntityPlayerMP player;
+	public final BlockPos departLocation;
 	public final DimensionType destinationDim;
-	public final World destWorld;
+	public final BlockPos destinationPoint;
 	
-//	public static void startJump(EntityPlayer player) {
-//		if (player.isPotionActive(Potions.warpSickness)) {
-//			Utils.addStatusMessage(player, "text.sleepstone.suffering_effects_of_warping");
-//		}
-//		else {
-//			if (player.dimension == DimensionType.NETHER.getId() || player.dimension == DimensionType.OVERWORLD.getId()) {
-//				player.addPotionEffect(new HelljumpWarpEffect(player));
-//			}
-//			else {
-//				Utils.addChatMessage(player, "text.helljump.not.dimension.attuned");
-//			}
-//		}
-//	}
+	private static BlockPos getValidSafePoint(Helljumper jumper) {
+		BlockPos validSafePoint = null;
+		EntityPlayerMP player = jumper.player;
+		if (player.dimension == DimensionType.NETHER.getId() || player.dimension == DimensionType.OVERWORLD.getId()) {
+			BlockPos safePoint = jumper.findSafeSpot();
+			if (safePoint != null) {
+				validSafePoint = safePoint;
+			}
+			else {
+				Utils.addStatusMessage(player, "text.helljump.fizzle");
+			}
+		}
+		else {
+			Utils.addChatMessage(player, "text.helljump.not.dimension.attuned");
+		}
+		return validSafePoint;
+	}
+	
+	public static void startJump(EntityPlayerMP player) {
+		if (player.isPotionActive(Potions.warpSickness)) {
+			Utils.addStatusMessage(player, "text.sleepstone.suffering_effects_of_warping");
+		}
+		else {
+			Helljumper jumper = new Helljumper(player);
+			BlockPos safePoint = getValidSafePoint(jumper);
+			if (safePoint != null) {
+				player.addPotionEffect(new HelljumpWarpEffect(jumper));
+				SoundManager.playSoundAtEntityFromServer(player, Sounds.channel);
+			}
+		}
+	}
 	
 	public Helljumper(EntityPlayerMP player) {
 		this.player = player;
@@ -49,30 +68,28 @@ public class Helljumper {
 		else {
 			destinationDim = DimensionType.OVERWORLD;
 		}
-		destWorld = player.getServer().getWorld(destinationDim.getId());
+		destinationPoint = calcJumpPoint(destinationDim);
 	}
 	
-	public boolean tryJump() {
-		boolean wasJumpSuccessful = false;
-		
-		BlockPos destinationPoint = calcJumpPoint(destinationDim);
-		BlockPos safePoint = findSafeSpot(destinationPoint);
+	public void jump() {
+		BlockPos safePoint = getValidSafePoint(this);
 		if (safePoint != null) {
 			createBubble(safePoint);
 			SoundManager.playSoundAtEntityFromServer(player, Sounds.swoosh);
 			SimpleTeleporter.INSTANCE.teleportPlayerToDimension(player, destinationDim, safePoint);
 			player.addPotionEffect(new WarpSicknessPotionEffect(30));
 			SoundManager.playSoundAtEntityFromServer(player, Sounds.teleport);
-			wasJumpSuccessful = true;
 			
 			BlockPos difference = safePoint.subtract(destinationPoint);
 			Utils.addChatMessage(player, "text.helljump.offset", difference.getX(), difference.getY(), difference.getZ());
-		}
-		
-		return wasJumpSuccessful;
+		}		
 	}
 	
-	protected BlockPos calcJumpPoint(DimensionType destinationDimension) {
+	private World getDestWorld() {
+		return player.getServer().getWorld(destinationDim.getId());
+	}
+	
+	private BlockPos calcJumpPoint(DimensionType destinationDimension) {
 		int x, y, z;
 		if (destinationDimension == DimensionType.NETHER) {
 			// to Nether
@@ -89,6 +106,7 @@ public class Helljumper {
 	}
 	
 	protected void createBubble(BlockPos p) {
+		World destWorld = getDestWorld();
 		BlockPos pos;
 		// Create bubble of glass
 		for (BlockPos part : bubbleShape) {
@@ -111,7 +129,7 @@ public class Helljumper {
 		}
 	}
 	
-	public BlockPos findSafeSpot(BlockPos destinationPoint) {
+	public BlockPos findSafeSpot() {
 		BlockPos safeLocation = null;
 		BlockPos searchLocation;
 		Iterator<BlockPos> iterSearchPattern = new SearchPattern(destinationPoint);
@@ -127,8 +145,8 @@ public class Helljumper {
 	
 	@SuppressWarnings("deprecation")
 	private boolean isLocationSafe(BlockPos location) {
-		// TODO allow partial bubbles.
 		// Check the shape, these blocks can only be replaceables
+		World destWorld = getDestWorld();
 		BlockPos pos;
 		for (BlockPos shapePiece: bubbleShape) {
 			pos = location.add(shapePiece.getX(), shapePiece.getY(), shapePiece.getZ());

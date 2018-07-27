@@ -6,7 +6,7 @@ import com.blargsworkshop.engine.network.AbstractMessage.AbstractServerMessage;
 import com.blargsworkshop.engine.proxy.IProxy;
 import com.blargsworkshop.sleepstone.SleepstoneMod;
 import com.blargsworkshop.sleepstone.abilities.barrier.NatureWall;
-import com.blargsworkshop.sleepstone.abilities.helljumper.Helljump;
+import com.blargsworkshop.sleepstone.abilities.helljumper.Helljumper;
 import com.blargsworkshop.sleepstone.abilities.warp.Warp;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -46,7 +46,7 @@ public class CommandMessage extends AbstractServerMessage<CommandMessage> {
 			EntityPlayerMP playerMP = (EntityPlayerMP) player;
 			switch (command) {
 				case HELLJUMP:
-					Helljump.INSTANCE.startJump(playerMP);
+					Helljumper.startJump(playerMP);
 					break;
 				case LEAFWALL:
 					NatureWall.INSTANCE.generate(playerMP);
