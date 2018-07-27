@@ -14,7 +14,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.BlockPos;
 
 public class WarpPotionEffect extends BlargsPotionEffect implements IWarpEffect {
-	private final static int WARP_CHANNEL_DURATION = Log.compare(LogLevel.DETAIL) ? 5 : 20 * 4;
+	private final static int WARP_CHANNEL_DURATION = Log.compare(LogLevel.ADV_DEBUG) ? 5 : 20 * 4;
 	
 	private final BlockPos startLocation;
 

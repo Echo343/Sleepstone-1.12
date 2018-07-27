@@ -52,7 +52,7 @@ public class FoodSaturationPotion extends BlargsPotion {
 			try {
 				foodSaturationLevel.setFloat(foodStats, level);
 				if (Utils.isServer(entity.getEntityWorld())) {
-					Log.detail("Food Saturation: " + foodStats.getSaturationLevel(), (EntityPlayer) entity);
+					Log.advDebug("Food Saturation: " + foodStats.getSaturationLevel(), (EntityPlayer) entity);
 				}
 			} catch (IllegalArgumentException | IllegalAccessException | NullPointerException e) {
 				hasError = true;

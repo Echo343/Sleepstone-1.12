@@ -60,7 +60,7 @@ public class PlayerSelectionGui extends GuiScreen {
 		Iterator<NetworkPlayerInfo> iter = players.iterator();
 		while (iter.hasNext()) {
 			NetworkPlayerInfo playerInfo = iter.next();
-			if (!Log.compare(LogLevel.DEBUG) && playerInfo.getGameProfile().getId().equals(player.getUniqueID())) {
+			if (!Log.compare(LogLevel.ADV_DEBUG) && playerInfo.getGameProfile().getId().equals(player.getUniqueID())) {
 				continue;
 			}
 			BasicButton button = new BasicButton(i, firstColumn, firstRow + (i * EFFECTIVE_BUTTON_HEIGHT), playerInfo.getGameProfile().getName());

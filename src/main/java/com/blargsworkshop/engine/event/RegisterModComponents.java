@@ -109,19 +109,19 @@ public class RegisterModComponents {
 
 	@SubscribeEvent
 	public void registerItems(RegistryEvent.Register<Item> event) {
-		Log.detail("RegisterModComponents - Items");
+		Log.advDebug("RegisterModComponents - Items");
 		for (Item i : modItems) {
 			event.getRegistry().register(i);
-			Log.detail("Registering Item - " + i.getRegistryName());
+			Log.advDebug("Registering Item - " + i.getRegistryName());
 		}
 	}
 	
 	@SubscribeEvent
 	public void registerBlocksAndTileEntities(RegistryEvent.Register<Block> event) {
-		Log.detail("RegisterModComponents - Blocks");
+		Log.advDebug("RegisterModComponents - Blocks");
 		for (Block i : modBlocks) {
 			event.getRegistry().register(i);
-			Log.detail("Registering Block - " + i.getRegistryName());
+			Log.advDebug("Registering Block - " + i.getRegistryName());
 		}
 		for (TileEntity i : modTileEntities) {
 			if (i instanceof IModTileEntity) {
@@ -132,28 +132,28 @@ public class RegisterModComponents {
 	
 	@SubscribeEvent
 	public void registerSoundEvents(RegistryEvent.Register<SoundEvent> event) {
-		Log.detail("RegisterModComponents - SoundEvents");
+		Log.advDebug("RegisterModComponents - SoundEvents");
 		for (SoundEvent s : modSounds) {
 			event.getRegistry().register(s);
-			Log.detail("Registering Sound - " + s.getRegistryName());
+			Log.advDebug("Registering Sound - " + s.getRegistryName());
 		}
 	}
 	
 	@SubscribeEvent
 	public void registerPotions(RegistryEvent.Register<Potion> event) {
-		Log.detail("RegisterModComponents - Potions");
+		Log.advDebug("RegisterModComponents - Potions");
 		for (Potion p : modPotions) {
 			event.getRegistry().register(p);
-			Log.detail("Registering Potion - " + p.getRegistryName());
+			Log.advDebug("Registering Potion - " + p.getRegistryName());
 		}
 	}
 	
 	@SubscribeEvent
 	public void registerRecipes(RegistryEvent.Register<IRecipe> event) {
-		Log.detail("RegisterModComponents - Recipes");
+		Log.advDebug("RegisterModComponents - Recipes");
 		for (IBlargRecipe p : modRecipes) {
 			p.register();
-			Log.detail("Registering recipe - " + p.getOutputName());
+			Log.advDebug("Registering recipe - " + p.getOutputName());
 		}
 	}
 

@@ -12,7 +12,7 @@ import net.minecraft.entity.player.EntityPlayer;
  * LogChat - true causes the log message to also be passed to the player chat client if a player was passed to the method.
  */
 public class Log {
-	private static LogLevel level = LogLevel.DETAIL;
+	private static LogLevel level = LogLevel.ADV_DEBUG;
 	private static boolean logChat = true;
 
 	/**
@@ -27,7 +27,7 @@ public class Log {
 		ERROR,
 		INFO,
 		DEBUG,
-		DETAIL
+		ADV_DEBUG
 	};
 	
 	/**
@@ -88,8 +88,8 @@ public class Log {
 	 * Logs a detail message.
 	 * @param message - message to log.
 	 */
-	public static void detail(String message) {
-		Log.detail(message, null);
+	public static void advDebug(String message) {
+		Log.advDebug(message, null);
 	}
 	
 	/**
@@ -98,8 +98,8 @@ public class Log {
 	 * @param message - message to log.
 	 * @param player - player to send chat message to.
 	 */
-	public static void detail(String message, EntityPlayer player) {
-		Log.log("DETAIL: " + message, LogLevel.DETAIL, player);
+	public static void advDebug(String message, EntityPlayer player) {
+		Log.log("DETAIL: " + message, LogLevel.ADV_DEBUG, player);
 	}
 	
 	/**
@@ -187,7 +187,7 @@ public class Log {
 				break;
 			}
 			break;
-		case DETAIL:
+		case ADV_DEBUG:
 			shouldLog = true;
 			break;		
 		}

@@ -35,26 +35,26 @@ public class SleepstoneMod implements IBlargsMod {
 	@Override
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent e) {
-		Log.detail("PreInit Start");
+		Log.advDebug("PreInit Start");
 		getProxy().preInit(e);
-		Log.detail("PreInit End");
+		Log.advDebug("PreInit End");
 	}
 
 	@Override
 	@EventHandler
 	public void init(FMLInitializationEvent e) {
 		Log.info("Hi! Hello There! ZZZZZZZZZZZZZZZZZ Sleepstone mod!");
-		Log.detail("Init Start");
+		Log.advDebug("Init Start");
 		getProxy().init(e);
-		Log.detail("Init End");
+		Log.advDebug("Init End");
 	}
 	
 	@Override
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent e) {
-		Log.detail("PostInit Start");
+		Log.advDebug("PostInit Start");
 		getProxy().postInit(e);
-		Log.detail("PostInit End");
+		Log.advDebug("PostInit End");
 	}
 
 }

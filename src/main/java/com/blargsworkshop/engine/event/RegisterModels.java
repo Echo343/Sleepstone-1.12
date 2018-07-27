@@ -133,10 +133,10 @@ public class RegisterModels {
 	@SuppressWarnings("unchecked")
 	@SubscribeEvent
 	public void onModelRegistry(ModelRegistryEvent event) {
-		Log.detail("Register Models - Models");
+		Log.advDebug("Register Models - Models");
 		for (Item i : modItems) {
 			registerItemModel(i);
-			Log.detail("Register Models - " + i.getRegistryName());
+			Log.advDebug("Register Models - " + i.getRegistryName());
 		}
 		
 		tesrTileEnities.forEach((tileClass, tesrClass) -> {
@@ -169,11 +169,11 @@ public class RegisterModels {
 	 */
 	@SubscribeEvent
 	public void onTextureRegistry(TextureStitchEvent.Pre event) {
-		Log.detail("Register Models - Textures");
+		Log.advDebug("Register Models - Textures");
 		for (ResourceLocation sprite : modSprites) {
 			// TODO add these to a registry
 			event.getMap().registerSprite(sprite);
-			Log.detail("Register Models - " + sprite.toString());
+			Log.advDebug("Register Models - " + sprite.toString());
 		}
 	}
 	

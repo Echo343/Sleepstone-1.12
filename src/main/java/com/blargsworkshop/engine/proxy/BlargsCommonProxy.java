@@ -30,13 +30,13 @@ public abstract class BlargsCommonProxy implements IProxy {
 	
 	@Override
     public void preInit(FMLPreInitializationEvent e) {
-		Log.detail("BlargsCommonProxy - PreInit");
+		Log.advDebug("BlargsCommonProxy - PreInit");
 		MinecraftForge.EVENT_BUS.register(new RegisterModComponents(getModItemClass()));
     }
 	
     @Override
     public void init(FMLInitializationEvent e) {
-		Log.detail("BlargsCommonProxy - Init");
+		Log.advDebug("BlargsCommonProxy - Init");
 		
     	//Capabilities
     	registerCapabilities();
@@ -53,12 +53,12 @@ public abstract class BlargsCommonProxy implements IProxy {
 
     @Override
     public void postInit(FMLPostInitializationEvent e) {
-		Log.detail("BlargsCommonProxy - PostInit");
+		Log.advDebug("BlargsCommonProxy - PostInit");
     }
     
     @Override
     public EntityPlayer getPlayerEntity(MessageContext ctx) {
-    	Log.detail("Retrieving player from CommonProxy for message on side " + ctx.side);
+    	Log.advDebug("Retrieving player from CommonProxy for message on side " + ctx.side);
     	return ctx.getServerHandler().player;
     }
     

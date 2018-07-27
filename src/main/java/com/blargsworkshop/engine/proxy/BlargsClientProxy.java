@@ -34,20 +34,20 @@ public abstract class BlargsClientProxy implements IProxy {
 	@Override
 	public void preInit(FMLPreInitializationEvent e) {
 		getCommonProxy().preInit(e);
-		Log.detail("BlargsClientProxy - PreInit");
+		Log.advDebug("BlargsClientProxy - PreInit");
 		MinecraftForge.EVENT_BUS.register(new RegisterModels(getModItemClass()));
 	}
 
 	@Override
 	public void init(FMLInitializationEvent e) {
 		getCommonProxy().init(e);
-		Log.detail("BlargsClientProxy - Init");
+		Log.advDebug("BlargsClientProxy - Init");
 	}
 
 	@Override
 	public void postInit(FMLPostInitializationEvent e) {
 		getCommonProxy().postInit(e);
-		Log.detail("BlargsClientProxy - PostInit");
+		Log.advDebug("BlargsClientProxy - PostInit");
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public abstract class BlargsClientProxy implements IProxy {
 		// Sounds absurd, but it's true.
 
 		// Solution is to double-check side before returning the player:
-		Log.detail("Retrieving player from ClientProxy for message on side " + ctx.side);
+		Log.advDebug("Retrieving player from ClientProxy for message on side " + ctx.side);
 		return (ctx.side.isClient() ? Minecraft.getMinecraft().player : getCommonProxy().getPlayerEntity(ctx));
 	}
 
