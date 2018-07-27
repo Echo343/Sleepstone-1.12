@@ -181,7 +181,6 @@ public class Helljumper {
 		return true;
 	}
 	
-	// TODO abstract the shape obj, here and in Nature Wall
 	protected List<BlockPos> getBubbleShape() {
 		List<BlockPos> shape = new ArrayList<>();
 		shape.add(new BlockPos(0, 0, 1));

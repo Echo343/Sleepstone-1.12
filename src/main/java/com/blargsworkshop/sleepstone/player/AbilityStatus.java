@@ -131,7 +131,7 @@ public class AbilityStatus implements IAbilityStatus {
 		doesPlayer = getAbility(ability);
 		
 		if (doesPlayer) {
-			//TODO search through in priority order
+			//TODO cache the slot index of the bonded stone
 			List<ItemStack> playerInv = player.inventory.mainInventory;
 			ItemStack backupStone = null;
 			for (ItemStack itemStack : playerInv) {

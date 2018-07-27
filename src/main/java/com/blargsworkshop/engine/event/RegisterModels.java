@@ -68,19 +68,7 @@ public class RegisterModels {
 				modSprites.add((ResourceLocation) f.get(null));
 			}
 			
-			// TODO pull out into method
-			if (f.isAnnotationPresent(TEISR.class) && f.isAnnotationPresent(ModItem.class)) {
-				teisrItems.put((Item) f.get(null), f.getAnnotation(TEISR.class).value());
-			}
-			else if (f.isAnnotationPresent(TESR.class) && f.isAnnotationPresent(ModTileEntity.class)) {
-				Object tile = f.get(null);
-				if (tile instanceof TileEntity) {
-					tesrTileEnities.put(((TileEntity)tile).getClass(), f.getAnnotation(TESR.class).value());
-				}
-			}
-			else if (f.isAnnotationPresent(NoBlockstate.class) && f.isAnnotationPresent(ModBlock.class)) {
-				tesrBlocks.add((Block) f.get(null));
-			}
+			sortAndFilterTesrTeisr(f);
 		}
 	}
 	
@@ -97,32 +85,7 @@ public class RegisterModels {
 				}
 			}
 			
-			// TODO pull out into method
-			if (innerClass.isAnnotationPresent(ModItem.class)) {
-				for (Field f : innerClass.getDeclaredFields()) {
-					if (f.isAnnotationPresent(TEISR.class)) {
-						teisrItems.put((Item) f.get(null), f.getAnnotation(TEISR.class).value());
-					}
-				}
-			}
-			else if (innerClass.isAnnotationPresent(ModTileEntity.class)) {
-				for (Field f : innerClass.getDeclaredFields()) {
-					if (f.isAnnotationPresent(TESR.class)) {
-						Object tile = f.get(null);
-						if (tile instanceof TileEntity) {
-							tesrTileEnities.put(((TileEntity)tile).getClass(), f.getAnnotation(TESR.class).value());
-						}
-					}
-				}
-			}
-			else if (innerClass.isAnnotationPresent(ModBlock.class)) {
-				for (Field f : innerClass.getDeclaredFields()) {
-					if (f.isAnnotationPresent(NoBlockstate.class)) {
-						tesrBlocks.add((Block) f.get(null));
-					}
-				}
-			}
-			
+			sortAndFilterTesrTeisr(innerClass);
 		}
 	}
 
@@ -189,4 +152,45 @@ public class RegisterModels {
 		}
 	}
 
+	private void sortAndFilterTesrTeisr(Field f) throws IllegalAccessException {
+		if (f.isAnnotationPresent(TEISR.class) && f.isAnnotationPresent(ModItem.class)) {
+			teisrItems.put((Item) f.get(null), f.getAnnotation(TEISR.class).value());
+		}
+		else if (f.isAnnotationPresent(TESR.class) && f.isAnnotationPresent(ModTileEntity.class)) {
+			Object tile = f.get(null);
+			if (tile instanceof TileEntity) {
+				tesrTileEnities.put(((TileEntity)tile).getClass(), f.getAnnotation(TESR.class).value());
+			}
+		}
+		else if (f.isAnnotationPresent(NoBlockstate.class) && f.isAnnotationPresent(ModBlock.class)) {
+			tesrBlocks.add((Block) f.get(null));
+		}
+	}
+
+	private void sortAndFilterTesrTeisr(Class<?> innerClass) throws IllegalAccessException {
+		if (innerClass.isAnnotationPresent(ModItem.class)) {
+			for (Field f : innerClass.getDeclaredFields()) {
+				if (f.isAnnotationPresent(TEISR.class)) {
+					teisrItems.put((Item) f.get(null), f.getAnnotation(TEISR.class).value());
+				}
+			}
+		}
+		else if (innerClass.isAnnotationPresent(ModTileEntity.class)) {
+			for (Field f : innerClass.getDeclaredFields()) {
+				if (f.isAnnotationPresent(TESR.class)) {
+					Object tile = f.get(null);
+					if (tile instanceof TileEntity) {
+						tesrTileEnities.put(((TileEntity)tile).getClass(), f.getAnnotation(TESR.class).value());
+					}
+				}
+			}
+		}
+		else if (innerClass.isAnnotationPresent(ModBlock.class)) {
+			for (Field f : innerClass.getDeclaredFields()) {
+				if (f.isAnnotationPresent(NoBlockstate.class)) {
+					tesrBlocks.add((Block) f.get(null));
+				}
+			}
+		}
+	}
 }

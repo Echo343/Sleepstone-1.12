@@ -10,7 +10,7 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 public class AbilityStatusProvider implements ICapabilitySerializable<NBTBase> {
 	
 	@CapabilityInject(IAbilityStatus.class)
-	static final Capability<IAbilityStatus> ABILITY_STATUS_CAPABILITY = null;
+	private static final Capability<IAbilityStatus> ABILITY_STATUS_CAPABILITY = null;
 	
 	private IAbilityStatus instance;
 

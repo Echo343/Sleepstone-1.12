@@ -9,9 +9,8 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
 public class StonePropertiesProvider implements ICapabilitySerializable<NBTBase> {
 	
-	// TODO make private and test Same with other one?
 	@CapabilityInject(IStoneProperties.class)
-	public static final Capability<IStoneProperties> STONE_PROPERTY_CAPABILITY = null;
+	private static final Capability<IStoneProperties> STONE_PROPERTY_CAPABILITY = null;
 	
 	private IStoneProperties properties;
 
