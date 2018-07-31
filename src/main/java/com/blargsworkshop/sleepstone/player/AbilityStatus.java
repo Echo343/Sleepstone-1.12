@@ -1,7 +1,9 @@
 package com.blargsworkshop.sleepstone.player;
 
 import java.util.EnumMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 
 import com.blargsworkshop.engine.logger.Log;
@@ -122,6 +124,10 @@ public class AbilityStatus implements IAbilityStatus {
 		}
 	}
 	
+	private int getCachedStoneIndex() {
+		return 1;
+	}
+	
 	@Override
 	public boolean isAbilityAvailable(Ability ability) {
 		boolean doesPlayer = false;
@@ -131,29 +137,52 @@ public class AbilityStatus implements IAbilityStatus {
 		doesPlayer = getAbility(ability);
 		
 		if (doesPlayer) {
-			//TODO cache the slot index of the bonded stone
-			List<ItemStack> playerInv = player.inventory.mainInventory;
-			ItemStack backupStone = null;
-			for (ItemStack itemStack : playerInv) {
-				if (itemStack != null && itemStack.isItemEqual(new ItemStack(ModItems.itemSleepstone))) {
-					backupStone = backupStone == null ? itemStack : backupStone;
-					IStoneProperties stoneProps = StonePropertiesProvider.getProperties(itemStack);
-					StoneInventory inventory = StoneInventoryProvider.getStoneInventory(itemStack);
-					if (stoneProps.getUniqueId().equals(getBondedStoneId())) {
-						hasStone = true;
-						hasGems = inventory.hasGemInSlot(ability);
-						break;
-					}
+			IStoneProperties stoneProps;
+			StoneInventory inventory;
+			
+			// Check the cached position first
+			ItemStack cache = player.inventory.getStackInSlot(getCachedStoneIndex());
+			if (cache.isItemEqual(new ItemStack(ModItems.itemSleepstone))) {
+				stoneProps = StonePropertiesProvider.getProperties(cache);
+				inventory = StoneInventoryProvider.getStoneInventory(cache);
+				if (stoneProps.getUniqueId().equals(getBondedStoneId())) {
+					hasStone = true;
+					hasGems = inventory.hasGemInSlot(ability);
 				}
 			}
 			
-			// Make this the new stone if the old one couldn't be found.
-			if (hasStone == false && backupStone != null) {
-				IStoneProperties stoneProps = StonePropertiesProvider.getProperties(backupStone);
-				StoneInventory stoneInventory = StoneInventoryProvider.getStoneInventory(backupStone);
-				setBondedStoneId(stoneProps.getUniqueId());
-				hasStone = true;
-				hasGems = stoneInventory.hasGemInSlot(ability);
+			
+			
+			if (!hasStone) {
+				//TODO cache the slot index of the bonded stone
+				List<ItemStack> playerInv = player.inventory.mainInventory;
+				ItemStack backupStone = null;
+//				Iterator<ItemStack> blah = playerInv.listIterator();
+//				blah.
+				
+				for (ItemStack itemStack : playerInv) {
+					if (itemStack.isItemEqual(new ItemStack(ModItems.itemSleepstone))) {
+						backupStone = backupStone == null ? itemStack : backupStone;
+						stoneProps = StonePropertiesProvider.getProperties(itemStack);
+						inventory = StoneInventoryProvider.getStoneInventory(itemStack);
+						if (stoneProps.getUniqueId().equals(getBondedStoneId())) {
+							hasStone = true;
+							// TODO set cached index
+							hasGems = inventory.hasGemInSlot(ability);
+							break;
+						}
+					}
+				}
+				
+				// Make this the new stone if the old one couldn't be found.
+				if (hasStone == false && backupStone != null) {
+					stoneProps = StonePropertiesProvider.getProperties(backupStone);
+					inventory = StoneInventoryProvider.getStoneInventory(backupStone);
+					setBondedStoneId(stoneProps.getUniqueId());
+					hasStone = true;
+					// TODO set cached index
+					hasGems = inventory.hasGemInSlot(ability);
+				}
 			}
 		}
 		
