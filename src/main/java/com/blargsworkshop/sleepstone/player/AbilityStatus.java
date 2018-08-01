@@ -1,9 +1,7 @@
 package com.blargsworkshop.sleepstone.player;
 
 import java.util.EnumMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Map;
 
 import com.blargsworkshop.engine.logger.Log;
@@ -49,7 +47,7 @@ public class AbilityStatus implements IAbilityStatus {
 	}
 
 	@Override
-	public boolean getAbility(Ability ability) {
+	public boolean getAbilityState(Ability ability) {
 		Boolean bool = abilities.get(ability);
 		return bool != null ? bool : false;
 	}
@@ -124,73 +122,81 @@ public class AbilityStatus implements IAbilityStatus {
 		}
 	}
 	
-	private int getCachedStoneIndex() {
+	private Integer getCachedStoneIndex() {
 		return 1;
+	}
+	
+	private void setCachedStoneIndex(Integer index) {
+		//TODO cache the slot index of the bonded stone
+		
+	}
+	
+	private ItemStack findBondedStone() {
+		//TODO optimize
+		ItemStack bondedStone = null;
+		IStoneProperties stoneProps;
+		
+		// Check the cached position first
+		ItemStack cache = player.inventory.getStackInSlot(getCachedStoneIndex());
+		if (cache.isItemEqual(new ItemStack(ModItems.itemSleepstone))) {
+			stoneProps = StonePropertiesProvider.getProperties(cache);
+			if (stoneProps.getUniqueId().equals(getBondedStoneId())) {
+				bondedStone = cache;
+			}
+		}
+		
+		if (bondedStone == null) {
+			List<ItemStack> playerInv = player.inventory.mainInventory;
+			ItemStack backupStone = null;
+			Integer backupStoneIndex = null;
+			
+			for (int i = 0; i < playerInv.size(); i++) {
+				ItemStack itemStack = playerInv.get(i);
+				if (itemStack.isItemEqual(new ItemStack(ModItems.itemSleepstone))) {
+					if (backupStone == null) {
+						backupStone = itemStack;
+						backupStoneIndex = i;
+					}
+					stoneProps = StonePropertiesProvider.getProperties(itemStack);
+					if (stoneProps.getUniqueId().equals(getBondedStoneId())) {
+						bondedStone = itemStack;
+						setCachedStoneIndex(i);
+						break;
+					}
+				}
+			}
+			
+			// Make this the new stone if the old one couldn't be found.
+			if (bondedStone == null && backupStone != null) {
+				stoneProps = StonePropertiesProvider.getProperties(backupStone);
+				setBondedStoneId(stoneProps.getUniqueId());
+				bondedStone = backupStone;
+				setCachedStoneIndex(backupStoneIndex);
+			}
+		}
+		return bondedStone;
 	}
 	
 	@Override
 	public boolean isAbilityAvailable(Ability ability) {
-		boolean doesPlayer = false;
-		boolean hasStone = false;
-		boolean hasGems = false;
+		boolean isAvailable = false;
 		
-		doesPlayer = getAbility(ability);
-		
-		if (doesPlayer) {
-			IStoneProperties stoneProps;
-			StoneInventory inventory;
-			
-			// Check the cached position first
-			ItemStack cache = player.inventory.getStackInSlot(getCachedStoneIndex());
-			if (cache.isItemEqual(new ItemStack(ModItems.itemSleepstone))) {
-				stoneProps = StonePropertiesProvider.getProperties(cache);
-				inventory = StoneInventoryProvider.getStoneInventory(cache);
-				if (stoneProps.getUniqueId().equals(getBondedStoneId())) {
-					hasStone = true;
-					hasGems = inventory.hasGemInSlot(ability);
-				}
+		if (getAbilityState(ability)) {
+			ItemStack bondedStone = findBondedStone();
+			if (bondedStone != null) {
+				StoneInventory inventory = StoneInventoryProvider.getStoneInventory(bondedStone);
+				isAvailable = inventory.hasGemInSlot(ability);
+//				if (!isAvailable) Log.advDebug("The sleepstone lacks the neccessary gem(s): " + ability.name(), player);
 			}
-			
-			
-			
-			if (!hasStone) {
-				//TODO cache the slot index of the bonded stone
-				List<ItemStack> playerInv = player.inventory.mainInventory;
-				ItemStack backupStone = null;
-//				Iterator<ItemStack> blah = playerInv.listIterator();
-//				blah.
-				
-				for (ItemStack itemStack : playerInv) {
-					if (itemStack.isItemEqual(new ItemStack(ModItems.itemSleepstone))) {
-						backupStone = backupStone == null ? itemStack : backupStone;
-						stoneProps = StonePropertiesProvider.getProperties(itemStack);
-						inventory = StoneInventoryProvider.getStoneInventory(itemStack);
-						if (stoneProps.getUniqueId().equals(getBondedStoneId())) {
-							hasStone = true;
-							// TODO set cached index
-							hasGems = inventory.hasGemInSlot(ability);
-							break;
-						}
-					}
-				}
-				
-				// Make this the new stone if the old one couldn't be found.
-				if (hasStone == false && backupStone != null) {
-					stoneProps = StonePropertiesProvider.getProperties(backupStone);
-					inventory = StoneInventoryProvider.getStoneInventory(backupStone);
-					setBondedStoneId(stoneProps.getUniqueId());
-					hasStone = true;
-					// TODO set cached index
-					hasGems = inventory.hasGemInSlot(ability);
-				}
+			else {
+//				Log.advDebug("Attuned sleepstone was not found in inventory", player);
 			}
 		}
+		else {
+//			Log.advDebug(ability.name() + " is turned off by the player", player);
+		}
 		
-//		if (!doesPlayer) Log.info(slot.name() + " is turned off by the player", player);
-//		if (!hasStone) Log.info("Attuned sleepstone was not found in inventory", player);
-//		if (hasStone && !hasGems) Log.info("The sleepstone lacks the neccessary gem(s): " + slot.name(), player);
-    	
-		return doesPlayer && hasStone && hasGems;
+		return isAvailable;
 	}
 
 }

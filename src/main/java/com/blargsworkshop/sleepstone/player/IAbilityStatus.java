@@ -7,7 +7,7 @@ import com.blargsworkshop.sleepstone.abilities.Ability;
 public interface IAbilityStatus {
 		
 	public Map<Ability, Boolean> getAbilityMap();
-	public boolean getAbility(Ability ability);
+	public boolean getAbilityState(Ability ability);
 	public void setAbility(Ability ability, boolean flag);
 	public void setAbilityWithoutSync(Ability ability, boolean flag);
 	

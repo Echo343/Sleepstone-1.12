@@ -146,7 +146,7 @@ public class AbilityGui extends GuiScreen {
 				
 				if (btn.getType().equals(ToggleButton.class)) {
 					button = new ToggleButton(btn, columnPosition, rowPosition, Utils.localize(btn.getMessageKey()));
-					((ToggleButton) button).setState(props.getAbility(btn.getAbility()));
+					((ToggleButton) button).setState(props.getAbilityState(btn.getAbility()));
 				}
 				else if (btn.getType().equals(BasicButton.class)) {
 					button = new BasicButton(btn, columnPosition, rowPosition, Utils.localize(btn.getMessageKey()));
