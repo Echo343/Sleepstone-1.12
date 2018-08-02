@@ -73,7 +73,7 @@ public class StoneInventory extends ItemStackHandler {
     	return hasGems;
     }
     
-    public boolean hasGemInSlot(Ability ability) {
+    public boolean hasGemsInSlot(Ability ability) {
     	return checkGems(ability.getFirstGemSlot(), ability.getSecondGemSlot());
     }
 }

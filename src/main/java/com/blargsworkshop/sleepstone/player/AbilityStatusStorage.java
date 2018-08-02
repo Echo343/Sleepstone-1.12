@@ -11,11 +11,13 @@ import net.minecraftforge.common.capabilities.Capability.IStorage;
 public class AbilityStatusStorage implements IStorage<IAbilityStatus> {
 	
 	private static final String BONDED_ID = "bondedstoneid";
+	private static final String CACHED_INDEX = "cachedstoneindex";
 	
 	@Override
 	public NBTBase writeNBT(Capability<IAbilityStatus> capability, IAbilityStatus instance,	EnumFacing side) {
 		NBTTagCompound properties = new NBTTagCompound();
 		properties.setString(BONDED_ID, instance.getBondedStoneId());
+		properties.setInteger(CACHED_INDEX, instance.getCachedStoneIndex());
 		instance.getAbilityMap().forEach((Ability ability, Boolean value) -> {
 			properties.setBoolean(ability.name(), value);
 		});
@@ -26,6 +28,7 @@ public class AbilityStatusStorage implements IStorage<IAbilityStatus> {
 	public void readNBT(Capability<IAbilityStatus> capability, IAbilityStatus instance, EnumFacing side, NBTBase nbt) {
 		NBTTagCompound properties = (NBTTagCompound) nbt;
 		instance.setBondedStoneIdWithoutSync(properties.getString(BONDED_ID));
+		instance.setCachedStoneIndexWithoutSync(properties.getInteger(CACHED_INDEX));
 		instance.getAbilityMap().forEach((Ability ability, Boolean value) -> {
 			instance.getAbilityMap().put(ability, properties.getBoolean(ability.name()));
 		});

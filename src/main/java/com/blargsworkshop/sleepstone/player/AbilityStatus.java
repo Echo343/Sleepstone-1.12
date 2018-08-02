@@ -17,6 +17,7 @@ import com.blargsworkshop.sleepstone.items.stone.properties.IStoneProperties;
 import com.blargsworkshop.sleepstone.items.stone.properties.StonePropertiesProvider;
 import com.blargsworkshop.sleepstone.network.packets.bidirectional.SyncAllPlayerPropsMessage;
 import com.blargsworkshop.sleepstone.network.packets.bidirectional.SyncPlayerBondedIdMessage;
+import com.blargsworkshop.sleepstone.network.packets.bidirectional.SyncPlayerCachedStoneIndexMessage;
 import com.blargsworkshop.sleepstone.network.packets.bidirectional.SyncPlayerPropMessage;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -28,6 +29,7 @@ public class AbilityStatus implements IAbilityStatus {
 	private PacketDispatcher dispatcher = null;
 	
 	private String bondedStoneId = "";
+	private int cachedStoneIndex = -1;
 	private EntityPlayer player;
 	private EnumMap<Ability, Boolean> abilities = new EnumMap<Ability, Boolean>(Ability.class);
 
@@ -122,37 +124,62 @@ public class AbilityStatus implements IAbilityStatus {
 		}
 	}
 	
-	private Integer getCachedStoneIndex() {
-		return 1;
+	@Override
+	public int getCachedStoneIndex() {
+		return cachedStoneIndex;
 	}
 	
-	private void setCachedStoneIndex(Integer index) {
-		//TODO cache the slot index of the bonded stone
-		
+	@Override
+	public void setCachedStoneIndex(int index) {
+		setCachedStoneIndex(index, true);
+	}
+	
+	@Override
+	public void setCachedStoneIndexWithoutSync(int index) {
+		setCachedStoneIndex(index, false);
+	}
+	
+	protected void setCachedStoneIndex(int index, boolean doSync) {
+		index = index < -1 ? -1 : index;
+		if (this.cachedStoneIndex == index) {
+			return;
+		}
+		this.cachedStoneIndex = index;
+		if (doSync) {
+			if (Utils.isClient(player.getEntityWorld())) {
+				dispatcher.sendToServer(new SyncPlayerCachedStoneIndexMessage(cachedStoneIndex));
+				Log.debug("Setting cached index to " + getCachedStoneIndex() + " on client", this.player);
+			}
+			else {
+				dispatcher.sendToPlayer(player, new SyncPlayerCachedStoneIndexMessage(cachedStoneIndex));
+				Log.debug("Setting cached index to " + getCachedStoneIndex() + " on server", this.player);
+			}
+		}
 	}
 	
 	private ItemStack findBondedStone() {
-		//TODO optimize
 		ItemStack bondedStone = null;
 		IStoneProperties stoneProps;
 		
 		// Check the cached position first
-		ItemStack cache = player.inventory.getStackInSlot(getCachedStoneIndex());
-		if (cache.isItemEqual(new ItemStack(ModItems.itemSleepstone))) {
-			stoneProps = StonePropertiesProvider.getProperties(cache);
+		ItemStack cacheStack = player.inventory.getStackInSlot(getCachedStoneIndex());
+		if (cacheStack.isItemEqual(new ItemStack(ModItems.itemSleepstone))) {
+			stoneProps = StonePropertiesProvider.getProperties(cacheStack);
 			if (stoneProps.getUniqueId().equals(getBondedStoneId())) {
-				bondedStone = cache;
+				bondedStone = cacheStack;
 			}
 		}
 		
 		if (bondedStone == null) {
-			List<ItemStack> playerInv = player.inventory.mainInventory;
+			final List<ItemStack> playerInv = player.inventory.mainInventory;
+			final ItemStack itemStoneComparer = new ItemStack(ModItems.itemSleepstone);
+			ItemStack itemStack = null;
 			ItemStack backupStone = null;
-			Integer backupStoneIndex = null;
+			int backupStoneIndex = -1;
 			
 			for (int i = 0; i < playerInv.size(); i++) {
-				ItemStack itemStack = playerInv.get(i);
-				if (itemStack.isItemEqual(new ItemStack(ModItems.itemSleepstone))) {
+				itemStack = playerInv.get(i);
+				if (itemStack.isItemEqual(itemStoneComparer)) {
 					if (backupStone == null) {
 						backupStone = itemStack;
 						backupStoneIndex = i;
@@ -185,8 +212,8 @@ public class AbilityStatus implements IAbilityStatus {
 			ItemStack bondedStone = findBondedStone();
 			if (bondedStone != null) {
 				StoneInventory inventory = StoneInventoryProvider.getStoneInventory(bondedStone);
-				isAvailable = inventory.hasGemInSlot(ability);
-//				if (!isAvailable) Log.advDebug("The sleepstone lacks the neccessary gem(s): " + ability.name(), player);
+				isAvailable = inventory.hasGemsInSlot(ability);
+//				if (!isAvailable) Log.advDebug("The sleepstone lacks the necessary gem(s): " + ability.name(), player);
 			}
 			else {
 //				Log.advDebug("Attuned sleepstone was not found in inventory", player);

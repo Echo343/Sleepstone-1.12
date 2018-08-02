@@ -125,7 +125,7 @@ public class AbilityGui extends GuiScreen {
 	}
 	
 	private boolean shouldShowButton(Button button) {
-		return inventory.hasGemInSlot(button.getAbility());
+		return inventory.hasGemsInSlot(button.getAbility());
 	}
 	
 	protected void initButtons() {

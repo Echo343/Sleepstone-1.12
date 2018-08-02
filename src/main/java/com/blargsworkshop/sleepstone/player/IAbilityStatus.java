@@ -15,6 +15,10 @@ public interface IAbilityStatus {
 	public void setBondedStoneId(String bondedStoneId);
 	public void setBondedStoneIdWithoutSync(String bondedStoneId);
 	
+	public int getCachedStoneIndex();
+	public void setCachedStoneIndex(int index);
+	public void setCachedStoneIndexWithoutSync(int index);
+	
 	public void syncAll();
 
 	public boolean isAbilityAvailable(Ability ability);
