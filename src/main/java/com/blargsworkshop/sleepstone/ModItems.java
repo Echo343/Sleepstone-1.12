@@ -17,6 +17,7 @@ import com.blargsworkshop.engine.recipe.IBlargRecipe;
 import com.blargsworkshop.engine.recipe.SmeltingRecipe;
 import com.blargsworkshop.engine.sound.BlargsSoundEvent;
 import com.blargsworkshop.sleepstone.abilities.iron_stomach.FoodSaturationPotion;
+import com.blargsworkshop.sleepstone.abilities.phantom_torch.PhantomTorch;
 import com.blargsworkshop.sleepstone.abilities.warp.WarpChannelingPotion;
 import com.blargsworkshop.sleepstone.abilities.windwalker.WindwalkerPotion;
 import com.blargsworkshop.sleepstone.items.airmattress.AirMattressBlock;
@@ -87,6 +88,7 @@ public class ModItems implements IModItems{
 	public static class Blocks {
 		@NoBlockstate
 		public static AirMattressBlock airMattress = new AirMattressBlock();
+		public static PhantomTorch phantomTorch = new PhantomTorch();
 	}
 	
 	@ModTileEntity
